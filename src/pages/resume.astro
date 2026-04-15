@@ -3,120 +3,237 @@ import Layout from '../layouts/Layout.astro';
 
 const roles = [
   {
-    title:   'VP, Data & Analytics',
     company: 'Lahzo',
+    title:   'VP, Strategy & Analytics',
     period:  'Mar 2026 — Present',
+    location: 'Atlanta, GA (Remote)',
     bullets: [
-      'Leading data strategy and analytics infrastructure from the ground up',
-      'Building AI-enabled analytics capabilities across the organization',
+      'Architecting internal AI systems, data stories, and proprietary data products that power Lahzo\'s revenue flywheel',
+      'Automating the performance marketing and ad-to-agent attribution pipelines to eliminate manual bottlenecks',
+      'Building client analytics and observability layer giving clients clear visibility into ROI',
+      'Automating the conversation review layer — feeding insights into agent optimization, product prioritization, and GTM playbooks',
+      'Acting as strategic partner for CEO and Head of Strategy on enterprise deals and special projects',
     ],
-    metrics: [],
+    metrics: ['3x revenue target', 'Ad-to-agent automation', 'Founder leverage'],
+    color: '#5a9a6e',
   },
   {
-    title:   'Director, Global AI & Data Strategy',
     company: 'Equifax',
-    period:  '2022 — 2026',
+    title:   'VP, Global AI & Data Strategy',
+    period:  '2024 — 2026',
+    location: 'Atlanta, GA',
     bullets: [
-      'Led AI maturity framework adoption across 4 international regions',
-      'Restructured $14–22M in data partnerships to align with AI strategy',
-      'Built cross-functional data governance and ML deployment pipelines',
+      'Led global AI and analytics strategy across international markets and business units',
+      'Developed AI maturity framework adopted across four regions',
+      'Restructured $14–22M in data partnerships to align with AI-first strategy',
     ],
-    metrics: ['$14–22M partnership restructuring', 'AI maturity framework'],
+    metrics: ['$14–22M restructured', 'AI maturity framework', '4 regions'],
+    color: '#d4a853',
   },
   {
-    title:   'Senior Manager, International Analytics',
-    company: 'Mailchimp',
-    period:  '2019 — 2022',
+    company: 'Intuit Mailchimp',
+    title:   'Director, Customer & International Analytics',
+    period:  '2020 — 2024',
+    location: 'Atlanta, GA',
     bullets: [
-      'Led international expansion analytics driving 57% acquisition increase',
-      'Reduced churn 40% through predictive modeling and lifecycle interventions',
+      'Led and scaled a 20-person analytics team supporting six key customer-facing departments',
+      'Partnered with the Chief Sales Officer and Chief Customer Officer to define GTM strategy and track weekly business performance',
+      'Developed business cases that resulted in 6× growth in go-to-market teams',
+      'Positioned Mailchimp to 2× international revenue over three years through analyses across geographies — accelerated app localization into five languages and shifted to local Sales/CS models',
+      'Led 22-person cross-functional team to design and ship the largest price increase in Mailchimp history: $100M+ in incremental annual revenue',
+      'Stood up enterprise-wide churn reduction program uncovering $90M+ annual savings — launched billing failure, retention promotion, and propensity model interventions',
     ],
-    metrics: ['57% acquisition increase', '40% churn reduction'],
+    metrics: ['$100M+ price increase', '$90M+ churn savings', '20-person team', '6× GTM growth'],
+    color: '#7c6fcd',
   },
   {
-    title:   'Manager, Restructuring Analytics',
-    company: 'Alvarez & Marsal',
-    period:  '2017 — 2019',
-    bullets: [
-      'Delivered $1.5M vendor POC and $1.3M AWS cost savings for Fortune 500 clients',
-    ],
-    metrics: ['$1.5M vendor POC', '$1.3M AWS savings'],
-  },
-  {
-    title:   'Consultant, AI & Customer Experience',
     company: 'Accenture Strategy',
-    period:  '2014 — 2017',
+    title:   'Manager, Customer Insight & Growth',
+    period:  '2017 — 2020',
+    location: 'Atlanta, GA',
     bullets: [
-      'Delivered AI chatbot strategy generating $200M+ in client savings',
+      '[Telecom] Led AI chatbot program reducing calls by 250M and saving $200M over three years',
+      '[Telecom] Conducted omni-channel customer analysis saving $7M via decreased CX/churn',
+      '[Healthcare Payer] Stood up Customer Experience Transformation Management Office — defined governance, org design, and operational processes',
+      '[Retail] Identified customer experience gaps at global retailer; recommended omni-channel improvements via two-day executive workshop',
     ],
-    metrics: ['$200M+ AI savings'],
+    metrics: ['$200M chatbot savings', '250M calls deflected', '$7M churn savings'],
+    color: '#6b8fad',
+  },
+  {
+    company: 'Alvarez & Marsal',
+    title:   'Manager, Business Consulting',
+    period:  '2012 — 2015',
+    location: 'Atlanta, GA',
+    bullets: [
+      '[Retail] Reduced digital content publishing cycle time from 17 to 6 weeks, saving $6M',
+      '[Banking] Led proof-of-concept of new Vendor Risk Management process — $1.5M in follow-on implementation',
+      '[Construction] Built business case to migrate data centers to AWS — $1.3M in savings',
+      '[Manufacturing] Implemented IT system for aircraft client reducing labor expenses by $5M+; led training for 800 staff',
+    ],
+    metrics: ['$6M cycle savings', '$1.5M follow-on', '$1.3M AWS savings'],
+    color: '#a07840',
+  },
+  {
+    company: 'Booz Allen Hamilton',
+    title:   'Senior Consultant',
+    period:  '2009 — 2012',
+    location: 'Atlanta, GA (CDC Account)',
+    bullets: [
+      '[Government] Developed three-year strategic plan for 300-person Influenza Division at the CDC',
+      '[Government] Redesigned H1N1 diagnostic kit distribution system — reduced failed deliveries by 85% during 2009 pandemic',
+      'Recognized with CDC Public Health Impact Award',
+      'Helped grow the Booz Allen CDC team from 2 to 14 consultants through business development',
+    ],
+    metrics: ['85% failed deliveries cut', 'CDC Public Health Award'],
+    color: '#8a7a9a',
+  },
+];
+
+const education = [
+  {
+    school: 'Duke University, Fuqua School of Business',
+    degree: 'MBA',
+    year:   '2017',
+    notes:  'Focus on strategy and finance. Founded Fuqua Motorcycle Club.',
+  },
+  {
+    school: 'Emory University, Goizueta Business School',
+    degree: 'BBA',
+    year:   '2009',
+    notes:  'Concentrations in marketing and Russian. Dean\'s List. Study abroad in Czech Republic.',
   },
 ];
 
 const skills = [
-  'Data Strategy', 'AI/ML', 'Python', 'SQL', 'dbt', 'Snowflake',
-  'Tableau', 'Looker', 'TypeScript', 'React', 'Astro',
-  'Product Analytics', 'Team Leadership', 'ADHD Operating Systems',
+  'Strategy & Analytics', 'AI/ML Systems', 'Python', 'SQL', 'BigQuery',
+  'dbt', 'Snowflake', 'Tableau', 'Looker', 'PowerBI',
+  'TypeScript', 'React', 'Astro', 'LLM Agent Workflows',
+  'Team Building', 'Executive Comms', 'Revenue Operations',
+  'Change Management (Prosci)', 'Project Management (CAPM)',
+];
+
+const funFacts = [
+  { icon: '⛰', text: 'Completed the 29029 Everesting challenge — climbed the vertical equivalent of Everest (29,029 ft) over 36 hours' },
+  { icon: '🎵', text: 'Regular at live music shows; building a Suno discography of songs for my kids Dean and Ruby' },
+  { icon: '🎭', text: 'Performs improv comedy. Personal motto: "to make a stranger laugh every day"' },
+  { icon: '🏍', text: 'Former motorcyclist (RIP the FZ6). MBA-founding motorcycle club energy still present' },
 ];
 ---
 <Layout title="Work">
-  <section class="pt-16 pb-10 border-b border-border">
-    <h1 class="font-serif text-[clamp(2.5rem,8vw,5rem)] leading-none tracking-tight text-ink mb-3">Work</h1>
-    <p class="text-muted text-sm uppercase tracking-widest">Experience · Skills · Background</p>
-    <p class="text-[0.7rem] text-muted/50 mt-2 italic">
-      * Approximate — review and correct as needed
-    </p>
+  <!-- Header -->
+  <section style="padding-top:4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+      <div>
+        <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,8vw,5rem);line-height:1;letter-spacing:-.02em;color:var(--ink);margin:0 0 .75rem;">
+          Dima Perkis
+        </h1>
+        <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 .5rem;">
+          VP, Strategy & Analytics · Atlanta, GA
+        </p>
+        <p style="font-size:.875rem;color:var(--muted);max-width:38rem;line-height:1.65;margin:0;">
+          Versatile player-coach with 15 years bridging analytics, consulting, and tech strategy.
+          I build AI-enabled systems and lead teams that turn data into decisions.
+        </p>
+      </div>
+      <img src="/images/dima.jpeg" alt="Dima Perkis"
+        style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0;" />
+    </div>
+  </section>
+
+  <!-- Highlight strip -->
+  <section style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2rem;margin-bottom:3rem;">
+    {[
+      { n: '15+', label: 'Years experience' },
+      { n: '6',   label: 'Companies' },
+      { n: '$400M+', label: 'Documented impact' },
+    ].map(s => (
+      <div style="background:var(--surface);padding:1.25rem;text-align:center;">
+        <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--gold);line-height:1;">{s.n}</div>
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.25rem;">{s.label}</div>
+      </div>
+    ))}
   </section>
 
   <!-- Timeline -->
-  <section class="mt-12 mb-16">
-    <div class="flex flex-col gap-px bg-border border border-border">
+  <section style="margin-bottom:3rem;">
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Experience</h2>
+    <div style="display:flex;flex-direction:column;gap:1px;border:1px solid var(--border);background:var(--border);">
       {roles.map((role, i) => (
-        <details class="group bg-surface" open={i === 0}>
-          <summary class="flex items-start justify-between p-6 cursor-pointer list-none gap-4">
-            <div>
-              <h3 class="font-serif text-xl text-ink group-open:text-gold transition-colors leading-tight">
+        <details open={i === 0} style="background:var(--surface);">
+          <summary style="display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;list-style:none;user-select:none;">
+            <!-- Color bar -->
+            <div style={`width:3px;height:2.5rem;background:${role.color};border-radius:2px;flex-shrink:0;`} />
+            <div style="flex:1;min-width:0;">
+              <div style="font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);line-height:1.2;">
                 {role.title}
-              </h3>
-              <p class="text-sm text-muted mt-1">{role.company}</p>
+              </div>
+              <div style="font-size:.75rem;color:var(--muted);margin-top:.2rem;">
+                {role.company} · {role.location}
+              </div>
             </div>
-            <div class="text-right shrink-0">
-              <p class="text-[0.65rem] uppercase tracking-widest text-muted">{role.period}</p>
-              <span class="text-muted text-lg group-open:rotate-180 transition-transform inline-block mt-1">⌄</span>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">{role.period}</div>
+              <div style="font-size:.75rem;color:var(--muted);margin-top:.2rem;">⌄</div>
             </div>
           </summary>
 
-          <div class="px-6 pb-6 border-t border-border">
-            <ul class="mt-4 flex flex-col gap-2">
+          <div style="padding:0 1.5rem 1.5rem 2.75rem;border-top:1px solid var(--border);">
+            <ul style="margin:.75rem 0 .75rem;display:flex;flex-direction:column;gap:.4rem;padding:0;list-style:none;">
               {role.bullets.map(b => (
-                <li class="text-sm text-muted leading-relaxed flex gap-3">
-                  <span class="text-gold shrink-0">—</span>
+                <li style="display:flex;gap:.75rem;font-size:.8125rem;color:var(--muted);line-height:1.6;">
+                  <span style={`color:${role.color};flex-shrink:0;`}>—</span>
                   <span>{b}</span>
                 </li>
               ))}
             </ul>
-
-            {role.metrics.length > 0 && (
-              <div class="flex gap-2 flex-wrap mt-4">
-                {role.metrics.map(m => (
-                  <span class="text-[0.65rem] font-mono uppercase tracking-widest border border-gold/30 text-gold px-2 py-0.5">
-                    {m}
-                  </span>
-                ))}
-              </div>
-            )}
+            <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem;">
+              {role.metrics.map(m => (
+                <span style={`font-size:.6rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;border:1px solid ${role.color}44;color:${role.color};padding:.2em .6em;border-radius:2px;`}>
+                  {m}
+                </span>
+              ))}
+            </div>
           </div>
         </details>
       ))}
     </div>
   </section>
 
+  <!-- Education -->
+  <section style="margin-bottom:3rem;">
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Education</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:1px;border:1px solid var(--border);background:var(--border);">
+      {education.map(e => (
+        <div style="background:var(--surface);padding:1.25rem 1.5rem;">
+          <div style="font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--ink);">{e.degree}</div>
+          <div style="font-size:.8rem;color:var(--gold);margin:.2rem 0;">{e.school}</div>
+          <div style="font-size:.75rem;color:var(--muted);">{e.year}</div>
+          <div style="font-size:.75rem;color:var(--muted);margin-top:.5rem;line-height:1.5;">{e.notes}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
   <!-- Skills -->
-  <section class="border-t border-border pt-12">
-    <h2 class="text-[0.7rem] uppercase tracking-[0.15em] text-muted mb-6">Skills & Tools</h2>
-    <div class="flex gap-2 flex-wrap">
+  <section style="margin-bottom:3rem;">
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Skills & Tools</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
       {skills.map(s => (
         <span class="tag-pill">{s}</span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Fun facts -->
+  <section style="border-top:1px solid var(--border);padding-top:2rem;">
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Outside Work</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1px;border:1px solid var(--border);background:var(--border);">
+      {funFacts.map(f => (
+        <div style="background:var(--surface);padding:1.25rem;">
+          <div style="font-size:1.25rem;margin-bottom:.5rem;">{f.icon}</div>
+          <p style="font-size:.8125rem;color:var(--muted);line-height:1.6;margin:0;">{f.text}</p>
+        </div>
       ))}
     </div>
   </section>

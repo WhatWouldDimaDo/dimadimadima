@@ -6,11 +6,11 @@ interface Props {
 }
 const {
   title = 'dimadimadima',
-  description = 'Dima Perkis — VP Data & Analytics. Builder of odd things.',
+  description = 'Dima Perkis — VP Strategy & Analytics. Builder of odd things.',
 } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,36 +19,64 @@ const {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
-
+  <!-- Prevent theme flash -->
+  <script is:inline>
+    (function() {
+      const saved = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
 
-  <nav class="sticky top-0 z-50 bg-bg/90 backdrop-blur-sm border-b border-border">
-    <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
-      <a href="/" class="font-serif text-lg text-ink hover:text-gold transition-colors">
-        dima<span class="text-gold italic">·</span>dima<span class="text-gold italic">·</span>dima
+  <nav style="position:sticky;top:0;z-index:50;background-color:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);">
+    <div style="max-width:64rem;margin:0 auto;padding:0 1.5rem;height:3rem;display:flex;align-items:center;justify-content:space-between;">
+      <a href="/" style="font-family:'DM Serif Display',serif;font-size:1.125rem;color:var(--ink);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--ink)'">
+        dima<span style="color:var(--gold);font-style:italic;">·</span>dima<span style="color:var(--gold);font-style:italic;">·</span>dima
       </a>
-      <div class="flex gap-6 text-[0.7rem] uppercase tracking-widest text-muted">
-        <a href="/feed" class="hover:text-ink transition-colors">Feed</a>
-        <a href="/resume" class="hover:text-ink transition-colors">Work</a>
-        <a href="https://github.com/WhatWouldDimaDo" target="_blank" rel="noopener" class="hover:text-ink transition-colors">GitHub</a>
+      <div style="display:flex;align-items:center;gap:1.25rem;">
+        <a href="/feed" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Feed</a>
+        <a href="/resume" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Work</a>
+        <a href="https://linkedin.com/in/dimaperkis" target="_blank" rel="noopener" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
+        <button id="theme-toggle" aria-label="Toggle theme" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:0.75rem;padding:.25em .6em;cursor:pointer;border-radius:3px;transition:all .2s;font-family:'DM Mono',monospace;">
+          <span id="theme-icon">☀</span>
+        </button>
       </div>
     </div>
   </nav>
 
-  <main class="max-w-5xl mx-auto px-6 pb-24">
+  <main style="max-width:64rem;margin:0 auto;padding:0 1.5rem 6rem;">
     <slot />
   </main>
 
-  <footer class="border-t border-border">
-    <div class="max-w-5xl mx-auto px-6 py-6 flex items-center gap-3 text-[0.7rem] text-muted">
+  <footer style="border-top:1px solid var(--border);">
+    <div style="max-width:64rem;margin:0 auto;padding:1.5rem;display:flex;align-items:center;gap:.75rem;font-size:.7rem;color:var(--muted);">
       <span>Atlanta, GA</span>
-      <span class="text-border-hi">·</span>
+      <span style="color:var(--border-hi);">·</span>
       <span>dimadimadima.com</span>
-      <span class="text-border-hi">·</span>
-      <a href="https://github.com/WhatWouldDimaDo" target="_blank" rel="noopener" class="hover:text-gold transition-colors">@WhatWouldDimaDo</a>
+      <span style="color:var(--border-hi);">·</span>
+      <a href="https://linkedin.com/in/dimaperkis" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">linkedin.com/in/dimaperkis</a>
     </div>
   </footer>
+
+  <script>
+    const btn = document.getElementById('theme-toggle') as HTMLButtonElement;
+    const icon = document.getElementById('theme-icon') as HTMLSpanElement;
+
+    function syncIcon() {
+      const t = document.documentElement.getAttribute('data-theme');
+      icon.textContent = t === 'light' ? '☾' : '☀';
+    }
+    syncIcon();
+
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      syncIcon();
+    });
+  </script>
 </body>
 </html>

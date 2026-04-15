@@ -1,0 +1,267 @@
+/* ─── Reset & Variables ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0c0c0e;
+  --surface:   #131316;
+  --border:    #232328;
+  --border-hi: #3a3a42;
+  --text:      #e8e6e0;
+  --muted:     #6b6a72;
+  --accent:    #d4a853;
+  --accent2:   #7c6fcd;
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-mono:  'DM Mono', 'Courier New', monospace;
+}
+
+/* ─── Base ────────────────────────────────────────────────────────────── */
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  overflow-x: hidden;
+}
+
+/* ─── Noise overlay ───────────────────────────────────────────────────── */
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────── */
+header {
+  padding-top: clamp(3rem, 8vh, 6rem);
+  padding-bottom: clamp(3rem, 6vh, 5rem);
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fade-up 0.7s ease forwards;
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 10vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.wordmark .dot,
+.wordmark .dot2 {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── Projects ────────────────────────────────────────────────────────── */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
+  margin-top: clamp(3rem, 7vh, 5rem);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem 1.75rem;
+  background: var(--surface);
+  border: 1px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.project-card:nth-child(1) { animation: fade-up 0.6s ease 0.15s forwards; }
+.project-card:nth-child(2) { animation: fade-up 0.6s ease 0.25s forwards; }
+.project-card:nth-child(3) { animation: fade-up 0.6s ease 0.35s forwards; }
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  background: #16161a;
+  border-color: var(--border-hi);
+}
+
+.project-card:hover::before {
+  transform: scaleX(1);
+}
+
+.card-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-tag {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.2em 0.6em;
+  border-radius: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.project-card:hover .card-tag {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 0.875rem;
+  flex: 1;
+}
+
+.card-desc {
+  font-size: 0.8125rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.card-arrow {
+  font-size: 1.1rem;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover .card-arrow {
+  transform: translate(3px, -3px);
+}
+
+.card-url {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ─── About ───────────────────────────────────────────────────────────── */
+.about {
+  margin-top: clamp(3rem, 6vh, 4.5rem);
+  padding-bottom: clamp(3rem, 6vh, 4.5rem);
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fade-up 0.6s ease 0.5s forwards;
+}
+
+.about-line {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 2rem;
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.about-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.about-text {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--text);
+}
+
+.about-link {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.about-link:hover { opacity: 0.7; }
+
+/* ─── Footer ──────────────────────────────────────────────────────────── */
+footer {
+  padding: 1.5rem 0 2rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  opacity: 0;
+  animation: fade-up 0.5s ease 0.65s forwards;
+}
+
+.footer-text {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.footer-sep { color: var(--border-hi); }
+
+/* ─── Animation ───────────────────────────────────────────────────────── */
+@keyframes fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .about-line {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .projects {
+    grid-template-columns: 1fr;
+  }
+}

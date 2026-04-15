@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FeedGrid from '../components/FeedGrid';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .map(p => ({
+    slug:    p.slug,
+    title:   p.data.title,
+    type:    p.data.type,
+    tags:    p.data.tags,
+    date:    p.data.date.toISOString(),
+    youtube: p.data.youtube,
+    image:   p.data.image,
+    caption: p.data.caption,
+  }));
+---
+<Layout title="Feed">
+  <section class="pt-16 pb-10 border-b border-border">
+    <h1 class="font-serif text-[clamp(2.5rem,8vw,5rem)] leading-none tracking-tight text-ink mb-3">
+      The Feed
+    </h1>
+    <p class="text-muted text-sm uppercase tracking-widest">
+      Songs · Images · Mini-projects · Notes
+    </p>
+  </section>
+
+  <section class="mt-10">
+    <FeedGrid posts={posts} client:load />
+  </section>
+</Layout>

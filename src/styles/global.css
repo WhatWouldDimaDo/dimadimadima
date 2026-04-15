@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-ink font-mono;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #d4a85333;
+    color: #d4a853;
+  }
+}
+
+@layer components {
+  .noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  .card-hover {
+    @apply transition-colors duration-200;
+    position: relative;
+  }
+
+  .card-hover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #d4a853, #7c6fcd);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .card-hover:hover::before {
+    transform: scaleX(1);
+  }
+
+  .tag-pill {
+    @apply text-[0.65rem] font-medium tracking-widest uppercase text-muted border border-border px-2 py-0.5 rounded-sm transition-colors duration-150;
+  }
+
+  .tag-pill:hover,
+  .tag-pill.active {
+    @apply text-gold border-gold/30;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease forwards;
+}

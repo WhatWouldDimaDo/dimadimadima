@@ -1,0 +1,33 @@
+---
+interface Props {
+  title:       string;
+  description: string;
+  tags:        string[];
+  url?:        string;
+  github?:     string;
+  style?:      string;
+}
+const { title, description, tags, url, github, style = '' } = Astro.props;
+const href = url || github || '#';
+---
+<a
+  class={`card-hover flex flex-col bg-surface border border-border p-8 text-inherit no-underline group ${style}`}
+  href={href}
+  target={href.startsWith('http') ? '_blank' : undefined}
+  rel={href.startsWith('http') ? 'noopener' : undefined}
+>
+  <div class="flex gap-2 flex-wrap mb-5">
+    {tags.map(t => <span class="tag-pill">{t}</span>)}
+  </div>
+
+  <h2 class="font-serif text-2xl font-normal leading-tight text-ink mb-3 group-hover:text-gold transition-colors">
+    {title}
+  </h2>
+
+  <p class="text-muted text-sm leading-relaxed flex-1 mb-6">{description}</p>
+
+  <div class="flex items-center justify-between border-t border-border pt-4">
+    <span class="text-gold text-base transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+    <span class="text-muted text-[0.7rem]">{url ? new URL(url).hostname : 'github'}</span>
+  </div>
+</a>

@@ -4,8 +4,8 @@ date: 2026-04-21
 description: LLM-scored Atlanta event discovery — every show, festival, and family pick ranked against a personal taste profile. S-tier electronic shows get bought immediately. B-tier waits for the right group. Built as a living dashboard, not a static list.
 tags: [ai, claude, events, atlanta, data viz, llm]
 status: active
-featured: true
-order: 4
+featured: false
+order: 40
 url: https://atl-events.vercel.app
 ---
 

@@ -4,25 +4,39 @@
 
 /* ─── Theme tokens ───────────────────────────────────────── */
 :root {
-  --bg:        #0c0c0e;
-  --surface:   #131316;
-  --border:    #232328;
-  --border-hi: #3a3a42;
-  --ink:       #e8e6e0;
-  --muted:     #6b6a72;
-  --gold:      #d4a853;
-  --violet:    #7c6fcd;
+  --bg:          #0c0c0e;
+  --surface:     #131316;
+  --border:      #232328;
+  --border-hi:   #3a3a42;
+  --ink:         #e8e6e0;
+  --muted:       #6b6a72;
+  --gold:        #d4a853;
+  --violet:      #7c6fcd;
+  --logo-filter: brightness(0) invert(0.85);
 }
 
 [data-theme="light"] {
-  --bg:        #f5f2eb;
-  --surface:   #ffffff;
-  --border:    #e0dbd0;
-  --border-hi: #c4bfb3;
-  --ink:       #1a1818;
-  --muted:     #7a7670;
-  --gold:      #b07c18;
-  --violet:    #5a4fb0;
+  --bg:          #f5f2eb;
+  --surface:     #ffffff;
+  --border:      #e0dbd0;
+  --border-hi:   #c4bfb3;
+  --ink:         #1a1818;
+  --muted:       #7a7670;
+  --gold:        #b07c18;
+  --violet:      #5a4fb0;
+  --logo-filter: none;
+}
+
+[data-theme="hacker"] {
+  --bg:          #050a05;
+  --surface:     #080e08;
+  --border:      #0f2010;
+  --border-hi:   #1a3a1b;
+  --ink:         #00e533;
+  --muted:       #2d6b2e;
+  --gold:        #00ff41;
+  --violet:      #00cc33;
+  --logo-filter: brightness(0) saturate(100%) invert(52%) sepia(97%) saturate(400%) hue-rotate(86deg) brightness(115%);
 }
 
 @layer base {
@@ -63,25 +77,26 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--gold), var(--violet));
+    height: 3px;
+    background: var(--gold);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
   }
   .card-hover:hover::before { transform: scaleX(1); }
 
-  /* ─── Tag pills ── */
+  /* ─── Tag pills (used only in filter UI, not in cards) ── */
   .tag-pill {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
     border: 1px solid var(--border);
-    padding: 0.2em 0.6em;
+    padding: 0.18em 0.55em;
     border-radius: 2px;
-    transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+    transition: color 0.15s, border-color 0.15s;
     white-space: nowrap;
   }
   .tag-pill:hover { color: var(--gold); border-color: color-mix(in srgb, var(--gold) 35%, transparent); }
@@ -89,6 +104,42 @@
     color: var(--gold);
     border-color: color-mix(in srgb, var(--gold) 45%, transparent);
     background-color: color-mix(in srgb, var(--gold) 8%, transparent);
+  }
+
+  /* ─── Hero project card ── */
+  .project-hero {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--border);
+    margin-bottom: 1px;
+  }
+  .project-hero-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block;
+  }
+  .project-hero:hover .project-hero-img { transform: scale(1.03); }
+  .project-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(12,12,14,0.92) 35%, rgba(12,12,14,0.15) 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    transition: background 0.4s ease;
+  }
+  .project-hero:hover .project-hero-overlay {
+    background: linear-gradient(to top, rgba(12,12,14,0.96) 40%, rgba(12,12,14,0.2) 100%);
+  }
+  .project-hero-no-img {
+    min-height: clamp(220px, 28vw, 360px);
+    padding: clamp(2rem, 5vw, 3.5rem);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    background: var(--surface);
+    border-left: 3px solid var(--gold);
+    position: relative;
   }
 
   /* ─── Type tab ── */

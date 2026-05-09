@@ -5,29 +5,75 @@ interface Props {
   tags:        string[];
   url?:        string;
   github?:     string;
+  image?:      string;
+  status?:     string;
+  date?:       Date;
+  slug?:       string;
   style?:      string;
 }
-const { title, description, tags, url, github, style = '' } = Astro.props;
-const href = url || github || '#';
+const { title, description, tags, url, github, image, status, date, slug, style = '' } = Astro.props;
+const href = slug ? `/projects/${slug}` : (url || github || '#');
+const hasLink = !!(slug || url || github);
+const isExternal = !slug && !!(url || github);
+
+const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
+  live:       { label: 'Live',       color: '#5a9a6e' },
+  active:     { label: 'Active',     color: '#d4a853' },
+  built:      { label: 'Built',      color: '#7c6fcd' },
+  concept:    { label: 'Concept',    color: '#6b6a72' },
+  research:   { label: 'Research',   color: '#6b8fad' },
+  experiment: { label: 'Experiment', color: '#c07050' },
+};
+const statusMeta = status ? (STATUS_CONFIG[status] ?? { label: status, color: '#6b6a72' }) : null;
+const dateStr = date ? date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : null;
+const tagStr = tags.slice(0, 3).join(' · ');
 ---
 <a
-  class={`card-hover flex flex-col bg-surface border border-border p-8 text-inherit no-underline group ${style}`}
-  href={href}
-  target={href.startsWith('http') ? '_blank' : undefined}
-  rel={href.startsWith('http') ? 'noopener' : undefined}
+  class={`card-hover flex flex-col bg-surface text-inherit no-underline group overflow-hidden ${style}`}
+  href={hasLink ? href : undefined}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener' : undefined}
+  style={!hasLink ? 'cursor:default;pointer-events:none;' : ''}
 >
-  <div class="flex gap-2 flex-wrap mb-5">
-    {tags.map(t => <span class="tag-pill">{t}</span>)}
-  </div>
+  {image && (
+    <div class="w-full overflow-hidden" style="aspect-ratio:16/9;">
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        loading="lazy"
+      />
+    </div>
+  )}
 
-  <h2 class="font-serif text-2xl font-normal leading-tight text-ink mb-3 group-hover:text-gold transition-colors">
-    {title}
-  </h2>
+  <div class="flex flex-col flex-1 p-6">
+    <!-- Status + date -->
+    <div class="flex items-center justify-between mb-5">
+      {statusMeta ? (
+        <span style={`font-size:0.6rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.12em;color:${statusMeta.color};display:flex;align-items:center;gap:0.35rem;`}>
+          <span style={`width:5px;height:5px;border-radius:50%;background:${statusMeta.color};flex-shrink:0;`}></span>
+          {statusMeta.label}
+        </span>
+      ) : <span />}
+      {dateStr && <span class="text-muted text-[0.58rem] font-mono">{dateStr}</span>}
+    </div>
 
-  <p class="text-muted text-sm leading-relaxed flex-1 mb-6">{description}</p>
+    <!-- Title -->
+    <h2 class="font-serif text-[1.25rem] font-normal leading-snug text-ink mb-3 group-hover:text-gold transition-colors duration-200">
+      {title}
+    </h2>
 
-  <div class="flex items-center justify-between border-t border-border pt-4">
-    <span class="text-gold text-base transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-    <span class="text-muted text-[0.7rem]">{url ? new URL(url).hostname : 'github'}</span>
+    <!-- Description -->
+    <p class="text-muted text-[0.8rem] leading-relaxed flex-1 mb-5">{description}</p>
+
+    <!-- Footer: tags + arrow -->
+    <div class="flex items-end justify-between border-t border-border pt-4">
+      <span class="text-muted text-[0.58rem] font-mono tracking-wide">{tagStr}</span>
+      {hasLink && (
+        <span class="text-gold transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-base leading-none">
+          {slug ? '→' : '↗'}
+        </span>
+      )}
+    </div>
   </div>
 </a>

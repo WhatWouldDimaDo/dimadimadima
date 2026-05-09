@@ -1,79 +1,203 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import AnimatedStats from '../components/AnimatedStats';
 import { getCollection } from 'astro:content';
 
-const projects = (await getCollection('projects'))
+const allFeatured = (await getCollection('projects'))
   .sort((a, b) => a.data.order - b.data.order)
   .filter(p => p.data.featured);
+
+const [heroProject, ...gridProjects] = allFeatured;
 
 const recentPosts = (await getCollection('posts'))
   .filter(p => !p.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+  .slice(0, 6);
 
+function ytId(url: string) {
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=)([^&?/\s]+)/);
+  return m ? m[1] : null;
+}
+
+const TYPE_COLORS: Record<string, string> = {
+  song: '#d4a853', image: '#7c6fcd', project: '#5a9a6e', note: '#6b8fad',
+};
 const TYPE_ICONS: Record<string, string> = {
   song: '♫', image: '◈', project: '⌥', note: '◇',
 };
+
+const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
+  live:       { label: 'Live',       color: '#5a9a6e' },
+  active:     { label: 'Active',     color: '#d4a853' },
+  built:      { label: 'Built',      color: '#7c6fcd' },
+  concept:    { label: 'Concept',    color: '#6b6a72' },
+  research:   { label: 'Research',   color: '#6b8fad' },
+  experiment: { label: 'Experiment', color: '#c07050' },
+};
+const heroStatus = heroProject?.data.status
+  ? (STATUS_CONFIG[heroProject.data.status] ?? null)
+  : null;
 ---
 <Layout>
   <!-- Hero -->
-  <section class="pt-20 pb-16 border-b border-border animate-fade-up">
-    <h1 class="font-serif text-[clamp(3.5rem,12vw,8rem)] leading-none tracking-tight text-ink mb-4">
+  <section class="pt-20 pb-12 border-b border-border">
+    <h1 class="font-serif leading-none tracking-tight text-ink mb-10" style="font-size:clamp(3.75rem,14vw,9rem);">
       dima<span class="text-gold italic">·</span>dima<span class="text-gold italic">·</span>dima
     </h1>
-    <p class="text-muted text-sm uppercase tracking-widest font-light">
-      VP Data & Analytics · Systems Thinker · Builder of Odd Things
+
+    <div class="mb-8 space-y-3">
+      <p class="font-serif leading-tight text-ink" style="font-size:clamp(1.2rem,2.8vw,1.75rem);">
+        <span class="text-[0.58rem] uppercase tracking-[0.16em] text-gold font-mono align-middle" style="margin-right:0.75rem;">For companies —</span>I help companies understand AI.
+      </p>
+      <p class="font-serif leading-tight text-muted" style="font-size:clamp(1.2rem,2.8vw,1.75rem);">
+        <span class="text-[0.58rem] uppercase tracking-[0.16em] font-mono align-middle" style="color:var(--violet);margin-right:0.75rem;">For builders —</span>I use AI to understand everything else.
+      </p>
+    </div>
+
+    <p class="text-muted text-xs uppercase tracking-widest">
+      VP, Data &amp; Analytics · Atlanta, GA ·
+      <a href="/about" style="color:var(--muted);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Father · Builder · Explorer →</a>
     </p>
   </section>
 
+  <!-- Animated Stats -->
+  <AnimatedStats client:visible />
+
   <!-- Projects -->
-  <section class="mt-16 mb-20">
-    <h2 class="text-[0.7rem] uppercase tracking-[0.15em] text-muted mb-6">Selected Projects</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
-      {projects.map(p => (
-        <ProjectCard
-          title={p.data.title}
-          description={p.data.description}
-          tags={p.data.tags}
-          url={p.data.url}
-          github={p.data.github}
-        />
-      ))}
+  <section class="mt-4 mb-20">
+    <div class="flex items-baseline justify-between mb-6">
+      <h2 class="text-[0.65rem] uppercase tracking-[0.15em] text-muted">Selected Projects</h2>
+      <a href="/projects" class="text-[0.65rem] text-muted hover:text-gold transition-colors uppercase tracking-widest">All projects →</a>
     </div>
+
+    <!-- Hero featured project -->
+    {heroProject && (
+      <a href={`/projects/${heroProject.slug}`} class="project-hero">
+        {heroProject.data.image ? (
+          <>
+            <div style="aspect-ratio:21/9;overflow:hidden;">
+              <img
+                src={heroProject.data.image}
+                alt={heroProject.data.title}
+                class="project-hero-img"
+                loading="eager"
+              />
+            </div>
+            <div class="project-hero-overlay">
+              <div class="mb-3">
+                {heroStatus && (
+                  <span style={`font-size:0.58rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.14em;color:${heroStatus.color};display:inline-flex;align-items:center;gap:0.35rem;margin-right:1.25rem;`}>
+                    <span style={`width:5px;height:5px;border-radius:50%;background:${heroStatus.color};`}></span>{heroStatus.label}
+                  </span>
+                )}
+                <span style="font-size:0.58rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.14em;color:rgba(232,230,224,0.35);">Featured</span>
+              </div>
+              <h3 class="font-serif leading-tight mb-3" style="font-size:clamp(1.5rem,4vw,2.75rem);max-width:42rem;color:#fff;">
+                {heroProject.data.title}
+              </h3>
+              <p class="text-[0.82rem] leading-relaxed mb-5" style="color:rgba(232,230,224,0.6);max-width:36rem;">
+                {heroProject.data.description}
+              </p>
+              <span class="text-gold text-sm font-mono">→ case study</span>
+            </div>
+          </>
+        ) : (
+          <div class="project-hero-no-img">
+            <div style="margin-bottom:0.75rem;">
+              {heroStatus && (
+                <span style={`font-size:0.58rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.14em;color:${heroStatus.color};display:inline-flex;align-items:center;gap:0.35rem;margin-right:1.25rem;`}>
+                  <span style={`width:5px;height:5px;border-radius:50%;background:${heroStatus.color};`}></span>{heroStatus.label}
+                </span>
+              )}
+              <span style="font-size:0.58rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);">Featured</span>
+            </div>
+            <h3 class="font-serif leading-tight mb-3 text-ink" style="font-size:clamp(1.5rem,4vw,2.75rem);max-width:42rem;">
+              {heroProject.data.title}
+            </h3>
+            <p class="text-muted text-[0.82rem] leading-relaxed mb-5" style="max-width:36rem;">
+              {heroProject.data.description}
+            </p>
+            <span class="text-gold text-sm font-mono">→ case study</span>
+          </div>
+        )}
+      </a>
+    )}
+
+    <!-- Grid of remaining featured projects -->
+    {gridProjects.length > 0 && (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border border-t-0">
+        {gridProjects.slice(0, 5).map(p => (
+          <ProjectCard
+            title={p.data.title}
+            description={p.data.description}
+            tags={p.data.tags}
+            url={p.data.url}
+            image={p.data.image}
+            status={p.data.status}
+            date={p.data.date}
+            slug={p.slug}
+          />
+        ))}
+      </div>
+    )}
   </section>
 
   <!-- Recent feed -->
   <section class="border-t border-border pt-16">
     <div class="flex items-baseline justify-between mb-6">
-      <h2 class="text-[0.7rem] uppercase tracking-[0.15em] text-muted">Latest</h2>
-      <a href="/feed" class="text-[0.7rem] text-muted hover:text-gold transition-colors uppercase tracking-widest">
+      <h2 class="text-[0.65rem] uppercase tracking-[0.15em] text-muted">Latest</h2>
+      <a href="/feed" class="text-[0.65rem] text-muted hover:text-gold transition-colors uppercase tracking-widest">
         All posts →
       </a>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
       {recentPosts.map(post => {
-        const icon = TYPE_ICONS[post.data.type] ?? '◇';
-        const color = post.data.type === 'song' ? '#d4a853'
-                    : post.data.type === 'image' ? '#7c6fcd'
-                    : post.data.type === 'project' ? '#5a9a6e'
-                    : '#6b6a72';
-        const date = post.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        const color = TYPE_COLORS[post.data.type] ?? '#6b6a72';
+        const icon  = TYPE_ICONS[post.data.type] ?? '◇';
+        const date  = post.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        const vid   = post.data.youtube ? ytId(post.data.youtube) : null;
+        const thumb = vid
+          ? `https://img.youtube.com/vi/${vid}/hqdefault.jpg`
+          : post.data.image ?? null;
         return (
-          <div class="bg-surface p-6 flex flex-col gap-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs uppercase tracking-widest" style={`color:${color}`}>{icon} {post.data.type}</span>
-              <span class="text-muted text-[0.65rem]">{date}</span>
-            </div>
-            <h3 class="font-serif text-xl text-ink leading-tight">{post.data.title}</h3>
-            {post.data.caption && <p class="text-muted text-sm leading-relaxed">{post.data.caption}</p>}
-            {post.data.youtube && (
-              <a href={post.data.youtube} target="_blank" rel="noopener"
-                 class="text-xs text-muted hover:text-gold transition-colors mt-auto pt-3 border-t border-border flex items-center gap-2">
-                <span style="color:#ff4444">▶</span> Watch on YouTube ↗
+          <div class="bg-surface flex flex-col overflow-hidden feed-card">
+            {thumb && (
+              <a
+                href={post.data.youtube ?? '#'}
+                target={post.data.youtube ? '_blank' : undefined}
+                rel={post.data.youtube ? 'noopener' : undefined}
+                style="display:block;position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;"
+              >
+                <img src={thumb} alt={post.data.title}
+                  style="width:100%;height:100%;object-fit:cover;opacity:.9;transition:opacity .2s;" />
+                {vid && (
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);transition:background .2s;">
+                    <div style="width:44px;height:44px;border-radius:50%;background:#ff0000cc;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.5);">
+                      <span style="color:#fff;font-size:1rem;margin-left:3px;">▶</span>
+                    </div>
+                  </div>
+                )}
+                <div style={`position:absolute;top:8px;left:8px;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);border:1px solid ${color}44;color:${color};font-size:.58rem;font-family:'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;padding:.2em .6em;border-radius:2px;`}>
+                  {icon} {post.data.type}
+                </div>
               </a>
             )}
+            {!thumb && (
+              <div style={`padding:.4rem .75rem;background:${color}14;border-bottom:1px solid ${color}22;color:${color};font-size:.6rem;font-family:'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;`}>
+                {icon} {post.data.type}
+              </div>
+            )}
+            <div class="flex flex-col flex-1 p-5 gap-2">
+              <div class="flex items-baseline justify-between gap-2">
+                <h3 class="font-serif text-lg text-ink leading-tight">{post.data.title}</h3>
+                <span class="text-muted text-[0.58rem] flex-shrink-0 font-mono">{date}</span>
+              </div>
+              {post.data.caption && (
+                <p class="text-muted text-[0.8rem] leading-relaxed flex-1">{post.data.caption}</p>
+              )}
+            </div>
           </div>
         );
       })}
@@ -84,17 +208,21 @@ const TYPE_ICONS: Record<string, string> = {
   <section class="mt-20 pt-16 border-t border-border">
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-px border border-border bg-border">
       <div class="bg-surface p-6">
-        <p class="text-[0.65rem] uppercase tracking-widest text-muted mb-2">Currently</p>
-        <p class="text-sm text-ink">VP, Data & Analytics at <span class="text-gold">Lahzo</span></p>
+        <p class="text-[0.6rem] uppercase tracking-widest text-muted mb-2">Currently</p>
+        <p class="text-[0.85rem] text-ink">VP, Data &amp; Analytics at <span class="text-gold">Lahzo</span></p>
       </div>
       <div class="bg-surface p-6">
-        <p class="text-[0.65rem] uppercase tracking-widest text-muted mb-2">Interested in</p>
-        <p class="text-sm text-ink">AI systems, personal data, building things that shouldn't exist</p>
+        <p class="text-[0.6rem] uppercase tracking-widest text-muted mb-2">Interested in</p>
+        <p class="text-[0.85rem] text-ink">AI systems, personal data, building things that shouldn't exist</p>
       </div>
       <div class="bg-surface p-6">
-        <p class="text-[0.65rem] uppercase tracking-widest text-muted mb-2">Base</p>
-        <p class="text-sm text-ink">Atlanta, GA · Father of Dean & Ruby</p>
+        <p class="text-[0.6rem] uppercase tracking-widest text-muted mb-2">Base</p>
+        <p class="text-[0.85rem] text-ink">Atlanta, GA · Father of Dean &amp; Ruby</p>
       </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  .feed-card:hover img { opacity: 1 !important; }
+</style>

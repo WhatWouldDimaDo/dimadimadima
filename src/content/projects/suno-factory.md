@@ -4,7 +4,7 @@ date: 2026-01-17
 description: End-to-end AI music pipeline — Claude writes lyrics and style guides, Suno generates the tracks, DALL-E makes cover art, FFmpeg builds the video, and a script uploads to YouTube. 75+ custom songs for Dean, Ruby, and friends.
 tags: [ai, music, suno, automation, python, claude]
 status: active
-featured: true
+featured: false
 order: 5
 ---
 

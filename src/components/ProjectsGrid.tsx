@@ -155,7 +155,7 @@ export default function ProjectsGrid({ projects }: Props) {
             >
               {p.image ? (
                 <div style={{ width: '100%', aspectRatio: '3/2', overflow: 'hidden', flexShrink: 0 }}>
-                  <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' }} loading="lazy" />
+                  <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' }} loading="lazy" />
                 </div>
               ) : (
                 <div style={{ minHeight: '8rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '1.5rem 1.25rem', background: 'linear-gradient(135deg, var(--surface) 60%, rgba(212,168,83,0.06))' }}>

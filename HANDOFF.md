@@ -93,20 +93,25 @@ Spotify wide | Concert History | Music cell
 
 ## UX Issues Found (Audit Session 2026-05-09)
 
-### Fixed This Session
+### Fixed This Session (2026-05-09)
 - [x] `$400M+` stat on resume → changed to `30+` / "Projects shipped"
 - [x] Nav "Work" → "Resume"
 - [x] About page contact email → `dperkis@gmail.com` (was work email)
 
+### Fixed Next Session (2026-05-10)
+- [x] Projects page card design → image-first 3:2, no description clutter
+- [x] Mobile projects page text wall → 29 projects hidden (listed:false), all visible cards have images
+- [x] Project detail pages → multi-image gallery with thumbnail strip
+- [x] Grocery store easter egg `$400M+` → `PRICELESS`
+- [x] v2 bento grid → light/cream theme (defaultTheme prop)
+
 ### Still Open
 - [ ] Suno Factory has no hero image — only featured project without one
-- [ ] Projects page: cards with images vs. text-only walls look inconsistent
-- [ ] Mobile projects page: 16,000px text scroll, no visual anchors
-- [ ] Project detail pages: body is pure text, no screenshots in body
 - [ ] Project page footer: "→ ALL PROJECTS" dead-end, needs next-project CTA
 - [ ] Resume page `<title>` says "Work" not "Dima Perkis — Resume"
 - [ ] OG image is `dima.jpeg` sitewide — no project-specific OG
 - [ ] No favicon beyond default
+- [ ] AI Enablement Portal + ATL Events Intelligence — listed but text-only cards (no images)
 
 ---
 
@@ -146,7 +151,7 @@ Dima dictates via SuperWhisper. Transcription errors are common. Key decoded con
 
 ## Technical Notes
 
-- **Build:** `npm run build` — clean, ~1.8s, 48 pages
+- **Build:** `npm run build` — clean, ~1.9s, 49 pages (v2 added)
 - **Deploy:** `npx vercel --prod` then `npx vercel deploy --prod` to promote
 - **Git:** Main branch push is blocked by repo policy. Use feature branches.
 - **Theme tokens:** `src/styles/global.css` — light mode gold `#8a6012`, muted `#6a6560` (WCAG AA). Hacker mode muted `#3a8a3b`.
@@ -158,12 +163,11 @@ Dima dictates via SuperWhisper. Transcription errors are common. Key decoded con
 
 ## Open Items (Priority Order)
 
-1. **Bento grid /v2 build** — `BentoGrid.astro` + `BentoCell.astro`, route at `/v2`
-2. **Suno Factory screenshot** — only featured project without a card image
-3. **Project page body** — add at least one screenshot per project detail page
-4. **Project page footer** — replace "→ ALL PROJECTS" with next-project CTA
-5. **Resume page title** — fix `<title>` to "Dima Perkis — Resume"
-6. **SEO** — meta descriptions, project-specific OG images, favicon
+1. **Suno Factory screenshot** — only featured project without a card image
+2. **Project page footer** — replace "→ ALL PROJECTS" with next-project CTA
+3. **Resume page title** — fix `<title>` to "Dima Perkis — Resume"
+4. **SEO** — meta descriptions, project-specific OG images, favicon
+5. **v2 → promote to /** — if v2 is approved, replace homepage
 
 ---
 

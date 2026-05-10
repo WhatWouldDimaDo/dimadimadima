@@ -1,20 +1,28 @@
 ---
 interface Props {
-  title:       string;
-  description: string;
-  tags:        string[];
-  url?:        string;
-  github?:     string;
-  image?:      string;
-  status?:     string;
-  date?:       Date;
-  slug?:       string;
-  style?:      string;
+  title:            string;
+  description:      string;
+  shortDescription?: string;
+  tags:             string[];
+  url?:             string;
+  github?:          string;
+  image?:           string;
+  status?:          string;
+  date?:            Date;
+  slug?:            string;
+  style?:           string;
+  eager?:           boolean;
 }
-const { title, description, tags, url, github, image, status, date, slug, style = '' } = Astro.props;
+const { title, description, shortDescription, tags, url, github, image, status, date, slug, style = '', eager = false } = Astro.props;
+const displayDescription = shortDescription ?? (description.length > 80 ? description.substring(0, 80) + '...' : description);
 const href = slug ? `/projects/${slug}` : (url || github || '#');
 const hasLink = !!(slug || url || github);
 const isExternal = !slug && !!(url || github);
+
+const words = title.trim().split(/\s+/);
+const initials = words.length > 1
+  ? (words[0][0] + words[words.length - 1][0]).toUpperCase()
+  : (words[0]?.slice(0, 2) || '').toUpperCase();
 
 const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
   live:       { label: 'Live',       color: '#5a9a6e' },
@@ -34,16 +42,17 @@ const statusMeta = status ? (STATUS_CONFIG[status] ?? { label: status, color: '#
   style={!hasLink ? 'cursor:default;pointer-events:none;' : ''}
 >
   {image ? (
-    <div class="w-full overflow-hidden" style="aspect-ratio:3/2;flex-shrink:0;">
+    <div class="w-full overflow-hidden" style="aspect-ratio:3/2;flex-shrink:0;background:linear-gradient(135deg,var(--border) 0%,var(--surface) 100%);">
       <img
         src={image}
         alt={title}
         class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-        loading="lazy"
+        loading={eager ? 'eager' : 'lazy'}
       />
     </div>
   ) : (
-    <div class="flex-1 flex flex-col justify-center px-5 py-6" style="min-height:8rem;background:linear-gradient(135deg,var(--surface) 60%,rgba(212,168,83,.06));">
+    <div class="relative flex-1 flex flex-col justify-center px-5 py-6" style="min-height:8rem;background:linear-gradient(135deg,var(--surface) 60%,rgba(212,168,83,.06));">
+      <span class="absolute top-2 right-4 font-serif select-none pointer-events-none" style="font-size:3rem;opacity:0.1;color:var(--gold);">{initials}</span>
       <h2 class="font-serif text-[1.25rem] font-normal leading-snug text-ink group-hover:text-gold transition-colors duration-200 mb-2">
         {title}
       </h2>

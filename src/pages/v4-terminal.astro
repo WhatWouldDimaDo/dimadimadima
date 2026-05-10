@@ -1,0 +1,499 @@
+---
+import LayoutTerminal from '../layouts/LayoutTerminal.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = (await getCollection('projects'))
+  .filter(p => p.data.listed !== false);
+
+const featured = allProjects
+  .filter(p => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const others = allProjects
+  .filter(p => !p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const sorted = [...featured, ...others];
+
+const projectEntries = sorted.map(p => ({
+  slug: p.slug,
+  title: p.data.title,
+  description: p.data.description,
+  tags: p.data.tags,
+  status: p.data.status || 'built',
+  isFeatured: p.data.featured,
+  order: p.data.order,
+}));
+
+const totalProjects = projectEntries.length;
+const activeProjects = projectEntries.filter(p => p.status === 'active' || p.status === 'live' || p.status === 'wip').length;
+const builtProjects = projectEntries.filter(p => p.status === 'built' || p.status === 'shipped' || p.status === 'archived').length;
+---
+
+<LayoutTerminal title="dimadimadima v4-terminal" description="Dima Perkis — VP Strategy & Analytics. Terminal portfolio.">
+
+  <!-- Terminal Header -->
+  <div class="terminal-box terminal-header-box">
+    <div id="type-target" class="terminal-type-content"></div>
+  </div>
+
+  <!-- Command Help -->
+  <div class="terminal-block" style="margin-top:1.5rem;">
+    <div class="terminal-prompt">$ help</div>
+    <div class="terminal-output">
+      <div class="terminal-help-title">Available commands:</div>
+      <div class="terminal-help-row"><span class="terminal-help-cmd">ls projects</span><span class="terminal-help-desc">— List all projects</span></div>
+      <div class="terminal-help-row"><span class="terminal-help-cmd">ls skills</span><span class="terminal-help-desc">— Show skills &amp; tools</span></div>
+      <div class="terminal-help-row"><span class="terminal-help-cmd">cat about</span><span class="terminal-help-desc">— Read about me</span></div>
+      <div class="terminal-help-row"><span class="terminal-help-cmd">cat resume</span><span class="terminal-help-desc">— View work history</span></div>
+      <div class="terminal-help-row"><span class="terminal-help-cmd">cat feed</span><span class="terminal-help-desc">— Browse the creative feed</span></div>
+      <div class="terminal-help-row"><span class="terminal-help-cmd">grep [query]</span><span class="terminal-help-desc">— Search projects</span></div>
+      <div class="terminal-help-row"><span class="terminal-help-cmd">status</span><span class="terminal-help-desc">— System status</span></div>
+    </div>
+  </div>
+
+  <!-- Default output: ls projects -->
+  <div class="terminal-block" style="margin-top:1.5rem;">
+    <div class="terminal-prompt">$ ls projects/</div>
+    <div class="terminal-output terminal-projects-list">
+      {projectEntries.map(p => {
+        const isDir = p.status === 'active' || p.status === 'wip' || p.status === 'live';
+        const perms = isDir ? 'drwxr-xr-x' : '-rwxr-xr-x';
+        const statusTag = p.isFeatured && p.status === 'active' ? '[active]' :
+                          p.isFeatured ? '[featured]' :
+                          p.status === 'live' ? '[live]' :
+                          p.status === 'wip' ? '[wip]' :
+                          p.status === 'built' ? '[built]' :
+                          p.status === 'shipped' ? '[shipped]' :
+                          p.status === 'archived' ? '[archived]' : '[built]';
+        return (
+          <a href={`/projects/${p.slug}`} class="terminal-project-entry" data-slug={p.slug} data-title={p.title.toLowerCase()} data-desc={p.description.toLowerCase()} data-tags={p.tags.join(' ').toLowerCase()}>
+            <span class="terminal-perms">{perms}</span>
+            <span class="terminal-name">{p.title}/</span>
+            <span class={`terminal-status ${isDir ? 'terminal-status--active' : 'terminal-status--done'}`}>{statusTag}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- System Status -->
+  <div class="terminal-block" style="margin-top:1.5rem;">
+    <div class="terminal-prompt">$ status</div>
+    <div class="terminal-output">
+      <div class="terminal-status-grid">
+        <div class="terminal-status-cell">
+          <div class="terminal-status-key">UPTIME</div>
+          <div class="terminal-status-val terminal-val--gold">15+ years</div>
+        </div>
+        <div class="terminal-status-cell">
+          <div class="terminal-status-key">PROJECTS</div>
+          <div class="terminal-status-val">{totalProjects} shipped</div>
+        </div>
+        <div class="terminal-status-cell">
+          <div class="terminal-status-key">ACTIVE</div>
+          <div class="terminal-status-val terminal-val--gold">{activeProjects} running</div>
+        </div>
+        <div class="terminal-status-cell">
+          <div class="terminal-status-key">CONCERTS</div>
+          <div class="terminal-status-val">178 logged</div>
+        </div>
+        <div class="terminal-status-cell">
+          <div class="terminal-status-key">COMPANIES</div>
+          <div class="terminal-status-val">7 served</div>
+        </div>
+        <div class="terminal-status-cell">
+          <div class="terminal-status-key">SONGS</div>
+          <div class="terminal-status-val">65+ created</div>
+        </div>
+      </div>
+      <div class="terminal-all-ok" style="margin-top:1rem;">All systems operational.<span class="terminal-cursor">█</span></div>
+    </div>
+  </div>
+
+  <!-- Terminal Input -->
+  <div class="terminal-input-area" style="margin-top:2rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;">
+      <span class="terminal-prompt" style="white-space:nowrap;">$</span>
+      <input
+        id="terminal-input"
+        type="text"
+        class="terminal-input-field"
+        placeholder="Type a command... (try 'help')"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+    <div id="terminal-response" class="terminal-response"></div>
+  </div>
+
+  <script define:vars={{ projectEntries: projectEntries.map(p => ({ slug: p.slug, title: p.title, desc: p.description, tags: p.tags, status: p.status || 'built' })), allProjects: totalProjects, activeProjects: activeProjects }}>
+    // ─── Palette data injection ─────────────────────────────────────
+    const projectData = projectEntries;
+    window.paletteData = projectData;
+
+    // ─── Type-out effect for header ─────────────────────────────────
+    const headerText = `┌──────────────────────────────────────────────────┐
+│  Welcome to dimadimadima v4.0-terminal           │
+│  Dima Perkis — VP Strategy & Analytics           │
+│  Atlanta, GA · Building since 2009               │
+└──────────────────────────────────────────────────┘`;
+
+    const typeTarget = document.getElementById('type-target');
+    let charIndex = 0;
+
+    function typeChar() {
+      if (charIndex < headerText.length) {
+        const char = headerText[charIndex];
+        if (char === '\n') {
+          typeTarget.innerHTML += '<br/>';
+        } else {
+          typeTarget.textContent += char;
+        }
+        charIndex++;
+        setTimeout(typeChar, 8 + Math.random() * 12);
+      } else {
+        typeTarget.innerHTML += '<br/><span class="terminal-cursor">█</span>';
+      }
+    }
+
+    // Start typing after a brief delay
+    setTimeout(typeChar, 400);
+
+    // ─── Terminal input commands ────────────────────────────────────
+    const input = document.getElementById('terminal-input');
+    const response = document.getElementById('terminal-response');
+
+    const commandMap = {
+      'help': `Available commands:\n  ls projects     — List all projects\n  ls skills       — Show skills & tools\n  cat about       — Read about me\n  cat resume      — View work history\n  cat feed        — Browse the creative feed\n  grep [query]    — Search projects\n  status          — System status\n  clear           — Clear output`,
+      'ls projects': `See the directory listing above. Click any entry to view details.`,
+      'ls skills': `Skills & Tools:\n  Languages:  TypeScript, Python, SQL, JavaScript\n  AI:         Claude, GPT, Gemini, LangChain, CrewAI\n  Data:       dbt, Looker, BigQuery, Postgres, Snowflake\n  Web:        Astro, React, Tailwind, Node.js\n  Music:      Suno, Logic Pro\n  Other:      Figma, Miro, Linear, Git`,
+      'cat about': `Dima Perkis — VP Strategy & Analytics at Lahzo.\nAtlanta, GA. Building AI systems and data pipelines after bedtime.\n30+ projects shipped. Father of two.\n→ Navigate to /about for the full page.`,
+      'cat resume': `Work History:\n  Lahzo — VP Strategy & Analytics (current)\n  Multiple companies over 15+ years\n  Focus: AI strategy, data systems, team leadership\n→ Navigate to /resume for the full page.`,
+      'cat feed': `Creative Feed:\n  Suno songs, AI images, project notes\n→ Navigate to /feed to browse.`,
+      'status': `UPTIME:     15+ years\nPROJECTS:   ${allProjects} shipped\nACTIVE:     ${activeProjects} running\nCONCERTS:   178 logged\nCOMPANIES:  7 served\nSONGS:      65+ created\n\nAll systems operational. █`,
+      'clear': '__CLEAR__',
+      'pwd': '/home/dima/portfolio',
+      'whoami': 'dima — VP Strategy & Analytics, Atlanta GA',
+      'date': new Date().toString(),
+      'uname -a': 'dimadimadima v4.0-terminal — Astro 4 — Dima OS',
+    };
+
+    if (input && response) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmd = input.value.trim().toLowerCase();
+          if (!cmd) return;
+
+          if (cmd.startsWith('grep ') || cmd.startsWith('ls ')) {
+            const query = cmd.replace(/^(grep|ls)\s+/, '');
+            if (query === 'projects') {
+              response.innerHTML += `<div class="terminal-cmd-echo">$ ${cmd}</div><div class="terminal-output">See directory listing above.</div>`;
+            } else {
+              const results = projectData.filter((p) =>
+                p.title.toLowerCase().includes(query) ||
+                p.desc.toLowerCase().includes(query) ||
+                p.tags.some((t) => t.toLowerCase().includes(query))
+              );
+              if (results.length) {
+                response.innerHTML += `<div class="terminal-cmd-echo">$ ${cmd}</div><div class="terminal-output">${results.map((p) => `<a href="/projects/${p.slug}" style="color:var(--terminal-gold);text-decoration:none;">${p.title}</a> — ${p.desc} [${p.status}]`).join('<br/>')}</div>`;
+              } else {
+                response.innerHTML += `<div class="terminal-cmd-echo">$ ${cmd}</div><div class="terminal-output">No results for "${query}".</div>`;
+              }
+            }
+          } else if (cmd === 'ls') {
+            response.innerHTML += `<div class="terminal-cmd-echo">$ ls</div><div class="terminal-output">about/  feed/  projects/  resume/  skills/</div>`;
+          } else if (cmd === 'cd' || cmd.startsWith('cd ')) {
+            response.innerHTML += `<div class="terminal-cmd-echo">$ ${cmd}</div><div class="terminal-output">Navigation: use the links above or click project entries.</div>`;
+          } else if (commandMap[cmd]) {
+            if (commandMap[cmd] === '__CLEAR__') {
+              response.innerHTML = '';
+            } else {
+              response.innerHTML += `<div class="terminal-cmd-echo">$ ${cmd}</div><div class="terminal-output">${commandMap[cmd].replace(/\n/g, '<br/>')}</div>`;
+            }
+          } else {
+            response.innerHTML += `<div class="terminal-cmd-echo">$ ${cmd}</div><div class="terminal-output terminal-error">Command not found: ${cmd}. Type 'help' for available commands.</div>`;
+          }
+
+          input.value = '';
+          response.scrollTop = response.scrollHeight;
+        }
+      });
+    }
+
+    // ─── Keyboard shortcut hints ────────────────────────────────────
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'l' && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          if (response) response.innerHTML = '';
+          input.value = '';
+        }
+      });
+
+      // Auto-focus input on page load
+      setTimeout(() => input.focus(), 1000);
+    }
+
+    // Re-focus on click anywhere in terminal area
+    document.querySelector('.terminal-main')?.addEventListener('click', () => {
+      if (document.getElementById('cmd-palette')?.style.display !== 'block') {
+        input?.focus();
+      }
+    });
+  </script>
+
+  <style>
+    .terminal-box {
+      border: 1px solid var(--terminal-border);
+      background: var(--terminal-surface);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .terminal-header-box {
+      min-height: 8rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .terminal-type-content {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--terminal-ink);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .terminal-cursor {
+      animation: blink 1s step-end infinite;
+      color: var(--terminal-gold);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .terminal-block {
+      animation: fadeUp 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .terminal-block:nth-child(2) { animation-delay: 0.1s; }
+    .terminal-block:nth-child(3) { animation-delay: 0.25s; }
+    .terminal-block:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .terminal-prompt {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--terminal-gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .terminal-prompt::before {
+      content: 'dima@portfolio:~';
+      color: var(--terminal-ink);
+    }
+
+    .terminal-output {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--terminal-muted);
+      line-height: 1.6;
+    }
+
+    .terminal-help-title {
+      color: var(--terminal-ink);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .terminal-help-row {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.15rem 0;
+    }
+
+    .terminal-help-cmd {
+      color: var(--terminal-gold);
+      min-width: 12rem;
+    }
+
+    .terminal-help-desc {
+      color: var(--terminal-muted);
+    }
+
+    .terminal-projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .terminal-project-entry {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.35rem 0.5rem;
+      text-decoration: none;
+      color: var(--terminal-muted);
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+
+    .terminal-project-entry:hover {
+      background: var(--terminal-border);
+      color: var(--terminal-ink);
+      border-left-color: var(--terminal-gold);
+    }
+
+    .terminal-perms {
+      font-size: 0.75rem;
+      color: var(--terminal-muted);
+      min-width: 7rem;
+      opacity: 0.6;
+    }
+
+    .terminal-name {
+      font-size: 0.85rem;
+      color: inherit;
+    }
+
+    .terminal-project-entry:hover .terminal-name {
+      color: var(--terminal-gold);
+    }
+
+    .terminal-status {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.1em 0.4em;
+      border: 1px solid;
+    }
+
+    .terminal-status--active {
+      color: var(--terminal-gold);
+      border-color: color-mix(in srgb, var(--terminal-gold) 30%, transparent);
+    }
+
+    .terminal-status--done {
+      color: var(--terminal-muted);
+      border-color: var(--terminal-border-hi);
+    }
+
+    .terminal-status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+      gap: 0.75rem;
+    }
+
+    .terminal-status-cell {
+      border: 1px solid var(--terminal-border);
+      padding: 0.75rem 1rem;
+    }
+
+    .terminal-status-key {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--terminal-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .terminal-status-val {
+      font-size: 1.1rem;
+      color: var(--terminal-ink);
+      font-weight: 500;
+    }
+
+    .terminal-val--gold {
+      color: var(--terminal-gold);
+    }
+
+    .terminal-all-ok {
+      font-size: 0.85rem;
+      color: var(--terminal-gold);
+    }
+
+    .terminal-input-area {
+      border-top: 1px solid var(--terminal-border);
+      padding-top: 1.5rem;
+    }
+
+    .terminal-input-field {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--terminal-border);
+      color: var(--terminal-ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      padding: 0.5rem 0;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .terminal-input-field:focus {
+      border-bottom-color: var(--terminal-gold);
+    }
+
+    .terminal-input-field::placeholder {
+      color: var(--terminal-muted);
+      opacity: 0.5;
+    }
+
+    .terminal-response {
+      margin-top: 0.75rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      max-height: 20rem;
+      overflow-y: auto;
+    }
+
+    .terminal-cmd-echo {
+      color: var(--terminal-ink);
+      margin-top: 0.5rem;
+    }
+
+    .terminal-cmd-echo::before {
+      content: 'dima@portfolio:~$ ';
+      color: var(--terminal-gold);
+    }
+
+    .terminal-error {
+      color: #ff5555;
+    }
+
+    @media (max-width: 640px) {
+      .terminal-status-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .terminal-help-row {
+        flex-direction: column;
+        gap: 0.1rem;
+      }
+
+      .terminal-help-cmd {
+        min-width: auto;
+      }
+
+      .terminal-project-entry {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .terminal-perms {
+        min-width: auto;
+        font-size: 0.65rem;
+      }
+    }
+  </style>
+
+</LayoutTerminal>

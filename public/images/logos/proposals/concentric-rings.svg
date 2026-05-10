@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Outer ring: muted -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#8a8990" stroke-width="3"/>
+  <!-- Middle ring: violet -->
+  <circle cx="60" cy="60" r="35" fill="none" stroke="#7c6fcd" stroke-width="3"/>
+  <!-- Inner ring: gold -->
+  <circle cx="60" cy="60" r="20" fill="none" stroke="#d4a853" stroke-width="3"/>
+  <!-- Center: solid gold dot -->
+  <circle cx="60" cy="60" r="4" fill="#d4a853"/>
+</svg>

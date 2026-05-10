@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <style>
+    .bracket { fill: #d4a853; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 24px; font-weight: 600; }
+    .text { fill: #e8e6e0; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 16px; font-weight: 400; letter-spacing: 0.5px; }
+    .dot { fill: #d4a853; }
+  </style>
+  <!-- Opening bracket -->
+  <text class="bracket" x="8" y="38">&lt;</text>
+  <!-- Text content -->
+  <text class="text" x="36" y="35">dima<tspan class="dot">·</tspan>dima<tspan class="dot">·</tspan>dima</text>
+  <!-- Closing bracket -->
+  <text class="bracket" x="172" y="38">/&gt;</text>
+</svg>

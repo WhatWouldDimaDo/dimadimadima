@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="bar1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a8990" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#8a8990" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4a853" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#d4a853"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8c872"/>
+      <stop offset="100%" stop-color="#d4a853"/>
+    </linearGradient>
+  </defs>
+  <!-- Antenna tip -->
+  <circle cx="80" cy="14" r="3" fill="#e8c872"/>
+  <line x1="80" y1="17" x2="80" y2="25" stroke="#e8c872" stroke-width="2"/>
+  <!-- Bar 1: shortest (30px tall), muted -->
+  <rect x="20" y="88" width="16" height="30" rx="4" fill="url(#bar1)"/>
+  <!-- Bar 2: medium (55px tall), gold -->
+  <rect x="52" y="63" width="16" height="55" rx="4" fill="url(#bar2)"/>
+  <!-- Bar 3: tallest (80px tall), bright gold -->
+  <rect x="84" y="38" width="16" height="80" rx="4" fill="url(#bar3)"/>
+</svg>

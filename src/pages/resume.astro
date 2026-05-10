@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import WorkTimeline from '../components/WorkTimeline';
+import ResumeExperience from '../components/ResumeExperience';
 ---
 <Layout title="Resume">
 
@@ -31,17 +31,17 @@ import WorkTimeline from '../components/WorkTimeline';
       { n: '7',     label: 'Companies' },
       { n: '30+',    label: 'Projects shipped' },
     ].map(s => (
-      <div style="background:var(--surface);padding:1.25rem;text-align:center;">
-        <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--gold);line-height:1;">{s.n}</div>
-        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.25rem;">{s.label}</div>
-      </div>
+        <div style="background:var(--surface);padding:1.25rem;text-align:center;">
+          <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--gold);line-height:1;">{s.n}</div>
+          <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.25rem;">{s.label}</div>
+        </div>
     ))}
   </section>
 
   <!-- Experience (React island with filtering) -->
   <section style="margin-bottom:3rem;">
     <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Experience</h2>
-    <WorkTimeline client:load />
+    <ResumeExperience client:load />
   </section>
 
   <!-- Education -->

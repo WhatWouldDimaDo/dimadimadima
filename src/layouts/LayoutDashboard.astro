@@ -1,0 +1,419 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Dashboard — dimadimadima',
+  description = 'Dima Perkis — Project Dashboard',
+} = Astro.props;
+
+const now = new Date();
+const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-dt="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="dashboard-body">
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="dashboard-shell">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <div class="status-brand">ddd</div>
+      <div class="status-center">
+        <span class="status-time" id="status-time">{timeStr}</span>
+        <span class="status-sep">·</span>
+        <span class="status-date">{dateStr}</span>
+        <span class="status-sep">·</span>
+        <span class="status-page">Dashboard</span>
+      </div>
+      <button id="db-theme-toggle" aria-label="Toggle theme" title="Cycle theme" class="status-btn">
+        <span id="db-theme-icon">☀</span>
+      </button>
+    </div>
+
+    <!-- Main Three-Panel Layout -->
+    <div class="dashboard-grid">
+      <aside class="sidebar-left">
+        <slot name="sidebar-left" />
+      </aside>
+      <main class="dashboard-main">
+        <slot />
+      </main>
+      <aside class="sidebar-right">
+        <slot name="sidebar-right" />
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const THEMES = ['dark', 'light', 'hacker'] as const;
+    const ICONS: Record<string, string> = { dark: '☀', light: '☾', hacker: '▸' };
+
+    const btn = document.getElementById('db-theme-toggle') as HTMLButtonElement;
+    const icon = document.getElementById('db-theme-icon') as HTMLSpanElement;
+
+    function syncIcon() {
+      const t = document.documentElement.getAttribute('data-theme') || 'dark';
+      icon.textContent = ICONS[t] || '☀';
+    }
+    syncIcon();
+
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const idx = THEMES.indexOf(current as typeof THEMES[number]);
+      const next = THEMES[(idx + 1) % THEMES.length];
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      syncIcon();
+    });
+
+    const timeEl = document.getElementById('status-time');
+    setInterval(() => {
+      if (timeEl) {
+        timeEl.textContent = new Date().toLocaleTimeString('en-US', {
+          hour: '2-digit', minute: '2-digit', second: '2-digit',
+        });
+      }
+    }, 1000);
+  </script>
+
+  <style>
+    .dashboard-body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    .dashboard-shell {
+      width: 100%;
+      max-width: none;
+      min-height: 100vh;
+    }
+
+    /* ─── Status Bar ─────────────────────────────── */
+    .status-bar {
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+    }
+
+    .status-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.9rem;
+      color: var(--gold);
+      font-style: italic;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .status-center {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .status-time {
+      font-variant-numeric: tabular-nums;
+      color: var(--ink);
+    }
+
+    .status-sep {
+      color: var(--border-hi);
+    }
+
+    .status-page {
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--gold);
+    }
+
+    .status-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.7rem;
+      padding: 0.15em 0.5em;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.2s;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .status-btn:hover {
+      color: var(--ink);
+      border-color: var(--border-hi);
+    }
+
+    /* ─── Three-Panel Grid ───────────────────────── */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr 300px;
+      min-height: calc(100vh - 2rem);
+    }
+
+    .sidebar-left {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 1rem;
+      overflow-y: auto;
+      position: sticky;
+      top: 2rem;
+      height: calc(100vh - 2rem);
+    }
+
+    .dashboard-main {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      min-width: 0;
+    }
+
+    .sidebar-right {
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      padding: 1.25rem 1rem;
+      overflow-y: auto;
+      position: sticky;
+      top: 2rem;
+      height: calc(100vh - 2rem);
+    }
+
+    /* ─── Left Sidebar ───────────────────────────── */
+    .sb-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      display: block;
+      text-decoration: none;
+    }
+
+    .sb-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sb-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.6rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .sb-nav-link:hover {
+      color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 5%, transparent);
+    }
+
+    .sb-nav-link.active {
+      color: var(--gold);
+      background: color-mix(in srgb, var(--gold) 8%, transparent);
+    }
+
+    .sb-nav-icon {
+      font-size: 0.85rem;
+      width: 1.25rem;
+      text-align: center;
+    }
+
+    .sb-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .sb-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.72rem;
+    }
+
+    .sb-stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    .sb-stat-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.62rem;
+    }
+
+    .sb-projects-label {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .sb-project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-height: calc(100vh - 28rem);
+      overflow-y: auto;
+    }
+
+    .sb-project-link {
+      display: block;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sb-project-link:hover {
+      color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 4%, transparent);
+    }
+
+    .sb-project-link.active {
+      color: var(--gold);
+      background: color-mix(in srgb, var(--gold) 6%, transparent);
+    }
+
+    /* ─── Right Sidebar ──────────────────────────── */
+    .rs-header {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .rs-activity {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .rs-activity-item {
+      padding: 0.6rem;
+      border-left: 2px solid var(--border);
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: var(--ink);
+      transition: border-color 0.2s;
+    }
+
+    .rs-activity-item:hover {
+      border-color: var(--gold);
+    }
+
+    .rs-activity-time {
+      font-size: 0.6rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .rs-contact {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .rs-contact-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .rs-contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .rs-contact-link:hover {
+      color: var(--gold);
+    }
+
+    .rs-contact-icon {
+      font-size: 0.85rem;
+    }
+
+    /* ─── Responsive ─────────────────────────────── */
+    @media (max-width: 1100px) {
+      .dashboard-grid {
+        grid-template-columns: 200px 1fr 240px;
+      }
+      .sidebar-left { padding: 1rem 0.75rem; }
+      .sidebar-right { padding: 1rem 0.75rem; }
+      .dashboard-main { padding: 1.25rem 1rem; }
+    }
+
+    @media (max-width: 860px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .sidebar-left, .sidebar-right {
+        position: static;
+        height: auto;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .sb-project-list {
+        max-height: 200px;
+      }
+    }
+  </style>
+</body>
+</html>

@@ -4,6 +4,7 @@ type Project = {
   slug: string;
   title: string;
   description: string;
+  shortDescription?: string;
   tags: string[];
   url?: string;
   image?: string;
@@ -47,6 +48,14 @@ function getCategory(tags: string[]): string[] {
     if (tags.some(t => catTags.includes(t.toLowerCase()))) cats.push(cat);
   }
   return cats;
+}
+
+function getInitials(title: string): string {
+  const words = title.trim().split(/\s+/);
+  if (words.length > 1) {
+    return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  }
+  return (words[0]?.slice(0, 2) || '').toUpperCase();
 }
 
 export default function ProjectsGrid({ projects }: Props) {
@@ -145,6 +154,7 @@ export default function ProjectsGrid({ projects }: Props) {
           const date = p.date ? new Date(p.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : null;
 
           const cardHref = `/projects/${p.slug}`;
+          const cardDescription = p.shortDescription ?? (p.description.length > 80 ? p.description.substring(0, 80) + '...' : p.description);
 
           return (
             <a
@@ -154,12 +164,14 @@ export default function ProjectsGrid({ projects }: Props) {
               className="card-hover"
             >
               {p.image ? (
-                <div style={{ width: '100%', aspectRatio: '3/2', overflow: 'hidden', flexShrink: 0 }}>
+                <div style={{ width: '100%', aspectRatio: '3/2', overflow: 'hidden', flexShrink: 0, background: 'linear-gradient(135deg, var(--border) 0%, var(--surface) 100%)' }}>
                   <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' }} loading="lazy" />
                 </div>
               ) : (
-                <div style={{ minHeight: '8rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '1.5rem 1.25rem', background: 'linear-gradient(135deg, var(--surface) 60%, rgba(212,168,83,0.06))' }}>
+                <div style={{ minHeight: '8rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '1.5rem 1.25rem', background: 'linear-gradient(135deg, var(--surface) 60%, rgba(212,168,83,0.06))', position: 'relative' }}>
+                  <span style={{ position: 'absolute', top: '0.5rem', right: '1rem', fontFamily: 'DM Serif Display, serif', fontSize: '3rem', opacity: 0.1, color: 'var(--gold)', userSelect: 'none', pointerEvents: 'none' }}>{getInitials(p.title)}</span>
                   <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '1.2rem', color: 'var(--ink)', lineHeight: 1.25, marginBottom: '0.5rem' }}>{p.title}</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: 'DM Mono, monospace', lineHeight: '1.4', marginTop: '0.15rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{cardDescription}</div>
                   {statusMeta && (
                     <span style={{ fontSize: '0.58rem', fontFamily: 'DM Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.12em', color: statusMeta.color, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                       <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: statusMeta.color, display: 'inline-block' }} />
@@ -169,11 +181,14 @@ export default function ProjectsGrid({ projects }: Props) {
                 </div>
               )}
               {p.image && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0 0.75rem', minHeight: '2.625rem', borderTop: '1px solid var(--border)', flexShrink: 0 }}>
-                  {statusMeta && (
-                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: statusMeta.color, flexShrink: 0, display: 'inline-block' }} />
-                  )}
-                  <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '0.9rem', color: 'var(--ink)', lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{p.title}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', padding: '0 0.75rem', paddingTop: '0.35rem', paddingBottom: '0.35rem', borderTop: '1px solid var(--border)', flexShrink: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    {statusMeta && (
+                      <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: statusMeta.color, flexShrink: 0, display: 'inline-block' }} />
+                    )}
+                    <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '0.9rem', color: 'var(--ink)', lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{p.title}</div>
+                  </div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--muted)', fontFamily: 'DM Mono, monospace', lineHeight: '1.4', marginTop: '0.15rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{cardDescription}</div>
                 </div>
               )}
             </a>

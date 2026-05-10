@@ -1,0 +1,396 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'dimadimadima',
+  description = 'Dima Perkis — VP Strategy & Analytics. Builder of odd things.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="hacker">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title === 'dimadimadima' ? 'dimadimadima' : `${title} — Dima Perkis`}</title>
+  <meta property="og:title" content={`${title} — dimadimadima`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`https://dimadimadima.com${Astro.url.pathname}`} />
+  <meta property="og:image" content="https://dimadimadima.com/images/dima.jpeg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={`${title} — dimadimadima`} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://dimadimadima.com/images/dima.jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="terminal-body">
+  <div class="noise terminal-noise" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="crt-flicker" aria-hidden="true"></div>
+
+  <nav class="terminal-nav">
+    <div class="terminal-nav-inner">
+      <a href="/" class="terminal-brand">dima@portfolio:~$</a>
+      <div class="terminal-links">
+        <a href="/projects" class="terminal-link">&gt; cat /projects</a>
+        <a href="/resume" class="terminal-link">&gt; cat /resume</a>
+        <a href="/about" class="terminal-link">&gt; cat /about</a>
+        <a href="/feed" class="terminal-link">&gt; cat /feed</a>
+        <a href="/" class="terminal-link" style="color: var(--gold);">&gt; cd /</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="terminal-main">
+    <slot />
+  </main>
+
+  <footer class="terminal-footer">
+    <div class="terminal-footer-inner">
+      <span>Atlanta, GA</span>
+      <span class="terminal-sep">·</span>
+      <span>dimadimadima.com</span>
+      <span class="terminal-sep">·</span>
+      <a href="https://linkedin.com/in/dima-perkis" target="_blank" rel="noopener" class="terminal-footer-link">linkedin.com/in/dima-perkis</a>
+      <span class="terminal-grocery-trigger" title="↑↑↓↓←→←→BA">♫</span>
+    </div>
+  </footer>
+
+  <div id="grocery-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);backdrop-filter:blur(4px);overflow-y:auto;padding:2rem 1rem;cursor:pointer;" onclick="document.getElementById('grocery-overlay').style.display='none'">
+    <div onclick="event.stopPropagation()" style="max-width:480px;margin:0 auto;background:#fefefe;color:#111;font-family:'Courier New',monospace;font-size:.8rem;line-height:1.6;padding:2rem 1.5rem;box-shadow:0 20px 60px rgba(0,0,0,.5);">
+      <div style="text-align:center;border-bottom:2px dashed #ccc;padding-bottom:1rem;margin-bottom:1rem;">
+        <div style="font-size:1.4rem;font-weight:bold;letter-spacing:.1em;">DIMADIMADIMA MART</div>
+        <div style="font-size:.75rem;margin-top:.25rem;">"We Build Things. Sometimes."</div>
+        <div style="font-size:.7rem;color:#555;margin-top:.15rem;">404 Mulberry Ln · Atlanta, GA · Est. 2009</div>
+        <div style="font-size:.65rem;margin-top:.5rem;">CASHIER: Claude Sonnet &nbsp;&nbsp; REG: 04</div>
+        <div style="font-size:.65rem;">MEMBER: Dima Perkis &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="background:#111;color:#fefefe;padding:0 .3em;">GOLD</span></div>
+      </div>
+
+      <div style="margin-bottom:.75rem;">
+        <div style="font-weight:bold;text-transform:uppercase;font-size:.7rem;border-bottom:1px solid #ccc;margin-bottom:.4rem;">AISLE 7 — ARTIFICIAL INTELLIGENCE</div>
+        <div style="display:flex;justify-content:space-between;"><span>Sisyphus Pipeline</span><span>12 MIN</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>LLM Router (store brand)</span><span>$0.99</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Multi-Agent Cluster</span><span>$∞.00</span></div>
+      </div>
+
+      <div style="margin-bottom:.75rem;">
+        <div style="font-weight:bold;text-transform:uppercase;font-size:.7rem;border-bottom:1px solid #ccc;margin-bottom:.4rem;">AISLE 3 — DATA SCIENCE</div>
+        <div style="display:flex;justify-content:space-between;"><span>Tarantino Graph</span><span>37 films</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Concert History</span><span>2007–</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Friend Relationship Sys</span><span>4,000+ ct</span></div>
+      </div>
+
+      <div style="margin-bottom:.75rem;">
+        <div style="font-weight:bold;text-transform:uppercase;font-size:.7rem;border-bottom:1px solid #ccc;margin-bottom:.4rem;">AISLE 12 — FAMILY (ORGANIC)</div>
+        <div style="display:flex;justify-content:space-between;"><span>Lil' Mimic Studio</span><span>10K gen</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Adventure Bay (offline)</span><span>1 ea</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Dean Comics</span><span>12 panels</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Baby Ruby Lullabies</span><span>♫</span></div>
+      </div>
+
+      <div style="margin-bottom:.75rem;">
+        <div style="font-weight:bold;text-transform:uppercase;font-size:.7rem;border-bottom:1px solid #ccc;margin-bottom:.4rem;">AISLE 9 — MUSIC</div>
+        <div style="display:flex;justify-content:space-between;"><span>Suno Songs (bulk)</span><span>65 ea</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Dad Squad Anthem</span><span>LIMITED</span></div>
+      </div>
+
+      <div style="margin-bottom:.75rem;">
+        <div style="font-weight:bold;text-transform:uppercase;font-size:.7rem;border-bottom:1px solid #ccc;margin-bottom:.4rem;">AISLE 1 — CORPORATE (FANCY)</div>
+        <div style="display:flex;justify-content:space-between;"><span>AI Strategy (premium)</span><span>PRICELESS</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Analytics Leadership</span><span>15 YRS</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>Insights Guild</span><span>CROWN ✦</span></div>
+      </div>
+
+      <div style="border-top:2px dashed #ccc;padding-top:1rem;margin-top:.5rem;">
+        <div style="display:flex;justify-content:space-between;"><span>SUBTOTAL</span><span>30+ PROJECTS</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>CHILDREN TAX (×2)</span><span>+CHAOS</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>ADHD SURCHARGE</span><span>ALWAYS</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>AGENTIC DISCOUNT</span><span>−6 HRS</span></div>
+        <div style="display:flex;justify-content:space-between;font-weight:bold;font-size:1rem;margin-top:.5rem;border-top:1px solid #ccc;padding-top:.5rem;">
+          <span>TOTAL</span><span>WORTH IT</span>
+        </div>
+      </div>
+
+      <div style="border-top:2px dashed #ccc;padding-top:1rem;margin-top:1rem;text-align:center;">
+        <div>PAYMENT: 15 YEARS EXPERIENCE</div>
+        <div>CHANGE DUE: PERSPECTIVE</div>
+        <div style="margin-top:.75rem;font-size:.7rem;color:#555;">YOU SAVED: 6 HRS (AGENTIC LABOR)</div>
+        <div style="margin-top:1rem;font-weight:bold;">★ ★ ★ ★ ★</div>
+        <div style="margin-top:.25rem;">Thank you for visiting!</div>
+        <div style="margin-top:1rem;font-size:.65rem;border-top:1px solid #eee;padding-top:.75rem;color:#888;">Press ESC or tap outside to exit</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cmd-palette" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(5,10,5,0.92);backdrop-filter:blur(8px);" onclick="closeCmdPalette()">
+    <div onclick="event.stopPropagation()" style="max-width:640px;margin:10vh auto 0;background:#080e08;border:1px solid #0f2010;box-shadow:0 0 40px rgba(0,229,51,0.08);">
+      <div style="padding:0.75rem 1rem;border-bottom:1px solid #0f2010;display:flex;align-items:center;gap:0.5rem;">
+        <span style="color:#00e533;font-family:'DM Mono',monospace;font-size:0.85rem;">$</span>
+        <input id="cmd-input" type="text" placeholder="search projects, tags, descriptions..." style="flex:1;background:transparent;border:none;outline:none;color:#00e533;font-family:'DM Mono',monospace;font-size:0.9rem;" oninput="filterPalette()" />
+        <kbd style="font-size:0.65rem;color:#3a8a3b;background:#0f2010;padding:0.15em 0.4em;border:1px solid #1a3a1b;">ESC</kbd>
+      </div>
+      <div id="cmd-results" style="max-height:50vh;overflow-y:auto;padding:0.5rem 0;"></div>
+    </div>
+  </div>
+
+  <script>
+    // ─── Konami code → grocery mode ─────────────────────────────────────
+    const KONAMI = [38,38,40,40,37,39,37,39,66,65];
+    let seq: number[] = [];
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openCmdPalette();
+        return;
+      }
+      seq.push(e.keyCode);
+      if (seq.length > KONAMI.length) seq.shift();
+      if (seq.join(',') === KONAMI.join(',')) {
+        const overlay = document.getElementById('grocery-overlay')!;
+        overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
+        seq = [];
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const overlay = document.getElementById('grocery-overlay');
+        if (overlay) overlay.style.display = 'none';
+        closeCmdPalette();
+      }
+    });
+
+    // ─── Command Palette ───────────────────────────────────────────────
+    let paletteData: Array<{slug: string; title: string; desc: string; tags: string[]; status: string}> = [];
+
+    function openCmdPalette() {
+      const el = document.getElementById('cmd-palette')!;
+      el.style.display = 'block';
+      const input = document.getElementById('cmd-input') as HTMLInputElement;
+      input.value = '';
+      input.focus();
+      filterPalette();
+    }
+
+    function closeCmdPalette() {
+      document.getElementById('cmd-palette')!.style.display = 'none';
+    }
+
+    function filterPalette() {
+      const query = (document.getElementById('cmd-input') as HTMLInputElement).value.toLowerCase().trim();
+      const results = document.getElementById('cmd-results')!;
+      const filtered = query
+        ? paletteData.filter(p =>
+            p.title.toLowerCase().includes(query) ||
+            p.desc.toLowerCase().includes(query) ||
+            p.tags.some(t => t.toLowerCase().includes(query)))
+        : paletteData;
+
+      results.innerHTML = filtered.slice(0, 12).map((p, i) =>
+        `<a href="/projects/${p.slug}" style="display:block;padding:0.6rem 1rem;text-decoration:none;color:#00e533;font-family:'DM Mono',monospace;font-size:0.85rem;border-left:2px solid transparent;transition:all .15s;${i === 0 ? 'background:#0f2010;border-left-color:#00ff41;' : ''}" onmouseover="this.style.background='#0f2010';this.style.borderLeftColor='#00ff41'" onmouseout="${i === 0 ? "this.style.background='#0f2010';this.style.borderLeftColor='#00ff41'" : "this.style.background='transparent';this.style.borderLeftColor='transparent'"}">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;">
+            <span>${p.title}</span>
+            <span style="font-size:0.65rem;color:#3a8a3b;">[${p.status}]</span>
+          </div>
+          <div style="font-size:0.7rem;color:#3a8a3b;margin-top:0.2rem;">${p.desc}</div>
+          ${p.tags.length ? `<div style="font-size:0.6rem;color:#1a3a1b;margin-top:0.25rem;">${p.tags.join(' · ')}</div>` : ''}
+        </a>`
+      ).join('');
+
+      if (!filtered.length) {
+        results.innerHTML = '<div style="padding:1rem;color:#3a8a3b;font-family:\'DM Mono\',monospace;font-size:0.85rem;text-align:center;">No results found.</div>';
+      }
+    }
+
+    // expose for inline handlers
+    (window as any).openCmdPalette = openCmdPalette;
+    (window as any).closeCmdPalette = closeCmdPalette;
+    (window as any).filterPalette = filterPalette;
+    (window as any).paletteData = paletteData;
+  </script>
+
+  <style>
+    :root {
+      --terminal-ink: #00e533;
+      --terminal-bg: #050a05;
+      --terminal-surface: #080e08;
+      --terminal-border: #0f2010;
+      --terminal-border-hi: #1a3a1b;
+      --terminal-muted: #3a8a3b;
+      --terminal-gold: #00ff41;
+      --terminal-violet: #00cc33;
+    }
+
+    .terminal-body {
+      background-color: var(--terminal-bg);
+      color: var(--terminal-ink);
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 1rem;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 98;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 229, 51, 0.015) 2px,
+        rgba(0, 229, 51, 0.015) 4px
+      );
+    }
+
+    .crt-flicker {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 97;
+      animation: crtFlicker 0.016s infinite;
+    }
+
+    @keyframes crtFlicker {
+      0% { opacity: 0.995; }
+      50% { opacity: 1; }
+      100% { opacity: 0.995; }
+    }
+
+    .terminal-noise {
+      opacity: 0.02;
+      z-index: 96;
+    }
+
+    .terminal-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: color-mix(in srgb, var(--terminal-bg) 95%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--terminal-border);
+    }
+
+    .terminal-nav-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .terminal-brand {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.95rem;
+      color: var(--terminal-ink);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .terminal-brand:hover {
+      color: var(--terminal-gold);
+    }
+
+    .terminal-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .terminal-link {
+      font-size: 0.75rem;
+      color: var(--terminal-muted);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      transition: color 0.2s;
+    }
+
+    .terminal-link:hover {
+      color: var(--terminal-gold);
+    }
+
+    .terminal-main {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 6rem;
+    }
+
+    .terminal-footer {
+      border-top: 1px solid var(--terminal-border);
+    }
+
+    .terminal-footer-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--terminal-muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .terminal-sep {
+      color: var(--terminal-border-hi);
+    }
+
+    .terminal-footer-link {
+      color: var(--terminal-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .terminal-footer-link:hover {
+      color: var(--terminal-gold);
+    }
+
+    .terminal-grocery-trigger {
+      margin-left: auto;
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .terminal-grocery-trigger:hover {
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .terminal-links {
+        gap: 0.75rem;
+      }
+      .terminal-link {
+        font-size: 0.65rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .terminal-nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        height: auto;
+        padding: 0.75rem 1.5rem;
+      }
+      .terminal-links {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</body>
+</html>

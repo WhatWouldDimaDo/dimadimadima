@@ -18,14 +18,12 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <title>{title === 'dimadimadima' ? 'dimadimadima' : (title === 'Dima Perkis' ? 'Dima Perkis — dimadimadima' : `${title} — Dima Perkis`)}</title>
-  <!-- Open Graph -->
   <meta property="og:title" content={title === 'dimadimadima' ? 'dimadimadima — Dima Perkis' : `${title} — Dima Perkis`} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={`https://dimadimadima.com${Astro.url.pathname}`} />
   <meta property="og:image" content="https://dimadimadima.com/images/dima.jpeg" />
   <meta property="og:site_name" content="dimadimadima" />
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={title === 'dimadimadima' ? 'dimadimadima — Dima Perkis' : `${title} — dimadimadima`} />
   <meta name="twitter:description" content={description} />
@@ -33,7 +31,6 @@ const {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
-  <!-- Prevent theme flash -->
   <script is:inline>
     (function() {
       var el = document.documentElement;
@@ -43,19 +40,19 @@ const {
     })();
   </script>
 </head>
-<body>
+<body class="editorial-body">
   <div class="noise" aria-hidden="true"></div>
 
   <nav style="position:sticky;top:0;z-index:50;background-color:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);">
-    <div style="max-width:64rem;margin:0 auto;padding:0 1.5rem;height:3rem;display:flex;align-items:center;justify-content:space-between;">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem;height:3rem;display:flex;align-items:center;justify-content:space-between;">
       <a href="/" style="font-family:'DM Serif Display',serif;font-size:1.125rem;color:var(--ink);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--ink)'">
         dima<span style="color:var(--gold);font-style:italic;">·</span>dima<span style="color:var(--gold);font-style:italic;">·</span>dima
       </a>
       <div style="display:flex;align-items:center;gap:1.25rem;">
-        <a href="/feed" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/feed' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/feed' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>Feed</a>
-        <a href="/projects" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname.startsWith('/projects') ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname.startsWith('/projects') ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>Projects</a>
-        <a href="/resume" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/resume' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/resume' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>Resume</a>
-        <a href="/about" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/about' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/about' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>About</a>
+        <a href="/feed" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;color:var(--muted);" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Feed</a>
+        <a href="/projects" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;color:var(--muted);" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Projects</a>
+        <a href="/resume" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;color:var(--muted);" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Resume</a>
+        <a href="/about" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;color:var(--muted);" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">About</a>
         <button id="theme-toggle" aria-label="Toggle theme" title="Cycle theme" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:0.75rem;padding:.25em .6em;cursor:pointer;border-radius:3px;transition:all .2s;font-family:'DM Mono',monospace;">
           <span id="theme-icon">☀</span>
         </button>
@@ -63,12 +60,12 @@ const {
     </div>
   </nav>
 
-  <main style="max-width:64rem;margin:0 auto;padding:0 1.5rem 6rem;">
+  <main style="max-width:80rem;margin:0 auto;padding:0 1.5rem 6rem;">
     <slot />
   </main>
 
   <footer style="border-top:1px solid var(--border);">
-    <div style="max-width:64rem;margin:0 auto;padding:1.5rem;display:flex;align-items:center;gap:.75rem;font-size:.8rem;color:var(--muted);">
+    <div style="max-width:80rem;margin:0 auto;padding:1.5rem;display:flex;align-items:center;gap:.75rem;font-size:.8rem;color:var(--muted);">
       <span>Atlanta, GA</span>
       <span style="color:var(--border-hi);">·</span>
       <span>dimadimadima.com</span>
@@ -78,7 +75,6 @@ const {
     </div>
   </footer>
 
-  <!-- Grocery Mode Overlay -->
   <div id="grocery-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);backdrop-filter:blur(4px);overflow-y:auto;padding:2rem 1rem;cursor:pointer;" onclick="document.getElementById('grocery-overlay').style.display='none'">
     <div onclick="event.stopPropagation()" style="max-width:480px;margin:0 auto;background:#fefefe;color:#111;font-family:'Courier New',monospace;font-size:.8rem;line-height:1.6;padding:2rem 1.5rem;box-shadow:0 20px 60px rgba(0,0,0,.5);">
       <div style="text-align:center;border-bottom:2px dashed #ccc;padding-bottom:1rem;margin-bottom:1rem;">
@@ -94,7 +90,6 @@ const {
         <div style="display:flex;justify-content:space-between;"><span>Sisyphus Pipeline</span><span>12 MIN</span></div>
         <div style="display:flex;justify-content:space-between;"><span>LLM Router (store brand)</span><span>$0.99</span></div>
         <div style="display:flex;justify-content:space-between;"><span>Multi-Agent Cluster</span><span>$∞.00</span></div>
-        <div style="display:flex;justify-content:space-between;"><span>&nbsp;&nbsp;<span style="color:#888;font-size:.7rem;">* BOGO on AI workflows this month</span></span><span></span></div>
       </div>
 
       <div style="margin-bottom:.75rem;">
@@ -149,7 +144,6 @@ const {
   </div>
 
   <script>
-    // ─── Theme cycling: dark → light → hacker → dark ───────────────────
     const btn  = document.getElementById('theme-toggle') as HTMLButtonElement;
     const icon = document.getElementById('theme-icon') as HTMLSpanElement;
     const THEMES = ['dark', 'light', 'hacker'] as const;
@@ -170,7 +164,6 @@ const {
       syncTheme();
     });
 
-    // ─── Konami code → grocery mode ─────────────────────────────────────
     const KONAMI = [38,38,40,40,37,39,37,39,66,65];
     let seq: number[] = [];
     document.addEventListener('keydown', (e) => {

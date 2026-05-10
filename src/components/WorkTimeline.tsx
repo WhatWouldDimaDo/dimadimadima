@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 type Role = {
   company: string;
@@ -129,9 +129,26 @@ const ROLES: Role[] = [
 const ALL_INDUSTRIES = [...new Set(ROLES.flatMap(r => r.industries))].sort();
 const ALL_FUNCTIONS = [...new Set(ROLES.flatMap(r => r.functions))].sort();
 
-export default function WorkTimeline() {
+interface WorkTimelineProps {
+  filterCompany?: string | null;
+}
+
+export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps) {
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
-  const [expandedIdx, setExpandedIdx] = useState<number | null>(0);
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(() => {
+    if (filterCompany) {
+      const idx = ROLES.findIndex(r => r.company === filterCompany);
+      return idx >= 0 ? idx : 0;
+    }
+    return 0;
+  });
+
+  useEffect(() => {
+    if (filterCompany) {
+      const idx = ROLES.findIndex(r => r.company === filterCompany);
+      if (idx >= 0) setExpandedIdx(idx);
+    }
+  }, [filterCompany]);
 
   function toggleTag(tag: string) {
     setActiveTags(prev => {
@@ -147,6 +164,9 @@ export default function WorkTimeline() {
         [...activeTags].some(t => r.industries.includes(t) || r.functions.includes(t))
       );
 
+  const hasActiveFilters = activeTags.size > 0;
+  const roleCount = filteredRoles.length;
+
   return (
     <div>
       {/* Tag Cloud */}
@@ -159,16 +179,16 @@ export default function WorkTimeline() {
           marginBottom: '0.75rem', flexWrap: 'wrap',
         }}>
           <span style={{
-            fontSize: '0.6rem', textTransform: 'uppercase',
-            letterSpacing: '0.12em', color: 'var(--muted)',
+            fontSize: '0.8rem', textTransform: 'uppercase',
+            letterSpacing: '0.08em', color: 'var(--muted)',
           }}>Industries</span>
-          {activeTags.size > 0 && (
+          {hasActiveFilters && (
             <button
               onClick={() => setActiveTags(new Set())}
               style={{
-                fontSize: '0.6rem', fontFamily: 'DM Mono, monospace',
-                textTransform: 'uppercase', letterSpacing: '0.08em',
-                padding: '0.2em 0.65em', borderRadius: '2px',
+                fontSize: '0.8rem', fontFamily: 'DM Mono, monospace',
+                textTransform: 'uppercase', letterSpacing: '0.06em',
+                padding: '0.3em 0.75em', borderRadius: '2px',
                 border: '1px solid var(--border)', background: 'transparent',
                 color: 'var(--muted)', cursor: 'pointer', marginLeft: 'auto',
               }}
@@ -186,9 +206,9 @@ export default function WorkTimeline() {
                 key={tag}
                 onClick={() => toggleTag(tag)}
                 style={{
-                  fontSize: '0.6rem', fontFamily: 'DM Mono, monospace',
-                  textTransform: 'uppercase', letterSpacing: '0.08em',
-                  padding: '0.2em 0.65em', borderRadius: '2px',
+                  fontSize: '0.8rem', fontFamily: 'DM Mono, monospace',
+                  textTransform: 'uppercase', letterSpacing: '0.06em',
+                  padding: '0.3em 0.75em', borderRadius: '2px',
                   border: `1px solid ${active ? '#d4a853' : 'rgba(212,168,83,0.3)'}`,
                   background: active ? '#d4a853' : 'rgba(212,168,83,0.1)',
                   color: active ? 'var(--bg)' : '#d4a853',
@@ -202,8 +222,8 @@ export default function WorkTimeline() {
         </div>
 
         <span style={{
-          fontSize: '0.6rem', textTransform: 'uppercase',
-          letterSpacing: '0.12em', color: 'var(--muted)',
+          fontSize: '0.8rem', textTransform: 'uppercase',
+          letterSpacing: '0.08em', color: 'var(--muted)',
           display: 'block', marginBottom: '0.5rem',
         }}>Functions</span>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
@@ -214,9 +234,9 @@ export default function WorkTimeline() {
                 key={tag}
                 onClick={() => toggleTag(tag)}
                 style={{
-                  fontSize: '0.6rem', fontFamily: 'DM Mono, monospace',
-                  textTransform: 'uppercase', letterSpacing: '0.08em',
-                  padding: '0.2em 0.65em', borderRadius: '2px',
+                  fontSize: '0.8rem', fontFamily: 'DM Mono, monospace',
+                  textTransform: 'uppercase', letterSpacing: '0.06em',
+                  padding: '0.3em 0.75em', borderRadius: '2px',
                   border: `1px solid ${active ? '#7c6fcd' : 'rgba(124,111,205,0.3)'}`,
                   background: active ? '#7c6fcd' : 'rgba(124,111,205,0.1)',
                   color: active ? 'var(--bg)' : '#7c6fcd',
@@ -229,12 +249,20 @@ export default function WorkTimeline() {
           })}
         </div>
 
-        {activeTags.size > 0 && (
+        {hasActiveFilters && (
           <div style={{
-            marginTop: '0.75rem', fontSize: '0.65rem',
-            color: 'var(--muted)', fontFamily: 'DM Mono, monospace',
+            marginTop: '0.75rem', fontSize: '0.9rem',
+            color: '#d4a853', fontFamily: 'DM Mono, monospace',
+            display: 'flex', alignItems: 'center', gap: '0.5rem',
           }}>
-            {filteredRoles.length} of {ROLES.length} roles
+            <span
+              style={{
+                display: 'inline-block',
+                animation: 'pulse 2s ease-in-out infinite',
+              }}
+            >
+              {roleCount} of {ROLES.length} roles
+            </span>
           </div>
         )}
       </div>
@@ -249,6 +277,7 @@ export default function WorkTimeline() {
         {filteredRoles.map((role, i) => {
           const globalIdx = ROLES.indexOf(role);
           const isExpanded = expandedIdx === globalIdx;
+          const isHighlighted = filterCompany === role.company;
           return (
             <div key={role.company} style={{ position: 'relative', paddingBottom: '1rem' }}>
               <div style={{
@@ -259,25 +288,32 @@ export default function WorkTimeline() {
               }} />
 
               <div
-                style={{ border: '1px solid var(--border)', background: 'var(--surface)', transition: 'border-color 0.2s' }}
+                onClick={() => setExpandedIdx(isExpanded ? null : globalIdx)}
+                style={{
+                  border: isHighlighted ? '2px solid #d4a853' : '1px solid var(--border)',
+                  background: 'var(--surface)',
+                  transition: 'border-color 0.2s, box-shadow 0.2s',
+                  cursor: 'pointer',
+                  boxShadow: isHighlighted ? '0 0 8px rgba(212,168,83,0.3)' : 'none',
+                }}
                 onMouseEnter={e => (e.currentTarget.style.borderColor = `${role.color}44`)}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = isHighlighted ? '#d4a853' : 'var(--border)';
+                }}
               >
-                <button
-                  onClick={() => setExpandedIdx(isExpanded ? null : globalIdx)}
+                <div
                   style={{
                     width: '100%', display: 'grid',
                     gridTemplateColumns: '80px 1fr auto',
                     alignItems: 'center', gap: '1.25rem',
                     padding: '1.25rem 1.5rem',
-                    cursor: 'pointer', background: 'none', border: 'none', textAlign: 'left',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img
                       src={role.logo} alt={role.company}
                       style={{
-                        maxWidth: '72px', maxHeight: '28px',
+                        maxWidth: '80px', maxHeight: '32px',
                         width: 'auto', height: 'auto', objectFit: 'contain',
                         filter: 'var(--logo-filter)', opacity: 0.85,
                       }}
@@ -294,7 +330,7 @@ export default function WorkTimeline() {
                     }}>{role.summary}</div>
                   </div>
 
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.25rem' }}>
                     <div style={{
                       fontSize: '0.65rem', textTransform: 'uppercase',
                       letterSpacing: '0.08em', color: role.color,
@@ -303,54 +339,68 @@ export default function WorkTimeline() {
                     <div style={{
                       fontSize: '0.6rem', color: 'var(--muted)', marginTop: '0.15rem',
                     }}>{role.location}</div>
-                  </div>
-                </button>
-
-                {isExpanded && (
-                  <div style={{
-                    padding: '0 1.5rem 1.5rem', marginLeft: '80px',
-                    paddingLeft: '1.25rem', borderTop: '1px solid var(--border)',
-                  }}>
                     <div style={{
-                      display: 'flex', flexWrap: 'wrap', gap: '0.3rem',
-                      margin: '1rem 0 0.875rem',
+                      fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.25rem',
+                      transition: 'transform 0.2s ease',
+                      transform: isExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
                     }}>
-                      {role.industries.map(t => (
-                        <span key={t} style={{
-                          fontSize: '0.55rem', fontFamily: 'DM Mono, monospace',
-                          textTransform: 'uppercase', letterSpacing: '0.06em',
-                          padding: '0.15em 0.5em', borderRadius: '2px',
-                          border: '1px solid rgba(212,168,83,0.3)',
-                          color: '#d4a853', background: 'rgba(212,168,83,0.06)',
-                        }}>{t}</span>
-                      ))}
-                      {role.functions.map(t => (
-                        <span key={t} style={{
-                          fontSize: '0.55rem', fontFamily: 'DM Mono, monospace',
-                          textTransform: 'uppercase', letterSpacing: '0.06em',
-                          padding: '0.15em 0.5em', borderRadius: '2px',
-                          border: '1px solid rgba(124,111,205,0.3)',
-                          color: '#7c6fcd', background: 'rgba(124,111,205,0.06)',
-                        }}>{t}</span>
-                      ))}
+                      ▼
                     </div>
-
-                    <ul style={{
-                      margin: 0, padding: 0, listStyle: 'none',
-                      display: 'flex', flexDirection: 'column', gap: '0.4rem',
-                    }}>
-                      {role.highlights.map((h, j) => (
-                        <li key={j} style={{
-                          display: 'flex', gap: '0.75rem',
-                          fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.65,
-                        }}>
-                          <span style={{ color: role.color, flexShrink: 0 }}>—</span>
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                )}
+                </div>
+
+                <div style={{
+                  maxHeight: isExpanded ? '500px' : '0',
+                  overflow: 'hidden',
+                  opacity: isExpanded ? 1 : 0,
+                  transition: 'max-height 0.3s ease, opacity 0.2s ease',
+                }}>
+                  {isExpanded && (
+                    <div style={{
+                      padding: '0 1.5rem 1.5rem', marginLeft: '80px',
+                      paddingLeft: '1.25rem', borderTop: '1px solid var(--border)',
+                    }}>
+                      <div style={{
+                        display: 'flex', flexWrap: 'wrap', gap: '0.3rem',
+                        margin: '1rem 0 0.875rem',
+                      }}>
+                        {role.industries.map(t => (
+                          <span key={t} style={{
+                            fontSize: '0.55rem', fontFamily: 'DM Mono, monospace',
+                            textTransform: 'uppercase', letterSpacing: '0.06em',
+                            padding: '0.15em 0.5em', borderRadius: '2px',
+                            border: '1px solid rgba(212,168,83,0.3)',
+                            color: '#d4a853', background: 'rgba(212,168,83,0.06)',
+                          }}>{t}</span>
+                        ))}
+                        {role.functions.map(t => (
+                          <span key={t} style={{
+                            fontSize: '0.55rem', fontFamily: 'DM Mono, monospace',
+                            textTransform: 'uppercase', letterSpacing: '0.06em',
+                            padding: '0.15em 0.5em', borderRadius: '2px',
+                            border: '1px solid rgba(124,111,205,0.3)',
+                            color: '#7c6fcd', background: 'rgba(124,111,205,0.06)',
+                          }}>{t}</span>
+                        ))}
+                      </div>
+
+                      <ul style={{
+                        margin: 0, padding: 0, listStyle: 'none',
+                        display: 'flex', flexDirection: 'column', gap: '0.4rem',
+                      }}>
+                        {role.highlights.map((h, j) => (
+                          <li key={j} style={{
+                            display: 'flex', gap: '0.75rem',
+                            fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.65,
+                          }}>
+                            <span style={{ color: role.color, flexShrink: 0 }}>—</span>
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           );

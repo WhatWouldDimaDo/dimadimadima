@@ -5,6 +5,7 @@ description: Generated professional headshots using an AI portrait service — u
 tags: [ai, ai-art, tools, photography]
 status: built
 featured: false
+listed: false
 order: 35
 ---
 

@@ -4,7 +4,8 @@ date: 2025-09-01
 description: Monthly AI intelligence brief distributed to Equifax leadership. Curated 60+ articles per edition, built a Python + Perplexity pipeline to fetch and score content, added ElevenLabs TTS narration. 6 editions produced covering AI in financial services, model governance, agentic commerce.
 tags: [ai, newsletter, python, fintech, editorial]
 status: active
-featured: true
+featured: false
+listed: false
 order: 11
 ---
 

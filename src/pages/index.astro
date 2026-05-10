@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import AnimatedStats from '../components/AnimatedStats';
 import { getCollection } from 'astro:content';
 
 const allFeatured = (await getCollection('projects'))
@@ -46,23 +45,22 @@ const heroStatus = heroProject?.data.status
       dima<span class="text-gold italic">·</span>dima<span class="text-gold italic">·</span>dima
     </h1>
 
-    <div class="mb-8 space-y-3">
-      <p class="font-serif leading-tight text-ink" style="font-size:clamp(1.2rem,2.8vw,1.75rem);">
-        <span class="text-[0.58rem] uppercase tracking-[0.16em] text-gold font-mono align-middle" style="margin-right:0.75rem;">For companies —</span>I help companies understand AI.
-      </p>
-      <p class="font-serif leading-tight text-muted" style="font-size:clamp(1.2rem,2.8vw,1.75rem);">
-        <span class="text-[0.58rem] uppercase tracking-[0.16em] font-mono align-middle" style="color:var(--violet);margin-right:0.75rem;">For builders —</span>I use AI to understand everything else.
-      </p>
-    </div>
-
-    <p class="text-muted text-xs uppercase tracking-widest">
-      VP, Data &amp; Analytics · Atlanta, GA ·
-      <a href="/about" style="color:var(--muted);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Father · Builder · Explorer →</a>
+    <p class="text-muted text-[0.95rem] leading-relaxed mb-6" style="max-width:40rem;">
+      Moving fast and breaking things with AI. VP of Strategy &amp; Analytics at Lahzo.
+      Previous analytics leader and strategy consultant. Focused on learning something
+      new every day and making someone laugh, whether it's a stranger or my toddlers.
     </p>
-  </section>
 
-  <!-- Animated Stats -->
-  <AnimatedStats client:visible />
+    <div class="flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.12em] font-mono">
+      <span class="text-gold">Professional</span>
+      <span style="color:var(--border-hi);">·</span>
+      <span style="color:var(--violet);">Side Quests</span>
+      <span style="color:var(--border-hi);">·</span>
+      <span class="text-muted">Personal</span>
+      <span style="color:var(--border-hi);margin-left:0.5rem;">·</span>
+      <a href="/about" class="text-muted hover:text-gold transition-colors" style="text-decoration:none;">Atlanta, GA →</a>
+    </div>
+  </section>
 
   <!-- Projects -->
   <section class="mt-4 mb-20">
@@ -126,7 +124,7 @@ const heroStatus = heroProject?.data.status
 
     <!-- Grid of remaining featured projects -->
     {gridProjects.length > 0 && (
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border border-t-0">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {gridProjects.slice(0, 5).map(p => (
           <ProjectCard
             title={p.data.title}
@@ -152,7 +150,7 @@ const heroStatus = heroProject?.data.status
       </a>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {recentPosts.map(post => {
         const color = TYPE_COLORS[post.data.type] ?? '#6b6a72';
         const icon  = TYPE_ICONS[post.data.type] ?? '◇';
@@ -162,7 +160,7 @@ const heroStatus = heroProject?.data.status
           ? `https://img.youtube.com/vi/${vid}/hqdefault.jpg`
           : post.data.image ?? null;
         return (
-          <div class="bg-surface flex flex-col overflow-hidden feed-card">
+          <div class="bg-surface flex flex-col overflow-hidden feed-card border border-border">
             {thumb && (
               <a
                 href={post.data.youtube ?? '#'}
@@ -206,18 +204,18 @@ const heroStatus = heroProject?.data.status
 
   <!-- About strip -->
   <section class="mt-20 pt-16 border-t border-border">
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-px border border-border bg-border">
-      <div class="bg-surface p-6">
-        <p class="text-[0.6rem] uppercase tracking-widest text-muted mb-2">Currently</p>
-        <p class="text-[0.85rem] text-ink">VP, Data &amp; Analytics at <span class="text-gold">Lahzo</span></p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="bg-surface p-6 border border-border">
+        <p class="text-[0.65rem] uppercase tracking-widest text-muted mb-2">Currently</p>
+        <p class="text-[0.9rem] text-ink">VP, Strategy &amp; Analytics at <span class="text-gold">Lahzo</span></p>
       </div>
-      <div class="bg-surface p-6">
-        <p class="text-[0.6rem] uppercase tracking-widest text-muted mb-2">Interested in</p>
-        <p class="text-[0.85rem] text-ink">AI systems, personal data, building things that shouldn't exist</p>
+      <div class="bg-surface p-6 border border-border">
+        <p class="text-[0.65rem] uppercase tracking-widest text-muted mb-2">Interested in</p>
+        <p class="text-[0.9rem] text-ink">AI systems, personal data, building things that shouldn't exist</p>
       </div>
-      <div class="bg-surface p-6">
-        <p class="text-[0.6rem] uppercase tracking-widest text-muted mb-2">Base</p>
-        <p class="text-[0.85rem] text-ink">Atlanta, GA · Father of Dean &amp; Ruby</p>
+      <div class="bg-surface p-6 border border-border">
+        <p class="text-[0.65rem] uppercase tracking-widest text-muted mb-2">Base</p>
+        <p class="text-[0.9rem] text-ink">Atlanta, GA · Father of Dean &amp; Ruby</p>
       </div>
     </div>
   </section>

@@ -4,7 +4,8 @@ date: 2026-05-01
 description: Personal operating system — 10 launchd jobs, iMessage capture daemon, semantic vault search, social engagement engine, and push-based routine management. An always-on agent architecture that manages daily planning, CRM, email triage, event intelligence, and vault backup without human intervention.
 tags: [python, ai, claude, automation, obsidian, personal, infrastructure]
 status: active
-featured: true
+featured: false
+listed: false
 order: 1
 ---
 

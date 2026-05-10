@@ -4,7 +4,7 @@ date: 2026-01-24
 description: Automated pipeline that converts agentic session traces into cyberpunk HUD infographics. D2 diagram generation + Gemini orchestration + Python rendering. Proves 12-minute agentic labor vs 6-hour manual work — visually.
 tags: [ai, python, d2, gemini, visualization, multi-agent]
 status: built
-featured: true
+featured: false
 image: /images/sisyphus.png
 order: 6
 ---

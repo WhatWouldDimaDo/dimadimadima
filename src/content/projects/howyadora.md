@@ -4,7 +4,8 @@ date: 2026-01-06
 description: Chrome extension that helps ADHD brains track energy levels, maintain priority alignment, and break out of hyperfocus spirals — via gentle check-ins from "Future You."
 tags: [chrome-extension, adhd, react, tools]
 status: built
-featured: true
+featured: false
+listed: false
 order: 10
 ---
 

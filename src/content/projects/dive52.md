@@ -7,13 +7,16 @@ status: active
 featured: true
 order: 2
 url: https://github.com/WhatWouldDimaDo/dive52
+image: /images/dive52-discord.png
 ---
 
 ## The Problem
 
-My ADHD brain consumes content voraciously but synthesizes poorly. I'll read 30 articles in a week, flag them, and by Sunday remember approximately none of it. The insight doesn't stick. The throughput is wasted.
+I read 30 articles in a week, flag them, and by Sunday remember approximately none of it. The insight doesn't stick. The throughput is wasted.
 
-The gap: there's no forcing function between *consuming* and *integrating* knowledge. Reading and understanding are not the same thing. I needed a system that required me to take a position on what I was learning — and then turned that position into something durable.
+The gap: there's no forcing function between *consuming* and *integrating* knowledge. Reading and understanding are not the same thing. I needed a system that made me take a position on what I was learning — and turned that position into something durable.
+
+Not open-ended "learn more about AI" but "this week: AI data center buildout. Go." The time-box matters as much as the synthesis. Constraints work.
 
 ## What Dive52 Is
 
@@ -68,10 +71,6 @@ A **52-week learning curriculum machine**. Each week has one topic. Everything y
 - **gray-matter** — YAML frontmatter parsing for vault files
 - **Fly.io** — always-on deployment (~$3/month)
 
-## Why 52
+## Status
 
-One week = one topic = one synthesized essay. 52 weeks. 52 domains.
-
-That's the forcing function. Not open-ended "learn more about AI" but "this week: AI data center buildout. Go."
-
-The time-box matters as much as the synthesis. ADHD brains respond to constraints. Dive52 provides both.
+512 articles fetched, 215+ cards generated, running on Fly.io (~$3/month). Active and used weekly.

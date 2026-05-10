@@ -5,6 +5,7 @@ description: Built a local offline library of meditations and hypnosis tracks fr
 tags: [python, automation, tools, audio, productivity]
 status: built
 featured: false
+listed: false
 order: 34
 ---
 

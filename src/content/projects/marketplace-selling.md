@@ -5,6 +5,7 @@ description: Used Claude to write item descriptions, recommend prices, and manag
 tags: [ai, claude, chrome-extension, tools, automation]
 status: built
 featured: false
+listed: false
 order: 36
 ---
 

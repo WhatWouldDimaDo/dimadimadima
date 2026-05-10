@@ -1,13 +1,14 @@
 ---
 title: Lil' Mimic Studio
-description: A dad-built AI character creator for toddlers. Upload a photo, generate a character, make a comic strip. Powered by Google Gemini. 10,000+ generations and counting.
+description: A dad-built AI character creator for toddlers. Upload a photo, generate a character, make a comic strip. Powered by Google Gemini.
 tags: [ai, kids, react, gemini]
 date: 2025-10-01
 url: https://ai.studio/apps/drive/1bCj_tq7hMhgfBmX_9GbIQkSQduNRPoIv
 image: /images/mimic.png
+images: [/images/mimic2.png]
 featured: true
 status: live
-order: 9
+order: 7
 ---
 
 ## Why I Built This
@@ -58,7 +59,6 @@ The whole flow takes under 60 seconds. Upload a photo, pick a style, watch the m
 
 ## The Numbers
 
-- **10,000+ generations** since launch
 - Shared across parenting communities without any paid distribution
 - Built in a single weekend session during Dean's nap
 

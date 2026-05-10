@@ -4,7 +4,8 @@ date: 2026-05-06
 description: Linguistic analysis of 1,438 recordings — 222 hours of meetings, coaching sessions, and solo notes. mlx-whisper transcription, LLM-powered speaker attribution, hedge rate tracking, acoustic feature extraction, and a RAG search layer across 1.95 million words.
 tags: [python, ai, claude, whisper, chromadb, data, nlp, personal]
 status: active
-featured: true
+featured: false
+listed: false
 order: 5
 ---
 

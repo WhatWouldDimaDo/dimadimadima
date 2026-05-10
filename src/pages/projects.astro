@@ -4,6 +4,7 @@ import ProjectsGrid from '../components/ProjectsGrid';
 import { getCollection } from 'astro:content';
 
 const all = (await getCollection('projects'))
+  .filter(p => p.data.listed !== false)
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
 const projects = all.map(p => ({

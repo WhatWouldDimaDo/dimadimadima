@@ -5,6 +5,7 @@ description: Used ChatGPT to build a personal film taste profile from 200+ ratin
 tags: [ai, chatgpt, movies, data, tools]
 status: active
 featured: false
+listed: false
 order: 32
 ---
 

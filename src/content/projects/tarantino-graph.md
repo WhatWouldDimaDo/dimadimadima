@@ -4,7 +4,8 @@ date: 2025-09-13
 description: Predecessor to All Roads to Kill Bill. Python pipeline that fetched metadata for 37 films from TMDB, scraped relationships via Firecrawl, and generated a fully-linked Obsidian vault with YAML frontmatter and WikiLink connections. The foundation that became the live 3D visualization.
 tags: [python, tmdb, firecrawl, obsidian, data-pipeline]
 status: built
-featured: true
+featured: false
+listed: false
 order: 21
 ---
 

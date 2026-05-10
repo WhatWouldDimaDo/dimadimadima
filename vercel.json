@@ -3,5 +3,11 @@
   "outputDirectory": "dist",
   "framework": "astro",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/spotify",  "destination": "https://dima-spotify.vercel.app",               "permanent": false },
+    { "source": "/concerts", "destination": "https://dima-spotify.vercel.app/concerts.html", "permanent": false },
+    { "source": "/atl",      "destination": "https://atlradar.vercel.app",                    "permanent": false },
+    { "source": "/ai-ideas", "destination": "https://ai-ideas-explorer.vercel.app",           "permanent": false }
+  ]
 }

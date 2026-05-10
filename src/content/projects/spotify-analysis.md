@@ -1,17 +1,19 @@
 ---
 title: Spotify Listening History Analysis
 date: 2026-04-01
-description: Seven years of streaming history — 67,000+ plays, reconstructed into an actual picture of who I am by decade, mood, season, and obsession cycle. Data as autobiography.
+description: 14 years of streaming history — 10,133 hours, 147,594 streams, 15,748 unique artists. Taste galaxy, artist loyalty scatter plots, and the sharp take on what the data actually says about who I am.
 tags: [python, duckdb, data viz, music, pandas, analysis]
 status: active
 featured: true
-order: 9
+order: 3
 url: https://dima-spotify.vercel.app
+image: /images/spotify-taste-galaxy.png
+images: [/images/spotify-hero.png, /images/spotify-stats-hero.png, /images/spotify-loyalty-chart.png, /images/spotify-heatmap.png, /images/spotify-bar-chart.png]
 ---
 
 ## The Data
 
-Spotify's extended streaming history goes back to your first play. Mine goes to 2019 — 67,000+ records, covering every track, album, artist, skip, shuffle, and offline listen for 7 years.
+Spotify's extended streaming history goes back to your first play. Mine starts in 2012 — 10,133 hours, 147,594 streams, 15,748 unique artists across 14 years. 422 continuous days of listening. Here's what the data says about who I am.
 
 Each record has a timestamp, play duration, track URI, skip flag, shuffle flag, platform, and whether it was offline. It's enough to reconstruct not just what I listened to but *how* I listened.
 

@@ -4,7 +4,8 @@ date: 2025-11-14
 description: Multi-platform data engineering pipeline that ingests exported data from 6 communication platforms, deduplicates across sources, scores relationship strength via interaction frequency and recency, and generates a tiered priority dashboard. 4,000+ contacts processed.
 tags: [python, data-engineering, facebook, imessage, pipeline, personal]
 status: built
-featured: true
+featured: false
+listed: false
 order: 10
 ---
 

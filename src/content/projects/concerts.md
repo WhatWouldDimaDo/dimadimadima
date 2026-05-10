@@ -1,11 +1,13 @@
 ---
 title: Concert History
-description: Every show I've attended since 2007, reconstructed from Spotify history, Google Calendar, and purchase records. Concerts as data. Data as autobiography.
+description: 178 shows over 18 years, reconstructed from Spotify scrobbles, Google Calendar, and Ticketmaster records. Venue analytics, genre breakdowns, concert squad cross-referencing, and the gap between what I listen to most and what I've never seen live.
 tags: [music, data, python, visualization]
 date: 2026-04-13
 url: https://dima-spotify.vercel.app/concerts.html
 featured: true
-order: 9
+order: 4
+image: /images/concert-genre-chart.png
+images: [/images/concert-history-hero.png, /images/concert-stats-hero.png]
 ---
 
 ## The Idea
@@ -14,13 +16,14 @@ Every concert I've been to since 2007 is somewhere in my digital exhaust — Spo
 
 ## What It Became
 
-A visual timeline and database of every show, enriched with:
-- **Venue** and city
-- **Date** (reconstructed from calendar + purchase records where Spotify wasn't enough)
-- **Setlist** (from setlist.fm API where available)
-- **Listening intensity** — was this an artist I was deep into, or a one-time show?
+**178 confirmed shows** across 18 years (2007–2025), visualized as an interactive timeline with multiple lenses:
 
-The result is a personal music autobiography. You can see exactly when certain artists entered my life, which venues I returned to, and how my taste shifted.
+- **The Arc** — Show distribution over time: discovery years, the NYC interlude, the explosion despite becoming a parent (29 shows in both 2023 and 2024)
+- **Your Venues** — Terminal West leads with 17 shows. Preference for 800–1,100 cap rooms. The Eastern emerged post-2022
+- **Electronic. Always.** — 84–91% of Spotify hours fall under the electronic umbrella every single year
+- **The Concert Squad** — Cross-referenced with a 71-person CRM. 7 core music friends identified
+- **The Gap** — Heaviest Spotify artists (Camo & Krooked: 62 hrs, Tosca: 52 hrs) never seen live
+- **Concert Calendar** — Heatmap showing Feb–May and Sep–Nov peak touring windows
 
 ## Live
 

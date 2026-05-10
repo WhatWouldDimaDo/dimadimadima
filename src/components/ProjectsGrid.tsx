@@ -138,7 +138,7 @@ export default function ProjectsGrid({ projects }: Props) {
       </div>
 
       {/* Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '1px', background: 'var(--border)', border: '1px solid var(--border)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '1rem' }}>
         {filtered.map(p => {
           const statusMeta = p.status ? STATUS_CONFIG[p.status] ?? { label: p.status, color: '#6b6a72' } : null;
           const href = p.url || null;
@@ -150,36 +150,32 @@ export default function ProjectsGrid({ projects }: Props) {
             <a
               key={p.slug}
               href={cardHref}
-              style={{ background: 'var(--surface)', display: 'flex', flexDirection: 'column', position: 'relative', textDecoration: 'none', color: 'inherit' }}
+              style={{ background: 'var(--surface)', display: 'flex', flexDirection: 'column', position: 'relative', textDecoration: 'none', color: 'inherit', border: '1px solid var(--border)', overflow: 'hidden' }}
               className="card-hover"
             >
-              {p.image && (
-                <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
-                  <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+              {p.image ? (
+                <div style={{ width: '100%', aspectRatio: '3/2', overflow: 'hidden', flexShrink: 0 }}>
+                  <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' }} loading="lazy" />
                 </div>
-              )}
-              <div style={{ padding: '1.25rem 1.5rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0' }}>
-                {/* Status + date row */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.1rem' }}>
-                  {statusMeta ? (
-                    <span style={{ fontSize: '0.58rem', fontFamily: 'DM Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.12em', color: statusMeta.color, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                      <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: statusMeta.color, flexShrink: 0, display: 'inline-block' }} />
+              ) : (
+                <div style={{ minHeight: '8rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '1.5rem 1.25rem', background: 'linear-gradient(135deg, var(--surface) 60%, rgba(212,168,83,0.06))' }}>
+                  <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '1.2rem', color: 'var(--ink)', lineHeight: 1.25, marginBottom: '0.5rem' }}>{p.title}</div>
+                  {statusMeta && (
+                    <span style={{ fontSize: '0.58rem', fontFamily: 'DM Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.12em', color: statusMeta.color, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: statusMeta.color, display: 'inline-block' }} />
                       {statusMeta.label}
                     </span>
-                  ) : <span />}
-                  {date && <span style={{ fontSize: '0.56rem', color: 'var(--muted)', fontFamily: 'DM Mono, monospace' }}>{date}</span>}
+                  )}
                 </div>
-
-                <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '1.15rem', color: 'var(--ink)', lineHeight: 1.25, marginBottom: '0.65rem' }}>{p.title}</div>
-                <p style={{ fontSize: '0.775rem', color: 'var(--muted)', lineHeight: 1.6, margin: 0, flex: 1, marginBottom: '1rem' }}>{p.description}</p>
-
-                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', borderTop: '1px solid var(--border)', paddingTop: '0.75rem' }}>
-                  <span style={{ fontSize: '0.56rem', fontFamily: 'DM Mono, monospace', color: 'var(--muted)', letterSpacing: '0.04em' }}>
-                    {p.tags.slice(0, 3).join(' · ')}
-                  </span>
-                  <span style={{ fontSize: '0.9rem', color: 'var(--gold)' }}>→</span>
+              )}
+              {p.image && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0 0.75rem', minHeight: '2.625rem', borderTop: '1px solid var(--border)', flexShrink: 0 }}>
+                  {statusMeta && (
+                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: statusMeta.color, flexShrink: 0, display: 'inline-block' }} />
+                  )}
+                  <div style={{ fontFamily: 'DM Serif Display, serif', fontSize: '0.9rem', color: 'var(--ink)', lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{p.title}</div>
                 </div>
-              </div>
+              )}
             </a>
           );
         })}

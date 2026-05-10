@@ -5,7 +5,9 @@ description: Built a script to poll the Momence API for sauna availability and f
 tags: [python, automation, discord, api, tools]
 status: built
 featured: true
-order: 7
+order: 6
+image: /images/fjord-imessage.png
+images: [/images/fjord-discord.png, /images/fjord-booking.png, /images/fjord-iMessage-booked.png]
 ---
 
 ## The Problem

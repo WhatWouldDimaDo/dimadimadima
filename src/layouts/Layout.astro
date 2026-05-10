@@ -3,14 +3,16 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  defaultTheme?: string;
 }
 const {
   title = 'dimadimadima',
   description = 'Dima Perkis — VP Strategy & Analytics. Builder of odd things.',
+  defaultTheme,
 } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme={defaultTheme || 'dark'} data-dt={defaultTheme || ''}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,8 +36,10 @@ const {
   <!-- Prevent theme flash -->
   <script is:inline>
     (function() {
-      const saved = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', saved);
+      var el = document.documentElement;
+      var dt = el.getAttribute('data-dt') || 'dark';
+      var saved = localStorage.getItem('theme') || dt;
+      el.setAttribute('data-theme', saved);
     })();
   </script>
 </head>
@@ -48,11 +52,10 @@ const {
         dima<span style="color:var(--gold);font-style:italic;">·</span>dima<span style="color:var(--gold);font-style:italic;">·</span>dima
       </a>
       <div style="display:flex;align-items:center;gap:1.25rem;">
-        <a href="/feed" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Feed</a>
-        <a href="/projects" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Projects</a>
-        <a href="/resume" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Work</a>
-        <a href="/about" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">About</a>
-        <a href="https://linkedin.com/in/dimaperkis" target="_blank" rel="noopener" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
+        <a href="/feed" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Feed</a>
+        <a href="/projects" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Projects</a>
+        <a href="/resume" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Resume</a>
+        <a href="/about" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">About</a>
         <button id="theme-toggle" aria-label="Toggle theme" title="Cycle theme" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:0.75rem;padding:.25em .6em;cursor:pointer;border-radius:3px;transition:all .2s;font-family:'DM Mono',monospace;">
           <span id="theme-icon">☀</span>
         </button>
@@ -65,12 +68,12 @@ const {
   </main>
 
   <footer style="border-top:1px solid var(--border);">
-    <div style="max-width:64rem;margin:0 auto;padding:1.5rem;display:flex;align-items:center;gap:.75rem;font-size:.7rem;color:var(--muted);">
+    <div style="max-width:64rem;margin:0 auto;padding:1.5rem;display:flex;align-items:center;gap:.75rem;font-size:.8rem;color:var(--muted);">
       <span>Atlanta, GA</span>
       <span style="color:var(--border-hi);">·</span>
       <span>dimadimadima.com</span>
       <span style="color:var(--border-hi);">·</span>
-      <a href="https://linkedin.com/in/dimaperkis" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">linkedin.com/in/dimaperkis</a>
+      <a href="https://linkedin.com/in/dima-perkis" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">linkedin.com/in/dima-perkis</a>
       <span style="margin-left:auto;opacity:.25;cursor:default;" title="↑↑↓↓←→←→BA">♫</span>
     </div>
   </footer>
@@ -117,7 +120,7 @@ const {
 
       <div style="margin-bottom:.75rem;">
         <div style="font-weight:bold;text-transform:uppercase;font-size:.7rem;border-bottom:1px solid #ccc;margin-bottom:.4rem;">AISLE 1 — CORPORATE (FANCY)</div>
-        <div style="display:flex;justify-content:space-between;"><span>AI Strategy (premium)</span><span>$400M+</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>AI Strategy (premium)</span><span>PRICELESS</span></div>
         <div style="display:flex;justify-content:space-between;"><span>Analytics Leadership</span><span>15 YRS</span></div>
         <div style="display:flex;justify-content:space-between;"><span>Insights Guild</span><span>CROWN ✦</span></div>
       </div>

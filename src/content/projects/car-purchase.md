@@ -5,6 +5,7 @@ description: Used CarEdge, AI negotiation research, and a custom monitoring scri
 tags: [ai, research, automation, tools]
 status: built
 featured: false
+listed: false
 order: 30
 ---
 

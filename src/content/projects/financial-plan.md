@@ -5,5 +5,6 @@ description: Comprehensive AI-assisted household financial plan — 401K/HSA opt
 tags: [ai, finance, planning, personal]
 status: active
 featured: false
+listed: false
 order: 98
 ---

@@ -17,9 +17,9 @@ const {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
-  <title>{title === 'dimadimadima' ? 'dimadimadima' : `${title} — dimadimadima`}</title>
+  <title>{title === 'dimadimadima' ? 'dimadimadima' : (title === 'Dima Perkis' ? 'Dima Perkis — dimadimadima' : `${title} — Dima Perkis`)}</title>
   <!-- Open Graph -->
-  <meta property="og:title" content={title === 'dimadimadima' ? 'dimadimadima — Dima Perkis' : `${title} — dimadimadima`} />
+  <meta property="og:title" content={title === 'dimadimadima' ? 'dimadimadima — Dima Perkis' : `${title} — Dima Perkis`} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={`https://dimadimadima.com${Astro.url.pathname}`} />

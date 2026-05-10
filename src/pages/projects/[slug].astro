@@ -70,6 +70,13 @@ const toolStack = d.tags
   .map(t => ({ tag: t, ...TOOL_MAP[t] }))
   // dedupe by icon
   .filter((v, i, a) => a.findIndex(x => x.icon === v.icon) === i);
+
+// Next project navigation — by order field
+const allListed = (await getCollection('projects')).filter(p => p.data.listed !== false);
+const sorted = allListed.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const currentIdx = sorted.findIndex(p => p.slug === project.slug);
+const nextProject = currentIdx >= 0 && currentIdx < sorted.length - 1 ? sorted[currentIdx + 1] : null;
+const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
 ---
 <Layout title={d.title} description={d.description}>
 
@@ -161,11 +168,27 @@ const toolStack = d.tags
     </div>
   </article>
 
-  <!-- Back link -->
+  <!-- Next project navigation -->
   <div style="margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);">
-    <a href="/projects" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">
-      ← All Projects
-    </a>
+    {nextProject ? (
+      <>
+        <p style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin:0 0 1rem;font-family:'DM Mono',monospace;">Up next</p>
+        <a href={`/projects/${nextProject.slug}`} class="next-card">
+          {nextProject.data.image && (
+            <img src={nextProject.data.image} alt={nextProject.data.title} />
+          )}
+          <div>
+            <div class="next-card-title">{nextProject.data.title}</div>
+            <div class="next-card-desc">{nextProject.data.description}</div>
+          </div>
+          <span class="next-card-arrow">→</span>
+        </a>
+      </>
+    ) : (
+      <a href="/projects" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">
+        ← All Projects
+      </a>
+    )}
   </div>
 
 </Layout>
@@ -283,5 +306,61 @@ const toolStack = d.tags
     font-family: 'DM Mono', monospace;
     text-transform: uppercase;
     letter-spacing: .08em;
+  }
+
+  /* Next project card */
+  .next-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: .75rem;
+    border-radius: 2px;
+    transition: border-color .2s, transform .2s;
+  }
+  .next-card:hover {
+    border-color: var(--border-hi);
+    transform: translateY(-1px);
+  }
+  .next-card img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .next-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: .25rem;
+  }
+  .next-card-desc {
+    font-size: .7rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    line-height: 1.4;
+  }
+  .next-card-arrow {
+    margin-left: auto;
+    font-size: 1.5rem;
+    color: var(--gold);
+    opacity: .35;
+    transition: opacity .15s, transform .15s;
+    flex-shrink: 0;
+    padding-right: .5rem;
+  }
+  .next-card:hover .next-card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+  @media (max-width: 480px) {
+    .next-card img { width: 80px; height: 54px; }
+    .next-card-desc { display: none; }
   }
 </style>

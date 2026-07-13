@@ -352,35 +352,84 @@
 
   <!-- ══ DEMAND PANE ══ -->
   <div class="pane" id="pane-demand">
-    <div class="insights">
-      <div class="insight red">
-        <div class="insight-icon">📍</div>
-        <div>
-          <div class="insight-title">19 of the top 20 demand-setting hours are OFF-PEAK</div>
-          <div class="insight-body">The June 2026 bill's 7 kW demand charge was set on a Saturday at 6pm (92°F) — not a weekday afternoon. On Smart Usage, the demand charge is based on any single worst hour regardless of when it occurs. Pre-cooling before 2pm reduces on-peak kWh costs but does NOT reduce your demand charge if the worst hour stays on evenings/weekends.</div>
-        </div>
+
+    <!-- stat chips -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:12px">
+      <div class="chart-card" style="padding:14px 16px; text-align:center">
+        <div style="font-size:28px; font-weight:700; color:var(--red); font-variant-numeric:tabular-nums">90</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:2px">hours ≥4 kW<br>across 13 billing periods</div>
       </div>
-      <div class="insight amber">
-        <div class="insight-icon">🌡️</div>
-        <div>
-          <div class="insight-title">Temperature is the primary demand driver, not time of day</div>
-          <div class="insight-body">Top demand events cluster on days above 84°F. The HVAC compressor draws 3–4 kW by itself; add cooking, a dryer load, or guests and you easily hit 6–7 kW in a single hour. The demand charge on Smart Usage is roughly $12–15/kW, so dropping peak demand from 7 → 5 kW saves $24–30 on that month's bill.</div>
-        </div>
+      <div class="chart-card" style="padding:14px 16px; text-align:center">
+        <div style="font-size:28px; font-weight:700; color:var(--amber); font-variant-numeric:tabular-nums">92%</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:2px">off-peak · 59% on<br>weekends (Sat/Sun)</div>
+      </div>
+      <div class="chart-card" style="padding:14px 16px; text-align:center">
+        <div style="font-size:28px; font-weight:700; color:var(--teal); font-variant-numeric:tabular-nums">$9.72</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:2px">per kW/month<br>every kW avoided saves $10</div>
       </div>
     </div>
+
+    <!-- near-peak frequency per period -->
     <div class="chart-card">
-      <div class="chart-card-title">Top 14 Highest Single-Hour Readings (Demand Setters)</div>
-      <div class="chart-card-sub">These are the events that most likely set each month's billed demand · PEAK = weekday 2–7pm Jun–Sep · WEEKEND = Sat/Sun off-peak</div>
+      <div class="chart-card-title">Near-Peak Hours Per Billing Period</div>
+      <div class="chart-card-sub">Count of hours that hit ≥4 kW (yellow) and ≥5 kW (red) — the worst months have many near-peak hours, not just one</div>
+      <div class="legend" style="margin-bottom:4px">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--amber);opacity:0.7"></div>Hours ≥4 kW</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Hours ≥5 kW</div>
+      </div>
+      <canvas id="nearPeakFreqChart" height="180"></canvas>
+    </div>
+
+    <!-- when do spikes hit -->
+    <div class="two-col">
+      <div class="chart-card">
+        <div class="chart-card-title">Hour of Day</div>
+        <div class="chart-card-sub">When ≥4 kW events occur (all 90 events)</div>
+        <canvas id="hourProfileChart" height="160"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Day of Week</div>
+        <div class="chart-card-sub">Saturday + Sunday = 59% of all near-peak events</div>
+        <canvas id="dowProfileChart" height="160"></canvas>
+      </div>
+    </div>
+
+    <!-- savings scenarios -->
+    <div class="chart-card">
+      <div class="chart-card-title">Behavior Shift — Estimated Savings</div>
+      <div class="chart-card-sub">Based on $9.72/kW demand rate · annualized from 13 billing periods · demand charge alone, not counting energy savings</div>
+      <div style="overflow-x:auto; margin-top:8px">
+        <table class="demand-table">
+          <thead>
+            <tr>
+              <th>Target</th>
+              <th>Required behavior</th>
+              <th style="text-align:center">Periods affected</th>
+              <th style="text-align:right">Annual savings</th>
+              <th style="text-align:center">Effort</th>
+            </tr>
+          </thead>
+          <tbody id="savingsTableBody"></tbody>
+        </table>
+      </div>
+      <div style="margin-top:10px; font-size:11px; color:var(--muted); padding:0 4px">
+        <strong style="color:var(--amber)">Key insight:</strong> The dryer (~4–5 kW) running while the HVAC is cooling (~3–4 kW) is the primary demand spike mechanism. Scheduling laundry for after 10pm or before 8am on hot days is the single highest-leverage behavior change available.
+      </div>
+    </div>
+
+    <!-- full event log -->
+    <div class="chart-card">
+      <div class="chart-card-title">Top 30 Highest Single-Hour Readings</div>
+      <div class="chart-card-sub">All events ≥4.67 kW · <span style="color:var(--red)">ON-PEAK</span> = weekday 2–7pm Jun–Sep · <span style="color:var(--amber)">WEEKEND</span> = Sat/Sun · off-peak weekdays in grey</div>
       <div style="overflow-x:auto">
         <table class="demand-table">
           <thead>
             <tr>
-              <th>Datetime</th>
-              <th>Day</th>
-              <th>Window</th>
-              <th>kWh</th>
-              <th>Temp</th>
-              <th style="width:100px">Load</th>
+              <th>Date &amp; Time</th>
+              <th>Type</th>
+              <th style="text-align:right">kWh</th>
+              <th style="text-align:right">Temp</th>
+              <th style="min-width:120px">Relative load</th>
             </tr>
           </thead>
           <tbody id="demandTableBody"></tbody>
@@ -504,14 +553,82 @@ const topDemand = [
   {dt:'2026-07-02 Thu 9pm', peak:false, weekend:false, kwh:5.69, temp:88},
   {dt:'2025-07-24 Thu 5pm', peak:true,  weekend:false, kwh:5.68, temp:86},
   {dt:'2026-04-12 Sun 2pm', peak:false, weekend:true,  kwh:5.54, temp:84},
-  {dt:'2026-07-02 Thu 8pm', peak:false, weekend:false, kwh:5.53, temp:90},
   {dt:'2026-07-01 Wed 11am',peak:false, weekend:false, kwh:5.53, temp:91},
+  {dt:'2026-07-02 Thu 8pm', peak:false, weekend:false, kwh:5.53, temp:90},
   {dt:'2025-06-22 Sun 8pm', peak:false, weekend:true,  kwh:5.29, temp:87},
   {dt:'2026-07-02 Thu 10pm',peak:false, weekend:false, kwh:5.22, temp:86},
   {dt:'2026-04-24 Fri 9pm', peak:false, weekend:false, kwh:5.13, temp:74},
   {dt:'2026-06-13 Sat 7pm', peak:false, weekend:true,  kwh:5.10, temp:90},
   {dt:'2026-06-09 Tue 9pm', peak:false, weekend:false, kwh:5.09, temp:77},
   {dt:'2026-06-05 Fri 5pm', peak:true,  weekend:false, kwh:5.07, temp:83},
+  {dt:'2026-05-22 Fri 10pm',peak:false, weekend:false, kwh:5.06, temp:70},
+  {dt:'2025-06-22 Sun 4pm', peak:false, weekend:true,  kwh:5.05, temp:93},
+  {dt:'2026-06-20 Sat 7pm', peak:false, weekend:true,  kwh:4.99, temp:77},
+  {dt:'2026-05-17 Sun 8pm', peak:false, weekend:true,  kwh:4.97, temp:73},
+  {dt:'2026-05-30 Sat 5pm', peak:false, weekend:true,  kwh:4.96, temp:83},
+  {dt:'2026-05-30 Sat 8am', peak:false, weekend:true,  kwh:4.89, temp:73},
+  {dt:'2026-05-17 Sun 7pm', peak:false, weekend:true,  kwh:4.86, temp:75},
+  {dt:'2025-12-28 Sun 7pm', peak:false, weekend:true,  kwh:4.85, temp:63},
+  {dt:'2026-04-25 Sat 4pm', peak:false, weekend:true,  kwh:4.79, temp:74},
+  {dt:'2026-04-12 Sun 5pm', peak:false, weekend:true,  kwh:4.77, temp:84},
+  {dt:'2026-06-14 Sun 1pm', peak:false, weekend:true,  kwh:4.72, temp:86},
+  {dt:'2025-08-16 Sat 4pm', peak:false, weekend:true,  kwh:4.71, temp:91},
+  {dt:'2026-05-17 Sun 4pm', peak:false, weekend:true,  kwh:4.71, temp:79},
+  {dt:'2026-05-23 Sat 9pm', peak:false, weekend:true,  kwh:4.69, temp:72},
+  {dt:'2026-06-10 Wed 9pm', peak:false, weekend:false, kwh:4.68, temp:81},
+  {dt:'2025-07-17 Thu 6pm', peak:true,  weekend:false, kwh:4.67, temp:86},
+];
+
+// Near-peak hours per billing period (count >=4kW, >=5kW)
+const nearPeakPeriods = [
+  {label:'May–Jun 25', above4:7,  above5:2},
+  {label:'Jun–Jul 25', above4:7,  above5:1},
+  {label:'Jul–Aug 25', above4:4,  above5:1},
+  {label:'Aug–Sep 25', above4:2,  above5:0},
+  {label:'Sep–Oct 25', above4:4,  above5:0},
+  {label:'Oct–Nov 25', above4:1,  above5:0},
+  {label:'Nov–Dec 25', above4:2,  above5:0},
+  {label:'Dec–Jan 26', above4:4,  above5:0},
+  {label:'Jan–Feb 26', above4:0,  above5:0},
+  {label:'Feb–Mar 26', above4:3,  above5:0},
+  {label:'Mar–Apr 26', above4:6,  above5:1},
+  {label:'Apr–May 26', above4:14, above5:3},
+  {label:'May–Jun 26', above4:21, above5:4},
+];
+
+// Hour-of-day count for >=4kW events (hours 0–23)
+const hourProfile = [0,0,0,0,0,0,1,0,2,2,3,2,3,2,3,4,5,16,6,8,12,11,8,2];
+
+// Day-of-week count for >=4kW events (0=Mon … 6=Sun)
+const dowProfile = [3,5,14,10,5,25,28];
+
+// Savings scenarios (demand rate $9.72/kW)
+const DEMAND_RATE = 9.72;
+const savingsScenarios = [
+  {
+    label: 'Cap at 5.0 kW',
+    desc: 'Avoid only the most extreme spikes (dryer during a heat wave)',
+    periods: 5,
+    annualSavings: 46,
+    effort: 'Low',
+    effortColor: 'var(--teal)',
+  },
+  {
+    label: 'Cap at 4.5 kW',
+    desc: 'Never run dryer while HVAC is actively cooling on hot days',
+    periods: 8,
+    annualSavings: 77,
+    effort: 'Medium',
+    effortColor: 'var(--amber)',
+  },
+  {
+    label: 'Cap at 4.0 kW',
+    desc: 'Full scheduling discipline — dryer 10pm–8am only, pre-cool weekends',
+    periods: 12,
+    annualSavings: 120,
+    effort: 'High',
+    effortColor: 'var(--red)',
+  },
 ];
 
 /* ── HELPERS ── */
@@ -799,24 +916,157 @@ function renderHourly() {
   });
 }
 
+/* ── NEAR-PEAK FREQUENCY CHART ── */
+function renderNearPeakFreq() {
+  const c = setupCanvas('nearPeakFreqChart'); if (!c) return;
+  const {ctx, w, h} = c;
+  const PAD = {l:32, r:12, t:14, b:32};
+  const cw = w - PAD.l - PAD.r, ch = h - PAD.t - PAD.b;
+  ctx.fillStyle = css('--card'); ctx.fillRect(0,0,w,h);
+
+  const n = nearPeakPeriods.length;
+  const maxVal = Math.max(...nearPeakPeriods.map(p=>p.above4)) + 2;
+  const bw = cw / n;
+
+  [0,5,10,15,20,25].forEach(v => {
+    if (v > maxVal) return;
+    const y = PAD.t + ch*(1 - v/maxVal);
+    ctx.strokeStyle = css('--border'); ctx.lineWidth=0.5;
+    ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(PAD.l+cw,y); ctx.stroke();
+    ctx.fillStyle = css('--muted'); ctx.font='9px ui-monospace'; ctx.textAlign='right';
+    ctx.fillText(v, PAD.l-3, y+3);
+  });
+
+  nearPeakPeriods.forEach((p,i) => {
+    const x0 = PAD.l + i*bw;
+    const barW = bw*0.72;
+    const xc = x0 + (bw - barW)/2;
+
+    // >=4 kW bar (amber, full height)
+    const h4 = p.above4 > 0 ? (p.above4/maxVal)*ch : 0;
+    ctx.fillStyle = 'rgba(245,164,39,0.55)';
+    ctx.beginPath(); ctx.roundRect(xc, PAD.t+ch-h4, barW, h4, [3,3,0,0]); ctx.fill();
+
+    // >=5 kW overlay (red, stacked on top portion)
+    if (p.above5 > 0) {
+      const h5 = (p.above5/maxVal)*ch;
+      ctx.fillStyle = 'rgba(232,82,90,0.8)';
+      ctx.beginPath(); ctx.roundRect(xc, PAD.t+ch-h5, barW, h5, [3,3,0,0]); ctx.fill();
+    }
+
+    // count label on bar
+    if (p.above4 > 0) {
+      ctx.fillStyle = css('--text'); ctx.font='bold 8px ui-monospace'; ctx.textAlign='center';
+      ctx.fillText(p.above4, x0+bw/2, PAD.t+ch - h4 - 3);
+    }
+
+    // period label
+    const shortLbl = p.label.replace(' 25','\'25').replace(' 26','\'26');
+    ctx.fillStyle = css('--muted'); ctx.font='7.5px system-ui'; ctx.textAlign='center';
+    ctx.fillText(shortLbl.split('–')[0], x0+bw/2, PAD.t+ch+16);
+  });
+}
+
+/* ── HOUR OF DAY PROFILE ── */
+function renderHourProfile() {
+  const c = setupCanvas('hourProfileChart'); if (!c) return;
+  const {ctx, w, h} = c;
+  const PAD = {l:24, r:8, t:14, b:28};
+  const cw = w - PAD.l - PAD.r, ch = h - PAD.t - PAD.b;
+  ctx.fillStyle = css('--card'); ctx.fillRect(0,0,w,h);
+
+  const maxV = Math.max(...hourProfile) + 1;
+  const bw = cw / 24;
+
+  // danger zone band (16-22)
+  ctx.fillStyle = 'rgba(232,82,90,0.07)';
+  ctx.fillRect(PAD.l + 16*bw, PAD.t, 6*bw, ch);
+
+  hourProfile.forEach((v, hr) => {
+    if (v === 0) return;
+    const x = PAD.l + hr*bw + bw*0.1;
+    const bh = (v/maxV)*ch;
+    // hot zone: 16-22
+    const isHot = hr >= 16 && hr <= 22;
+    ctx.fillStyle = isHot ? 'rgba(232,82,90,0.75)' : 'rgba(90,114,133,0.5)';
+    ctx.beginPath(); ctx.roundRect(x, PAD.t+ch-bh, bw*0.8, bh, [2,2,0,0]); ctx.fill();
+    if (v >= 5) {
+      ctx.fillStyle = css('--text'); ctx.font='bold 8px ui-monospace'; ctx.textAlign='center';
+      ctx.fillText(v, PAD.l+hr*bw+bw/2, PAD.t+ch-bh-2);
+    }
+  });
+
+  // x labels
+  [0,6,12,16,20,23].forEach(hr => {
+    const x = PAD.l + hr*bw + bw/2;
+    const lbl = hr===0?'12a':hr<12?hr+'a':hr===12?'12p':(hr-12)+'p';
+    ctx.fillStyle = css('--muted'); ctx.font='8px system-ui'; ctx.textAlign='center';
+    ctx.fillText(lbl, x, PAD.t+ch+14);
+  });
+
+  // label
+  ctx.fillStyle = 'rgba(232,82,90,0.6)'; ctx.font='8px system-ui'; ctx.textAlign='center';
+  ctx.fillText('danger zone', PAD.l+19*bw, PAD.t+8);
+}
+
+/* ── DAY OF WEEK PROFILE ── */
+function renderDowProfile() {
+  const c = setupCanvas('dowProfileChart'); if (!c) return;
+  const {ctx, w, h} = c;
+  const PAD = {l:24, r:8, t:14, b:28};
+  const cw = w - PAD.l - PAD.r, ch = h - PAD.t - PAD.b;
+  ctx.fillStyle = css('--card'); ctx.fillRect(0,0,w,h);
+
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const maxV = Math.max(...dowProfile) + 2;
+  const bw = cw / 7;
+
+  dowProfile.forEach((v, d) => {
+    const x = PAD.l + d*bw + bw*0.1;
+    const bh = (v/maxV)*ch;
+    const isWeekend = d >= 5;
+    ctx.fillStyle = isWeekend ? 'rgba(232,82,90,0.75)' : 'rgba(90,114,133,0.45)';
+    ctx.beginPath(); ctx.roundRect(x, PAD.t+ch-bh, bw*0.8, bh, [2,2,0,0]); ctx.fill();
+
+    ctx.fillStyle = css('--text'); ctx.font='bold 8px ui-monospace'; ctx.textAlign='center';
+    if (v > 0) ctx.fillText(v, PAD.l+d*bw+bw/2, PAD.t+ch-bh-3);
+
+    ctx.fillStyle = isWeekend ? css('--red') : css('--muted');
+    ctx.font = isWeekend ? 'bold 8px system-ui' : '8px system-ui';
+    ctx.fillText(days[d], PAD.l+d*bw+bw/2, PAD.t+ch+14);
+  });
+}
+
+/* ── SAVINGS TABLE ── */
+function renderSavingsTable() {
+  const tbody = document.getElementById('savingsTableBody');
+  if (!tbody) return;
+  tbody.innerHTML = savingsScenarios.map(s => `<tr>
+    <td style="font-weight:700;white-space:nowrap">${s.label}</td>
+    <td style="font-size:11px;color:var(--muted)">${s.desc}</td>
+    <td class="num" style="text-align:center">${s.periods} of 13</td>
+    <td class="num" style="text-align:right;font-weight:700;color:var(--teal)">~$${s.annualSavings}/yr</td>
+    <td style="text-align:center"><span class="peak-badge" style="background:transparent;border:1px solid;border-color:${s.effortColor};color:${s.effortColor}">${s.effort}</span></td>
+  </tr>`).join('');
+}
+
 /* ── DEMAND TABLE ── */
 function renderDemandTable() {
   const tbody = document.getElementById('demandTableBody');
   if (!tbody) return;
   const maxKwh = Math.max(...topDemand.map(d=>d.kwh));
-  tbody.innerHTML = topDemand.map(d => {
+  tbody.innerHTML = topDemand.map((d,idx) => {
     const badgeCls = d.peak ? 'badge-peak' : d.weekend ? 'badge-offwknd' : 'badge-off';
     const badgeTxt = d.peak ? 'ON-PEAK' : d.weekend ? 'WEEKEND' : 'OFF-PEAK';
     const pct = Math.round(d.kwh/maxKwh*100);
-    const tempCls = d.temp >= 88 ? 'temp-hot num' : d.temp >= 82 ? 'temp-warm num' : 'num';
-    return `<tr>
-      <td class="num" style="font-size:12px">${d.dt}</td>
-      <td class="num" style="color:var(--muted)">${d.dt.split(' ')[1]}</td>
+    const tempCls = d.temp >= 88 ? 'temp-hot' : d.temp >= 82 ? 'temp-warm' : '';
+    const rowOpacity = idx < 5 ? 1 : idx < 15 ? 0.85 : 0.65;
+    return `<tr style="opacity:${rowOpacity}">
+      <td class="num" style="font-size:11px;white-space:nowrap">${d.dt}</td>
       <td><span class="peak-badge ${badgeCls}">${badgeTxt}</span></td>
-      <td class="num" style="font-weight:600">${d.kwh.toFixed(2)}</td>
-      <td class="${tempCls}">${d.temp}°F</td>
+      <td class="num" style="text-align:right;font-weight:700">${d.kwh.toFixed(2)}</td>
+      <td class="num ${tempCls}" style="text-align:right">${d.temp}°F</td>
       <td class="demand-bar-cell">
-        <div class="num" style="font-size:10px;color:var(--muted)">${d.kwh.toFixed(2)} kWh</div>
         <div class="demand-bar-bg"><div class="demand-bar-fill" style="width:${pct}%"></div></div>
       </td>
     </tr>`;
@@ -853,6 +1103,10 @@ function renderAll() {
   renderDemand();
   renderSplit();
   renderHourly();
+  renderNearPeakFreq();
+  renderHourProfile();
+  renderDowProfile();
+  renderSavingsTable();
   renderDemandTable();
 
   buildScheduleGrid('scheduleGrid', [

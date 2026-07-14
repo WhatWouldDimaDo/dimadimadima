@@ -124,22 +124,4 @@ import ResumeExperience from '../components/ResumeExperience';
     </div>
   </section>
 
-  <!-- Outside work -->
-  <section style="border-top:1px solid var(--border);padding-top:2rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Outside Work</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1rem;">
-      {[
-        { icon: '⛰', text: 'Completed the 29029 Everesting challenge — climbed the vertical equivalent of Everest (29,029 ft) in 36 hours on a ski mountain, in laps, on no sleep.' },
-        { icon: '♫', text: 'Regular at live music shows. Building a Suno AI discography of original songs for my kids Dean and Ruby before they\'re old enough to be embarrassed by it.' },
-        { icon: '🎭', text: 'Performs improv comedy. Personal motto: make a stranger laugh every day.' },
-        { icon: '⚙', text: 'Compulsive builder: Chrome extensions, ML pipelines, AI systems, interactive data visualizations — if it\'s automatable, it\'s getting automated.' },
-      ].map(f => (
-        <div style="background:var(--surface);padding:1.25rem;border:1px solid var(--border);">
-          <div style="font-size:1.25rem;margin-bottom:.5rem;">{f.icon}</div>
-          <p style="font-size:.8125rem;color:var(--muted);line-height:1.65;margin:0;">{f.text}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
 </Layout>

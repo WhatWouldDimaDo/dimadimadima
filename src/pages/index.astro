@@ -98,10 +98,11 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
     </a>
 
     <!-- ── AI Ideas Explorer ──────────────────────── -->
-    <a href="/projects/ai-ideas-explorer" class="bc bc-project bc-ideas">
+    <a href="/projects/ai-ideas-explorer" class="bc bc-project bc-ideas" id="bc-ideas-cell">
       {aiIdeas?.data.image && (
         <img src={aiIdeas.data.image} alt="AI Ideas Explorer" class="bc-img" />
       )}
+      <span class="bc-live-badge bc-ideas-live"><span class="dot-pulse"></span>Live</span>
       <div class="bc-project-body">
         <div class="bc-status bc-status--gold">Live</div>
         <div class="bc-project-title">AI Ideas Explorer</div>
@@ -173,6 +174,27 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
       }
       if ('requestIdleCallback' in window) requestIdleCallback(loadRadar);
       else setTimeout(loadRadar, 250);
+    })();
+  </script>
+
+  <script is:inline>
+    (function () {
+      var cell = document.getElementById('bc-ideas-cell');
+      if (!cell || !('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (e) { return e.isIntersecting; })) return;
+        io.disconnect();
+        var frame = document.createElement('iframe');
+        frame.src = 'https://ai-ideas-explorer.vercel.app';
+        frame.loading = 'lazy';
+        frame.title = 'AI Ideas Explorer';
+        frame.className = 'bc-ideas-frame';
+        frame.addEventListener('load', function () {
+          cell.classList.add('bc-ideas--live');
+        });
+        cell.insertBefore(frame, cell.firstChild);
+      }, { rootMargin: '200px' });
+      io.observe(cell);
     })();
   </script>
 
@@ -466,7 +488,31 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
     bottom: 0; left: 0; right: 0;
     background: linear-gradient(to top, rgba(12,12,14,0.97) 55%, transparent 100%);
     padding: 0.85rem 1.1rem;
+    z-index: 3;
   }
+
+  /* ─── AI IDEAS LIVE EMBED ───────────────────────── */
+  .bc-ideas :global(.bc-ideas-frame) {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+    display: block;
+    pointer-events: none;
+    background: #0c0c0e;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 2;
+  }
+  .bc-ideas:global(.bc-ideas--live) :global(.bc-ideas-frame) { opacity: 1; }
+  .bc-ideas .bc-ideas-live {
+    position: absolute;
+    top: 0.75rem; right: 0.9rem;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .bc-ideas:global(.bc-ideas--live) .bc-ideas-live { opacity: 1; }
   .bc-status {
     font-size: 0.52rem;
     font-family: 'DM Mono', monospace;

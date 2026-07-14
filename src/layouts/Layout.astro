@@ -23,16 +23,16 @@ const {
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={`https://dimadimadima.com${Astro.url.pathname}`} />
-  <meta property="og:image" content="https://dimadimadima.com/images/dima.jpeg" />
+  <meta property="og:image" content="https://dimadimadima.com/images/brand/dima-dima-dima/og-card.png" />
   <meta property="og:site_name" content="dimadimadima" />
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title === 'dimadimadima' ? 'dimadimadima — Dima Perkis' : `${title} — dimadimadima`} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content="https://dimadimadima.com/images/dima.jpeg" />
-  <link rel="icon" type="image/svg+xml" href="/images/brand/dima-dima-dima/dima-mark-color.svg" media="(prefers-color-scheme: light)" />
-  <link rel="icon" type="image/svg+xml" href="/images/brand/dima-dima-dima/dima-mark-color-dark.svg" media="(prefers-color-scheme: dark)" />
-  <link rel="apple-touch-icon" href="/images/brand/dima-dima-dima/png/dima-mark-color-192.png" />
+  <meta name="twitter:image" content="https://dimadimadima.com/images/brand/dima-dima-dima/og-card.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/brand/dima-dima-dima/png/dima-mark-concept-01-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/brand/dima-dima-dima/png/dima-mark-concept-01-192.png" />
+  <link rel="apple-touch-icon" href="/images/brand/dima-dima-dima/png/dima-mark-concept-01-touch-180.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -54,12 +54,10 @@ const {
   <nav style="position:sticky;top:0;z-index:50;background-color:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);">
     <div style="max-width:64rem;margin:0 auto;padding:0 1.5rem;height:3rem;display:flex;align-items:center;justify-content:space-between;">
       <a href="/" class="site-brand" aria-label="dimadimadima home">
-        <span class="site-brand-mark" aria-hidden="true">
-          <img class="site-brand-mark__image site-brand-mark__image--light" src="/images/brand/dima-dima-dima/dima-mark-color.svg" alt="" />
-          <img class="site-brand-mark__image site-brand-mark__image--dark" src="/images/brand/dima-dima-dima/dima-mark-color-dark.svg" alt="" />
-          <img class="site-brand-mark__image site-brand-mark__image--hacker" src="/images/brand/dima-dima-dima/dima-mark-mono-reverse.svg" alt="" />
-        </span>
-        <span class="site-brand-word">dima<span>·</span>dima<span>·</span>dima</span>
+        <img src="/images/brand/dima-dima-dima/png/dima-mark-concept-01-192.png" alt="" aria-hidden="true"
+          style="height:30px;width:auto;display:block;" />
+        <img src="/images/brand/dima-dima-dima/dima-wordmark-concept-09-transparent.png" alt="dima dima dima"
+          style="height:16px;width:auto;display:block;" />
       </a>
       <div class="site-nav-links" style="display:flex;align-items:center;gap:1.25rem;">
         <a class="site-nav-link" href="/resume" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/resume' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/resume' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}><span class="nav-label-long">Professional Experience</span><span class="nav-label-short">Work</span></a>

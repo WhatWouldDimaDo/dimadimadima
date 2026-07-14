@@ -27,39 +27,46 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
     <!-- ── INTRO BANNER (full width) ─────────────── -->
     <div class="bc bc-intro">
-      <div class="bc-intro-left">
-        <img src="/images/brand/dima-dima-dima/png/dima-mark-concept-01-192.png" alt="" class="bc-mark" />
-        <h1 class="bc-name">Dima Perkis</h1>
-      </div>
-      <div class="bc-intro-right">
-        <p class="bc-bio">
-          VP, Data &amp; AI. I build AI strategies at the enterprise level and deploy
-          the systems that make them real — and keep building after bedtime.
-        </p>
-        <div class="bc-tags">
-          <span class="bc-tag bc-tag--gold">AI strategy</span>
-          <span class="bc-tag bc-tag--violet">Deployed systems</span>
-          <span class="bc-tag bc-tag--muted">Atlanta, GA</span>
+      <nav class="bc-top-links" aria-label="Primary">
+        <a href="/resume">Professional Experience</a>
+        <span class="bc-top-sep" aria-hidden="true"></span>
+        <a href="/projects">AI Side Quests</a>
+        <span class="bc-top-sep" aria-hidden="true"></span>
+        <a href="/about">About Me</a>
+        <span class="bc-top-sep" aria-hidden="true"></span>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="bc-intro-main">
+        <div class="bc-intro-left">
+          <img src="/images/brand/dima-dima-dima/png/dima-mark-concept-01-192.png" alt="" class="bc-mark" />
+          <h1 class="bc-name">Dima Perkis</h1>
         </div>
-        <nav class="bc-intro-nav">
-          <a href="/resume"><span class="bc-nav-n">01</span>Professional Experience<span class="bc-nav-arrow">→</span></a>
-          <a href="/projects"><span class="bc-nav-n">02</span>AI Side Quests<span class="bc-nav-arrow">→</span></a>
-          <a href="/about"><span class="bc-nav-n">03</span>About Me<span class="bc-nav-arrow">→</span></a>
-        </nav>
+        <div class="bc-intro-right">
+          <p class="bc-bio">
+            VP, Data &amp; AI. I build AI strategies at the enterprise level and deploy
+            the systems that make them real — and keep building after bedtime.
+          </p>
+          <div class="bc-tags">
+            <span class="bc-tag bc-tag--gold">AI strategy</span>
+            <span class="bc-tag bc-tag--violet">Deployed systems</span>
+            <span class="bc-tag bc-tag--muted">Atlanta, GA</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ── LIVE: Happening in Atlanta ─────────────── -->
+    <!-- ── ON DIMA'S RADAR: Happening in Atlanta ──── -->
     <a href="/atl" class="bc bc-live">
-      <div class="bc-live-head">
-        <span class="bc-live-badge"><span class="dot-pulse"></span>Live</span>
-        <span class="bc-live-title">Happening in Atlanta</span>
+      <div class="bc-live-brand">
+        <span class="bc-radar-ping"><img src="/atl/favicon.svg" alt="" /></span>
+        <span class="bc-live-brandname">On Dima's Radar</span>
       </div>
+      <div class="bc-live-title">Happening in Atlanta</div>
       <div id="atl-live-list" class="bc-live-list">
         <div class="bc-live-empty">Loading the radar…</div>
       </div>
       <div class="bc-live-foot">
-        On Dima's Radar · my event-intelligence pipeline →
+        Straight from my event-intelligence pipeline · Full radar →
       </div>
     </a>
 
@@ -163,9 +170,9 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
           var upcoming = EVENTS
             .filter(function (e) { return new Date(e.dateEnd || e.date) >= today; })
             .sort(function (a, b) { return (b.score || 0) - (a.score || 0); })
-            .slice(0, 10)
+            .slice(0, 14)
             .sort(function (a, b) { return new Date(a.date) - new Date(b.date); })
-            .slice(0, 4);
+            .slice(0, 7);
           if (!upcoming.length) return;
           list.innerHTML = upcoming.map(function (e) {
             var thumb = e.imageUrl
@@ -176,6 +183,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
               + thumb
               + '<span class="bc-live-event"><span class="bc-live-name">' + e.title + '</span>'
               + '<span class="bc-live-venue">' + e.dateStr + ' · ' + (e.venue || '') + '</span></span>'
+              + '<span class="bc-live-kind">' + (e.emoji || '') + '</span>'
               + '</div>';
           }).join('');
         } catch (err) { /* leave fallback text */ }
@@ -219,7 +227,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
   .bento {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: auto 360px 250px 240px;
+    grid-template-rows: auto 300px 300px 250px 240px;
     gap: 0.625rem;
     padding-top: 1.75rem;
     padding-bottom: 4rem;
@@ -265,14 +273,14 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
   /* ─── Grid placement ────────────────────────────── */
   .bc-intro     { grid-column: 1 / 7; grid-row: 1; }
-  .bc-live      { grid-column: 1 / 4; grid-row: 2; }
+  .bc-live      { grid-column: 1 / 4; grid-row: 2 / 4; }
   .bc-dewey     { grid-column: 4 / 7; grid-row: 2; }
-  .bc-suno-cell { grid-column: 1 / 3; grid-row: 3; }
-  .bc-tmaps     { grid-column: 3 / 5; grid-row: 3; }
-  .bc-ideas     { grid-column: 5 / 7; grid-row: 3; }
-  .bc-power     { grid-column: 1 / 3; grid-row: 4; }
-  .bc-music     { grid-column: 3 / 5; grid-row: 4; }
-  .bc-killbill  { grid-column: 5 / 7; grid-row: 4; }
+  .bc-suno-cell { grid-column: 4 / 7; grid-row: 3; }
+  .bc-tmaps     { grid-column: 1 / 3; grid-row: 4; }
+  .bc-ideas     { grid-column: 3 / 5; grid-row: 4; }
+  .bc-power     { grid-column: 5 / 7; grid-row: 4; }
+  .bc-music     { grid-column: 1 / 4; grid-row: 5; }
+  .bc-killbill  { grid-column: 4 / 7; grid-row: 5; }
 
   /* ─── Shared image pattern ──────────────────────── */
   .bc-img {
@@ -291,20 +299,45 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
   /* ─── INTRO BANNER ──────────────────────────────── */
   .bc-intro {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    gap: 1.75rem;
+    padding: 1.5rem 2.25rem 2.25rem;
+  }
+  /* Horizontal top links — same grammar as the sticky nav they morph into */
+  .bc-top-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .bc-top-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .bc-top-links a:hover { color: var(--ink); }
+  .bc-top-sep { width: 1px; height: 12px; background: var(--border-hi); display: inline-block; }
+  .bc-intro-main {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 2.5rem;
-    padding: 2rem 2.25rem;
     flex-wrap: wrap;
   }
   .bc-intro-left {
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 1.4rem;
   }
   .bc-mark {
-    height: 44px;
+    height: 96px;
     width: auto;
     display: block;
     flex-shrink: 0;
@@ -347,39 +380,6 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
   .bc-tag--gold   { color: var(--gold);   border-color: color-mix(in srgb, var(--gold) 30%, transparent); }
   .bc-tag--violet { color: var(--violet); border-color: color-mix(in srgb, var(--violet) 30%, transparent); }
   .bc-tag--muted  { color: var(--muted); }
-  .bc-intro-nav {
-    display: flex;
-    flex-direction: column;
-    margin-top: 0.5rem;
-    border-top: 1px solid var(--border);
-  }
-  .bc-intro-nav a {
-    display: flex;
-    align-items: baseline;
-    gap: 0.85rem;
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.35rem;
-    color: var(--ink);
-    text-decoration: none;
-    line-height: 1.2;
-    padding: 0.65rem 0.25rem;
-    border-bottom: 1px solid var(--border);
-    transition: color 0.15s ease, padding-left 0.2s ease;
-  }
-  .bc-nav-n {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--gold);
-    letter-spacing: 0.08em;
-  }
-  .bc-nav-arrow {
-    margin-left: auto;
-    color: var(--muted);
-    opacity: 0.4;
-    transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
-  }
-  .bc-intro-nav a:hover { color: var(--gold); padding-left: 0.6rem; }
-  .bc-intro-nav a:hover .bc-nav-arrow { opacity: 1; color: var(--gold); transform: translateX(4px); }
 
   /* ─── LIVE ATL ──────────────────────────────────── */
   .bc-live {
@@ -387,21 +387,52 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
     flex-direction: column;
     padding: 1.25rem 1.5rem;
   }
-  .bc-live-head {
+  .bc-live-brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
   }
-  .bc-live-badge {
-    font-size: 0.56rem;
-    font-family: 'DM Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: #5a9a6e;
+  .bc-radar-ping {
+    position: relative;
     display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
+    width: 26px; height: 26px;
+    flex-shrink: 0;
+  }
+  .bc-radar-ping img { width: 100%; height: 100%; display: block; }
+  .bc-radar-ping::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid #C2410C;
+    opacity: 0;
+    animation: radar-ping 2.6s ease-out infinite;
+  }
+  @keyframes radar-ping {
+    0%   { transform: scale(0.6); opacity: 0.7; }
+    70%  { transform: scale(1.35); opacity: 0; }
+    100% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .bc-radar-ping::after { animation: none; } }
+  .bc-live-brandname {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #C2410C;
+  }
+  .bc-live-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.45rem;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .bc-live :global(.bc-live-kind) {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 1.05rem;
+    opacity: 0.85;
   }
   .dot-pulse {
     display: inline-block;
@@ -414,10 +445,15 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
   }
-  .bc-live-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15rem;
-    color: var(--ink);
+  .bc-live-badge {
+    font-size: 0.56rem;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #5a9a6e;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
   .bc-live-list {
     flex: 1;
@@ -635,9 +671,8 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
     .bc-intro     { order: 1; }
     .bc-intro { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
     .bc-name { white-space: normal; }
-    .bc-intro-nav { gap: 0.5rem 1.25rem; }
-    .bc-intro-nav a { font-size: 1.2rem; }
-    .bc-live      { order: 2; min-height: 340px; }
+    .bc-mark { height: 64px; }
+    .bc-live      { order: 2; min-height: 480px; }
     .bc-dewey     { order: 3; min-height: 240px; }
     .bc-suno-cell { order: 4; min-height: 260px; }
     .bc-tmaps     { order: 5; min-height: 220px; }

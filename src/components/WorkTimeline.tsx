@@ -16,7 +16,7 @@ type Role = {
 const ROLES: Role[] = [
   {
     company: 'Lahzo',
-    logo: '/images/logos/lahzo.svg',
+    logo: '/images/logos/clients/lahzo.png',
     title: 'VP, Strategy & Analytics',
     period: '2026',
     location: 'Atlanta, GA',
@@ -172,7 +172,7 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                 onClick={() => setExpandedIdx(isExpanded ? null : globalIdx)}
                 style={{
                   border: isHighlighted ? '2px solid #d4a853' : '1px solid var(--border)',
-                  background: 'var(--surface)',
+                  background: 'transparent',
                   transition: 'border-color 0.2s, box-shadow 0.2s',
                   cursor: 'pointer',
                   boxShadow: isHighlighted ? '0 0 8px rgba(212,168,83,0.3)' : 'none',

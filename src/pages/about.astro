@@ -17,10 +17,11 @@ import Layout from '../layouts/Layout.astro';
           "To make a stranger laugh every day."
         </p>
       </div>
-      <div style="flex-shrink:0;display:flex;gap:1rem;">
+      <div style="flex-shrink:0;display:flex;gap:1rem;align-items:stretch;">
         <img src="/images/dima.jpeg" alt="Dima Perkis"
-          style="width:min(360px,80vw);height:auto;aspect-ratio:4/5;border-radius:12px;object-fit:cover;border:2px solid var(--border);" />
-        <!-- FAMILY PHOTO: swap in when Dima provides (public/images/family.jpg) -->
+          style="width:min(280px,60vw);height:auto;aspect-ratio:4/5;border-radius:12px;object-fit:cover;border:2px solid var(--border);" />
+        <img src="/images/family.jpg" alt="Dima with Jeannie, Dean, and Ruby"
+          style="width:min(280px,60vw);height:auto;aspect-ratio:4/5;border-radius:12px;object-fit:cover;border:2px solid var(--border);" />
       </div>
     </div>
   </section>
@@ -49,6 +50,27 @@ import Layout from '../layouts/Layout.astro';
         the endless parade of apps I make her beta-test. Dad to Dean & Ruby. 29029 Everesting
         finisher. Concert obsessive. Born in Moldova, raised in New Jersey, rooted in Atlanta.
       </p>
+    </div>
+  </section>
+
+  <!-- Out in the world -->
+  <section class="reveal" style="margin-bottom:3rem;">
+    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Out in the World</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:1rem;">
+      {[
+        { src: '/images/about/cayambe.jpg',       cap: 'Cayambe summit · 19,000 ft · Ecuador' },
+        { src: '/images/about/moto-colombia.jpg', cap: 'Motorcycling Colombia · Guatapé' },
+        { src: '/images/about/scuba.jpg',         cap: 'Scuba · Thailand' },
+        { src: '/images/about/kite.jpg',          cap: 'Learning to kite surf' },
+        { src: '/images/about/jeannie.jpg',       cap: 'With Jeannie' },
+        { src: '/images/about/graffiti.jpg',      cap: 'Street art stop' },
+      ].map(p => (
+        <figure style="margin:0;">
+          <img src={p.src} alt={p.cap} loading="lazy"
+            style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--border);display:block;" />
+          <figcaption style="font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:.5rem;">{p.cap}</figcaption>
+        </figure>
+      ))}
     </div>
   </section>
 
@@ -82,6 +104,9 @@ import Layout from '../layouts/Layout.astro';
             '29029 Everesting',
             'Travel through Southeast Asia',
             'Motorcycle trips across Colombia',
+            "Summit 19,000' Cayambe volcano in Ecuador",
+            'Motorcycle on three continents',
+            'Perform live improv',
           ].map(b => (
             <li style="font-size:.85rem;color:var(--gold);display:flex;gap:.5rem;">
               <span style="flex-shrink:0;">&#10003;</span><span style="text-decoration:line-through;opacity:.8;">{b}</span>
@@ -104,6 +129,8 @@ import Layout from '../layouts/Layout.astro';
             'Publish a book',
             'Safari with Jeannie',
             'Spinning fire poi',
+            'Scuba dive the Galápagos',
+            'Learn to kite surf',
             'Dog sledding — Alaska or Scandinavia',
           ].map(b => (
             <li style="font-size:.85rem;color:var(--muted);display:flex;gap:.5rem;">

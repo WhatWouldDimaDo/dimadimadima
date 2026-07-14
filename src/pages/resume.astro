@@ -19,12 +19,13 @@ import ResumeExperience from '../components/ResumeExperience';
           real — from Board rooms to front-line teams.
         </p>
         <a href="https://linkedin.com/in/dima-perkis" target="_blank" rel="noopener noreferrer"
-          style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);text-decoration:none;">
+          style="display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);text-decoration:none;">
+          <img src="/images/logos/tools/linkedin.svg" alt="" style="height:18px;width:18px;object-fit:contain;filter:var(--logo-filter);" />
           linkedin.com/in/dima-perkis ↗
         </a>
       </div>
       <img src="/images/dima.jpeg" alt="Dima Perkis"
-        style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0;" />
+        style="width:200px;height:200px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0;" />
     </div>
   </section>
 
@@ -45,6 +46,40 @@ import ResumeExperience from '../components/ResumeExperience';
   <section style="margin-bottom:3rem;">
     <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Experience</h2>
     <ResumeExperience client:load />
+  </section>
+
+  <!-- Companies I've Helped Grow -->
+  <section style="margin-bottom:3rem;">
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Companies I've Helped Grow</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem;">
+      {[
+        { name: 'Intuit', logo: '/images/logos/clients/intuit.svg' },
+        { name: 'Mailchimp', logo: '/images/logos/mailchimp.svg' },
+        { name: 'Lahzo', logo: '/images/logos/lahzo.svg' },
+        { name: 'Equifax', logo: '/images/logos/equifax.svg' },
+        { name: 'Walmart', logo: '/images/logos/clients/walmart.svg' },
+        { name: 'Target', logo: '/images/logos/clients/target.svg' },
+        { name: 'Blue Cross Blue Shield NC', logo: '/images/logos/clients/bcbs-nc.svg' },
+        { name: 'Verizon', logo: '/images/logos/clients/verizon.svg' },
+        { name: 'AT&T', logo: '/images/logos/clients/att.svg' },
+        { name: 'New York Life', logo: '/images/logos/clients/new-york-life.svg' },
+        { name: 'CDC', logo: '/images/logos/clients/cdc.svg' },
+        { name: 'American Cancer Society', logo: '/images/logos/clients/american-cancer-society.svg' },
+        { name: 'Apollo', logo: '/images/logos/clients/apollo.svg' },
+        { name: 'Pfizer', logo: '/images/logos/clients/pfizer.svg' },
+        { name: 'Shiseido', logo: '/images/logos/clients/shiseido.svg' },
+        { name: 'Laura Mercier', logo: '/images/logos/clients/laura-mercier.svg' },
+        { name: 'Oldcastle Materials', logo: '/images/logos/clients/oldcastle.svg' },
+      ].map(c => (
+        <div style="background:var(--surface);border:1px solid var(--border);height:90px;display:flex;align-items:center;justify-content:center;padding:.75rem;position:relative;">
+          <img src={c.logo} alt={c.name}
+            data-fallback-name={c.name}
+            style="max-height:52px;max-width:90%;width:auto;object-fit:contain;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <span style="display:none;align-items:center;justify-content:center;text-align:center;font-size:.75rem;color:var(--muted);line-height:1.3;padding:0 .5rem;">{c.name}</span>
+        </div>
+      ))}
+    </div>
   </section>
 
   <!-- Education -->
@@ -94,9 +129,11 @@ import ResumeExperience from '../components/ResumeExperience';
         { icon: '🧭', label: 'AI Strategy & Enablement' },
         { icon: '📊', label: 'Analytics Leadership' },
         { icon: '🤖', label: 'LLM Agent Workflows' },
-        { icon: '📈', label: 'Go-to-Market & Pricing' },
+        { icon: '📈', label: 'Go-to-Market Strategy & Pricing' },
         { icon: '🎤', label: 'Executive Communication' },
         { icon: '⚙️', label: 'Systems Building — Python · SQL · TypeScript' },
+        { icon: '🤝', label: 'AI for Sales' },
+        { icon: '🚀', label: 'Growth Strategy' },
       ].map(s => (
         <div style="display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);padding:.75rem 1rem;">
           <span style="font-size:1.15rem;flex-shrink:0;">{s.icon}</span>

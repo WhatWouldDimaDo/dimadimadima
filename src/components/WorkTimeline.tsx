@@ -134,9 +134,9 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
   const [expandedIdx, setExpandedIdx] = useState<number | null>(() => {
     if (filterCompany) {
       const idx = ROLES.findIndex(r => r.company === filterCompany);
-      return idx >= 0 ? idx : 0;
+      return idx >= 0 ? idx : null;
     }
-    return 0;
+    return null;
   });
 
   useEffect(() => {
@@ -196,7 +196,6 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                       style={{
                         maxWidth: '110px', maxHeight: '44px',
                         width: 'auto', height: 'auto', objectFit: 'contain',
-                        filter: 'var(--logo-filter)', opacity: 0.85,
                       }}
                     />
                   </div>
@@ -208,7 +207,7 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                     }}>{role.title}</div>
                     <div style={{
                       fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.15rem',
-                    }}>{role.summary}</div>
+                    }}>{role.company}</div>
                   </div>
 
                   <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.25rem' }}>
@@ -241,10 +240,14 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                       padding: '0 1.5rem 1.5rem', marginLeft: '110px',
                       paddingLeft: '1.25rem', borderTop: '1px solid var(--border)',
                     }}>
+                      <div style={{
+                        fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.6,
+                        paddingTop: '1rem',
+                      }}>{role.summary}</div>
                       <ul style={{
                         margin: 0, padding: 0, listStyle: 'none',
                         display: 'flex', flexDirection: 'column', gap: '0.4rem',
-                        paddingTop: '1rem',
+                        paddingTop: '0.75rem',
                       }}>
                         {role.highlights.map((h, j) => (
                           <li key={j} style={{

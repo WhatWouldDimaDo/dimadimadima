@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Contact" description="Get in touch with Dima Perkis — VP Strategy & Analytics, AI strategy and enablement leadership.">
+
+  <!-- Hero -->
+  <section style="padding-top:4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);">
+    <p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin:0 0 1rem;">Contact</p>
+    <h1 style="font-family:'DM Serif Display',serif;font-size:2.25rem;color:var(--ink);margin:0;">Let's talk</h1>
+  </section>
+
+  <!-- Contact cards -->
+  <section style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:1px;border:1px solid var(--border);background:var(--border);margin-top:2.5rem;margin-bottom:3rem;">
+    {[
+      { label: 'Email', value: 'dperkis@gmail.com', href: 'mailto:dperkis@gmail.com', external: false },
+      { label: 'LinkedIn', value: 'linkedin.com/in/dima-perkis', href: 'https://linkedin.com/in/dima-perkis', external: true },
+    ].map(c => (
+      <div style="background:var(--surface);padding:1.5rem;">
+        <p style="font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 .4rem;">{c.label}</p>
+        <a href={c.href} target={c.external ? '_blank' : undefined} rel={c.external ? 'noopener' : undefined}
+          style="font-size:.9rem;color:var(--gold);text-decoration:none;transition:opacity .15s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+          {c.value} ↗
+        </a>
+      </div>
+    ))}
+  </section>
+
+  <!-- What I'm looking for -->
+  <section style="margin-bottom:3rem;">
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">What I'm Looking For</h2>
+    <p style="font-size:.95rem;color:var(--muted);line-height:1.75;max-width:38rem;margin:0;">
+      I'm exploring my next role: VP or Head of Data & Analytics, or AI strategy and enablement leadership — somewhere AI ambition needs a person who can set the strategy at the Board level and deploy the systems that make it real. Atlanta or remote. If your company is wrestling with how to make AI real, I'd love to talk.
+    </p>
+  </section>
+
+  <!-- Also happy to talk about -->
+  <section style="border-top:1px solid var(--border);padding-top:2.5rem;margin-bottom:2rem;">
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Also Happy to Talk About</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem;">
+      {[
+        'AI enablement and agent workflows',
+        'Analytics org design',
+        'Atlanta tech and events',
+        'Anything on the AI Side Quests page',
+      ].map(item => (
+        <li style="font-size:.85rem;color:var(--muted);display:flex;gap:.5rem;">
+          <span style="color:var(--border-hi);flex-shrink:0;">&#9675;</span>{item}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+</Layout>

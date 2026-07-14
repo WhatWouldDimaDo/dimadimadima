@@ -12,15 +12,15 @@ import Layout from '../layouts/Layout.astro';
           I build AI strategies at the enterprise level and deploy the systems that make them real.
           Most recently VP of Strategy & Analytics at an AI startup; before that Equifax, Mailchimp,
           Accenture, A&M, and Booz Allen. Father of Dean & Ruby. Everesting finisher.
-          Compulsive builder of things that probably shouldn't exist.
         </p>
         <p style="font-size:.85rem;color:var(--gold);font-style:italic;margin:1rem 0 0;">
           "To make a stranger laugh every day."
         </p>
       </div>
-      <div style="flex-shrink:0;">
+      <div style="flex-shrink:0;display:flex;gap:1rem;">
         <img src="/images/dima.jpeg" alt="Dima Perkis"
           style="width:min(360px,80vw);height:auto;aspect-ratio:4/5;border-radius:12px;object-fit:cover;border:2px solid var(--border);" />
+        <!-- FAMILY PHOTO: swap in when Dima provides (public/images/family.jpg) -->
       </div>
     </div>
   </section>
@@ -38,7 +38,7 @@ import Layout from '../layouts/Layout.astro';
       <p style="font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--violet);margin:0 0 .75rem;">Side Quests</p>
       <p style="font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);line-height:1.4;margin:0 0 .75rem;">Building after bedtime</p>
       <p style="font-size:.85rem;color:var(--muted);line-height:1.65;margin:0;">
-        AI tools, data visualizations, automation pipelines, creative experiments. Projects, explorations, and ideas — some shipped, some half-baked, all interesting.
+        AI tools, data visualizations, automation pipelines, creative experiments. Projects, explorations, and ideas — some deployed, some half-baked, all interesting.
       </p>
     </div>
     <div style="background:var(--surface);padding:2rem;border:1px solid var(--border);">
@@ -115,28 +115,5 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Contact -->
-  <section style="border-top:1px solid var(--border);padding-top:2.5rem;margin-bottom:2rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.5rem;">Get in Touch</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:1px;border:1px solid var(--border);background:var(--border);">
-      {[
-        { label: 'LinkedIn', value: 'linkedin.com/in/dima-perkis', href: 'https://linkedin.com/in/dima-perkis' },
-        { label: 'Email', value: 'dperkis@gmail.com', href: 'mailto:dperkis@gmail.com' },
-        { label: 'Best for', value: 'AI strategy, analytics leadership, building something interesting together', href: null },
-      ].map(c => (
-        <div style="background:var(--surface);padding:1.25rem 1.5rem;">
-          <p style="font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 .4rem;">{c.label}</p>
-          {c.href ? (
-            <a href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined}
-              style="font-size:.8rem;color:var(--gold);text-decoration:none;transition:opacity .15s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-              {c.value} ↗
-            </a>
-          ) : (
-            <p style="font-size:.8rem;color:var(--ink);margin:0;line-height:1.5;">{c.value}</p>
-          )}
-        </div>
-      ))}
-    </div>
-  </section>
 
 </Layout>

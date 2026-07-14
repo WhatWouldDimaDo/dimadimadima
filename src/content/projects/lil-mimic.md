@@ -6,9 +6,10 @@ date: 2025-10-01
 url: https://ai.studio/apps/drive/1bCj_tq7hMhgfBmX_9GbIQkSQduNRPoIv
 image: /images/mimic.png
 images: [/images/mimic2.png]
-featured: true
+featured: false
 status: live
 order: 7
+listed: false
 ---
 
 ## Why I Built This

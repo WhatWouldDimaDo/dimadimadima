@@ -63,9 +63,6 @@ export default function ProjectsGrid({ projects }: Props) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [search, setSearch] = useState('');
 
-  const allTags = useMemo(() =>
-    [...new Set(projects.flatMap(p => p.tags))].sort(), [projects]);
-
   const filtered = useMemo(() => {
     return projects.filter(p => {
       if (activeCategory !== 'all') {
@@ -116,30 +113,14 @@ export default function ProjectsGrid({ projects }: Props) {
         />
       </div>
 
-      {/* Tag cloud */}
-      <div style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap', marginBottom: '1.75rem' }}>
-        {allTags.map(t => (
-          <button
-            key={t}
-            onClick={() => setActiveTag(activeTag === t ? null : t)}
-            style={{
-              fontSize: '0.58rem', fontFamily: 'DM Mono, monospace',
-              textTransform: 'uppercase', letterSpacing: '0.06em',
-              padding: '0.15em 0.55em', borderRadius: '2px',
-              border: `1px solid ${activeTag === t ? 'var(--gold)' : 'var(--border)'}`,
-              background: activeTag === t ? 'rgba(212,168,83,0.1)' : 'transparent',
-              color: activeTag === t ? 'var(--gold)' : 'var(--muted)',
-              cursor: 'pointer', transition: 'all 0.12s',
-            }}
-          >#{t}</button>
-        ))}
-        {(activeTag || search || activeCategory !== 'all') && (
+      {(search || activeCategory !== 'all') && (
+        <div style={{ marginBottom: '1.75rem' }}>
           <button
             onClick={() => { setActiveTag(null); setSearch(''); setActiveCategory('all'); }}
-            style={{ fontSize: '0.58rem', fontFamily: 'DM Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.06em', padding: '0.15em 0.55em', borderRadius: '2px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: 'pointer', marginLeft: '0.25rem' }}
+            style={{ fontSize: '0.58rem', fontFamily: 'DM Mono, monospace', textTransform: 'uppercase', letterSpacing: '0.06em', padding: '0.15em 0.55em', borderRadius: '2px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', cursor: 'pointer' }}
           >Clear ×</button>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Count */}
       <div style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'DM Mono, monospace', marginBottom: '1.25rem', letterSpacing: '0.06em' }}>

@@ -7,6 +7,7 @@ status: built
 featured: false
 image: /images/sisyphus.png
 order: 6
+listed: false
 ---
 
 ## The Problem

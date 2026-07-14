@@ -13,7 +13,7 @@ const concerts = featured.find(p => p.slug === 'concerts');
 
 // Also pull a few non-featured projects with good images for bento cells
 const allProjects = await getCollection('projects');
-const lilMimic = allProjects.find(p => p.slug === 'lil-mimic');
+const toddlerMaps = allProjects.find(p => p.slug === 'toddlermaps');
 
 const songs = (await getCollection('posts'))
   .filter(p => !p.data.draft && p.data.type === 'song' && p.data.youtube)
@@ -92,7 +92,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
       )}
       <div class="bc-project-body">
         <div class="bc-status bc-status--gold">Active</div>
-        <div class="bc-project-title">ATL Radar</div>
+        <div class="bc-project-title">On Dima's Radar</div>
         <div class="bc-project-desc">Personal event intelligence for Atlanta</div>
       </div>
     </a>
@@ -109,15 +109,15 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
       </div>
     </a>
 
-    <!-- ── Lil Mimic ─────────────────────────────────── -->
-    <a href="/projects/lil-mimic" class="bc bc-project bc-suno">
-      {lilMimic?.data.image && (
-        <img src={lilMimic.data.image} alt="Lil Mimic" class="bc-img" />
+    <!-- ── ToddlerMaps ─────────────────────────────────── -->
+    <a href="/projects/toddlermaps" class="bc bc-project bc-suno">
+      {toddlerMaps?.data.image && (
+        <img src={toddlerMaps.data.image} alt="ToddlerMaps" class="bc-img" />
       )}
       <div class="bc-project-body">
         <div class="bc-status bc-status--gold">Live</div>
-        <div class="bc-project-title">Lil' Mimic Studio</div>
-        <div class="bc-project-desc">AI comic creator · toddler to cartoon</div>
+        <div class="bc-project-title">ToddlerMaps</div>
+        <div class="bc-project-desc">Maps of a toddler's world · AI stickers</div>
       </div>
     </a>
 

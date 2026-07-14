@@ -5,8 +5,9 @@ description: LLM-scored Atlanta event discovery — every show, festival, and fa
 tags: [ai, claude, events, atlanta, data viz, llm]
 status: active
 featured: false
+listed: false
 order: 40
-url: https://atl-events.vercel.app
+url: https://dimadimadima.com/atl
 ---
 
 ## What It Is

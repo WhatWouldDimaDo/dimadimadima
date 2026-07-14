@@ -1,12 +1,12 @@
 ---
-title: ATL Radar
+title: On Dima's Radar
 date: 2026-04-21
 description: Personal event intelligence for Atlanta. LLM-scored events and activities ranked against my actual taste profile, surfaced through a wizard filter, interactive map, and mobile-first UX.
 tags: [ai, claude, events, atlanta, data viz, llm, maps]
 status: active
 featured: true
 order: 1
-url: https://atlradar.vercel.app
+url: https://dimadimadima.com/atl
 image: /images/atl-radar-home.png
 ---
 

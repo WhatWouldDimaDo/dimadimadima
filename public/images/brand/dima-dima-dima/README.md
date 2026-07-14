@@ -21,3 +21,13 @@ The `png/` folder contains transparent exports at 1024, 512, 192, 64, and 32 px.
 - Warm white: `#F8F1E5`
 
 The existing On Dima's Radar face/radar mark remains the project-specific identity. This D mark is the umbrella identity for Dima Dima Dima.
+
+## Corrected selections from refinement 02
+
+The earlier concept archive was preserved in the ATL Events project. Dima later clarified that the intended selections were concept 01 (the full profile inside the D) and concept 09 (the horizontal lowercase wordmark with one copper dot above each i).
+
+- `dima-mark-concept-01-transparent.png` — exact concept 01 artwork isolated from its numbered proof tile.
+- `dima-wordmark-concept-09-transparent.png` — exact concept 09 wordmark isolated from its numbered proof tile.
+- `dima-mark-concept-01-proof.png` and `dima-wordmark-concept-09-proof.png` — warm-paper previews for review.
+
+These are review masters extracted from the original raster proofs. The production SVGs above still represent concept 20 until concept 01 and the concept 09 lockup are approved for final vector reconstruction and deployment.

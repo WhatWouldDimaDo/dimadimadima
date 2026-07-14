@@ -9,5 +9,11 @@
     { "source": "/concerts", "destination": "https://dima-spotify.vercel.app/concerts.html", "permanent": false },
     { "source": "/atl",      "destination": "https://atlradar.vercel.app",                    "permanent": false },
     { "source": "/ai-ideas", "destination": "https://ai-ideas-explorer.vercel.app",           "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/dewey", "destination": "https://deweybooks.vercel.app/" },
+    { "source": "/dewey/:path*", "destination": "https://deweybooks.vercel.app/:path*" },
+    { "source": "/api/:path*", "destination": "https://deweybooks.vercel.app/api/:path*" },
+    { "source": "/_next/:path*", "destination": "https://deweybooks.vercel.app/_next/:path*" }
   ]
 }

@@ -13,6 +13,8 @@
   "rewrites": [
     { "source": "/dewey", "destination": "https://deweybooks.vercel.app/" },
     { "source": "/dewey/:path*", "destination": "https://deweybooks.vercel.app/:path*" },
+    { "source": "/icon.png", "destination": "https://deweybooks.vercel.app/icon.png" },
+    { "source": "/apple-icon.png", "destination": "https://deweybooks.vercel.app/apple-icon.png" },
     { "source": "/api/availability", "destination": "https://deweybooks.vercel.app/api/availability" },
     { "source": "/api/recommend", "destination": "https://deweybooks.vercel.app/api/recommend" },
     { "source": "/api/branches", "destination": "https://deweybooks.vercel.app/api/branches" },

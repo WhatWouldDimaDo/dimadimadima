@@ -203,21 +203,21 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                   <div style={{ minWidth: 0 }}>
                     <div style={{
                       fontFamily: 'DM Serif Display, serif',
-                      fontSize: '1.05rem', color: 'var(--ink)', lineHeight: 1.2,
+                      fontSize: '1.3rem', color: 'var(--ink)', lineHeight: 1.2,
                     }}>{role.title}</div>
                     <div style={{
-                      fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.15rem',
+                      fontSize: '0.85rem', color: 'var(--muted)', marginTop: '0.2rem',
                     }}>{role.company}</div>
                   </div>
 
                   <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.25rem' }}>
                     <div style={{
-                      fontSize: '0.65rem', textTransform: 'uppercase',
+                      fontSize: '0.75rem', textTransform: 'uppercase',
                       letterSpacing: '0.08em', color: role.color,
                       fontFamily: 'DM Mono, monospace',
                     }}>{role.period}</div>
                     <div style={{
-                      fontSize: '0.6rem', color: 'var(--muted)', marginTop: '0.15rem',
+                      fontSize: '0.72rem', color: 'var(--muted)', marginTop: '0.15rem',
                     }}>{role.location}</div>
                     <div style={{
                       fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.25rem',
@@ -241,7 +241,7 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                       paddingLeft: '1.25rem', borderTop: '1px solid var(--border)',
                     }}>
                       <div style={{
-                        fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.6,
+                        fontSize: '0.92rem', color: 'var(--muted)', lineHeight: 1.65,
                         paddingTop: '1rem',
                       }}>{role.summary}</div>
                       <ul style={{
@@ -252,7 +252,7 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                         {role.highlights.map((h, j) => (
                           <li key={j} style={{
                             display: 'flex', gap: '0.75rem',
-                            fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.65,
+                            fontSize: '0.92rem', color: 'var(--muted)', lineHeight: 1.7,
                           }}>
                             <span style={{ color: role.color, flexShrink: 0 }}>—</span>
                             <span>{h}</span>

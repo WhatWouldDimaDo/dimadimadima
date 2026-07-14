@@ -37,7 +37,7 @@ const {
   <link rel="apple-touch-icon" href="/images/brand/dima-dima-dima/png/dima-mark-concept-01-touch-180.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- Prevent theme flash -->
   <script is:inline>
     (function() {
@@ -49,6 +49,22 @@ const {
   </script>
   <!-- Vercel Web Analytics (requires Analytics enabled on the Vercel project) -->
   <script is:inline defer src="/_vercel/insights/script.js"></script>
+  <!-- Scroll-reveal driver for .reveal elements -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!els.length || !('IntersectionObserver' in window)) {
+        els.forEach && els.forEach(function (e) { e.classList.add('revealed'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('revealed'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    });
+  </script>
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>

@@ -1,26 +1,58 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ResumeExperience from '../components/ResumeExperience';
+
+// Lucide-style stroke icons (inline paths, stroke=currentColor)
+const SKILLS = [
+  { label: 'AI Strategy & Enablement', paths: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/>' },
+  { label: 'Analytics Leadership', paths: '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>' },
+  { label: 'LLM Agent Workflows', paths: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2"/><path d="M15 2v2"/><path d="M9 20v2"/><path d="M15 20v2"/><path d="M2 9h2"/><path d="M2 15h2"/><path d="M20 9h2"/><path d="M20 15h2"/>' },
+  { label: 'Go-to-Market Strategy & Pricing', paths: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>' },
+  { label: 'Executive Communication', paths: '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>' },
+  { label: 'Systems Building — Python · SQL · TypeScript', paths: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>' },
+  { label: 'AI for Sales', paths: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>' },
+  { label: 'Growth Strategy', paths: '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>' },
+];
+
+const CLIENTS = [
+  { name: 'Intuit', logo: '/images/logos/clients/intuit.svg' },
+  { name: 'Mailchimp', logo: '/images/logos/mailchimp.svg' },
+  { name: 'Lahzo', logo: '/images/logos/lahzo.svg' },
+  { name: 'Equifax', logo: '/images/logos/equifax.svg' },
+  { name: 'Walmart', logo: '/images/logos/clients/walmart.svg' },
+  { name: 'Target', logo: '/images/logos/clients/target.svg' },
+  { name: 'Blue Cross Blue Shield NC', logo: '/images/logos/clients/bcbs-nc.svg' },
+  { name: 'Verizon', logo: '/images/logos/clients/verizon.svg' },
+  { name: 'AT&T', logo: '/images/logos/clients/att.svg' },
+  { name: 'New York Life', logo: '/images/logos/clients/new-york-life.svg' },
+  { name: 'CDC', logo: '/images/logos/clients/cdc.svg' },
+  { name: 'American Cancer Society', logo: '/images/logos/clients/american-cancer-society.svg' },
+  { name: 'Apollo', logo: '/images/logos/clients/apollo.svg' },
+  { name: 'Pfizer', logo: '/images/logos/clients/pfizer.svg' },
+  { name: 'Shiseido', logo: '/images/logos/clients/shiseido.svg' },
+  { name: 'Laura Mercier', logo: '/images/logos/clients/laura-mercier.svg' },
+  { name: 'Oldcastle Materials', logo: '/images/logos/clients/oldcastle.svg' },
+];
 ---
 <Layout title="Professional Experience">
 
   <!-- Header -->
-  <section style="padding-top:4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);">
+  <section class="reveal" style="padding-top:4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
       <div>
         <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,8vw,5rem);line-height:1;letter-spacing:-.02em;color:var(--ink);margin:0 0 .75rem;">
           Dima Perkis
         </h1>
-        <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 .5rem;">
+        <p style="font-family:'DM Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 .5rem;">
           VP, Data & AI · Atlanta, GA
         </p>
-        <p style="font-size:.875rem;color:var(--muted);max-width:40rem;line-height:1.65;margin:0 0 .75rem;">
+        <p style="font-size:.95rem;color:var(--muted);max-width:40rem;line-height:1.7;margin:0 0 .85rem;">
           I build AI strategies at the enterprise level and deploy the systems that make them
           real — from Board rooms to front-line teams.
         </p>
         <a href="https://linkedin.com/in/dima-perkis" target="_blank" rel="noopener noreferrer"
-          style="display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);text-decoration:none;">
-          <img src="/images/logos/tools/linkedin.svg" alt="" style="height:18px;width:18px;object-fit:contain;filter:var(--logo-filter);" />
+          style="display:inline-flex;align-items:center;gap:.45rem;font-family:'DM Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;">
+          <img src="/images/logos/tools/linkedin.svg" alt="" style="height:16px;width:16px;object-fit:contain;filter:var(--logo-filter);" />
           linkedin.com/in/dima-perkis ↗
         </a>
       </div>
@@ -30,61 +62,74 @@ import ResumeExperience from '../components/ResumeExperience';
   </section>
 
   <!-- Highlight strip -->
-  <section style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2rem;margin-bottom:2.5rem;">
+  <section class="reveal" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2rem;margin-bottom:3.5rem;">
     {[
       { n: '15+',   label: 'Years experience' },
       { n: '7',     label: 'Companies' },
     ].map(s => (
         <div style="background:var(--surface);padding:1.25rem;text-align:center;">
           <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--gold);line-height:1;">{s.n}</div>
-          <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.25rem;">{s.label}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.3rem;">{s.label}</div>
         </div>
     ))}
   </section>
 
-  <!-- Experience (React island with filtering) -->
-  <section style="margin-bottom:3rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Experience</h2>
-    <ResumeExperience client:load />
-  </section>
-
-  <!-- Companies I've Helped Grow -->
-  <section style="margin-bottom:3rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Companies I've Helped Grow</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem;">
-      {[
-        { name: 'Intuit', logo: '/images/logos/clients/intuit.svg' },
-        { name: 'Mailchimp', logo: '/images/logos/mailchimp.svg' },
-        { name: 'Lahzo', logo: '/images/logos/lahzo.svg' },
-        { name: 'Equifax', logo: '/images/logos/equifax.svg' },
-        { name: 'Walmart', logo: '/images/logos/clients/walmart.svg' },
-        { name: 'Target', logo: '/images/logos/clients/target.svg' },
-        { name: 'Blue Cross Blue Shield NC', logo: '/images/logos/clients/bcbs-nc.svg' },
-        { name: 'Verizon', logo: '/images/logos/clients/verizon.svg' },
-        { name: 'AT&T', logo: '/images/logos/clients/att.svg' },
-        { name: 'New York Life', logo: '/images/logos/clients/new-york-life.svg' },
-        { name: 'CDC', logo: '/images/logos/clients/cdc.svg' },
-        { name: 'American Cancer Society', logo: '/images/logos/clients/american-cancer-society.svg' },
-        { name: 'Apollo', logo: '/images/logos/clients/apollo.svg' },
-        { name: 'Pfizer', logo: '/images/logos/clients/pfizer.svg' },
-        { name: 'Shiseido', logo: '/images/logos/clients/shiseido.svg' },
-        { name: 'Laura Mercier', logo: '/images/logos/clients/laura-mercier.svg' },
-        { name: 'Oldcastle Materials', logo: '/images/logos/clients/oldcastle.svg' },
-      ].map(c => (
-        <div style="background:var(--surface);border:1px solid var(--border);height:90px;display:flex;align-items:center;justify-content:center;padding:.75rem;position:relative;">
-          <img src={c.logo} alt={c.name}
-            data-fallback-name={c.name}
-            style="max-height:52px;max-width:90%;width:auto;object-fit:contain;"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <span style="display:none;align-items:center;justify-content:center;text-align:center;font-size:.75rem;color:var(--muted);line-height:1.3;padding:0 .5rem;">{c.name}</span>
+  <!-- Companies I've Helped Grow — airy, no boxes -->
+  <section class="reveal" style="margin-bottom:4rem;">
+    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:2rem;">Companies I've Helped Grow</h2>
+    <div class="client-wall">
+      {CLIENTS.map(c => (
+        <div class="client-logo">
+          <img src={c.logo} alt={c.name} title={c.name}
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+          <span style="display:none;font-size:.85rem;color:var(--muted);text-align:center;line-height:1.3;">{c.name}</span>
         </div>
       ))}
     </div>
   </section>
 
+  <!-- Skills -->
+  <section class="reveal" style="margin-bottom:4rem;">
+    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Skills</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:.75rem;margin-bottom:2.5rem;">
+      {SKILLS.map(s => (
+        <div style="display:flex;align-items:center;gap:.85rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.85rem 1.1rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="var(--gold)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+            style="flex-shrink:0;" set:html={s.paths} />
+          <span style="font-size:.85rem;color:var(--ink);line-height:1.4;">{s.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Tools I Work With</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:.75rem;">
+      {[
+        { logo: '/images/logos/tools/openai.svg',       label: 'GPT' },
+        { logo: '/images/logos/tools/claude.svg',       label: 'Claude' },
+        { logo: '/images/logos/tools/googlegemini.svg', label: 'Gemini' },
+        { logo: '/images/logos/tools/github.svg',       label: 'GitHub' },
+        { logo: '/images/logos/tools/vercel.svg',       label: 'Vercel' },
+        { logo: '/images/logos/tools/replit.svg',       label: 'Replit' },
+      ].map(t => (
+        <div style="display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;">
+          <img src={t.logo} alt={t.label}
+            style="height:20px;width:20px;object-fit:contain;filter:var(--logo-filter);opacity:.85;flex-shrink:0;" />
+          <span style="font-size:.85rem;color:var(--ink);">{t.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="reveal" style="margin-bottom:4rem;">
+    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Experience</h2>
+    <ResumeExperience client:load />
+  </section>
+
   <!-- Education -->
-  <section style="margin-bottom:3rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Education</h2>
+  <section class="reveal" style="margin-bottom:3rem;">
+    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Education</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:1rem;">
       {[
         {
@@ -106,59 +151,56 @@ import ResumeExperience from '../components/ResumeExperience';
           color: '#002878',
         },
       ].map(e => (
-        <div style="background:var(--surface);padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;border:1px solid var(--border);">
+        <div style="background:var(--surface);padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;border:1px solid var(--border);border-radius:8px;">
           <div style="display:flex;align-items:center;gap:1rem;">
-            <img src={e.logo} alt={e.school} style="height:32px;width:auto;max-width:100px;object-fit:contain;opacity:.85;" />
+            <img src={e.logo} alt={e.school} style="height:36px;width:auto;max-width:110px;object-fit:contain;" class="edu-logo" />
           </div>
           <div>
-            <div style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);">{e.degree} — {e.school}</div>
-            <div style={`font-size:.75rem;color:${e.color};margin:.2rem 0;`}>{e.program}</div>
-            <div style="font-size:.7rem;color:var(--muted);">{e.year}</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);">{e.degree} — {e.school}</div>
+            <div style={`font-size:.8rem;color:${e.color};margin:.2rem 0;`} class="edu-program">{e.program}</div>
+            <div style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);">{e.year}</div>
           </div>
-          <p style="font-size:.775rem;color:var(--muted);line-height:1.55;margin:0;">{e.notes}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Skills & Tools -->
-  <section style="margin-bottom:3rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Skills</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:.75rem;margin-bottom:2rem;">
-      {[
-        { icon: '🧭', label: 'AI Strategy & Enablement' },
-        { icon: '📊', label: 'Analytics Leadership' },
-        { icon: '🤖', label: 'LLM Agent Workflows' },
-        { icon: '📈', label: 'Go-to-Market Strategy & Pricing' },
-        { icon: '🎤', label: 'Executive Communication' },
-        { icon: '⚙️', label: 'Systems Building — Python · SQL · TypeScript' },
-        { icon: '🤝', label: 'AI for Sales' },
-        { icon: '🚀', label: 'Growth Strategy' },
-      ].map(s => (
-        <div style="display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);padding:.75rem 1rem;">
-          <span style="font-size:1.15rem;flex-shrink:0;">{s.icon}</span>
-          <span style="font-size:.8rem;color:var(--ink);line-height:1.4;">{s.label}</span>
-        </div>
-      ))}
-    </div>
-
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Tools I Work With</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:.75rem;">
-      {[
-        { logo: '/images/logos/tools/openai.svg',       label: 'GPT' },
-        { logo: '/images/logos/tools/claude.svg',       label: 'Claude' },
-        { logo: '/images/logos/tools/googlegemini.svg', label: 'Gemini' },
-        { logo: '/images/logos/tools/github.svg',       label: 'GitHub' },
-        { logo: '/images/logos/tools/vercel.svg',       label: 'Vercel' },
-        { logo: '/images/logos/tools/replit.svg',       label: 'Replit' },
-      ].map(t => (
-        <div style="display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);padding:.75rem 1rem;">
-          <img src={t.logo} alt={t.label}
-            style="height:22px;width:22px;object-fit:contain;filter:var(--logo-filter);opacity:.85;flex-shrink:0;" />
-          <span style="font-size:.8rem;color:var(--ink);">{t.label}</span>
+          <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0;">{e.notes}</p>
         </div>
       ))}
     </div>
   </section>
 
 </Layout>
+
+<style>
+  /* Client wall: transparent, generous air, quiet-to-loud hover */
+  .client-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 2.5rem 2rem;
+    align-items: center;
+    justify-items: center;
+  }
+  .client-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    width: 100%;
+  }
+  .client-logo img {
+    max-height: 42px;
+    max-width: 120px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.72;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .client-logo:hover img {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  /* Monochrome-black SVGs (simple-icons) need lifting on dark themes */
+  html[data-theme="dark"] .client-logo img,
+  html[data-theme="hacker"] .client-logo img { filter: brightness(0) invert(0.85); }
+  html[data-theme="light"] .client-logo img[src*="lahzo"] { filter: invert(1) brightness(0.35); }
+  html[data-theme="dark"] .edu-logo,
+  html[data-theme="hacker"] .edu-logo { filter: brightness(0) invert(0.85); }
+  html[data-theme="dark"] .edu-program { color: var(--muted) !important; }
+</style>

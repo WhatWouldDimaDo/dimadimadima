@@ -42,9 +42,9 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
           <span class="bc-tag bc-tag--muted">Atlanta, GA</span>
         </div>
         <nav class="bc-intro-nav">
-          <a href="/resume">Professional Experience</a>
-          <a href="/projects">AI Side Quests</a>
-          <a href="/about">About Me</a>
+          <a href="/resume"><span class="bc-nav-n">01</span>Professional Experience<span class="bc-nav-arrow">→</span></a>
+          <a href="/projects"><span class="bc-nav-n">02</span>AI Side Quests<span class="bc-nav-arrow">→</span></a>
+          <a href="/about"><span class="bc-nav-n">03</span>About Me<span class="bc-nav-arrow">→</span></a>
         </nav>
       </div>
     </div>
@@ -70,6 +70,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
         <div class="bc-status bc-status--gold">Active</div>
         <div class="bc-project-title">Dewey</div>
         <div class="bc-project-desc">Book recs for the whole family, checked live against the library shelf</div>
+        <span class="bc-project-view">View project →</span>
       </div>
     </a>
 
@@ -99,6 +100,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
         <div class="bc-status bc-status--gold">Live</div>
         <div class="bc-project-title">ToddlerMaps</div>
         <div class="bc-project-desc">Maps of a toddler's world · AI stickers</div>
+        <span class="bc-project-view">View project →</span>
       </div>
     </a>
 
@@ -112,6 +114,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
         <div class="bc-status bc-status--gold">Live</div>
         <div class="bc-project-title">AI Ideas Explorer</div>
         <div class="bc-project-desc">1,160 AI business ideas, scored</div>
+        <span class="bc-project-view">View project →</span>
       </div>
     </a>
 
@@ -122,6 +125,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
         <div class="bc-status bc-status--gold">Active</div>
         <div class="bc-project-title">Georgia Power Analysis</div>
         <div class="bc-project-desc">13 months of bills + 10,487 hourly readings, decoded</div>
+        <span class="bc-project-view">View project →</span>
       </div>
     </a>
 
@@ -132,6 +136,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
         <div class="bc-status bc-status--gold">Active</div>
         <div class="bc-project-title">Music Data</div>
         <div class="bc-project-desc">147,594 streams · 178 shows · 18 years of listening data</div>
+        <span class="bc-project-view">View project →</span>
       </div>
     </a>
 
@@ -141,6 +146,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
       <div class="bc-project-body">
         <div class="bc-project-title">All Roads to Kill Bill</div>
         <div class="bc-project-desc">Every Tarantino connection, mapped</div>
+        <span class="bc-project-view">View project →</span>
       </div>
     </a>
 
@@ -223,16 +229,39 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
   .bc {
     background: var(--surface);
     border: 1px solid var(--border);
+    border-radius: 10px;
     overflow: hidden;
     position: relative;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    animation: bc-rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .bento .bc:nth-child(1) { animation-delay: 0.05s; }
+  .bento .bc:nth-child(2) { animation-delay: 0.12s; }
+  .bento .bc:nth-child(3) { animation-delay: 0.19s; }
+  .bento .bc:nth-child(4) { animation-delay: 0.26s; }
+  .bento .bc:nth-child(5) { animation-delay: 0.33s; }
+  .bento .bc:nth-child(6) { animation-delay: 0.40s; }
+  .bento .bc:nth-child(7) { animation-delay: 0.47s; }
+  .bento .bc:nth-child(8) { animation-delay: 0.54s; }
+  .bento .bc:nth-child(9) { animation-delay: 0.61s; }
+  @keyframes bc-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bc { animation: none; }
   }
   a.bc {
     display: block;
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
   }
-  a.bc:hover { border-color: var(--border-hi); }
+  a.bc:hover {
+    border-color: color-mix(in srgb, var(--gold) 45%, var(--border));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--ink) 25%, transparent);
+  }
 
   /* ─── Grid placement ────────────────────────────── */
   .bc-intro     { grid-column: 1 / 7; grid-row: 1; }
@@ -320,19 +349,37 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
   .bc-tag--muted  { color: var(--muted); }
   .bc-intro-nav {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.75rem;
-    margin-top: 0.25rem;
+    flex-direction: column;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border);
   }
   .bc-intro-nav a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
     font-family: 'DM Serif Display', serif;
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     color: var(--ink);
     text-decoration: none;
     line-height: 1.2;
-    transition: color 0.15s ease;
+    padding: 0.65rem 0.25rem;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.15s ease, padding-left 0.2s ease;
   }
-  .bc-intro-nav a:hover { color: var(--gold); }
+  .bc-nav-n {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+  .bc-nav-arrow {
+    margin-left: auto;
+    color: var(--muted);
+    opacity: 0.4;
+    transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  }
+  .bc-intro-nav a:hover { color: var(--gold); padding-left: 0.6rem; }
+  .bc-intro-nav a:hover .bc-nav-arrow { opacity: 1; color: var(--gold); transform: translateX(4px); }
 
   /* ─── LIVE ATL ──────────────────────────────────── */
   .bc-live {
@@ -554,12 +601,24 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
     line-height: 1.2;
   }
   .bc-project-desc {
-    font-size: 0.7rem;
-    color: rgba(240, 236, 228, 0.6);
+    font-size: 0.78rem;
+    color: rgba(240, 236, 228, 0.65);
     margin-top: 0.2rem;
-    font-family: 'DM Mono', monospace;
-    line-height: 1.45;
+    line-height: 1.5;
   }
+  .bc-project-view {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    opacity: 0;
+    transform: translateY(3px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  a.bc:hover .bc-project-view { opacity: 1; transform: none; }
 
   /* ─── MOBILE ────────────────────────────────────── */
   @media (max-width: 860px) {

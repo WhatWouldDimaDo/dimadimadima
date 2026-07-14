@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/atl/">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FBF2E3" />
+  <meta name="description" content="Someone proposed a time to do this — pick what works for you." />
+  <title>On Dima's Radar — Want to do this?</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="share-page-body">
+
+<div class="share-page">
+  <div class="share-header">
+    <a href="index.html" class="share-eyebrow"><img class="brand-mark" src="favicon.png" alt="" width="22" height="22" />On <em>Dima's</em> Radar</a>
+    <h1 class="share-title">Want to do this?</h1>
+    <p class="share-sub" id="propose-sub">Pick every time that works for you, then send your answer back.</p>
+    <p class="share-context" id="propose-note-line" style="display:none"></p>
+  </div>
+
+  <div class="propose-activity" id="propose-activity"></div>
+
+  <div class="propose-slots-wrap" id="propose-slots-wrap">
+    <div class="propose-slots-label">Pick every time that works:</div>
+    <div class="propose-slots" id="propose-slots"></div>
+    <button class="propose-slot-pill propose-none-btn" id="propose-none-btn" onclick="toggleNoneWork()">None of these work for me</button>
+  </div>
+
+  <div class="propose-empty" id="propose-empty" style="display:none">Hmm, this link is missing something — ask for a fresh one.</div>
+</div>
+
+<div class="share-bottom-bar" id="propose-bottom-bar">
+  <span class="share-bottom-count"><span id="propose-selected-count">0</span> selected</span>
+  <div class="share-bottom-actions">
+    <button class="btn-sm btn-details" id="propose-copy-link-btn" onclick="copyResponseLink()">Copy link with my answer</button>
+    <button class="btn-sm btn-buy" id="propose-copy-text-btn" onclick="copyPlainAnswer()">Copy plain text</button>
+  </div>
+</div>
+
+<textarea id="share-copy-fallback" aria-hidden="true"></textarea>
+
+<script src="data.js"></script>
+<script src="propose.js"></script>
+
+</body>
+</html>

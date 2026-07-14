@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/toddlermaps/">
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>What is ToddlerMaps?</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#faf5ea; --ink:#1c1b18; --red:#d93b2b; --soft:#6b6558; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1080px; height:1350px; background:var(--paper); color:var(--ink);
+         font-family:"Patrick Hand", cursive; overflow:hidden; position:relative; }
+  .frame { position:absolute; inset:28px; border:4px dashed var(--ink); border-radius:24px; }
+  .inner { position:relative; padding:64px 72px; height:100%; }
+  h1 { font-family:"Fredoka"; font-weight:700; font-size:76px; line-height:1; }
+  h1 span { color:var(--red); }
+  .kicker { display:inline-block; background:var(--ink); color:var(--paper); font-size:24px;
+            padding:6px 18px; border-radius:6px; transform:rotate(-2deg); margin-bottom:22px; }
+  .tag { font-size:34px; color:var(--soft); margin:18px 0 40px; max-width:30ch; }
+  .steps { display:flex; gap:26px; margin-bottom:44px; }
+  .step { flex:1; background:#fff; border:4px solid var(--ink); border-radius:20px;
+          box-shadow:6px 7px 0 rgba(28,27,24,.9); padding:22px; position:relative; }
+  .step:nth-child(1){ transform:rotate(-1.2deg);} .step:nth-child(2){ transform:rotate(.9deg);}
+  .step:nth-child(3){ transform:rotate(-.6deg);}
+  .n { position:absolute; top:-22px; left:-16px; width:52px; height:52px; border-radius:50%;
+       background:var(--red); color:#fff; border:4px solid var(--ink); display:grid; place-items:center;
+       font-family:"Fredoka"; font-weight:700; font-size:26px; }
+  .step b { font-family:"Fredoka"; font-size:27px; display:block; margin-bottom:6px; }
+  .step p { font-size:21px; color:var(--soft); }
+  .row { display:flex; gap:30px; align-items:center; }
+  .row img { width:300px; height:300px; object-fit:contain; background:#fff;
+             border:4px solid var(--ink); border-radius:20px; box-shadow:6px 7px 0 rgba(28,27,24,.9); }
+  .row img:nth-child(2){ transform:rotate(1.4deg);} .row img:nth-child(1){ transform:rotate(-1.4deg);}
+  .row img:nth-child(3){ transform:rotate(.8deg);}
+  .foot { position:absolute; bottom:56px; left:72px; right:72px; display:flex;
+          justify-content:space-between; align-items:end; }
+  .url { font-family:"Fredoka"; font-weight:600; font-size:30px; background:var(--red); color:#fff;
+         border:4px solid var(--ink); padding:10px 22px; border-radius:14px; transform:rotate(-1deg); }
+  .made { font-size:22px; color:var(--soft); max-width:34ch; text-align:right; }
+</style>
+</head>
+<body>
+<div class="frame"></div>
+<div class="inner">
+  <span class="kicker">a dad project · zero screens required ★</span>
+  <h1>Toddler<span>Maps</span></h1>
+  <p class="tag">Real maps of your kid's world + AI coloring stickers, printed on the kitchen label printer.</p>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><b>Print a map</b><p>Faint real roads, one dashed route to trace — the actual drive to the zoo, school, or a friend's house.</p></div>
+    <div class="step"><span class="n">2</span><b>Print the stickers</b><p>Describe anything out loud — the label printer spits out a colorable sticker in seconds.</p></div>
+    <div class="step"><span class="n">3</span><b>Color &amp; stick</b><p>Trip strips show every landmark with drive times. No more "are we there yet?"</p></div>
+  </div>
+  <div class="row">
+    <img src="assets/icons/fernbank.png" alt="">
+    <img src="assets/icons/ex_story_dino.png" alt="">
+    <img src="assets/icons/zoo.png" alt="">
+  </div>
+  <div class="foot">
+    <div class="url">dimadimadima.com/toddlermaps</div>
+    <div class="made">Brother QL-810W + OpenStreetMap + a little AI. Ask Dima how to build one for your kid.</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1045 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-07T21:23:17",
+  "people": [
+    {
+      "firstName": "Brent",
+      "tier": 1,
+      "cadence": "quarterly",
+      "lastContact": "2022-10-25",
+      "overdueStr": "+1261d overdue",
+      "daysOverdue": 3783,
+      "provenance": null,
+      "groups": [
+        "Kids Crew"
+      ],
+      "slots": [
+        "SOLO_RESET",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Sam",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2022-08-24",
+      "overdueStr": "+1323d overdue",
+      "daysOverdue": 2646,
+      "provenance": null,
+      "groups": [
+        "Kids Crew"
+      ],
+      "slots": [
+        "SOLO_RESET",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Leah",
+      "tier": 2,
+      "cadence": "yearly",
+      "lastContact": "2022-02-13",
+      "overdueStr": "+1240d overdue",
+      "daysOverdue": 2480,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "GROUP_NIGHT"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "Shani",
+      "tier": 2,
+      "cadence": "6 months",
+      "lastContact": "2023-01-25",
+      "overdueStr": "+1079d overdue",
+      "daysOverdue": 2158,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "unknown"
+    },
+    {
+      "firstName": "Matt",
+      "tier": 1,
+      "cadence": "monthly",
+      "lastContact": "2024-10-28",
+      "overdueStr": "+587d overdue",
+      "daysOverdue": 1761,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Ian",
+      "tier": 1,
+      "cadence": "quarterly",
+      "lastContact": "2025-02-07",
+      "overdueStr": "+425d overdue",
+      "daysOverdue": 1275,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "Cliff",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2024-08-30",
+      "overdueStr": "+586d overdue",
+      "daysOverdue": 1172,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "FAMILY_OUT",
+        "SOLO_RESET"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Dave",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2025-04-28",
+      "overdueStr": "+345d overdue",
+      "daysOverdue": 690,
+      "provenance": null,
+      "groups": [
+        "Kids Crew"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Glenn",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2025-05-02",
+      "overdueStr": "+341d overdue",
+      "daysOverdue": 682,
+      "provenance": null,
+      "groups": [
+        "Kids Crew"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Alessia",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2025-06-07",
+      "overdueStr": "+305d overdue",
+      "daysOverdue": 610,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "Robert",
+      "tier": 1,
+      "cadence": "quarterly",
+      "lastContact": "2025-10-20",
+      "overdueStr": "+170d overdue",
+      "daysOverdue": 510,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Close By",
+        "Neighbors"
+      ],
+      "slots": [
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Chelsea",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2025-12-26",
+      "overdueStr": "+103d overdue",
+      "daysOverdue": 206,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Close By"
+      ],
+      "slots": [
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Andrew",
+      "tier": 3,
+      "cadence": "quarterly",
+      "lastContact": "2025-12-21",
+      "overdueStr": "+108d overdue",
+      "daysOverdue": 108,
+      "provenance": null,
+      "groups": [
+        "Concert Squad"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "Ben",
+      "tier": 2,
+      "cadence": "weekly",
+      "lastContact": "2026-05-23",
+      "overdueStr": "+38d overdue",
+      "daysOverdue": 76,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Craig",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-06-16",
+      "overdueStr": "+14d overdue",
+      "daysOverdue": 42,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Neighbors"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "David",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-03-24",
+      "overdueStr": "+15d overdue",
+      "daysOverdue": 30,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Couples Dinner"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Alan",
+      "tier": 3,
+      "cadence": "quarterly",
+      "lastContact": "2026-03-31",
+      "overdueStr": "+8d overdue",
+      "daysOverdue": 8,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Alex",
+      "tier": 3,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": "Josh",
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Alisa",
+      "tier": 2,
+      "cadence": "weekly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": "David",
+      "groups": [
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Arjun",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Couples Dinner",
+        "Weekly Check-in",
+        "Kids Crew"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Ben",
+      "tier": 2,
+      "cadence": "monthly",
+      "lastContact": "2026-06-25",
+      "overdueStr": "18d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Chaya",
+      "tier": 3,
+      "cadence": "quarterly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "89d until due",
+      "daysOverdue": 0,
+      "provenance": "Shae",
+      "groups": [
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Chris",
+      "tier": 2,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Kids Crew"
+      ],
+      "slots": [
+        "SOLO_RESET",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Cortland",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-04-24",
+      "overdueStr": "16d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Daniel",
+      "tier": 1,
+      "cadence": "monthly",
+      "lastContact": "2026-06-09",
+      "overdueStr": "2d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "David",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By",
+        "Weekly Check-in"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Davis",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By",
+        "Neighbors"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Gabe",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-04-14",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Gray",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-04-18",
+      "overdueStr": "10d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Couples Dinner"
+      ],
+      "slots": [
+        "DATE_NIGHT",
+        "GROUP_NIGHT"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "James",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Couples Dinner"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET",
+        "DATE_NIGHT"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "Jaye",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-07-05",
+      "overdueStr": "88d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Jayme",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-04-15",
+      "overdueStr": "7d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Couples Dinner"
+      ],
+      "slots": [
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Jesse",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-06-25",
+      "overdueStr": "78d until due",
+      "daysOverdue": 0,
+      "provenance": "Ben",
+      "groups": [],
+      "slots": [
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "John",
+      "tier": 2,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "John",
+      "tier": 1,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Couples Dinner",
+        "Close By",
+        "Kids Crew"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "John",
+      "tier": 3,
+      "cadence": "yearly",
+      "lastContact": "2026-02-05",
+      "overdueStr": "213d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "SOLO_RESET",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Jon",
+      "tier": 1,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": "Stefanie",
+      "groups": [
+        "Kids Crew",
+        "Close By",
+        "Neighbors"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Josh",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Kate",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-05-20",
+      "overdueStr": "42d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Close By",
+        "Neighbors"
+      ],
+      "slots": [
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Kieran",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "89d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "GROUP_NIGHT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Kirsten",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "89d until due",
+      "daysOverdue": 0,
+      "provenance": "Arjun",
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Liam",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-07-05",
+      "overdueStr": "5d until due",
+      "daysOverdue": 0,
+      "provenance": "Jaye",
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Mariah",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-06-20",
+      "overdueStr": "73d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Nabil",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "89d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Couples Dinner"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Peter",
+      "tier": 1,
+      "cadence": "monthly",
+      "lastContact": "2026-07-02",
+      "overdueStr": "25d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "Peter",
+      "tier": 1,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Raquel",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-04-13",
+      "overdueStr": "5d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Kids Crew"
+      ],
+      "slots": [
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Roman",
+      "tier": 2,
+      "cadence": "monthly",
+      "lastContact": "2026-07-03",
+      "overdueStr": "26d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Shae",
+      "tier": 1,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Shannon",
+      "tier": 2,
+      "cadence": "monthly",
+      "lastContact": "2026-07-05",
+      "overdueStr": "28d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By",
+        "Neighbors"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Shubh",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By",
+        "Weekly Check-in"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Stefanie",
+      "tier": 2,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Kids Crew",
+        "Neighbors"
+      ],
+      "slots": [
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Ted",
+      "tier": 1,
+      "cadence": "monthly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "29d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [
+        "Concert Squad",
+        "Kids Crew",
+        "Couples Dinner"
+      ],
+      "slots": [
+        "GROUP_NIGHT",
+        "DATE_NIGHT",
+        "FAMILY_OUT"
+      ],
+      "kids": "yes"
+    },
+    {
+      "firstName": "Tim",
+      "tier": 1,
+      "cadence": "weekly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "6d until due",
+      "daysOverdue": 0,
+      "provenance": null,
+      "groups": [],
+      "slots": [
+        "GROUP_NIGHT",
+        "SOLO_RESET"
+      ],
+      "kids": "no"
+    },
+    {
+      "firstName": "Yazmine",
+      "tier": 2,
+      "cadence": "quarterly",
+      "lastContact": "2026-07-06",
+      "overdueStr": "89d until due",
+      "daysOverdue": 0,
+      "provenance": "Shubh",
+      "groups": [
+        "Kids Crew",
+        "Couples Dinner",
+        "Close By"
+      ],
+      "slots": [
+        "DATE_NIGHT",
+        "FAMILY_OUT",
+        "LAST_MINUTE"
+      ],
+      "kids": "yes"
+    }
+  ]
+}

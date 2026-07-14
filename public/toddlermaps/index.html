@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/toddlermaps/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ToddlerMaps</title>
+<meta name="description" content="A map of your toddler's world, one place at a time — printable coloring maps and stickers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="index.html"><img src="assets/logo.png" alt="ToddlerMaps"></a>
+  <a class="active" href="index.html">Maps</a>
+  <a href="studio.html">Sticker Studio ✂️</a>
+  <a href="about.html">About</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-kicker">printed on the kitchen label printer ★</p>
+      <h1>Toddler<br>Maps</h1>
+      <p class="hero-sub">A map of your toddler's world, one place at a time.
+        Print a map, trace the dashed road, put your stickers in the circles.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-red" href="#places">Pick a place ↓</a>
+        <a class="btn" id="overview-pdf" href="#" download>Print the World Map</a>
+        <a class="btn" href="studio.html">Sticker Studio ✂️</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-logo" src="assets/logo.png" alt="ToddlerMaps logo">
+      <figure class="hero-map sticker" id="hero-map"></figure>
+    </div>
+  </div>
+  <div class="route-divider" aria-hidden="true"><span class="route-step">1</span></div>
+</header>
+
+<section class="section" id="world">
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li class="sticker"><span class="step-num">1</span><b>Print a map</b><span>Faint real roads on paper — the dashed line is our actual drive.</span></li>
+    <li class="sticker"><span class="step-num">2</span><b>Print the stickers</b><span>The label printer spits out coloring stickers of each place.</span></li>
+    <li class="sticker"><span class="step-num">3</span><b>Color &amp; stick</b><span>Trace the road, color the world, stickers go in the dashed circles.</span></li>
+  </ol>
+  <div class="route-divider" aria-hidden="true"><span class="route-step">2</span></div>
+</section>
+
+<section class="section" id="places">
+  <h2>Where are we going today?</h2>
+  <p class="section-sub">Every card is a real drive from home — tap Map for the printable sheet, Sticker for the coloring sticker.</p>
+  <div class="grid" id="places-grid"></div>
+  <div class="route-divider" aria-hidden="true"><span class="route-step">3</span></div>
+</section>
+
+<section class="section" id="printables">
+  <h2>Fresh off the printer</h2>
+  <p class="section-sub">Real trips with real drive times — milestones the label printer spits out as one long strip — plus car kits and the sticker calendar.</p>
+  <div id="printables-list"></div>
+  <div class="route-divider" aria-hidden="true"><span class="route-step">4</span></div>
+</section>
+
+<section class="section" id="trip">
+  <h2>Beach Trip!</h2>
+  <p class="section-sub">The long drive to the beach house — one milestone at a time, so nobody has to ask <i>"are we there yet?"</i></p>
+  <div class="trip-strip" id="trip-strip"></div>
+</section>
+
+<footer>
+  <p>Made with a Brother QL-810W, a laser printer, and a dad who can't stop tinkering.</p>
+  <p class="footer-small">Maps © OpenStreetMap contributors · routes by OSRM</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

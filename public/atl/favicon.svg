@@ -1,0 +1,25 @@
+<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="On Dima's Radar">
+  <defs>
+    <linearGradient id="odr-grad" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C2410C"/>
+      <stop offset="1" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="odr-sweep" x1="20" y1="20" x2="36.9" y2="13.8" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C2410C" stop-opacity="0"/>
+      <stop offset="1" stop-color="#C2410C" stop-opacity="0.28"/>
+    </linearGradient>
+  </defs>
+  <!-- radar rings -->
+  <circle cx="20" cy="20" r="17.5" fill="none" stroke="url(#odr-grad)" stroke-width="2"/>
+  <circle cx="20" cy="20" r="11.5" fill="none" stroke="url(#odr-grad)" stroke-width="1.4" opacity="0.5"/>
+  <circle cx="20" cy="20" r="5.5"  fill="none" stroke="url(#odr-grad)" stroke-width="1.1" opacity="0.35"/>
+  <!-- sweep afterglow wedge -->
+  <path d="M20 20 L20 2.5 A17.5 17.5 0 0 1 36.9 13.8 Z" fill="url(#odr-sweep)"/>
+  <!-- leading sweep beam -->
+  <line x1="20" y1="20" x2="36.9" y2="13.8" stroke="url(#odr-grad)" stroke-width="2" stroke-linecap="round"/>
+  <!-- blip: the event that just pinged -->
+  <circle cx="31.8" cy="15.6" r="3" fill="#B45309"/>
+  <circle cx="31.8" cy="15.6" r="3" fill="none" stroke="#B45309" stroke-width="1.5" opacity="0.35"/>
+  <!-- center -->
+  <circle cx="20" cy="20" r="1.7" fill="url(#odr-grad)"/>
+</svg>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/atl/">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FBF2E3" />
+  <meta name="description" content="On Dima's Radar — Atlanta live music & events, scored against my own taste. S-tier electronic shows, family picks, date nights, ranked and refreshed daily." />
+  <title>On Dima's Radar — Atlanta live music & events, my taste</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="On Dima's Radar" />
+  <meta property="og:title" content="On Dima's Radar" />
+  <meta property="og:description" content="Atlanta live music, shows, and things to do — curated against Dima's taste." />
+  <meta property="og:url" content="https://dimadimadima.com/atl/" />
+  <meta property="og:image" content="https://dimadimadima.com/atl/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="On Dima's Radar logo" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="On Dima's Radar" />
+  <meta name="twitter:description" content="Atlanta events, curated against Dima's taste." />
+  <meta name="twitter:image" content="https://dimadimadima.com/atl/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- ── NAV — brand + current-view label + hamburger menu ── -->
+<nav id="site-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand view-tab" data-view="tonight"><img class="brand-mark" src="favicon.png" alt="" width="26" height="26" />On <em>Dima's</em> Radar<span class="internal-badge">Internal</span></a>
+    <span class="nav-current-label" id="nav-current-label">Highlights</span>
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon-light">🌙</span>
+        <span class="theme-toggle-icon-dark">☀️</span>
+      </button>
+      <button class="nav-hamburger-btn" id="nav-hamburger-btn" aria-label="Menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="nav-menu-panel" id="nav-menu-panel">
+    <a href="#" class="nav-menu-item view-tab active" data-view="tonight">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      Highlights
+    </a>
+    <a href="#" class="nav-menu-item view-tab" data-view="browse">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Browse — all events
+    </a>
+    <a href="#" class="nav-menu-item nav-menu-anchor" data-anchor="evergreen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1-7-5-7-10a9 9 0 0 1 9-9c5 0 9 4 9 9-5 0-9 4-11 10z"/><path d="M12 21c0-6 3-10 8-13"/></svg>
+      Evergreen activities
+    </a>
+    <a href="#" class="nav-menu-item nav-menu-anchor" data-anchor="map-section">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20 3 17V7l6 3m0 10 6-3m-6 3V10m6 7 6 3V10l-6-3m0 10V7m0 0L9 4"/></svg>
+      Map
+    </a>
+    <a href="#" class="nav-menu-item view-tab internal-only" data-view="people">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="8.5" r="2.4"/><path d="M14.5 20c.2-2.7 2.1-4.6 4.5-4.6s4.3 1.9 4.5 4.6"/></svg>
+      People
+    </a>
+  </div>
+</nav>
+
+<!-- ── TONIGHT MODE — zero-input answer, default landing ── -->
+<section id="tonight" class="view-section view-tonight">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Atlanta, GA &nbsp;·&nbsp; <span id="tonight-date-label">Today</span></div>
+      <h1 class="hero-headline">On <em>Dima's</em> <span class="grad">Radar</span></h1>
+      <p class="hero-sub">Atlanta live music, shows &amp; things to do — scored against my own taste. Refreshed daily.</p>
+      <div id="tonight-mylist-wrap"></div>
+      <div id="tonight-pick-wrap"></div>
+      <div id="tonight-alternates-wrap"></div>
+      <div id="tonight-evergreen-wrap"></div>
+      <div id="tonight-week-wrap"></div>
+      <div class="tonight-more-row">
+        <a href="#" class="view-tab tonight-browse-link" data-view="browse">See everything in Browse →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── BROWSE MODE — grid + filters + map + calendar + evergreen ── -->
+<section class="view-section view-browse" id="browse-mode-wrap">
+
+<hr class="section-divider" />
+
+<!-- ── EVENTS GRID ── -->
+<section id="events">
+  <div class="container">
+    <div class="section-label">Apr–Sep 2026</div>
+    <h2 class="section-title">All Events</h2>
+    <p class="section-body">Every scored event. Click any card to expand lineup, YouTube preview, and score radar. Use the filters below to narrow it down.</p>
+
+    <!-- Coverage stats (moved out of TONIGHT — Browse is the inventory view) -->
+    <div class="stat-grid stat-grid-compact">
+      <div class="stat-card">
+        <div class="stat-number"><span class="c-purple" id="stat-ev-count">—</span></div>
+        <div class="stat-label">Events · Next 3 Months</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="c-teal" id="stat-eg-count">—</span></div>
+        <div class="stat-label">Evergreen Activities</div>
+      </div>
+      <div class="stat-card internal-only">
+        <div class="stat-number"><span class="c-green" id="stat-rsvp-count">0</span></div>
+        <div class="stat-label">I'm In</div>
+        <div class="stat-sublabel" id="stat-rsvp-sub">Mark events below</div>
+      </div>
+    </div>
+
+    <!-- Calendar widget — collapsed by default (progressive disclosure) -->
+    <button class="disclosure-toggle" id="cal-disclosure-toggle" aria-expanded="false">📅 <span>Show calendar</span><span class="disclosure-caret">▾</span></button>
+    <div class="cal-widget disclosure-panel" id="cal-mini">
+      <div class="cal-widget-header">
+        <button class="cal-nav-btn" id="cal-prev">‹</button>
+        <div class="cal-widget-title" id="cal-month-label">—</div>
+        <button class="cal-nav-btn" id="cal-next">›</button>
+      </div>
+      <div id="cal-body"></div>
+    </div>
+
+    <!-- Filters — collapsed by default (progressive disclosure) -->
+    <button class="disclosure-toggle" id="filters-disclosure-toggle" aria-expanded="false">⚙️ <span>Filter &amp; sort</span><span class="disclosure-caret">▾</span></button>
+    <div class="disclosure-panel" id="filters-panel">
+      <div class="search-wrap">
+        <div class="search-input-row">
+          <span class="search-icon">🔍</span>
+          <input type="search" id="search-input" class="search-input" placeholder="Filter events by name, artist, venue…" autocomplete="off" />
+        </div>
+      </div>
+      <div class="filter-bar">
+        <span class="filter-label">Type:</span>
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="music">🎵 Music</button>
+        <button class="chip" data-filter="family">👨‍👧 Family</button>
+        <button class="chip chip-comedy" data-filter="comedy">😂 Comedy</button>
+        <button class="chip" data-filter="group">👥 Group Night</button>
+        <button class="chip" data-filter="date">💑 Date Night</button>
+        <button class="chip" data-filter="free">Free</button>
+      </div>
+      <div class="filter-bar">
+        <span class="filter-label">Score:</span>
+        <button class="chip active" data-tier="all">All</button>
+        <button class="chip chip-top" data-tier="S">90+</button>
+        <button class="chip" data-tier="A">75–89</button>
+        <button class="chip" data-tier="B">60–74</button>
+      </div>
+
+      <!-- Formerly the standalone Plan/Wizard view — merged into Filter & sort
+           so "narrow the grid" is one mental model instead of two coexisting
+           ones. These now really filter the grid (see applyEventFilters in
+           app.js), not just dim non-matches like the old wizard did. -->
+      <div class="filter-bar">
+        <span class="filter-label">When:</span>
+        <button class="chip active" data-wizwhen="all">All</button>
+        <button class="chip" data-wizwhen="now">Right Now</button>
+        <button class="chip" data-wizwhen="weekend">This Weekend</button>
+        <button class="chip" data-wizwhen="ahead">Planning Ahead</button>
+      </div>
+      <div class="filter-bar">
+        <span class="filter-label">Who:</span>
+        <button class="chip active" data-wizwho="all">All</button>
+        <button class="chip" data-wizwho="solo">Just Me</button>
+        <button class="chip" data-wizwho="dean">Dima + Dean</button>
+        <button class="chip" data-wizwho="family">Full Family</button>
+        <button class="chip" data-wizwho="date">Date Night</button>
+        <button class="chip" data-wizwho="friends">Friends</button>
+        <button class="chip" data-wizwho="papa">Papa + Dean</button>
+      </div>
+      <div class="ruby-nap-banner hidden" id="ruby-nap">
+        ⚠️ Toddler nap window: 12:00–2:30 PM — plan full family outings in the morning or evening
+      </div>
+      <div class="filter-bar">
+        <span class="filter-label">Vibe:</span>
+        <button class="chip active" data-wizvibe="all">All</button>
+        <button class="chip" data-wizvibe="music">🎵 Music</button>
+        <button class="chip" data-wizvibe="outdoor">🌿 Outdoor</button>
+        <button class="chip" data-wizvibe="chill">🧘 Chill</button>
+        <button class="chip" data-wizvibe="food">🍴 Food</button>
+        <button class="chip" data-wizvibe="indoor">🏠 Indoor</button>
+      </div>
+
+      <div class="sort-bar">
+        <span class="filter-label">Sort:</span>
+        <button class="sort-btn active" id="sort-date">By Date</button>
+        <button class="sort-btn" id="sort-score">By Score</button>
+        <button class="sort-btn" id="sort-venue">By Venue</button>
+      </div>
+
+      <!-- Score threshold — near-misses that didn't make the curated grid.
+           Nested disclosure so opening Filter & sort doesn't dump the full
+           candidate list every time. -->
+      <button class="disclosure-toggle disclosure-toggle-nested" id="threshold-disclosure-toggle" aria-expanded="false">🎚️ <span>Lower the score threshold — see more events</span><span class="disclosure-caret">▾</span></button>
+      <div class="disclosure-panel" id="threshold-panel">
+        <div class="it-panel">
+          <div class="it-panel-header">
+            <h3 class="it-panel-title">More Candidates</h3>
+            <span class="it-panel-sub" id="inv-count-label">loading…</span>
+          </div>
+          <div class="threshold-row">
+            <label for="score-threshold-input">Score threshold</label>
+            <input type="range" id="score-threshold-input" min="0" max="100" step="5" value="40" />
+            <span class="threshold-value" id="score-threshold-value">40</span>
+          </div>
+          <div class="it-panel-body" id="inventory-list">Loading scanned_inventory.json…</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="disclosure-toggle" id="share-mode-btn" onclick="toggleShareMode()">📤 <span>Build an invite for a friend</span></button>
+
+    <div class="events-grid-wrap">
+      <div class="events-grid" id="events-grid"></div>
+      <div class="scroll-counter" id="scroll-counter"></div>
+    </div>
+    <div id="surprise-strip" class="surprise-strip" style="display:none"></div>
+    <button class="show-more-btn" id="show-more-btn" style="display:none">Show all events</button>
+  </div>
+</section>
+
+</section><!-- /view-browse (part 1 — resumes after People mode, below) -->
+
+<!-- ── PEOPLE MODE — internal only ── -->
+<section id="internal-tools" class="internal-only view-section view-people">
+  <div class="container">
+    <div class="section-label">Internal Only</div>
+    <h2 class="section-title">Calibration &amp; Tracking</h2>
+    <p class="section-body">Not shown to visitors. Star ratings to calibrate scoring over time, and the invite-round tracker. (Score threshold + scanned inventory moved to Browse — visible to everyone.)</p>
+
+    <!-- Ratings export -->
+    <div class="it-panel">
+      <div class="it-panel-header">
+        <h3 class="it-panel-title">Scoring Calibration</h3>
+      </div>
+      <p class="it-panel-note">Star-rate events (on their detail sheet) and inventory rows above. Export feeds <code>scripts/import_ratings.py</code> — see SPEC-30-CALIBRATION.md.</p>
+      <button class="btn-sm btn-it" id="export-ratings-btn" onclick="exportRatings()">Export Ratings (ratings_feedback.json)</button>
+    </div>
+
+    <!-- People Roster (item 1.6 addendum) -->
+    <div class="it-panel">
+      <div class="it-panel-header">
+        <h3 class="it-panel-title">People Roster</h3>
+        <span class="it-panel-sub" id="roster-count-label">loading…</span>
+      </div>
+      <p class="it-panel-note">Overdue-ranked, household-aware — a couple shares one contact timeline, so reaching one partner keeps both current. Full design direction for a richer visual treatment: SPEC-INVITE-PANEL-VISUAL.md.</p>
+      <div class="roster-tabs" id="roster-tabs"></div>
+      <div class="it-panel-body" id="roster-list">Loading invite_context.json…</div>
+    </div>
+
+    <!-- Invite Tracker -->
+    <div class="it-panel">
+      <div class="it-panel-header">
+        <h3 class="it-panel-title">Invite Tracker</h3>
+        <span class="it-panel-sub" id="invite-count-label"></span>
+      </div>
+      <p class="it-panel-note">Per-event invite state lives on each event's detail sheet. Export moves the working copy to <code>2026-04-18_Personal-CRM/derived/invite_tracker.json</code> — see SPEC-24-INVITE-TRACKER.md.</p>
+      <div class="it-btn-row">
+        <button class="btn-sm btn-it" onclick="exportInviteTracker()">Export Invite Tracker</button>
+        <label class="btn-sm btn-it btn-it-file">
+          Import Invite Tracker
+          <input type="file" id="invite-import-input" accept="application/json" style="display:none" onchange="importInviteTracker(this.files[0])" />
+        </label>
+      </div>
+      <div class="it-panel-body" id="invite-summary-list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BROWSE MODE resumes ── -->
+<section class="view-section view-browse" id="browse-mode-wrap-2">
+
+<hr class="section-divider" />
+
+<!-- ── MAP ── -->
+<section id="map-section">
+  <div class="container">
+    <div class="section-label">Atlanta, GA</div>
+    <h2 class="section-title">Event Map</h2>
+    <p class="section-body">All upcoming events (tier-colored) and evergreen activities (green) on the map. Hover or click any pin for details.</p>
+    <button class="disclosure-toggle" id="map-disclosure-toggle" aria-expanded="false">🗺️ <span>Show map</span><span class="disclosure-caret">▾</span></button>
+    <div class="disclosure-panel" id="map-panel">
+      <div class="map-filters">
+        <div class="map-filter-row">
+          <button class="map-toggle active" data-layer="events">Events</button>
+          <button class="map-toggle active" data-layer="evergreen">Evergreen</button>
+        </div>
+        <div class="map-filter-row">
+          <button class="map-cat-btn active" data-cat="all">All</button>
+          <button class="map-cat-btn" data-cat="music">Music</button>
+          <button class="map-cat-btn" data-cat="family">Family</button>
+          <button class="map-cat-btn" data-cat="date">Date</button>
+          <button class="map-cat-btn" data-cat="group">Group</button>
+          <button class="map-cat-btn" data-cat="solo">Solo</button>
+          <button class="map-cat-btn" data-cat="outdoor">Outdoor</button>
+          <button class="map-cat-btn" data-cat="comedy">Comedy</button>
+          <button class="map-cat-btn" data-cat="social">Social</button>
+          <button class="map-cat-btn" data-cat="papa">Papa</button>
+        </div>
+      </div>
+      <div id="atl-map"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ── EVERGREEN ── -->
+<section id="evergreen">
+  <div class="container">
+    <div class="section-label">No Ticket Required</div>
+    <h2 class="section-title">Evergreen ATL</h2>
+    <p class="section-body">High-value repeatable experiences that don't require weeks of planning. Kid/adult scores on each card.</p>
+
+    <!-- Flexible finder — describe what you're free for instead of clicking
+         through every filter row. Plain text match against name/description/
+         notes, not smart parsing — type roughly what you mean. -->
+    <div class="eg-finder">
+      <div class="search-input-row">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="eg-freeform-input" class="search-input" placeholder="Free Sat morning, indoors, or at home? Describe it…" autocomplete="off" />
+      </div>
+    </div>
+
+    <div class="eg-filter-bar">
+      <span class="eg-filter-label">Who:</span>
+      <button class="eg-chip active" data-cat="all">All</button>
+      <button class="eg-chip" data-cat="family">👨‍👧 With Dean</button>
+      <button class="eg-chip" data-cat="papa">🧓 Papa + Dean</button>
+      <button class="eg-chip" data-cat="solo">🧘 Solo Reset</button>
+      <button class="eg-chip" data-cat="date">💑 Date Night</button>
+      <button class="eg-chip" data-cat="group">👥 Group</button>
+    </div>
+
+    <button class="disclosure-toggle" id="eg-filters-disclosure-toggle" aria-expanded="false">⚙️ <span>More filters — day, time, effort, availability</span><span class="disclosure-caret">▾</span></button>
+    <div class="disclosure-panel" id="eg-filters-panel">
+      <div class="eg-filter-bar eg-filter-bar-when">
+        <span class="eg-filter-label">Day:</span>
+        <button class="eg-chip-day active" data-day="any">Any</button>
+        <button class="eg-chip-day" data-day="weekday">Mon</button>
+        <button class="eg-chip-day" data-day="weekday">Tue</button>
+        <button class="eg-chip-day" data-day="weekday">Wed</button>
+        <button class="eg-chip-day" data-day="weekday">Thu</button>
+        <button class="eg-chip-day" data-day="weekday">Fri</button>
+        <button class="eg-chip-day" data-day="weekend">Sat</button>
+        <button class="eg-chip-day" data-day="weekend">Sun</button>
+      </div>
+      <div class="eg-filter-bar eg-filter-bar-when" style="margin-top:-10px;">
+        <span class="eg-filter-label">Time:</span>
+        <button class="eg-chip-time active" data-time="any">Any Time</button>
+        <button class="eg-chip-time" data-time="morning">Morning</button>
+        <button class="eg-chip-time" data-time="afternoon">Afternoon</button>
+        <button class="eg-chip-time" data-time="evening">Evening</button>
+      </div>
+      <div class="eg-filter-bar" style="margin-top:-10px;">
+        <span class="eg-filter-label">Availability:</span>
+        <button class="eg-chip-avail active" data-avail="all">All</button>
+        <button class="eg-chip-avail" data-avail="year-round">🌿 Year-round</button>
+        <button class="eg-chip-avail" data-avail="scheduled">🗓 Scheduled</button>
+        <button class="eg-chip-avail" data-avail="seasonal">🌸 Seasonal</button>
+      </div>
+      <div class="eg-filter-bar" style="margin-top:-10px;">
+        <span class="eg-filter-label">Effort:</span>
+        <button class="eg-chip-effort active" data-effort="all">All</button>
+        <button class="eg-chip-effort" data-effort="low">🟢 Low</button>
+        <button class="eg-chip-effort" data-effort="medium">🟡 Medium</button>
+        <button class="eg-chip-effort" data-effort="high">🔴 High</button>
+      </div>
+    </div>
+
+    <div class="eg-grid" id="eg-grid"></div>
+    <button class="show-more-btn" id="eg-show-more-btn" style="display:none">Show all evergreen activities</button>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ── TASTE PROFILE ── -->
+<section id="taste">
+  <div class="container">
+    <div class="section-label">Scoring System</div>
+    <h2 class="section-title">How Events Get Scored</h2>
+    <p class="section-body">Each event scored 0-100 against a personal taste profile across 5 axes: genre match, venue quality, format rarity, lineup strength, and value. Expand any event to see its spider chart breakdown.</p>
+    <div style="margin-top:20px">
+      <a href="about.html" class="btn-sm btn-buy" style="display:inline-flex">Read the full taste profile & build log →</a>
+    </div>
+  </div>
+</section>
+
+</section><!-- /view-browse (part 2) -->
+
+<hr class="section-divider" />
+
+<!-- ── SEARCH OVERLAY ── -->
+<div class="search-overlay" id="search-overlay" aria-hidden="true">
+  <div class="search-modal" role="dialog" aria-label="Search">
+    <div class="search-modal-bar">
+      <span class="search-modal-icon">🔍</span>
+      <input type="text" id="search-modal-input"
+             class="search-modal-input"
+             placeholder="Search events, venues, artists, activities…"
+             autocomplete="off" spellcheck="false" />
+      <kbd class="search-esc-key">ESC</kbd>
+    </div>
+    <div class="search-modal-results" id="search-modal-results">
+      <div class="search-empty-hint">Start typing to search all events and activities</div>
+    </div>
+    <div class="search-kb-hint">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>ESC</kbd> close</span>
+      <span><kbd>⌘K</kbd> open</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── BOTTOM SHEET (Mobile event detail) ── -->
+<div class="bs-overlay" id="bs-overlay" aria-hidden="true">
+  <div class="bs-sheet" id="bs-sheet" role="dialog" aria-label="Event details">
+    <div class="bs-handle"><span class="bs-handle-bar"></span></div>
+    <button class="bs-close-btn" aria-label="Close" onclick="closeBottomSheet()">✕</button>
+    <div class="bs-content" id="bs-content"></div>
+  </div>
+</div>
+
+<!-- ── MAP FAB (mobile) ── -->
+
+<!-- ── BACK TO TOP ── -->
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+
+<!-- ── INVITE BUILDER — combine events, evergreen proposals, and bare time
+     slots into one friend-facing link. The draft panel is the actual
+     "where is my invite" answer: a live, editable list of everything
+     added, stacked above the action bar inside one fixed wrapper so the
+     two never overlap regardless of how tall either one gets. ── -->
+<div class="invite-bar-wrap" id="invite-bar-wrap">
+  <div class="invite-draft-panel" id="invite-draft-panel">
+    <div class="invite-draft-list" id="invite-draft-list"></div>
+  </div>
+  <div class="share-action-bar" id="share-action-bar">
+    <span class="share-count"><span id="share-selected-count">0</span> selected</span>
+    <button class="share-bar-link" onclick="selectAllShare()">Select all events</button>
+    <button class="share-bar-link" onclick="clearShareSelection()">Clear</button>
+    <button class="share-bar-link" onclick="toggleAddSlotForm()">+ Add a time</button>
+    <div class="add-slot-form" id="add-slot-form" style="display:none">
+      <input type="date" id="add-slot-date" class="eg-propose-date" aria-label="Date">
+      <select id="add-slot-tod" class="eg-propose-tod" aria-label="Time of day">
+        <option value="x">Any time</option>
+        <option value="m">Morning</option>
+        <option value="a">Afternoon</option>
+        <option value="e">Evening</option>
+      </select>
+      <input type="text" id="add-slot-label" placeholder="What? (optional)" maxlength="60">
+      <button class="btn-sm btn-buy" onclick="addBareSlot()">Add</button>
+    </div>
+    <button class="btn-sm btn-buy" id="share-copy-btn" onclick="copyShareLink()" disabled>Copy invite link</button>
+    <button class="btn-sm btn-details" onclick="toggleShareMode()">Done</button>
+  </div>
+</div>
+<textarea id="share-copy-fallback" aria-hidden="true"></textarea>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <span id="footer-last-scan">Updated Apr 22, 2026</span>
+  </div>
+</footer>
+
+<!-- CDN Scripts — order matters -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- App -->
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

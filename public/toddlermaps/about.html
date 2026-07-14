@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/toddlermaps/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>About — ToddlerMaps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="assets/favicon/icon-512.png">
+<link rel="apple-touch-icon" href="assets/favicon/apple-icon-180.png">
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="index.html"><img src="assets/logo.png" alt="ToddlerMaps"></a>
+  <a href="index.html">Maps</a>
+  <a href="studio.html">Sticker Studio ✂️</a>
+  <a class="active" href="about.html">About</a>
+</nav>
+
+<section class="section about-body">
+  <h1 style="font-family:var(--font-display); font-size:clamp(40px,6vw,72px); margin:36px 0 24px;">About</h1>
+
+  <p>StickerBox — the $99 kids' AI sticker printer — is a mono thermal printer,
+  the same hardware as the ~$100 Brother label printer already on our kitchen
+  counter. The clone took an afternoon. The rest is what the product doesn't do:
+  maps of Dean's actual streets, trip strips with real road signs and drive
+  times, car kits, a calendar that prints its own stickers.</p>
+
+  <p>Zero screens. He shows the maps to his friends at school. And "are we there
+  yet?" is now a piece of paper in his hands.</p>
+
+  <h2>The stack</h2>
+  <p>Brother QL-810W + open-source <i>brother_ql</i> · OpenStreetMap + OSRM for
+  roads and drive times · Gemini image gen for the coloring-book art · ~600
+  lines of Python. The road signs are the real public-domain MUTCD files.</p>
+
+  <p style="margin-top:34px;"><b>Want one for your kid?</b> Ask me —
+  <a href="https://dimadimadima.com" style="color:var(--red);">dimadimadima.com</a>.</p>
+
+  <p style="margin-top:26px;"><a class="btn" href="index.html">← Back to the maps</a></p>
+</section>
+
+<footer>
+  <p>Made with a Brother QL-810W, a laser printer, and a dad who can't stop tinkering.</p>
+  <p class="footer-small">Maps © OpenStreetMap contributors · routes by OSRM</p>
+</footer>
+
+</body>
+</html>

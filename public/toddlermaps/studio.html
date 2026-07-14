@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/toddlermaps/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sticker Studio — ToddlerMaps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="assets/favicon/icon-512.png">
+<link rel="apple-touch-icon" href="assets/favicon/apple-icon-180.png">
+<style>
+  .studio-hero { text-align: center; padding: 56px 24px 8px; }
+  .studio-hero h1 { font-family: var(--font-display); font-size: clamp(44px, 7vw, 84px); }
+  .studio-hero .hero-kicker { transform: rotate(-1.5deg); }
+  .modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+  .mode { padding: 26px 24px; position: relative; }
+  .mode:nth-child(1) { transform: rotate(-.8deg); }
+  .mode:nth-child(2) { transform: rotate(.7deg); }
+  .mode:nth-child(3) { transform: rotate(-.5deg); }
+  .mode h3 { font-family: var(--font-display); font-size: 26px; margin-bottom: 8px; }
+  .mode .mode-tag {
+    position: absolute; top: -16px; right: 16px;
+    font-family: var(--font-display); font-size: 14px; font-weight: 600;
+    background: var(--red); color: #fff; border: var(--border);
+    padding: 4px 12px; border-radius: 8px;
+  }
+  .mode .mode-tag.soon { background: var(--crayon-yellow); color: var(--ink); }
+  .mode p { color: var(--ink-soft); font-size: 18px; }
+  .mode .flow { font-family: var(--font-display); font-size: 15px; font-weight: 600; margin-top: 14px; }
+  .mode img { width: 100%; aspect-ratio: 1; object-fit: contain; margin-top: 12px; }
+  .try { max-width: 720px; margin: 0 auto; text-align: center; }
+  .try-box { display: flex; gap: 12px; margin: 22px 0; }
+  .try-box input {
+    flex: 1; font-family: var(--font-hand); font-size: 20px;
+    padding: 14px 18px; border: var(--border); border-radius: 12px;
+    background: #fff; box-shadow: var(--shadow);
+  }
+  .try-box input:focus { outline: 3px dashed var(--red); outline-offset: 3px; }
+  #result { margin: 10px auto 0; max-width: 480px; min-height: 60px; }
+  #result img { width: 100%; border: var(--border); border-radius: 18px; box-shadow: var(--shadow); background: #fff; }
+  #status { font-size: 19px; color: var(--ink-soft); min-height: 28px; }
+  .backlink { display: inline-block; margin: 26px 0 0; font-size: 18px; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="index.html"><img src="assets/logo.png" alt="ToddlerMaps"></a>
+  <a href="index.html">Maps</a>
+  <a class="active" href="studio.html">Sticker Studio ✂️</a>
+  <a href="about.html">About</a>
+</nav>
+
+
+<header class="studio-hero">
+  <p class="hero-kicker">describe it → the printer draws it → you color it ★</p>
+  <h1>Sticker Studio</h1>
+  <p class="section-sub" style="margin: 10px auto 0; max-width: 54ch;">The kitchen label printer, but magic.
+     Say what you want, get a coloring sticker. Three flavors — tell Daddy which one to build first.</p>
+</header>
+
+<section class="section">
+  <div class="modes">
+    <article class="mode sticker">
+      <span class="mode-tag">LIVE BELOW</span>
+      <h3>1 · Classic StickerBox</h3>
+      <p>Describe anything — "a garbage truck eating spaghetti" — and get a colorable sticker.</p>
+      <img src="assets/icons/fernbank.png" alt="example coloring sticker">
+      <div class="flow">say it → sticker prints → color it in</div>
+    </article>
+    <article class="mode sticker">
+      <span class="mode-tag soon">CHOOSE ME?</span>
+      <h3>2 · Story Mode</h3>
+      <p>Your kid &amp; their real friends as the heroes: "We ride a dinosaur to the beach!"
+         Uses the friend photo library so everyone looks like themselves.</p>
+      <img src="assets/icons/ex_story_dino.png" alt="two kids riding a dinosaur" onerror="this.remove()">
+      <div class="flow">pick friends → say the story → comic-sticker prints</div>
+    </article>
+    <article class="mode sticker">
+      <span class="mode-tag soon">CHOOSE ME?</span>
+      <h3>3 · Mimic Mode</h3>
+      <p>Photograph one of your kid's own drawings — it comes back as a cleaned-up sticker
+         version of THEIR art, ready to color or gift.</p>
+      <img src="assets/icons/ex_story_robot.png" alt="kids picnic with a robot" onerror="this.remove()">
+      <div class="flow">snap the drawing → magic redraw → sticker of his art</div>
+    </article>
+  </div>
+</section>
+
+<section class="section try">
+  <h2>Try it right now</h2>
+  <p class="section-sub" style="margin-bottom:0">Live — generates a real sticker (nothing prints, screen only).</p>
+  <div class="try-box">
+    <input id="prompt" maxlength="300" placeholder="a dinosaur driving a fire truck…"
+           onkeydown="if(event.key==='Enter')go()">
+    <button class="btn btn-red" onclick="go()">Make it! ✨</button>
+  </div>
+  <div id="status"></div>
+  <div id="result"></div>
+  <a class="backlink" href="index.html">← back to ToddlerMaps</a>
+</section>
+
+<footer>
+  <p>Sticker Studio · part of ToddlerMaps</p>
+</footer>
+
+<script>
+async function go() {
+  const prompt = document.getElementById("prompt").value.trim();
+  const status = document.getElementById("status");
+  const result = document.getElementById("result");
+  if (!prompt) return;
+  status.textContent = "Drawing… (takes ~15 seconds)";
+  result.innerHTML = "";
+  try {
+    const r = await fetch("/api/sticker", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || r.status);
+    const img = new Image();
+    img.src = data.image;
+    img.alt = prompt;
+    result.appendChild(img);
+    status.textContent = "Save it, or tell Daddy to print it!";
+  } catch (e) {
+    status.textContent = "Hmm, the crayon broke: " + e.message;
+  }
+}
+</script>
+</body>
+</html>

@@ -13,7 +13,10 @@
   "rewrites": [
     { "source": "/dewey", "destination": "https://deweybooks.vercel.app/" },
     { "source": "/dewey/:path*", "destination": "https://deweybooks.vercel.app/:path*" },
-    { "source": "/api/:path*", "destination": "https://deweybooks.vercel.app/api/:path*" },
+    { "source": "/api/availability", "destination": "https://deweybooks.vercel.app/api/availability" },
+    { "source": "/api/recommend", "destination": "https://deweybooks.vercel.app/api/recommend" },
+    { "source": "/api/branches", "destination": "https://deweybooks.vercel.app/api/branches" },
+    { "source": "/api/pricing", "destination": "https://deweybooks.vercel.app/api/pricing" },
     { "source": "/_next/:path*", "destination": "https://deweybooks.vercel.app/_next/:path*" }
   ]
 }

@@ -5,7 +5,7 @@ description: Agentic idea generation at scale. 35 Claude agents ran in parallel 
 tags: [ai, claude, automation, multi-agent, business]
 status: live
 featured: true
-order: 0
+order: 4
 url: https://ai-ideas-explorer.vercel.app
 image: /images/ai-ideas-galaxy.png
 ---

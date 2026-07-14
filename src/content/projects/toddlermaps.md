@@ -5,8 +5,8 @@ description: Coloring maps of my 4-year-old's real world, AI stickers off the ki
 shortDescription: Real maps of a toddler's world + AI stickers, printed on a $100 label printer.
 tags: [ai, kids, maps, printing, gemini, openstreetmap, python]
 status: active
-featured: false
-order: 35
+featured: true
+order: 3
 url: https://dimadimadima.com/toddlermaps
 image: /images/toddlermaps/toddlermaps-trip-strip.png
 images:

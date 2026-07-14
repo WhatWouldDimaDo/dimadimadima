@@ -18,22 +18,22 @@ const ROLES: Role[] = [
     company: 'Lahzo',
     logo: '/images/logos/lahzo.svg',
     title: 'VP, Strategy & Analytics',
-    period: 'Mar 2026 — Present',
+    period: 'Mar 2026 — Jun 2026',
     location: 'Atlanta, GA',
     color: '#5a9a6e',
     industries: ['AI / SaaS', 'Startup'],
     functions: ['Strategy', 'Analytics', 'AI Systems', 'Revenue Operations'],
-    summary: 'Building the data and analytics function from scratch at a pre-Series A AI company.',
+    summary: 'Owned client analytics, AI conversation intelligence, and the AI-ification of Lahzo itself — reporting to the CEO at a high-growth AI sales & marketing startup.',
     highlights: [
-      'Architecting internal AI systems and proprietary pipelines powering the revenue flywheel',
-      'Automating performance marketing attribution to eliminate manual bottlenecks',
-      'Strategic partner to CEO on enterprise deals, pricing, and product direction',
+      'Overhauled measurement and data strategy into a full-funnel view of client value, adopted company-wide to manage performance and quantify value to clients',
+      'Transformed the conversation-intelligence function into a self-improving process powered by LLM judges with human-in-the-loop review — redeployed ~$200K/year of capacity toward product and client support',
+      'Built the company\'s AI context layer ("Lahzo Brain") linking meeting notes, Slack, Drive, and Linear so no question had to be asked twice',
     ],
   },
   {
     company: 'Equifax',
     logo: '/images/logos/equifax.svg',
-    title: 'VP, Global AI & Data Strategy',
+    title: 'Senior Director, Global AI & Data Strategy',
     period: '2025 — 2026',
     location: 'Atlanta, GA',
     color: '#d4a853',
@@ -41,25 +41,25 @@ const ROLES: Role[] = [
     functions: ['AI Strategy', 'Data Governance', 'International', 'Executive Comms'],
     summary: 'Led global AI and analytics strategy across international markets.',
     highlights: [
-      'Developed AI maturity framework adopted across four regions',
-      'Built Insights Guild — internal knowledge network recognized as crown jewel initiative',
-      'Restructured multi-million dollar data partnerships for AI-first strategy',
+      'Developed the AI Maturity Assessment cited by the CFO as a corporate priority',
+      'Orchestrated a partnership deal that unlocked a $2M+ revenue stream',
+      'Designed and delivered hands-on AI training — workflows adopted by hundreds across the organization',
     ],
   },
   {
     company: 'Intuit Mailchimp',
     logo: '/images/logos/mailchimp.svg',
     title: 'Director, Customer & International Analytics',
-    period: '2021 — 2023',
+    period: '2020 — 2024',
     location: 'Atlanta, GA',
     color: '#7c6fcd',
     industries: ['SaaS', 'Marketing Technology'],
     functions: ['Analytics', 'Revenue Operations', 'Team Leadership', 'International'],
-    summary: 'Scaled analytics org from 4 to 20 and led cross-functional revenue programs.',
+    summary: 'Drove $120M+ in revenue impact through pricing, go-to-market, and retention strategies while leading a team that grew 6x.',
     highlights: [
-      'Led 22-person cross-functional team implementing largest price increase: $100M+ in incremental annual revenue',
+      'Led 22-person cross-functional team implementing the company\'s largest price increase: $100M+ in incremental annual revenue',
       'Stood up enterprise churn reduction program uncovering $90M+ in annual savings',
-      'Positioned company to 2x international revenue over three years',
+      'Positioned the company to 2x international revenue over three years',
     ],
   },
   {
@@ -126,15 +126,11 @@ const ROLES: Role[] = [
   },
 ];
 
-const ALL_INDUSTRIES = [...new Set(ROLES.flatMap(r => r.industries))].sort();
-const ALL_FUNCTIONS = [...new Set(ROLES.flatMap(r => r.functions))].sort();
-
 interface WorkTimelineProps {
   filterCompany?: string | null;
 }
 
 export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps) {
-  const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
   const [expandedIdx, setExpandedIdx] = useState<number | null>(() => {
     if (filterCompany) {
       const idx = ROLES.findIndex(r => r.company === filterCompany);
@@ -150,123 +146,8 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
     }
   }, [filterCompany]);
 
-  function toggleTag(tag: string) {
-    setActiveTags(prev => {
-      const next = new Set(prev);
-      next.has(tag) ? next.delete(tag) : next.add(tag);
-      return next;
-    });
-  }
-
-  const filteredRoles = activeTags.size === 0
-    ? ROLES
-    : ROLES.filter(r =>
-        [...activeTags].some(t => r.industries.includes(t) || r.functions.includes(t))
-      );
-
-  const hasActiveFilters = activeTags.size > 0;
-  const roleCount = filteredRoles.length;
-
   return (
     <div>
-      {/* Tag Cloud */}
-      <div style={{
-        marginBottom: '2.5rem', padding: '1.5rem',
-        border: '1px solid var(--border)', background: 'var(--surface)',
-      }}>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: '0.75rem',
-          marginBottom: '0.75rem', flexWrap: 'wrap',
-        }}>
-          <span style={{
-            fontSize: '0.8rem', textTransform: 'uppercase',
-            letterSpacing: '0.08em', color: 'var(--muted)',
-          }}>Industries</span>
-          {hasActiveFilters && (
-            <button
-              onClick={() => setActiveTags(new Set())}
-              style={{
-                fontSize: '0.8rem', fontFamily: 'DM Mono, monospace',
-                textTransform: 'uppercase', letterSpacing: '0.06em',
-                padding: '0.3em 0.75em', borderRadius: '2px',
-                border: '1px solid var(--border)', background: 'transparent',
-                color: 'var(--muted)', cursor: 'pointer', marginLeft: 'auto',
-              }}
-            >
-              Clear {activeTags.size} &times;
-            </button>
-          )}
-        </div>
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1rem' }}>
-          {ALL_INDUSTRIES.map(tag => {
-            const active = activeTags.has(tag);
-            return (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                style={{
-                  fontSize: '0.8rem', fontFamily: 'DM Mono, monospace',
-                  textTransform: 'uppercase', letterSpacing: '0.06em',
-                  padding: '0.3em 0.75em', borderRadius: '2px',
-                  border: `1px solid ${active ? '#d4a853' : 'rgba(212,168,83,0.3)'}`,
-                  background: active ? '#d4a853' : 'rgba(212,168,83,0.1)',
-                  color: active ? 'var(--bg)' : '#d4a853',
-                  cursor: 'pointer', transition: 'all 0.15s', whiteSpace: 'nowrap',
-                }}
-              >
-                {tag}
-              </button>
-            );
-          })}
-        </div>
-
-        <span style={{
-          fontSize: '0.8rem', textTransform: 'uppercase',
-          letterSpacing: '0.08em', color: 'var(--muted)',
-          display: 'block', marginBottom: '0.5rem',
-        }}>Functions</span>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
-          {ALL_FUNCTIONS.map(tag => {
-            const active = activeTags.has(tag);
-            return (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                style={{
-                  fontSize: '0.8rem', fontFamily: 'DM Mono, monospace',
-                  textTransform: 'uppercase', letterSpacing: '0.06em',
-                  padding: '0.3em 0.75em', borderRadius: '2px',
-                  border: `1px solid ${active ? '#7c6fcd' : 'rgba(124,111,205,0.3)'}`,
-                  background: active ? '#7c6fcd' : 'rgba(124,111,205,0.1)',
-                  color: active ? 'var(--bg)' : '#7c6fcd',
-                  cursor: 'pointer', transition: 'all 0.15s', whiteSpace: 'nowrap',
-                }}
-              >
-                {tag}
-              </button>
-            );
-          })}
-        </div>
-
-        {hasActiveFilters && (
-          <div style={{
-            marginTop: '0.75rem', fontSize: '0.9rem',
-            color: '#d4a853', fontFamily: 'DM Mono, monospace',
-            display: 'flex', alignItems: 'center', gap: '0.5rem',
-          }}>
-            <span
-              style={{
-                display: 'inline-block',
-                animation: 'pulse 2s ease-in-out infinite',
-              }}
-            >
-              {roleCount} of {ROLES.length} roles
-            </span>
-          </div>
-        )}
-      </div>
-
       {/* Timeline */}
       <div style={{ position: 'relative', paddingLeft: '2rem' }}>
         <div style={{
@@ -274,7 +155,7 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
           width: '1px', background: 'var(--border)',
         }} />
 
-        {filteredRoles.map((role, i) => {
+        {ROLES.map((role, i) => {
           const globalIdx = ROLES.indexOf(role);
           const isExpanded = expandedIdx === globalIdx;
           const isHighlighted = filterCompany === role.company;
@@ -360,33 +241,10 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                       padding: '0 1.5rem 1.5rem', marginLeft: '80px',
                       paddingLeft: '1.25rem', borderTop: '1px solid var(--border)',
                     }}>
-                      <div style={{
-                        display: 'flex', flexWrap: 'wrap', gap: '0.3rem',
-                        margin: '1rem 0 0.875rem',
-                      }}>
-                        {role.industries.map(t => (
-                          <span key={t} style={{
-                            fontSize: '0.55rem', fontFamily: 'DM Mono, monospace',
-                            textTransform: 'uppercase', letterSpacing: '0.06em',
-                            padding: '0.15em 0.5em', borderRadius: '2px',
-                            border: '1px solid rgba(212,168,83,0.3)',
-                            color: '#d4a853', background: 'rgba(212,168,83,0.06)',
-                          }}>{t}</span>
-                        ))}
-                        {role.functions.map(t => (
-                          <span key={t} style={{
-                            fontSize: '0.55rem', fontFamily: 'DM Mono, monospace',
-                            textTransform: 'uppercase', letterSpacing: '0.06em',
-                            padding: '0.15em 0.5em', borderRadius: '2px',
-                            border: '1px solid rgba(124,111,205,0.3)',
-                            color: '#7c6fcd', background: 'rgba(124,111,205,0.06)',
-                          }}>{t}</span>
-                        ))}
-                      </div>
-
                       <ul style={{
                         margin: 0, padding: 0, listStyle: 'none',
                         display: 'flex', flexDirection: 'column', gap: '0.4rem',
+                        paddingTop: '1rem',
                       }}>
                         {role.highlights.map((h, j) => (
                           <li key={j} style={{

@@ -33,7 +33,7 @@ Verified structure of the reference: single About page with hero intro (personal
 17. **Contact page** modeled on his, plus a **"Similar to what I'm looking for"** section (Dima adapts the concept — roles/companies he's targeting).
 18. **About Me**: more personal opening; include the **family photo**.
 19. **Work experience + education**: clean rows (role/company/dates) that are **collapsed by default — click the down arrow to expand a drawer with the bullets**.
-20. **"Companies I've helped grow"** logo wall with LARGE logos: Intuit, Mailchimp, Lahzo, Equifax, Walmart, Target, **[VERIFY: "UTM" — Optum?]**, New York Life, CDC, American Cancer Society, Apollo, Pfizer, Shiseido, Laura Mercier, Oldcastle Materials. Need logo SVG/PNG sourcing for the new ones.
+20. **"Companies I've helped grow"** logo wall with LARGE logos: Intuit, Mailchimp, Lahzo, Equifax, Walmart, Target, Blue Cross Blue Shield NC, Verizon, AT&T, New York Life, CDC, American Cancer Society, Apollo, Pfizer, Shiseido, Laura Mercier, Oldcastle Materials. (Confirmed by Dima 7/14 PM — "UTM" was noise, not Optum.) Need logo SVG/PNG sourcing for the new ones.
 21. Mention **Atlanta-based** prominently.
 
 ## Done from this list

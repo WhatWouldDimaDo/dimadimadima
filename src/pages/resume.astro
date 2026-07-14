@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ResumeExperience from '../components/ResumeExperience';
 ---
-<Layout title="Resume">
+<Layout title="Professional Experience">
 
   <!-- Header -->
   <section style="padding-top:4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);">
@@ -86,14 +86,42 @@ import ResumeExperience from '../components/ResumeExperience';
     </div>
   </section>
 
-  <!-- Skills -->
+  <!-- Skills & Tools -->
   <section style="margin-bottom:3rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Core Competencies</h2>
-    <p style="font-size:.875rem;color:var(--muted);line-height:1.75;max-width:44rem;margin:0;">
-      AI strategy &amp; enablement · Analytics leadership · LLM agent workflows ·
-      Go-to-market &amp; pricing strategy · Executive communication · Hands-on builder
-      (Python, SQL, TypeScript)
-    </p>
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Skills</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:.75rem;margin-bottom:2rem;">
+      {[
+        { icon: '🧭', label: 'AI Strategy & Enablement' },
+        { icon: '📊', label: 'Analytics Leadership' },
+        { icon: '🤖', label: 'LLM Agent Workflows' },
+        { icon: '📈', label: 'Go-to-Market & Pricing' },
+        { icon: '🎤', label: 'Executive Communication' },
+        { icon: '⚙️', label: 'Systems Building — Python · SQL · TypeScript' },
+      ].map(s => (
+        <div style="display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);padding:.75rem 1rem;">
+          <span style="font-size:1.15rem;flex-shrink:0;">{s.icon}</span>
+          <span style="font-size:.8rem;color:var(--ink);line-height:1.4;">{s.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1rem;">Tools I Work With</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:.75rem;">
+      {[
+        { logo: '/images/logos/tools/openai.svg',       label: 'GPT' },
+        { logo: '/images/logos/tools/claude.svg',       label: 'Claude' },
+        { logo: '/images/logos/tools/googlegemini.svg', label: 'Gemini' },
+        { logo: '/images/logos/tools/github.svg',       label: 'GitHub' },
+        { logo: '/images/logos/tools/vercel.svg',       label: 'Vercel' },
+        { logo: '/images/logos/tools/replit.svg',       label: 'Replit' },
+      ].map(t => (
+        <div style="display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);padding:.75rem 1rem;">
+          <img src={t.logo} alt={t.label}
+            style="height:22px;width:22px;object-fit:contain;filter:var(--logo-filter);opacity:.85;flex-shrink:0;" />
+          <span style="font-size:.8rem;color:var(--ink);">{t.label}</span>
+        </div>
+      ))}
+    </div>
   </section>
 
   <!-- Outside work -->

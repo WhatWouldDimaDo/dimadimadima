@@ -22,7 +22,7 @@ export default function ClientLogoWall({ onFilter, activeFilter }: ClientLogoWal
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))',
         gap: '0.75rem',
       }}
     >
@@ -63,8 +63,9 @@ export default function ClientLogoWall({ onFilter, activeFilter }: ClientLogoWal
               src={logo}
               alt={company}
               style={{
-                height: '30px',
+                height: '48px',
                 width: 'auto',
+                maxWidth: '100%',
                 objectFit: 'contain',
               }}
             />

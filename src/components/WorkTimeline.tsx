@@ -18,16 +18,16 @@ const ROLES: Role[] = [
     company: 'Lahzo',
     logo: '/images/logos/lahzo.svg',
     title: 'VP, Strategy & Analytics',
-    period: 'Mar 2026 — Jun 2026',
+    period: '2026',
     location: 'Atlanta, GA',
     color: '#5a9a6e',
     industries: ['AI / SaaS', 'Startup'],
     functions: ['Strategy', 'Analytics', 'AI Systems', 'Revenue Operations'],
-    summary: 'Owned client analytics, AI conversation intelligence, and the AI-ification of Lahzo itself — reporting to the CEO at a high-growth AI sales & marketing startup.',
+    summary: 'Owned client analytics, AI conversation intelligence, and the AI-ification of the company — reporting to the CEO at a high-growth AI startup.',
     highlights: [
-      'Overhauled measurement and data strategy into a full-funnel view of client value, adopted company-wide to manage performance and quantify value to clients',
-      'Transformed the conversation-intelligence function into a self-improving process powered by LLM judges with human-in-the-loop review — redeployed ~$200K/year of capacity toward product and client support',
-      'Built the company\'s AI context layer ("Lahzo Brain") linking meeting notes, Slack, Drive, and Linear so no question had to be asked twice',
+      'Overhauled measurement and data strategy — a full-funnel view of client value, adopted company-wide',
+      'Transformed a manual conversation-review function into a self-improving LLM-judge process, redeploying ~$200K/year of capacity',
+      'Built the company\'s AI context layer so no question had to be asked twice',
     ],
   },
   {
@@ -39,11 +39,11 @@ const ROLES: Role[] = [
     color: '#d4a853',
     industries: ['Financial Services', 'Enterprise Tech'],
     functions: ['AI Strategy', 'Data Governance', 'International', 'Executive Comms'],
-    summary: 'Led global AI and analytics strategy across international markets.',
+    summary: 'Led global AI and data strategy — turning enterprise AI ambition into assessments, partnerships, and trained teams.',
     highlights: [
       'Developed the AI Maturity Assessment cited by the CFO as a corporate priority',
       'Orchestrated a partnership deal that unlocked a $2M+ revenue stream',
-      'Designed and delivered hands-on AI training — workflows adopted by hundreds across the organization',
+      'Designed hands-on AI training — workflows adopted by hundreds across the organization',
     ],
   },
   {
@@ -185,7 +185,7 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                 <div
                   style={{
                     width: '100%', display: 'grid',
-                    gridTemplateColumns: '80px 1fr auto',
+                    gridTemplateColumns: '110px 1fr auto',
                     alignItems: 'center', gap: '1.25rem',
                     padding: '1.25rem 1.5rem',
                   }}
@@ -194,7 +194,7 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                     <img
                       src={role.logo} alt={role.company}
                       style={{
-                        maxWidth: '80px', maxHeight: '32px',
+                        maxWidth: '110px', maxHeight: '44px',
                         width: 'auto', height: 'auto', objectFit: 'contain',
                         filter: 'var(--logo-filter)', opacity: 0.85,
                       }}
@@ -238,7 +238,7 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                 }}>
                   {isExpanded && (
                     <div style={{
-                      padding: '0 1.5rem 1.5rem', marginLeft: '80px',
+                      padding: '0 1.5rem 1.5rem', marginLeft: '110px',
                       paddingLeft: '1.25rem', borderTop: '1px solid var(--border)',
                     }}>
                       <ul style={{

@@ -8,4 +8,5 @@ image: /images/job-tinder-card.png
 images: [/images/job-tinder-results.png]
 featured: false
 order: 8
+listed: false
 ---

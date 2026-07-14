@@ -134,7 +134,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
     <!-- ── Music ──────────────────────────────────── -->
     <a
-      href={song?.data.youtube ?? '/feed'}
+      href={song?.data.youtube ?? '/projects'}
       target={song?.data.youtube ? '_blank' : undefined}
       rel="noopener noreferrer"
       class="bc bc-music"
@@ -165,14 +165,11 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
     <!-- ── CTA ───────────────────────────────────── -->
     <div class="bc bc-cta">
-      <a href="/projects" class="bc-cta-row">
-        <span>All projects</span><span class="bc-arrow">→</span>
-      </a>
-      <a href="/feed" class="bc-cta-row">
-        <span>The feed</span><span class="bc-arrow">→</span>
-      </a>
       <a href="/resume" class="bc-cta-row">
-        <span>Resume</span><span class="bc-arrow">→</span>
+        <span>Professional experience</span><span class="bc-arrow">→</span>
+      </a>
+      <a href="/projects" class="bc-cta-row">
+        <span>AI side quests</span><span class="bc-arrow">→</span>
       </a>
       <a href="/about" class="bc-cta-row">
         <span>About</span><span class="bc-arrow">→</span>

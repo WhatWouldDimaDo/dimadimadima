@@ -70,7 +70,8 @@ export default function AnimatedStats() {
           gap: '0.35rem',
         }}>
           <div style={{
-            fontFamily: '"DM Serif Display", serif',
+            fontFamily: '"DM Sans", sans-serif',
+            fontWeight: 600,
             fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
             color: 'var(--gold)',
             lineHeight: 1,

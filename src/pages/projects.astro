@@ -11,6 +11,7 @@ const projects = all.map(p => ({
   slug:        p.slug,
   title:       p.data.title,
   description: p.data.description,
+  shortDescription: p.data.shortDescription,
   tags:        p.data.tags,
   url:         p.data.url ?? undefined,
   image:       p.data.image ?? undefined,
@@ -18,18 +19,20 @@ const projects = all.map(p => ({
   date:        p.data.date ? p.data.date.toISOString() : undefined,
 }));
 ---
-<Layout title="AI Side Quests">
-  <section style="padding-top:4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);">
-    <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(2rem,7vw,4rem);line-height:1;letter-spacing:-.02em;color:var(--ink);margin:0 0 .75rem;">
-      AI Side Quests
-    </h1>
-    <p style="font-size:.8rem;color:var(--muted);max-width:36rem;line-height:1.65;margin:0;">
-      Side projects, AI experiments, personal tools, and creative builds.
-      Things that probably shouldn't exist but do.
-    </p>
+<Layout title="AI Side Quests" description="Working products, personal systems, and experiments Dima Perkis built to solve real problems and learn by making.">
+  <section class="projects-hero reveal">
+    <p class="page-eyebrow">AI side quests</p>
+    <h1 class="page-title">Built because<br />it should exist.</h1>
+    <p>Working products, personal systems, data rabbit holes, and creative experiments. Each one started with a real problem or a question I couldn’t leave alone.</p>
   </section>
 
-  <section style="margin-top:2.5rem;">
+  <section class="projects-list reveal">
     <ProjectsGrid projects={projects} client:load />
   </section>
 </Layout>
+
+<style>
+  .projects-hero{padding:clamp(4rem,8vw,7rem) 0 3.5rem;border-bottom:1px solid var(--border)}
+  .projects-hero>p:last-child{max-width:44rem;margin:1.5rem 0 0;color:var(--muted);font-size:clamp(1rem,2vw,1.15rem);line-height:1.75}
+  .projects-list{margin-top:2.5rem}
+</style>

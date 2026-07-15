@@ -5,23 +5,28 @@ interface Props {
   description?: string;
   defaultTheme?: string;
   heroNav?: boolean;
+  noindex?: boolean;
 }
 const {
   title = 'dimadimadima',
   description = 'Dima Perkis — VP Strategy & Analytics. Builder of odd things.',
   defaultTheme,
   heroNav = false,
+  noindex = false,
 } = Astro.props;
+const pageTitle = title === 'dimadimadima' ? 'dimadimadima' : (title === 'Dima Perkis' ? 'Dima Perkis — dimadimadima' : `${title} — Dima Perkis`);
+const ogTitle = title === 'Dima Perkis' ? 'Dima Perkis' : (title === 'dimadimadima' ? 'dimadimadima — Dima Perkis' : `${title} — Dima Perkis`);
 ---
 <!DOCTYPE html>
-<html lang="en" data-theme={defaultTheme || 'dark'} data-dt={defaultTheme || ''} data-heronav={heroNav ? 'true' : 'false'}>
+<html lang="en" data-theme={defaultTheme || 'light'} data-dt={defaultTheme || ''} data-heronav={heroNav ? 'true' : 'false'}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
-  <title>{title === 'dimadimadima' ? 'dimadimadima' : (title === 'Dima Perkis' ? 'Dima Perkis — dimadimadima' : `${title} — Dima Perkis`)}</title>
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  <title>{pageTitle}</title>
   <!-- Open Graph -->
-  <meta property="og:title" content={title === 'dimadimadima' ? 'dimadimadima — Dima Perkis' : `${title} — Dima Perkis`} />
+  <meta property="og:title" content={ogTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={`https://dimadimadima.com${Astro.url.pathname}`} />
@@ -37,12 +42,12 @@ const {
   <link rel="apple-touch-icon" href="/images/brand/dima-dima-dima/png/dima-mark-concept-01-touch-180.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <!-- Prevent theme flash -->
   <script is:inline>
     (function() {
       var el = document.documentElement;
-      var dt = el.getAttribute('data-dt') || 'dark';
+      var dt = el.getAttribute('data-dt') || 'light';
       var saved = localStorage.getItem('theme') || dt;
       el.setAttribute('data-theme', saved);
     })();
@@ -70,26 +75,34 @@ const {
   <div class="noise" aria-hidden="true"></div>
 
   <nav id="site-nav" style={'position:sticky;top:0;z-index:50;background-color:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);' + (heroNav ? 'transform:translateY(-100%);opacity:0;transition:transform .3s,opacity .3s;' : '')}>
-    <div style="max-width:64rem;margin:0 auto;padding:0 1.5rem;height:3rem;display:flex;align-items:center;justify-content:space-between;">
+    <div class="nav-row" style="max-width:64rem;margin:0 auto;padding:0 1.5rem;height:3rem;display:flex;align-items:center;justify-content:space-between;position:relative;gap:1rem;">
       <a href="/" class="site-brand" aria-label="dimadimadima home">
         <img src="/images/brand/dima-dima-dima/png/dima-mark-concept-01-192.png" alt="" aria-hidden="true"
           style="height:30px;width:auto;display:block;" />
-        <img src="/images/brand/dima-dima-dima/dima-wordmark-concept-09-transparent.png" alt="dima dima dima"
-          style="height:16px;width:auto;display:block;" />
+        <img class="site-wordmark" src="/images/brand/dima-dima-dima/dima-wordmark-concept-09-transparent.png" alt="dima dima dima"
+          style="height:21px;width:auto;display:block;" />
       </a>
-      <div class="site-nav-links" style="display:flex;align-items:center;gap:1.5rem;">
+
+      <div class="site-nav-primary" style="display:flex;align-items:center;gap:1.5rem;margin-left:auto;">
         <a class="site-nav-link" href="/resume" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/resume' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/resume' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}><span class="nav-label-long">Professional Experience</span><span class="nav-label-short">Work</span></a>
         <span aria-hidden="true" style="width:1px;height:12px;background:var(--border-hi);display:inline-block;"></span>
         <a class="site-nav-link" href="/projects" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname.startsWith('/projects') ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname.startsWith('/projects') ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}><span class="nav-label-long">AI Side Quests</span><span class="nav-label-short">Projects</span></a>
-        <span aria-hidden="true" style="width:1px;height:12px;background:var(--border-hi);display:inline-block;"></span>
+      </div>
+
+      <div id="nav-menu" class="site-nav-links" style="align-items:center;gap:1.5rem;">
+        <span class="nav-menu-sep" aria-hidden="true" style="width:1px;height:12px;background:var(--border-hi);display:inline-block;"></span>
         <a class="site-nav-link" href="/about" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/about' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/about' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>About Me</a>
-        <span aria-hidden="true" style="width:1px;height:12px;background:var(--border-hi);display:inline-block;"></span>
+        <span aria-hidden="true" style="width:1px;height:12px;background:var(--border-hi);display:inline-block;" class="nav-menu-sep"></span>
         <a class="site-nav-link" href="/contact" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/contact' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/contact' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>Contact</a>
         <a href="/resume" style="background:var(--gold);color:#1a1a1a;font-size:0.75rem;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;padding:.35em 1em;border-radius:3px;font-weight:600;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Resume</a>
-        <button id="theme-toggle" aria-label="Toggle theme" title="Cycle theme" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:0.75rem;padding:.25em .6em;cursor:pointer;border-radius:3px;transition:all .2s;font-family:'DM Mono',monospace;">
-          <span id="theme-icon">☀</span>
+        <button id="theme-toggle" aria-label="Switch to light theme" title="Cycle theme" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:0.75rem;padding:.25em .6em;cursor:pointer;border-radius:3px;transition:all .2s;font-family:'DM Mono',monospace;">
+          <span id="theme-icon" aria-hidden="true">☀</span>
         </button>
       </div>
+
+      <button id="nav-menu-toggle" class="nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu" style="background:none;border:1px solid var(--border);color:var(--ink);width:2.1rem;height:2.1rem;align-items:center;justify-content:center;cursor:pointer;border-radius:3px;flex-shrink:0;">
+        <span aria-hidden="true" style="font-size:1rem;line-height:1;">☰</span>
+      </button>
     </div>
   </nav>
 
@@ -186,10 +199,14 @@ const {
     const icon = document.getElementById('theme-icon') as HTMLSpanElement;
     const THEMES = ['dark', 'light', 'hacker'] as const;
     const ICONS  = { dark: '☀', light: '☾', hacker: '▊' };
+    const THEME_LABELS = { dark: 'dark', light: 'light', hacker: 'hacker' };
 
     function syncTheme() {
       const t = (document.documentElement.getAttribute('data-theme') || 'dark') as keyof typeof ICONS;
       icon.textContent = ICONS[t] || '☀';
+      const idx = THEMES.indexOf(t as typeof THEMES[number]);
+      const next = THEMES[(idx >= 0 ? idx + 1 : 0) % THEMES.length];
+      btn.setAttribute('aria-label', `Switch to ${THEME_LABELS[next]} theme (currently ${THEME_LABELS[t] || 'dark'})`);
     }
     syncTheme();
 
@@ -201,6 +218,25 @@ const {
       localStorage.setItem('theme', next);
       syncTheme();
     });
+
+    // ─── Mobile nav menu toggle ──────────────────────────────────────────
+    const navMenuToggle = document.getElementById('nav-menu-toggle') as HTMLButtonElement | null;
+    const navMenu = document.getElementById('nav-menu') as HTMLDivElement | null;
+    if (navMenuToggle && navMenu) {
+      navMenuToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('nav-menu-open');
+        navMenuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        navMenuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('nav-menu-open')) {
+          navMenu.classList.remove('nav-menu-open');
+          navMenuToggle.setAttribute('aria-expanded', 'false');
+          navMenuToggle.setAttribute('aria-label', 'Open menu');
+          navMenuToggle.focus();
+        }
+      });
+    }
 
     // ─── Konami code → grocery mode ─────────────────────────────────────
     const KONAMI = [38,38,40,40,37,39,37,39,66,65];

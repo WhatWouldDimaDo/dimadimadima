@@ -11,6 +11,7 @@ type Role = {
   functions: string[];
   summary: string;
   highlights: string[];
+  metrics: string[];
 };
 
 const ROLES: Role[] = [
@@ -18,7 +19,7 @@ const ROLES: Role[] = [
     company: 'Lahzo',
     logo: '/images/logos/clients/lahzo.png',
     title: 'VP, Strategy & Analytics',
-    period: '2026',
+    period: 'Mar — Jun 2026',
     location: 'Atlanta, GA',
     color: '#5a9a6e',
     industries: ['AI / SaaS', 'Startup'],
@@ -29,12 +30,13 @@ const ROLES: Role[] = [
       'Transformed a manual conversation-review function into a self-improving LLM-judge process, redeploying ~$200K/year of capacity',
       'Built the company\'s AI context layer so no question had to be asked twice',
     ],
+    metrics: ['$200K capacity', '$3.4M client impact'],
   },
   {
     company: 'Equifax',
     logo: '/images/logos/equifax.svg',
     title: 'Senior Director, Global AI & Data Strategy',
-    period: '2025 — 2026',
+    period: 'Apr 2025 — Mar 2026',
     location: 'Atlanta, GA',
     color: '#d4a853',
     industries: ['Financial Services', 'Enterprise Tech'],
@@ -45,12 +47,13 @@ const ROLES: Role[] = [
       'Orchestrated a partnership deal that unlocked a $2M+ revenue stream',
       'Designed hands-on AI training — workflows adopted by hundreds across the organization',
     ],
+    metrics: ['$2M+ revenue stream', 'Hundreds trained'],
   },
   {
     company: 'Intuit Mailchimp',
     logo: '/images/logos/mailchimp.svg',
     title: 'Director, Customer & International Analytics',
-    period: '2020 — 2024',
+    period: 'May 2020 — Sep 2024',
     location: 'Atlanta, GA',
     color: '#7c6fcd',
     industries: ['SaaS', 'Marketing Technology'],
@@ -61,12 +64,13 @@ const ROLES: Role[] = [
       'Stood up enterprise churn reduction program uncovering $90M+ in annual savings',
       'Positioned the company to 2x international revenue over three years',
     ],
+    metrics: ['$120M+ impact', 'Team grew 6×'],
   },
   {
     company: 'Accenture Strategy',
     logo: '/images/logos/accenture.svg',
-    title: 'Sr. Strategy Consultant → Manager',
-    period: '2014 — 2019',
+    title: 'Strategy Consultant → Manager',
+    period: 'Sep 2017 — May 2020',
     location: 'Atlanta, GA',
     color: '#6b8fad',
     industries: ['Management Consulting', 'Telecom', 'Healthcare', 'Retail'],
@@ -76,11 +80,12 @@ const ROLES: Role[] = [
       'Led AI chatbot program projected to reduce 250M customer service calls and deliver $200M in savings',
       'Conducted omni-channel customer behavior analysis delivering $7M in annual CX savings',
     ],
+    metrics: ['$200M savings model', '250M calls'],
   },
   {
     company: 'PricewaterhouseCoopers',
     logo: '/images/logos/pwc.svg',
-    title: 'Strategy Consultant, M&A Advisory',
+    title: 'MBA Intern, M&A Advisory',
     period: 'Summer 2016',
     location: 'Atlanta, GA',
     color: '#e05c2c',
@@ -91,6 +96,7 @@ const ROLES: Role[] = [
       'Facilitated org design workshops driving $13M in synergies for major acquisition',
       'Developed integration tracking dashboards for $17B pharmaceutical deal',
     ],
+    metrics: ['$13M synergies', '$17B deal'],
   },
   {
     company: 'Alvarez & Marsal',
@@ -107,6 +113,7 @@ const ROLES: Role[] = [
       'Led proof-of-concept securing $1.5M in follow-on implementation work',
       'Implemented enterprise IT system reducing labor expenses by $5M+ across facilities',
     ],
+    metrics: ['$6M annual savings', '$5M+ labor savings'],
   },
   {
     company: 'Booz Allen Hamilton',
@@ -123,6 +130,7 @@ const ROLES: Role[] = [
       'Redesigned global diagnostic kit distribution during H1N1 pandemic — reduced failed deliveries by 85%',
       'Grew team from 2 to 14 consultants through business development',
     ],
+    metrics: ['85% fewer failures', 'Team 2 → 14'],
   },
 ];
 
@@ -169,12 +177,10 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
               }} />
 
               <div
-                onClick={() => setExpandedIdx(isExpanded ? null : globalIdx)}
                 style={{
                   border: isHighlighted ? '2px solid #d4a853' : '1px solid var(--border)',
                   background: 'transparent',
                   transition: 'border-color 0.2s, box-shadow 0.2s',
-                  cursor: 'pointer',
                   boxShadow: isHighlighted ? '0 0 8px rgba(212,168,83,0.3)' : 'none',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.borderColor = `${role.color}44`)}
@@ -182,59 +188,87 @@ export default function WorkTimeline({ filterCompany = null }: WorkTimelineProps
                   e.currentTarget.style.borderColor = isHighlighted ? '#d4a853' : 'var(--border)';
                 }}
               >
-                <div
+                <button
+                  type="button"
+                  className="role-toggle-btn"
+                  id={`role-header-${globalIdx}`}
+                  aria-expanded={isExpanded}
+                  aria-controls={`role-panel-${globalIdx}`}
+                  onClick={() => setExpandedIdx(isExpanded ? null : globalIdx)}
                   style={{
-                    width: '100%', display: 'grid',
-                    gridTemplateColumns: '110px 1fr auto',
-                    alignItems: 'center', gap: '1.25rem',
-                    padding: '1.25rem 1.5rem',
+                    display: 'block', width: '100%', textAlign: 'left',
+                    background: 'none', border: 'none', margin: 0,
+                    cursor: 'pointer', font: 'inherit', color: 'inherit',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img
-                      src={role.logo} alt={role.company}
-                      style={{
-                        maxWidth: '110px', maxHeight: '44px',
-                        width: 'auto', height: 'auto', objectFit: 'contain',
-                      }}
-                    />
-                  </div>
+                  <div
+                    style={{
+                      width: '100%', display: 'grid',
+                      gridTemplateColumns: '110px 1fr auto',
+                      alignItems: 'center', gap: '1.25rem',
+                      padding: '1.25rem 1.5rem',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <img
+                        src={role.logo} alt={role.company}
+                        style={{
+                          maxWidth: '110px', maxHeight: '44px',
+                          width: 'auto', height: 'auto', objectFit: 'contain',
+                        }}
+                      />
+                    </div>
 
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{
-                      fontFamily: 'DM Serif Display, serif',
-                      fontSize: '1.3rem', color: 'var(--ink)', lineHeight: 1.2,
-                    }}>{role.title}</div>
-                    <div style={{
-                      fontSize: '0.85rem', color: 'var(--muted)', marginTop: '0.2rem',
-                    }}>{role.company}</div>
-                  </div>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{
+                        fontFamily: 'DM Sans, sans-serif', fontWeight: 600,
+                        fontSize: '1.15rem', color: 'var(--ink)', lineHeight: 1.2,
+                        letterSpacing: '-0.02em',
+                      }}>{role.title}</div>
+                      <div style={{
+                        fontSize: '0.85rem', color: 'var(--muted)', marginTop: '0.2rem',
+                      }}>{role.company}</div>
+                      <div className="role-metrics" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginTop: '0.65rem' }}>
+                        {role.metrics.map(metric => (
+                          <span key={metric} style={{
+                            border: '1px solid var(--border)', borderRadius: '999px',
+                            padding: '0.16rem 0.5rem', fontFamily: 'DM Mono, monospace',
+                            fontSize: '0.65rem', color: role.color, letterSpacing: '0.02em',
+                          }}>{metric}</span>
+                        ))}
+                      </div>
+                    </div>
 
-                  <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.25rem' }}>
-                    <div style={{
-                      fontSize: '0.75rem', textTransform: 'uppercase',
-                      letterSpacing: '0.08em', color: role.color,
-                      fontFamily: 'DM Mono, monospace',
-                    }}>{role.period}</div>
-                    <div style={{
-                      fontSize: '0.72rem', color: 'var(--muted)', marginTop: '0.15rem',
-                    }}>{role.location}</div>
-                    <div style={{
-                      fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.25rem',
-                      transition: 'transform 0.2s ease',
-                      transform: isExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
-                    }}>
-                      ▼
+                    <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.25rem' }}>
+                      <div style={{
+                        fontSize: '0.75rem', textTransform: 'uppercase',
+                        letterSpacing: '0.08em', color: role.color,
+                        fontFamily: 'DM Mono, monospace',
+                      }}>{role.period}</div>
+                      <div style={{
+                        fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.15rem',
+                      }}>{role.location}</div>
+                      <div className="role-chevron" style={{
+                        fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.25rem',
+                        transform: isExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
+                      }} aria-hidden="true">
+                        ▼
+                      </div>
                     </div>
                   </div>
-                </div>
+                </button>
 
-                <div style={{
-                  maxHeight: isExpanded ? '500px' : '0',
-                  overflow: 'hidden',
-                  opacity: isExpanded ? 1 : 0,
-                  transition: 'max-height 0.3s ease, opacity 0.2s ease',
-                }}>
+                <div
+                  id={`role-panel-${globalIdx}`}
+                  role="region"
+                  aria-labelledby={`role-header-${globalIdx}`}
+                  className="role-panel"
+                  style={{
+                    maxHeight: isExpanded ? '500px' : '0',
+                    overflow: 'hidden',
+                    opacity: isExpanded ? 1 : 0,
+                  }}
+                >
                   {isExpanded && (
                     <div style={{
                       padding: '0 1.5rem 1.5rem', marginLeft: '110px',

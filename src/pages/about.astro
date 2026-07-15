@@ -1,146 +1,93 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const VALUES = [
+  { title: 'Family & security', body: 'Build a life where the people I love feel supported, protected, and fully part of the adventure.', icon: 'home' },
+  { title: 'Joy, awe & adventure', body: 'Seek experiences big enough to reset my sense of what is possible—and laugh often along the way.', icon: 'spark' },
+  { title: 'Growth & curiosity', body: 'Keep learning in public, follow the interesting thread, and stay willing to be a beginner.', icon: 'book' },
+  { title: 'Physical vitality', body: 'Use hard physical things to stay grounded, resilient, and awake to the world.', icon: 'heart' },
+  { title: 'Resilience', body: 'Turn difficult chapters into useful information, then keep moving with more self-awareness.', icon: 'mountain' },
+  { title: 'Contribution', body: 'Leave people, teams, and systems more capable than I found them.', icon: 'people' },
+];
+
+const ICONS: Record<string,string> = {
+  home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+  spark: '<path d="m12 3 1.8 4.7L19 10l-5.2 2.3L12 17l-1.8-4.7L5 10l5.2-2.3L12 3Z"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/>',
+  book: '<path d="M4 5a3 3 0 0 1 3-2h5v17H7a3 3 0 0 0-3 2V5Z"/><path d="M20 5a3 3 0 0 0-3-2h-5v17h5a3 3 0 0 1 3 2V5Z"/>',
+  heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>',
+  mountain: '<path d="m3 20 6-11 4 6 2-3 6 8H3Z"/><path d="m8 11 1-2 2 3"/>',
+  people: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+};
+
+const DONE = ['29029 Everesting', 'Summit Cayambe at 19,000 ft', 'Motorcycle three continents', 'Perform live improv', 'Travel Southeast Asia'];
+const NEXT = ['Camino de Santiago', 'Great Barrier Reef dive', 'Hut-to-hut hike with the kids', 'Safari with Jeannie'];
+const SOMEDAY = ['Antarctica + aurora borealis', 'A genuinely good stand-up set', 'Publish a book', 'Dog sledding in Alaska or Scandinavia'];
 ---
-<Layout title="About" description="Dima Perkis — VP, Data & AI. Systems builder, ADHD brain, husband to Jeannie, father of Dean & Ruby.">
-
-  <!-- Hero -->
-  <section style="padding-top:4rem;padding-bottom:3rem;border-bottom:1px solid var(--border);">
-    <div style="display:flex;align-items:flex-start;gap:3rem;flex-wrap:wrap;">
-      <div style="flex:1;min-width:min(100%,320px);">
-        <p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin:0 0 1rem;">About</p>
-        <p style="font-size:.95rem;color:var(--muted);line-height:1.75;max-width:36rem;margin:0;">
-          I build AI strategies at the enterprise level and deploy the systems that make them real.
-          Most recently VP of Strategy & Analytics at an AI startup; before that Equifax, Mailchimp,
-          Accenture, A&M, and Booz Allen. Father of Dean & Ruby. Everesting finisher.
-        </p>
-        <p style="font-size:.85rem;color:var(--gold);font-style:italic;margin:1rem 0 0;">
-          "To make a stranger laugh every day."
-        </p>
-      </div>
-      <div style="flex-shrink:0;display:flex;gap:1rem;align-items:stretch;">
-        <img src="/images/dima.jpeg" alt="Dima Perkis"
-          style="width:min(280px,60vw);height:auto;aspect-ratio:4/5;border-radius:12px;object-fit:cover;border:2px solid var(--border);" />
-        <img src="/images/family.jpg" alt="Dima with Jeannie, Dean, and Ruby"
-          style="width:min(280px,60vw);height:auto;aspect-ratio:4/5;border-radius:12px;object-fit:cover;border:2px solid var(--border);" />
-      </div>
+<Layout title="About" description="Dima Perkis — Data & AI leader, systems builder, husband, father, and serial side-quest starter.">
+  <section class="about-hero reveal">
+    <div class="about-copy">
+      <p class="page-eyebrow">About me</p>
+      <h1 class="page-title">Builder.<br />Dad. Explorer.</h1>
+      <p class="about-lede">I’m a Data & AI leader who likes hard problems, working alongside a sharp team, and making the abstract tangible. Outside work, I build personal tools, chase new experiences, and test nearly everything on my family.</p>
+      <p class="personal-motto">“Make a stranger laugh every day.”</p>
     </div>
+    <figure class="headshot"><img src="/images/dima.jpeg" alt="Dima Perkis" /></figure>
   </section>
 
-  <!-- Three-panel strip -->
-  <section style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1rem;margin-top:2.5rem;margin-bottom:3rem;">
-    <div style="background:var(--surface);padding:2rem;border:1px solid var(--border);">
-      <p style="font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin:0 0 .75rem;">Professional</p>
-      <p style="font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);line-height:1.4;margin:0 0 .75rem;">Analytics leadership + AI strategy</p>
-      <p style="font-size:.85rem;color:var(--muted);line-height:1.65;margin:0;">
-        15+ years scaling analytics orgs and leading cross-functional teams — from Board rooms to front-line teams. Most recently VP at an AI startup; previously Equifax, Mailchimp, Accenture, A&M, Booz Allen.
-      </p>
+  <section class="life-gallery reveal">
+    <div class="family-shot">
+      <img src="/images/family.jpg" alt="Dima with Jeannie, Dean, and Ruby" loading="lazy" />
+      <div class="photo-caption"><strong>The home team</strong><span>Jeannie, Dean, Ruby, and me</span></div>
     </div>
-    <div style="background:var(--surface);padding:2rem;border:1px solid var(--border);">
-      <p style="font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--violet);margin:0 0 .75rem;">Side Quests</p>
-      <p style="font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);line-height:1.4;margin:0 0 .75rem;">Building after bedtime</p>
-      <p style="font-size:.85rem;color:var(--muted);line-height:1.65;margin:0;">
-        AI tools, data visualizations, automation pipelines, creative experiments. Projects, explorations, and ideas — some deployed, some half-baked, all interesting.
-      </p>
-    </div>
-    <div style="background:var(--surface);padding:2rem;border:1px solid var(--border);">
-      <p style="font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin:0 0 .75rem;">Personal</p>
-      <p style="font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);line-height:1.4;margin:0 0 .75rem;">Husband, father, concert-goer, learner</p>
-      <p style="font-size:.85rem;color:var(--muted);line-height:1.65;margin:0;">
-        Married to Jeannie, who deserves public credit for her patience with my dad jokes and
-        the endless parade of apps I make her beta-test. Dad to Dean & Ruby. 29029 Everesting
-        finisher. Concert obsessive. Born in Moldova, raised in New Jersey, rooted in Atlanta.
-      </p>
-    </div>
-  </section>
-
-  <!-- Out in the world -->
-  <section class="reveal" style="margin-bottom:3rem;">
-    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Out in the World</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:1rem;">
+    <div class="world-thumbs" aria-label="Dima out in the world">
       {[
-        { src: '/images/about/cayambe.jpg',       cap: 'Cayambe summit · 19,000 ft · Ecuador' },
-        { src: '/images/about/moto-colombia.jpg', cap: 'Motorcycling Colombia · Guatapé' },
-        { src: '/images/about/scuba.jpg',         cap: 'Scuba · Thailand' },
-        { src: '/images/about/kite.jpg',          cap: 'Learning to kite surf' },
-        { src: '/images/about/jeannie.jpg',       cap: 'With Jeannie' },
-        { src: '/images/about/graffiti.jpg',      cap: 'Street art stop' },
-      ].map(p => (
-        <figure style="margin:0;">
-          <img src={p.src} alt={p.cap} loading="lazy"
-            style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--border);display:block;" />
-          <figcaption style="font-family:'DM Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:.5rem;">{p.cap}</figcaption>
-        </figure>
+        ['/images/about/cayambe.jpg','Cayambe summit · Ecuador'],
+        ['/images/about/moto-colombia.jpg','Motorcycling · Colombia'],
+        ['/images/about/scuba.jpg','Scuba · Thailand'],
+        ['/images/about/kite.jpg','Learning to kite surf'],
+      ].map(([src,cap]) => (
+        <figure><img src={src} alt={cap} loading="lazy" /><figcaption>{cap}</figcaption></figure>
       ))}
     </div>
   </section>
 
-  <!-- Core values -->
-  <section style="margin-bottom:3rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Core Values</h2>
-    <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
-      {[
-        'Family & Security',
-        'Joy, Awe & Adventure',
-        'Growth & Curiosity',
-        'Physical Vitality',
-        'Resilience',
-        'Contribution',
-      ].map(v => (
-        <span style="font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--ink);background:var(--surface);border:1px solid var(--border);padding:.6rem 1.25rem;">
-          {v}
-        </span>
+  <section class="about-identity reveal">
+    <article><span class="section-kicker">At work</span><h2>Strategy that ships</h2><p>I lead teams that turn AI and data into operating systems, growth decisions, and measurable outcomes—not decks that end at the boardroom.</p></article>
+    <article><span class="section-kicker">After bedtime</span><h2>Useful side quests</h2><p>Family tools, event intelligence, data rabbit holes, and creative experiments. The point is not novelty; it is learning by making something real.</p></article>
+    <article><span class="section-kicker">At home</span><h2>All-in on people</h2><p>Husband to Jeannie, dad to Dean and Ruby, born in Moldova, raised in New Jersey, and rooted in Atlanta.</p></article>
+  </section>
+
+  <section class="values-section reveal">
+    <span class="section-kicker">What guides me</span>
+    <h2 class="section-title">Core values</h2>
+    <div class="values-grid">
+      {VALUES.map(value => (
+        <article class="value-card">
+          <span class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" set:html={ICONS[value.icon]} /></span>
+          <h3>{value.title}</h3><p>{value.body}</p>
+        </article>
       ))}
     </div>
   </section>
 
-  <!-- Bucket list -->
-  <section style="margin-bottom:3rem;">
-    <h2 style="font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Bucket List</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-      <div style="background:var(--surface);padding:2rem;border:1px solid var(--border);">
-        <p style="font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin:0 0 .75rem;">Done</p>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem;">
-          {[
-            '29029 Everesting',
-            'Travel through Southeast Asia',
-            'Motorcycle trips across Colombia',
-            "Summit 19,000' Cayambe volcano in Ecuador",
-            'Motorcycle on three continents',
-            'Perform live improv',
-          ].map(b => (
-            <li style="font-size:.85rem;color:var(--gold);display:flex;gap:.5rem;">
-              <span style="flex-shrink:0;">&#10003;</span><span style="text-decoration:line-through;opacity:.8;">{b}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div style="background:var(--surface);padding:2rem;border:1px solid var(--border);">
-        <p style="font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 .75rem;">Next</p>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem;">
-          {[
-            'Antarctica + aurora borealis',
-            'Camino de Santiago',
-            'Stand-up comedy set (actually good)',
-            'Knife from scratch, woodworking',
-            'Burning Man',
-            'Scuba — Great Barrier Reef',
-            'Hut-to-hut hike with the kids',
-            'Ultra marathon',
-            'Publish a book',
-            'Safari with Jeannie',
-            'Spinning fire poi',
-            'Scuba dive the Galápagos',
-            'Learn to kite surf',
-            'Dog sledding — Alaska or Scandinavia',
-          ].map(b => (
-            <li style="font-size:.85rem;color:var(--muted);display:flex;gap:.5rem;">
-              <span style="color:var(--border-hi);flex-shrink:0;">&#9675;</span>{b}
-            </li>
-          ))}
-        </ul>
-      </div>
+  <section class="bucket-section reveal">
+    <span class="section-kicker">The running list</span>
+    <h2 class="section-title">Bucket list</h2>
+    <p class="bucket-intro">A life backlog should feel more like a launchpad than a checklist.</p>
+    <div class="bucket-grid">
+      <article class="bucket-column bucket-done"><div class="bucket-head"><span>✓</span><div><small>Completed</small><strong>Proof I’ll do the odd thing</strong></div></div><ul>{DONE.map(item => <li>{item}</li>)}</ul></article>
+      <article class="bucket-column"><div class="bucket-head"><span>→</span><div><small>Next up</small><strong>Plans becoming calendar events</strong></div></div><ul>{NEXT.map(item => <li>{item}</li>)}</ul></article>
+      <article class="bucket-column"><div class="bucket-head"><span>∞</span><div><small>Someday</small><strong>Keep the horizon interesting</strong></div></div><ul>{SOMEDAY.map(item => <li>{item}</li>)}</ul></article>
     </div>
   </section>
-
-
 </Layout>
+
+<style>
+  .about-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,390px);gap:clamp(2rem,7vw,6rem);padding:clamp(4rem,8vw,7rem) 0 4rem;border-bottom:1px solid var(--border);align-items:center}.about-lede{max-width:42rem;margin:1.5rem 0 0;color:var(--muted);font-size:clamp(1rem,2vw,1.18rem);line-height:1.75}.personal-motto{margin:1.5rem 0 0;color:var(--gold);font-size:.9rem;font-weight:600}.headshot{margin:0}.headshot img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:24px;border:1px solid var(--border)}
+  .life-gallery{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(240px,.75fr);gap:1rem;margin:4rem 0 5.5rem}.family-shot{position:relative;min-height:520px;overflow:hidden;border-radius:20px}.family-shot>img{width:100%;height:100%;object-fit:cover;display:block}.photo-caption{position:absolute;left:1rem;right:1rem;bottom:1rem;display:flex;justify-content:space-between;gap:1rem;padding:.85rem 1rem;border-radius:12px;background:rgba(12,12,14,.72);backdrop-filter:blur(10px);color:#fff;font-size:.8rem}.photo-caption span{opacity:.7}.world-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.world-thumbs figure{margin:0;min-width:0}.world-thumbs img{display:block;width:100%;aspect-ratio:1/1.14;object-fit:cover;border-radius:14px}.world-thumbs figcaption{margin-top:.4rem;color:var(--muted);font-family:'DM Mono',monospace;font-size:.65rem;line-height:1.35}
+  .about-identity{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:6rem}.about-identity article{padding:1.5rem;border-top:1px solid var(--border)}.about-identity h2{margin:0 0 .65rem;font-size:1.15rem;font-weight:600;letter-spacing:-.025em}.about-identity p{margin:0;color:var(--muted);font-size:.84rem;line-height:1.65}
+  .values-section,.bucket-section{margin-bottom:6rem}.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.value-card{min-height:210px;padding:1.35rem;border:1px solid var(--border);border-radius:16px}.value-icon{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:11px;background:var(--surface);color:var(--gold)}.value-icon svg{width:1.3rem;height:1.3rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.value-card h3{margin:1.1rem 0 .55rem;font-size:1rem;font-weight:600;letter-spacing:-.02em}.value-card p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.6}
+  .bucket-intro{margin:-.65rem 0 1.5rem;color:var(--muted);font-size:.9rem}.bucket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.bucket-column{padding:1.5rem;border:1px solid var(--border);border-radius:18px;background:var(--surface)}.bucket-done{background:color-mix(in srgb,var(--gold) 7%,var(--surface))}.bucket-head{display:flex;gap:.85rem;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--border)}.bucket-head>span{display:grid;place-items:center;width:2.3rem;height:2.3rem;border-radius:50%;background:var(--bg);color:var(--gold);font-weight:700}.bucket-head small,.bucket-head strong{display:block}.bucket-head small{color:var(--gold);font-family:'DM Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em}.bucket-head strong{margin-top:.18rem;font-size:.82rem;line-height:1.25}.bucket-column ul{list-style:none;padding:0;margin:1rem 0 0}.bucket-column li{position:relative;padding:.55rem 0 .55rem 1rem;border-bottom:1px solid var(--border);color:var(--muted);font-size:.78rem;line-height:1.4}.bucket-column li:last-child{border-bottom:0}.bucket-column li::before{content:'•';position:absolute;left:0;color:var(--gold)}
+  @media(max-width:800px){.about-hero,.life-gallery{grid-template-columns:1fr}.headshot{max-width:420px}.family-shot{min-height:380px}.about-identity,.values-grid,.bucket-grid{grid-template-columns:1fr 1fr}.about-identity article:last-child,.bucket-column:last-child{grid-column:1/-1}}
+  @media(max-width:560px){.about-hero{padding-top:3rem}.world-thumbs{grid-template-columns:1fr 1fr}.about-identity,.values-grid,.bucket-grid{grid-template-columns:1fr}.about-identity article:last-child,.bucket-column:last-child{grid-column:auto}.family-shot{min-height:300px}.photo-caption{align-items:flex-start;flex-direction:column;gap:.1rem}}
+</style>

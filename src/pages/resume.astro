@@ -2,204 +2,113 @@
 import Layout from '../layouts/Layout.astro';
 import ResumeExperience from '../components/ResumeExperience';
 
-// Lucide-style stroke icons (inline paths, stroke=currentColor)
-const SKILLS = [
-  { label: 'AI Strategy & Enablement', paths: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/>' },
-  { label: 'Analytics Leadership', paths: '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>' },
-  { label: 'LLM Agent Workflows', paths: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2"/><path d="M15 2v2"/><path d="M9 20v2"/><path d="M15 20v2"/><path d="M2 9h2"/><path d="M2 15h2"/><path d="M20 9h2"/><path d="M20 15h2"/>' },
-  { label: 'Go-to-Market Strategy & Pricing', paths: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>' },
-  { label: 'Executive Communication', paths: '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>' },
-  { label: 'Systems Building — Python · SQL · TypeScript', paths: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>' },
-  { label: 'AI for Sales', paths: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>' },
-  { label: 'Growth Strategy', paths: '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>' },
+const EXPERTISE = [
+  { title: 'Applied AI systems', body: 'Evaluation, context layers, and agent workflows designed around adoption—not demo theater.', icon: '<path d="M12 2a7 7 0 0 0-4 12.74V18h8v-3.26A7 7 0 0 0 12 2Z"/><path d="M9 22h6M9 18h6"/>' },
+  { title: 'Analytics leadership', body: 'Building capable teams, useful operating rhythms, and measurement that changes decisions.', icon: '<path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/>' },
+  { title: 'Revenue & GTM strategy', body: 'Pricing, retention, growth, and sales systems grounded in customer behavior and economics.', icon: '<path d="m3 17 6-6 4 4 8-9"/><path d="M15 6h6v6"/>' },
+  { title: 'Zero-to-one operating', body: 'Turning ambiguous mandates into a first working system, a clear story, and a team that can scale it.', icon: '<path d="M4 19h16"/><path d="m6 15 5-5 3 3 4-6"/><circle cx="6" cy="15" r="1"/>' },
+  { title: 'Executive translation', body: 'Moving fluently between boards, founders, technical teams, and the people doing the daily work.', icon: '<path d="M21 15a4 4 0 0 1-4 4H8l-5 3v-7a4 4 0 0 1-2-3.5V7a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v8Z"/>' },
+  { title: 'Hands-on systems building', body: 'Python, SQL, TypeScript, and modern AI tools—enough depth to prototype, inspect, and unblock.', icon: '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6M14 4l-4 16"/>' },
 ];
 
 const CLIENTS = [
-  { name: 'Intuit', logo: '/images/logos/clients/intuit.svg' },
   { name: 'Mailchimp', logo: '/images/logos/mailchimp.svg' },
-  { name: 'Lahzo', logo: '/images/logos/clients/lahzo.png' },
+  { name: 'Lahzo', logo: '/images/logos/clients/lahzo.png', color: true },
   { name: 'Equifax', logo: '/images/logos/equifax.svg' },
-  { name: 'Walmart', logo: '/images/logos/clients/walmart.svg' },
-  { name: 'Target', logo: '/images/logos/clients/target.svg' },
-  { name: 'Blue Cross Blue Shield NC', logo: '/images/logos/clients/bcbs-nc.svg' },
-  { name: 'Verizon', logo: '/images/logos/clients/verizon.png' },
-  { name: 'AT&T', logo: '/images/logos/clients/att.svg' },
+  { name: 'Walmart', logo: '/images/logos/clients/walmart.svg', color: true },
+  { name: 'Target', logo: '/images/logos/clients/target.svg', color: true },
+  { name: 'Blue Cross Blue Shield NC', logo: '/images/logos/clients/bcbs-nc.svg', color: true },
+  { name: 'Verizon', logo: '/images/logos/clients/verizon.svg', color: true },
+  { name: 'AT&T', logo: '/images/logos/clients/att.svg', color: true },
   { name: 'New York Life', logo: '/images/logos/clients/new-york-life.svg' },
-  { name: 'CDC', logo: '/images/logos/clients/cdc.svg' },
-  { name: 'American Cancer Society', logo: '/images/logos/clients/american-cancer-society.svg' },
+  { name: 'CDC', logo: '/images/logos/clients/cdc.svg', color: true },
+  { name: 'American Cancer Society', logo: '/images/logos/clients/american-cancer-society.svg', color: true },
   { name: 'Apollo', logo: '/images/logos/clients/apollo.svg' },
-  { name: 'Pfizer', logo: '/images/logos/clients/pfizer.svg' },
+  { name: 'Pfizer', logo: '/images/logos/clients/pfizer.svg', color: true },
   { name: 'Shiseido', logo: '/images/logos/clients/shiseido.svg' },
   { name: 'Laura Mercier', logo: '/images/logos/clients/laura-mercier.svg' },
   { name: 'Oldcastle Materials', logo: '/images/logos/clients/oldcastle.svg' },
 ];
+
+const TOOLS = [
+  { logo: '/images/logos/tools/openai.svg', label: 'OpenAI' },
+  { logo: '/images/logos/tools/claude.svg', label: 'Claude' },
+  { logo: '/images/logos/tools/googlegemini.svg', label: 'Gemini' },
+  { logo: '/images/logos/tools/github.svg', label: 'GitHub' },
+  { logo: '/images/logos/tools/vercel.svg', label: 'Vercel' },
+  { logo: '/images/logos/tools/replit.svg', label: 'Replit' },
+];
 ---
-<Layout title="Professional Experience">
-
-  <!-- Header -->
-  <section class="reveal" style="padding-top:4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
-      <div>
-        <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,8vw,5rem);line-height:1;letter-spacing:-.02em;color:var(--ink);margin:0 0 .75rem;">
-          Dima Perkis
-        </h1>
-        <p style="font-family:'DM Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 .5rem;">
-          VP, Data & AI · Atlanta, GA
-        </p>
-        <p style="font-size:.95rem;color:var(--muted);max-width:40rem;line-height:1.7;margin:0 0 .85rem;">
-          I build AI strategies at the enterprise level and deploy the systems that make them
-          real — from Board rooms to front-line teams.
-        </p>
-        <a href="https://linkedin.com/in/dima-perkis" target="_blank" rel="noopener noreferrer"
-          style="display:inline-flex;align-items:center;gap:.45rem;font-family:'DM Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;">
-          <img src="/images/logos/tools/linkedin.svg" alt="" style="height:16px;width:16px;object-fit:contain;filter:var(--logo-filter);" />
-          linkedin.com/in/dima-perkis ↗
-        </a>
+<Layout title="Professional Experience" description="Dima Perkis — Data & AI leader who turns emerging capabilities into revenue-producing systems.">
+  <section class="resume-hero reveal">
+    <div>
+      <p class="page-eyebrow">Professional experience</p>
+      <h1 class="page-title">Strategy<br />that ships.</h1>
+      <p class="resume-lede">I lead teams that turn messy data and emerging AI capabilities into systems that drive revenue, improve decisions, and get used—from board-level strategy through production.</p>
+      <div class="resume-actions">
+        <span>VP, Data & AI · Atlanta</span>
+        <a href="https://linkedin.com/in/dima-perkis" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
       </div>
-      <img src="/images/dima.jpeg" alt="Dima Perkis"
-        style="width:200px;height:200px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0;" />
     </div>
+    <img src="/images/dima.jpeg" alt="Dima Perkis" class="resume-headshot" />
   </section>
 
-  <!-- Highlight strip -->
-  <section class="reveal" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2rem;margin-bottom:3.5rem;">
-    {[
-      { n: '15+',   label: 'Years experience' },
-      { n: '7',     label: 'Companies' },
-    ].map(s => (
-        <div style="background:var(--surface);padding:1.25rem;text-align:center;">
-          <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:var(--gold);line-height:1;">{s.n}</div>
-          <div style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.3rem;">{s.label}</div>
-        </div>
-    ))}
-  </section>
-
-  <!-- Companies I've Helped Grow — airy, no boxes -->
-  <section class="reveal" style="margin-bottom:4rem;">
-    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:2rem;">Companies I've Helped Grow</h2>
-    <div class="client-wall">
-      {CLIENTS.map(c => (
-        <div class="client-logo">
-          <img src={c.logo} alt={c.name} title={c.name} class={c.logo.endsWith('.png') ? 'logo-color' : ''}
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
-          <span style="display:none;font-size:.85rem;color:var(--muted);text-align:center;line-height:1.3;">{c.name}</span>
-        </div>
+  <section class="expertise-section reveal">
+    <span class="section-kicker">How I create leverage</span>
+    <h2 class="section-title">Core expertise</h2>
+    <div class="expertise-grid">
+      {EXPERTISE.map(item => (
+        <article class="expertise-card" tabindex="0">
+          <span class="expertise-icon" aria-hidden="true"><svg viewBox="0 0 24 24" set:html={item.icon} /></span>
+          <div><h3>{item.title}</h3><p>{item.body}</p></div>
+          <span class="expertise-arrow" aria-hidden="true">↗</span>
+        </article>
       ))}
     </div>
   </section>
 
-  <!-- Skills -->
-  <section class="reveal" style="margin-bottom:4rem;">
-    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Skills</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:.75rem;margin-bottom:2.5rem;">
-      {SKILLS.map(s => (
-        <div style="display:flex;align-items:center;gap:.85rem;background:transparent;border:1px solid var(--border);border-radius:8px;padding:.85rem 1.1rem;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="var(--gold)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
-            style="flex-shrink:0;" set:html={s.paths} />
-          <span style="font-size:.85rem;color:var(--ink);line-height:1.4;">{s.label}</span>
-        </div>
-      ))}
-    </div>
-
-    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Tools I Work With</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:.75rem;">
-      {[
-        { logo: '/images/logos/tools/openai.svg',       label: 'GPT' },
-        { logo: '/images/logos/tools/claude.svg',       label: 'Claude' },
-        { logo: '/images/logos/tools/googlegemini.svg', label: 'Gemini' },
-        { logo: '/images/logos/tools/github.svg',       label: 'GitHub' },
-        { logo: '/images/logos/tools/vercel.svg',       label: 'Vercel' },
-        { logo: '/images/logos/tools/replit.svg',       label: 'Replit' },
-      ].map(t => (
-        <div style="display:flex;align-items:center;gap:.75rem;background:transparent;border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;">
-          <img src={t.logo} alt={t.label}
-            style="height:20px;width:20px;object-fit:contain;filter:var(--logo-filter);opacity:.85;flex-shrink:0;" />
-          <span style="font-size:.85rem;color:var(--ink);">{t.label}</span>
-        </div>
-      ))}
-    </div>
+  <section class="tools-section reveal">
+    <div><span class="section-kicker">Tools</span><h2 class="section-title">Close enough to the work</h2><p>I use these to prototype, inspect, and unblock—not as a substitute for the engineering and data teams I lead.</p></div>
+    <div class="tool-row">{TOOLS.map(tool => <div class="tool"><img src={tool.logo} alt="" /><span>{tool.label}</span></div>)}</div>
   </section>
 
-  <!-- Experience -->
-  <section class="reveal" style="margin-bottom:4rem;">
-    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Experience</h2>
+  <section class="experience-section reveal">
+    <span class="section-kicker">Career</span>
+    <h2 class="section-title">Experience</h2>
     <ResumeExperience client:load />
   </section>
 
-  <!-- Education -->
-  <section class="reveal" style="margin-bottom:3rem;">
-    <h2 style="font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:1.25rem;">Education</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:1rem;">
-      {[
-        {
-          logo: '/images/logos/fuqua.svg',
-          degree: 'MBA',
-          school: 'Duke University',
-          program: 'Fuqua School of Business',
-          year: '2017',
-          notes: 'Focus: Strategy & Finance. Founded Fuqua Motorcycle Club. PwC M&A internship.',
-          color: '#012169',
-        },
-        {
-          logo: '/images/logos/emory.svg',
-          degree: 'BBA',
-          school: 'Emory University',
-          program: 'Goizueta Business School',
-          year: '2009',
-          notes: "Concentrations: Marketing & Russian. Dean's List. Study abroad in Czech Republic.",
-          color: '#002878',
-        },
-      ].map(e => (
-        <div style="background:transparent;padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;border:1px solid var(--border);border-radius:8px;">
-          <div style="display:flex;align-items:center;gap:1rem;">
-            <img src={e.logo} alt={e.school} style="height:36px;width:auto;max-width:110px;object-fit:contain;" class="edu-logo" />
+  <section class="clients-section reveal" aria-labelledby="clients-title">
+    <span class="section-kicker">Across the work</span>
+    <h2 class="section-title" id="clients-title">Selected companies and clients</h2>
+    <div class="logo-marquee">
+      <div class="logo-track">
+        {[...CLIENTS, ...CLIENTS].map((client, index) => (
+          <div class="client-logo" aria-hidden={index >= CLIENTS.length ? 'true' : undefined}>
+            <img src={client.logo} alt={index < CLIENTS.length ? client.name : ''} class:list={{'logo-color':client.color}} />
           </div>
-          <div>
-            <div style="font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);">{e.degree} — {e.school}</div>
-            <div style={`font-size:.8rem;color:${e.color};margin:.2rem 0;`} class="edu-program">{e.program}</div>
-            <div style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);">{e.year}</div>
-          </div>
-          <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0;">{e.notes}</p>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </section>
 
+  <section class="education-section reveal">
+    <span class="section-kicker">Education</span><h2 class="section-title">The formal part</h2>
+    <div class="education-grid">
+      <article><img src="/images/logos/fuqua.svg" alt="Duke Fuqua" /><div><h3>MBA · Duke University</h3><p>Fuqua School of Business · Strategy & Finance · 2017</p></div></article>
+      <article><img src="/images/logos/emory.svg" alt="Emory University" /><div><h3>BBA · Emory University</h3><p>Goizueta Business School · Marketing & Russian · 2009</p></div></article>
+    </div>
+  </section>
 </Layout>
 
 <style>
-  /* Client wall: transparent, generous air, quiet-to-loud hover */
-  .client-wall {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 2.5rem 2rem;
-    align-items: center;
-    justify-items: center;
-  }
-  .client-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 48px;
-    width: 100%;
-  }
-  .client-logo img {
-    max-height: 42px;
-    max-width: 120px;
-    width: auto;
-    object-fit: contain;
-    opacity: 0.72;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-  .client-logo:hover img {
-    opacity: 1;
-    transform: scale(1.06);
-  }
-  /* Monochrome-black SVGs (simple-icons) need lifting on dark themes */
-  html[data-theme="dark"] .client-logo img:not(.logo-color),
-  html[data-theme="hacker"] .client-logo img:not(.logo-color) { filter: brightness(0) invert(0.85); }
-  html[data-theme="dark"] .edu-logo,
-  html[data-theme="hacker"] .edu-logo { filter: brightness(0) invert(0.85); }
-  html[data-theme="dark"] .edu-program { color: var(--muted) !important; }
+  .resume-hero{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:clamp(2rem,7vw,6rem);padding:clamp(4rem,8vw,7rem) 0 4rem;border-bottom:1px solid var(--border);align-items:end}.resume-lede{max-width:46rem;margin:1.5rem 0 0;color:var(--muted);font-size:clamp(1rem,2vw,1.18rem);line-height:1.75}.resume-actions{display:flex;align-items:center;gap:1rem;margin-top:1.5rem;color:var(--muted);font-family:'DM Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.resume-actions a{color:var(--gold);text-decoration:none}.resume-headshot{width:100%;aspect-ratio:1/1.15;object-fit:cover;border-radius:22px;border:1px solid var(--border)}
+  .expertise-section,.experience-section,.clients-section,.education-section{margin:5.5rem 0}.expertise-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.expertise-card{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:start;min-height:158px;padding:1.4rem;border:1px solid var(--border);border-radius:18px;outline:none;transition:background .2s,border-color .2s,transform .2s}.expertise-card:hover,.expertise-card:focus-visible{transform:translateY(-2px);border-color:color-mix(in srgb,var(--gold) 45%,var(--border));background:var(--surface)}.expertise-icon{display:grid;place-items:center;width:2.9rem;height:2.9rem;border-radius:12px;background:var(--ink);color:var(--bg)}.expertise-icon svg{width:1.35rem;height:1.35rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.expertise-card h3{margin:.25rem 0 .55rem;font-size:1.05rem;font-weight:600;letter-spacing:-.025em}.expertise-card p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.55;opacity:.18;transform:translateY(5px);transition:opacity .2s,transform .2s}.expertise-card:hover p,.expertise-card:focus-visible p{opacity:1;transform:none}.expertise-arrow{color:var(--gold);opacity:.35}
+  .tools-section{display:grid;grid-template-columns:minmax(250px,.8fr) minmax(0,1.2fr);gap:3rem;align-items:center;margin:5.5rem 0;padding:2rem;border:1px solid var(--border);border-radius:20px}.tools-section .section-title{margin-bottom:.75rem}.tools-section p{margin:0;color:var(--muted);font-size:.85rem;line-height:1.65}.tool-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}.tool{display:flex;align-items:center;gap:.65rem;padding:.85rem;border-radius:12px;background:var(--surface);font-size:.78rem}.tool img{width:20px;height:20px;object-fit:contain;filter:var(--logo-filter)}
+  .logo-marquee{overflow:hidden;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);padding:1.5rem 0}.logo-track{display:flex;width:max-content;align-items:center;animation:logo-scroll 36s linear infinite}.client-logo{display:grid;place-items:center;width:160px;height:74px;padding:1rem}.client-logo img{max-width:118px;max-height:40px;object-fit:contain;opacity:.72;filter:grayscale(1);transition:filter .2s,opacity .2s}.client-logo:hover img{opacity:1;filter:none}html[data-theme="dark"] .client-logo img:not(.logo-color),html[data-theme="hacker"] .client-logo img:not(.logo-color){filter:brightness(0) invert(.85)}@keyframes logo-scroll{to{transform:translateX(-50%)}}.logo-marquee:hover .logo-track{animation-play-state:paused}
+  .education-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.education-grid article{display:flex;align-items:center;gap:1.25rem;padding:1.5rem;border:1px solid var(--border);border-radius:16px}.education-grid img{width:88px;max-height:42px;object-fit:contain}.education-grid h3{margin:0;font-size:1rem;font-weight:600;letter-spacing:-.02em}.education-grid p{margin:.3rem 0 0;color:var(--muted);font-size:.75rem;line-height:1.5}html[data-theme="dark"] .education-grid img,html[data-theme="hacker"] .education-grid img{filter:brightness(0) invert(.85)}
+  @media (hover:none){.expertise-card p{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.logo-track{animation:none;flex-wrap:wrap;width:100%;justify-content:center}.logo-track .client-logo:nth-child(n+17){display:none}}
+  @media(max-width:760px){.resume-hero{grid-template-columns:1fr}.resume-headshot{width:min(100%,360px)}.expertise-grid,.education-grid,.tools-section{grid-template-columns:1fr}.tool-row{grid-template-columns:repeat(2,1fr)}.expertise-card p{opacity:1;transform:none}.logo-track{animation-duration:28s}}
+  @media(max-width:480px){.resume-actions{align-items:flex-start;flex-direction:column}.expertise-grid{grid-template-columns:1fr}.expertise-card{grid-template-columns:auto 1fr}.expertise-arrow{display:none}}
 </style>

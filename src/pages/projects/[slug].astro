@@ -13,6 +13,13 @@ const { Content } = await render(project);
 const d = project.data;
 const date = d.date ? d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : null;
 
+// Gallery images — avoid duplicating d.image when it's already present in d.images
+const galleryImages: string[] = d.image
+  ? (d.images && d.images.length > 0
+      ? (d.images.includes(d.image) ? d.images : [d.image, ...d.images])
+      : [d.image])
+  : (d.images ?? []);
+
 const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
   live:       { label: 'Live',       color: '#5a9a6e' },
   active:     { label: 'Active',     color: '#d4a853' },
@@ -78,32 +85,36 @@ const currentIdx = sorted.findIndex(p => p.slug === project.slug);
 const nextProject = currentIdx >= 0 && currentIdx < sorted.length - 1 ? sorted[currentIdx + 1] : null;
 const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
 ---
-<Layout title={d.title} description={d.description}>
+<Layout title={d.title} description={d.description} noindex={d.listed === false}>
 
   <!-- Breadcrumb -->
   <nav style="padding-top:2rem;padding-bottom:1.5rem;">
-    <a href="/projects" style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">
+    <a href="/projects" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">
       ← Projects
     </a>
   </nav>
 
   <!-- Header -->
   <section style="padding-bottom:2.5rem;border-bottom:1px solid var(--border);">
-    {d.image && (
+    {galleryImages.length > 0 && (
       <div style="margin-bottom:2rem;">
-        <div style="width:100%;max-height:460px;overflow:hidden;border:1px solid var(--border);border-radius:2px;">
-          <img id="gallery-main" src={d.image} alt={d.title} style="width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity .2s;" />
+        <div class="gallery-hero" style="width:100%;overflow:hidden;border:1px solid var(--border);border-radius:2px;aspect-ratio:16/9;">
+          <img id="gallery-main" src={galleryImages[0]} alt={d.title} width="1200" height="675" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity .2s;display:block;" />
         </div>
-        {d.images && d.images.length > 0 && (
-          <div style="display:flex;gap:.625rem;margin-top:.75rem;flex-wrap:wrap;">
-            {[d.image, ...d.images].map((img, i) => (
+        {galleryImages.length > 1 && (
+          <div class="gthumb-row" role="group" aria-label="Screenshot gallery" style="display:flex;gap:.625rem;margin-top:.75rem;flex-wrap:wrap;">
+            {galleryImages.map((img, i) => (
               <button
+                type="button"
                 data-src={img}
-                onclick="var m=document.getElementById('gallery-main');var s=this.dataset.src;m.style.opacity='0';setTimeout(function(){m.src=s;m.style.opacity='1';},120);document.querySelectorAll('.gthumb').forEach(function(b){b.style.outline='none';});this.style.outline='2px solid var(--gold)';"
+                data-alt={`${d.title} — screenshot ${i + 1} of ${galleryImages.length}`}
+                aria-label={`View screenshot ${i + 1} of ${galleryImages.length}`}
+                aria-current={i === 0 ? 'true' : 'false'}
                 class="gthumb"
-                style={`width:120px;height:84px;overflow:hidden;border:1px solid var(--border);padding:0;cursor:pointer;background:none;flex-shrink:0;border-radius:2px;transition:outline .1s;outline:${i === 0 ? '2px solid var(--gold)' : 'none'};`}
+                data-selected={i === 0 ? 'true' : 'false'}
+                style="width:120px;height:84px;overflow:hidden;border:1px solid var(--border);padding:0;cursor:pointer;background:none;flex-shrink:0;border-radius:2px;"
               >
-                <img src={img} alt={`${d.title} screenshot ${i + 1}`} style="width:100%;height:100%;object-fit:cover;object-position:top;" loading="lazy" />
+                <img src={img} alt="" width="120" height="84" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" loading="lazy" />
               </button>
             ))}
           </div>
@@ -114,33 +125,59 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
     <div style="display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
       <div style="display:flex;flex-wrap:wrap;gap:.35rem;flex:1;">
         {d.tags.map((t: string) => (
-          <span style="font-size:.6rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border:1px solid var(--border);padding:.2em .6em;border-radius:2px;">{t}</span>
+          <span style="font-size:0.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border:1px solid var(--border);padding:.2em .6em;border-radius:2px;">{t}</span>
         ))}
       </div>
       <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
-        {date && <span style="font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;">{date}</span>}
+        {date && <span style="font-size:0.75rem;color:var(--muted);font-family:'DM Mono',monospace;">{date}</span>}
         {statusMeta && (
-          <span style={`font-size:.6rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;padding:.2em .6em;border-radius:2px;border:1px solid ${statusMeta.color}55;color:${statusMeta.color};`}>{statusMeta.label}</span>
+          <span style={`font-size:0.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;padding:.2em .6em;border-radius:2px;border:1px solid ${statusMeta.color}55;color:${statusMeta.color};`}>{statusMeta.label}</span>
         )}
       </div>
     </div>
 
-    <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(2rem,7vw,4rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin:0 0 1rem;">{d.title}</h1>
+    <h1 style="font-family:'DM Sans',sans-serif;font-size:clamp(2.5rem,7vw,4.5rem);font-weight:600;line-height:1.02;letter-spacing:-.05em;color:var(--ink);margin:0 0 1rem;">{d.title}</h1>
     <p style="font-size:.9rem;color:var(--muted);max-width:44rem;line-height:1.7;margin:0 0 1.5rem;">{d.description}</p>
 
     {d.url && (
       <a href={d.url} target="_blank" rel="noopener"
-        style="display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);text-decoration:none;border:1px solid var(--gold)33;padding:.5em 1em;border-radius:2px;transition:all .15s;"
+        style="display:inline-flex;align-items:center;gap:.5rem;font-size:0.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);text-decoration:none;border:1px solid var(--gold)33;padding:.5em 1em;border-radius:2px;transition:all .15s;"
         onmouseover="this.style.background='rgba(212,168,83,.08)'" onmouseout="this.style.background='transparent'">
         ↗ View Live
       </a>
     )}
   </section>
 
+  <script is:inline>
+    (function () {
+      var main = document.getElementById('gallery-main');
+      var thumbs = document.querySelectorAll('.gthumb');
+      if (!main || !thumbs.length) return;
+      thumbs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var src = btn.getAttribute('data-src');
+          var alt = btn.getAttribute('data-alt');
+          main.style.opacity = '0';
+          setTimeout(function () {
+            main.src = src;
+            main.alt = alt || main.alt;
+            main.style.opacity = '1';
+          }, 120);
+          thumbs.forEach(function (b) {
+            b.setAttribute('aria-current', 'false');
+            b.setAttribute('data-selected', 'false');
+          });
+          btn.setAttribute('aria-current', 'true');
+          btn.setAttribute('data-selected', 'true');
+        });
+      });
+    })();
+  </script>
+
   <!-- Tech stack strip -->
   {toolStack.length > 0 && (
     <section style="padding:1.5rem 0;border-bottom:1px solid var(--border);">
-      <p style="font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin:0 0 1rem;">Built with</p>
+      <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin:0 0 1rem;">Built with</p>
       <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;">
         {toolStack.map(tool => (
           <div title={tool.name} style="display:flex;flex-direction:column;align-items:center;gap:.4rem;opacity:.85;transition:opacity .15s;cursor:default;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.85'">
@@ -154,7 +191,7 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
                 loading="lazy"
               />
             </div>
-            <span style="font-size:.55rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">{tool.name}</span>
+            <span style="font-size:0.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">{tool.name}</span>
           </div>
         ))}
       </div>
@@ -172,7 +209,7 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
   <div style="margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);">
     {nextProject ? (
       <>
-        <p style="font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin:0 0 1rem;font-family:'DM Mono',monospace;">Up next</p>
+        <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin:0 0 1rem;font-family:'DM Mono',monospace;">Up next</p>
         <a href={`/projects/${nextProject.slug}`} class="next-card">
           {nextProject.data.image && (
             <img src={nextProject.data.image} alt={nextProject.data.title} />
@@ -185,7 +222,7 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
         </a>
       </>
     ) : (
-      <a href="/projects" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">
+      <a href="/projects" style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">
         ← All Projects
       </a>
     )}
@@ -194,21 +231,28 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
 </Layout>
 
 <style>
+  .gthumb { outline: 2px solid transparent; outline-offset: 1px; transition: outline-color .15s; }
+  .gthumb[data-selected="true"] { outline-color: var(--gold); }
+  .gthumb:focus-visible { outline-color: var(--gold); outline-style: solid; }
+  @media (max-width: 640px) {
+    .gallery-hero { aspect-ratio: 4/3; }
+  }
+
   .prose { color: var(--muted); font-size: .875rem; line-height: 1.75; }
-  .prose h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--ink); margin: 2.5rem 0 .75rem; font-weight: 400; }
-  .prose h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); margin: 1.75rem 0 .5rem; font-weight: 400; }
+  .prose h2 { font-family: 'DM Sans', sans-serif; font-size: 1.6rem; color: var(--ink); margin: 2.5rem 0 .75rem; font-weight: 600; letter-spacing: -.03em; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.15rem; color: var(--ink); margin: 1.75rem 0 .5rem; font-weight: 600; letter-spacing: -.02em; }
   .prose p { margin: 0 0 1rem; }
   .prose ul { padding-left: 1.25rem; margin: 0 0 1rem; display: flex; flex-direction: column; gap: .35rem; }
   .prose ol { padding-left: 1.25rem; margin: 0 0 1rem; display: flex; flex-direction: column; gap: .35rem; }
   .prose li { line-height: 1.65; }
   .prose strong { color: var(--ink); font-weight: 600; }
   .prose code { font-family: 'DM Mono', monospace; font-size: .8em; background: var(--border); padding: .15em .4em; border-radius: 2px; color: var(--gold); }
-  .prose blockquote { border-left: 2px solid var(--gold); padding-left: 1rem; margin: 1.5rem 0; color: var(--ink); font-family: 'DM Serif Display', serif; font-size: 1.05rem; line-height: 1.6; }
+  .prose blockquote { border-left: 2px solid var(--gold); padding-left: 1rem; margin: 1.5rem 0; color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 1.05rem; line-height: 1.6; }
   .prose a { color: var(--gold); text-decoration: none; }
   .prose a:hover { text-decoration: underline; }
   .prose hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
   .prose table { width: 100%; border-collapse: collapse; font-size: .8rem; margin: 1.5rem 0; }
-  .prose th { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid var(--border-hi); color: var(--ink); font-family: 'DM Mono', monospace; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+  .prose th { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid var(--border-hi); color: var(--ink); font-family: 'DM Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
   .prose td { padding: .5rem .75rem; border-bottom: 1px solid var(--border); color: var(--muted); }
   .prose tr:last-child td { border-bottom: none; }
 
@@ -242,7 +286,7 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
   }
   .pipeline-step:last-child::after { display: none; }
   .pipeline-num {
-    font-size: .6rem;
+    font-size: 0.75rem;
     font-family: 'DM Mono', monospace;
     color: var(--gold);
     text-transform: uppercase;
@@ -250,14 +294,15 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
     margin-bottom: .35rem;
   }
   .pipeline-label {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
     font-size: .95rem;
     color: var(--ink);
     line-height: 1.2;
     margin-bottom: .35rem;
   }
   .pipeline-desc {
-    font-size: .7rem;
+    font-size: 0.75rem;
     color: var(--muted);
     font-family: 'DM Mono', monospace;
     line-height: 1.4;
@@ -274,9 +319,9 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
     padding: .75rem 1rem;
     border-radius: 2px;
   }
-  .live-embed-header span { font-size: .7rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .live-embed-header span { font-size: 0.75rem; color: var(--muted); font-family: 'DM Mono', monospace; }
   .live-embed-btn {
-    font-size: .65rem; font-family: 'DM Mono', monospace;
+    font-size: 0.75rem; font-family: 'DM Mono', monospace;
     text-transform: uppercase; letter-spacing: .1em;
     color: var(--gold); background: transparent;
     border: 1px solid var(--gold)44; padding: .3em .8em;
@@ -293,7 +338,8 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
     border-radius: 2px;
   }
   .stat-callout .stat-number {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
     font-size: 2rem;
     color: var(--gold);
     line-height: 1;
@@ -334,14 +380,15 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
     flex-shrink: 0;
   }
   .next-card-title {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
     font-size: 1.05rem;
     color: var(--ink);
     line-height: 1.2;
     margin-bottom: .25rem;
   }
   .next-card-desc {
-    font-size: .7rem;
+    font-size: 0.75rem;
     color: var(--muted);
     font-family: 'DM Mono', monospace;
     line-height: 1.4;

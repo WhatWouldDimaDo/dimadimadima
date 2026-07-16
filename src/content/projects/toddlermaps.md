@@ -1,8 +1,8 @@
 ---
 title: ToddlerMaps
 date: 2026-07-11
-description: Coloring maps of my 4-year-old's real world, AI stickers off the kitchen label printer, and trip strips that answer "are we there yet?" with landmarks and minutes.
-shortDescription: Real maps of a toddler's world + AI stickers, printed on a $100 label printer.
+description: "Translating the adult mental model of navigation—GPS, miles, and minutes—into a 4-year-old's language: playgrounds, lunch, buses, and cousins."
+shortDescription: "A toddler can't follow the moving dot. He can follow the playground, the Peachoid, and lunch."
 tags: [ai, kids, maps, printing, gemini, openstreetmap, python]
 status: active
 featured: true
@@ -18,25 +18,52 @@ images:
   - /images/toddlermaps/toddlermaps-carkit-zoo.png
 ---
 
-## What It Is
+## The Road Trip
 
-Paper for a 4-year-old, generated from his actual world:
+On a drive to North Carolina, Dean kept asking, “Are we there yet?” He wasn't being impatient. He knew where we were going; he just had no way to picture the progress.
 
-- **Coloring map sheets** — real OpenStreetMap roads, one dashed route to trace, sticker circles at each end
-- **Trip strips** — a drive as landmarks with minutes between them, real road signs included. Dean holds the answer to "are we there yet?"
-- **Sticker Studio** — say anything out loud, a colorable sticker prints in ~15 seconds
-- **Car kits** — songs, games, and talk topics per destination
-- **Calendar labels** — the wall calendar prints its own event stickers
+I had GPS, a moving dot, miles, and an understanding of time. He had none of those. But he did understand landmarks.
 
-## Why
+So I designed a printable trip strip that translated the drive into his language:
 
-StickerBox — the $99 kids' AI sticker printer that went semi-viral — is a mono thermal printer, same hardware as the ~$100 Brother label printer already on our kitchen counter. The clone took an afternoon. The rest is what the product doesn't do: Dean's streets, his zoo, the hot dog place on the way.
+**Home → playground → lunch → Peachoid → rest area → cousins**
 
-## Notes
+Instead of asking a 4-year-old to track 47 miles or 42 minutes, the strip gives him a sequence of recognizable events. Each trip can be generated for today's destination, landmarks, and stops—not a generic children's map.
 
-- Thermal printing eats detail. Simpler icons won every time — road-sign pictograms beat cute illustrations
-- US road signs (MUTCD) are public domain. That's the real I-85 shield
-- Dean cares more about the hot dog place on the way than the aquarium at the end. The milestones are the product
+## The Larger Idea
+
+ToddlerMaps is the umbrella, not a single product. It shares maps, image generation, schedules, and thermal printing across several related experiments:
+
+- **Trip Maps** — road trips and familiar drives told through landmarks
+- **Visual Schedules** — everyday sequences a child can see and anticipate
+- **Printable Maps** — real local roads simplified for tracing and coloring
+- **Sticker Studio** — custom colorable labels generated from a spoken idea
+- **Print Lab** — the shared printing workflow behind the other experiences
+
+This page spotlights Trip Maps. The other experiences deserve their own stories as they develop.
+
+## Building an Internal Map
+
+The idea expanded beyond long drives. I narrate ordinary routes in terms Dean can hold onto: “We're turning onto Lenox Road,” “This is the curvy road,” and “That's where the school buses sleep.”
+
+The goal isn't to teach turn-by-turn navigation. It's to help him construct an internal map of his world.
+
+There are early signs that may be happening. On one drive, he noticed, “This isn't the way to our house.” On another, he predicted, “Next is Morningside Place.” Those are observations, not a measured result, but they're more meaningful than counting generated maps.
+
+## What I Learned
+
+- The trigger was a child's missing mental model—not AI, maps, or the printer
+- Adults think in time, distance, GPS, and addresses; young children think in landmarks and events
+- Thermal printing eats detail, so simple pictograms and real road signs work better than intricate illustrations
+- The most important stop may not be the destination. A familiar lunch spot can mean more than the aquarium at the end
+
+## What Still Needs Testing
+
+I haven't formally measured whether the maps improve spatial reasoning or reduce “Are we there yet?” questions. I still need to document how many trip strips have actually been printed and used, how Dean interacted with them during a drive, and which landmarks are most useful. For now, the evidence is observed route recognition and prediction—not a causal claim.
+
+## Where the Printer Fits
+
+The hardware made the idea immediate. StickerBox, a $99 kids' AI sticker printer, uses the same kind of mono thermal printing as the Brother label printer already on our kitchen counter. Connecting the hardware unlocked an instant, wireless output for one specific child and one specific trip. But the printer is infrastructure; the product insight is translating between adult and child mental models.
 
 ## Stack
 

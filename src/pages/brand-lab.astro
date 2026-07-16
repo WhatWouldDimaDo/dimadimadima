@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const variants = [
+  { id: '01', name: 'Copper · clean', file: 'dima-mark-copper-no-hairline.png', color: '#C45420' },
+  { id: '02', name: 'Copper · hairline', file: 'dima-mark-copper-hairline.png', color: '#C45420', selected: true },
+  { id: '03', name: 'Auburn · clean', file: 'dima-mark-auburn-no-hairline.png', color: '#944C36' },
+  { id: '04', name: 'Auburn · hairline', file: 'dima-mark-auburn-hairline.png', color: '#944C36' },
+  { id: '05', name: 'Golden copper · clean', file: 'dima-mark-golden-no-hairline.png', color: '#B96B32' },
+  { id: '06', name: 'Golden copper · hairline', file: 'dima-mark-golden-hairline.png', color: '#B96B32' },
+];
+
+const base = '/images/brand/dima-dima-dima/experiments/';
+---
+
+<Layout title="Brand Lab — Dima Perkis" description="Local review board for the Dima identity system.">
+  <section class="lab-hero">
+    <p class="page-eyebrow">Local identity proof</p>
+    <h1>One shape.<br />Three beard colors.</h1>
+    <p>Numbered for review. The small samples show what survives at navigation and favicon scale.</p>
+  </section>
+
+  <section class="lockup-proof" aria-labelledby="lockup-title">
+    <div>
+      <span class="proof-label">Selected direction</span>
+      <h2 id="lockup-title"><span class="brand-d"><img src={`${base}dima-mark-selected-512.png`} alt="D with Dima's profile" /></span><span class="brand-name"><span><i>D</i>ima</span><b>Perkis</b></span></h2>
+    </div>
+    <div class="lockup-copy">
+      <strong>The D does the recognition work.</strong>
+      <span>A restrained hairline cue makes the profile more personal without turning the mark into an illustration.</span>
+    </div>
+  </section>
+
+  <section class="variant-grid" aria-label="Logo color variants">
+    {variants.map((variant) => (
+      <article class:list={['variant-card', { selected: variant.selected }]}>
+        <header>
+          <span class="number">{variant.id}</span>
+          <div><h2>{variant.name}</h2><code>{variant.color}</code></div>
+          {variant.selected && <span class="selected-tag">Selected</span>}
+        </header>
+        <div class="large-sample">
+          <img src={`${base}${variant.file}`} alt={variant.name} />
+        </div>
+        <div class="scale-row">
+          <span class="scale scale-light"><img src={`${base}${variant.file}`} alt="" /></span>
+          <span class="scale scale-dark"><img src={`${base}${variant.file}`} alt="" /></span>
+          <span class="scale scale-light small"><img src={`${base}${variant.file}`} alt="" /></span>
+          <span class="scale scale-dark tiny"><img src={`${base}${variant.file}`} alt="" /></span>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="theme-proof">
+    <div class="theme-card light">
+      <span>Light UI</span>
+      <img class="theme-mark" src={`${base}dima-mark-selected-192.png`} alt="" />
+      <img class="theme-wordmark" src={`${base}dima-wordmark-flat.png`} alt="dima dima dima" />
+    </div>
+    <div class="theme-card dark">
+      <span>Dark UI</span>
+      <img class="theme-mark" src={`${base}dima-mark-selected-dark-192.png`} alt="" />
+      <img class="theme-wordmark" src={`${base}dima-wordmark-flat-dark.png`} alt="dima dima dima" />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .lab-hero { padding: 6rem 0 3rem; max-width: 47rem; }
+  .lab-hero h1 { margin: 0; font-size: clamp(3.2rem, 9vw, 6.8rem); letter-spacing: -.07em; line-height: .88; }
+  .lab-hero > p:last-child { max-width: 42rem; margin: 1.5rem 0 0; color: var(--muted); font-size: 1.08rem; }
+  .lockup-proof { display: grid; grid-template-columns: 1.3fr .7fr; align-items: end; gap: 3rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid var(--border); background: var(--surface); }
+  .proof-label, .theme-card > span { color: var(--muted); font: 600 .68rem/1 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .lockup-proof h2 { display: flex; align-items: center; gap: .5rem; margin: 1.2rem 0 0; }
+  .brand-d { width: clamp(7rem, 18vw, 12rem); line-height: 0; }
+  .brand-d img { width: 100%; }
+  .brand-name { display: grid; align-content: center; line-height: .82; letter-spacing: -.07em; }
+  .brand-name span { font-size: clamp(4rem, 10vw, 7.4rem); font-style: normal; }
+  .brand-name i { position: absolute; inline-size: 1px; block-size: 1px; clip-path: inset(50%); overflow: hidden; }
+  .brand-name b { margin-top: .36em; font-size: clamp(2.2rem, 5.2vw, 4rem); font-weight: 600; letter-spacing: -.05em; }
+  .lockup-copy { display: grid; gap: .6rem; padding-bottom: .5rem; color: var(--muted); font-size: .95rem; }
+  .lockup-copy strong { color: var(--ink); font-size: 1.25rem; line-height: 1.15; }
+  .variant-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .variant-card { overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+  .variant-card.selected { outline: 2px solid #C45420; outline-offset: -2px; }
+  .variant-card header { display: flex; align-items: center; gap: .8rem; min-height: 4.5rem; padding: .9rem 1rem; border-bottom: 1px solid var(--border); }
+  .variant-card header h2 { margin: 0; font-size: .88rem; letter-spacing: -.01em; }
+  .variant-card header code { color: var(--muted); font-size: .65rem; }
+  .number { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--ink); color: var(--bg); font: 600 .75rem/1 'DM Mono', monospace; }
+  .selected-tag { margin-left: auto; color: #C45420; font: 600 .6rem/1 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .large-sample { display: grid; place-items: center; aspect-ratio: 1.12; padding: 2rem; background: #f8f1e5; }
+  .large-sample img { width: 76%; height: 76%; object-fit: contain; }
+  .scale-row { display: flex; align-items: center; gap: .65rem; padding: 1rem; }
+  .scale { display: grid; place-items: center; width: 3.25rem; height: 3.25rem; padding: .35rem; border: 1px solid var(--border); }
+  .scale img { max-width: 100%; max-height: 100%; }
+  .scale-light { background: #f8f1e5; }
+  .scale-dark { background: #0c0c0e; }
+  .scale.small { width: 2.25rem; height: 2.25rem; }
+  .scale.tiny { width: 1.65rem; height: 1.65rem; padding: .2rem; }
+  .theme-proof { display: grid; grid-template-columns: 1fr 1fr; margin-top: 1.5rem; border: 1px solid var(--border); }
+  .theme-card { display: grid; grid-template-columns: 2rem 7rem 1fr; align-items: center; gap: 1rem; padding: 2rem; }
+  .theme-card + .theme-card { border-left: 1px solid var(--border); }
+  .theme-card > span { writing-mode: vertical-rl; }
+  .theme-card.light { background: #f8f1e5; color: #0b5a58; }
+  .theme-card.dark { background: #0c0c0e; color: #f8f1e5; }
+  .theme-mark { width: 7rem; max-height: 7rem; object-fit: contain; }
+  .theme-wordmark { width: min(100%, 19rem); }
+  @media (max-width: 800px) {
+    .lockup-proof { grid-template-columns: 1fr; gap: 1.5rem; }
+    .variant-grid { grid-template-columns: 1fr 1fr; }
+    .theme-proof { grid-template-columns: 1fr; }
+    .theme-card + .theme-card { border-left: 0; border-top: 1px solid var(--border); }
+  }
+  @media (max-width: 520px) {
+    .lab-hero { padding-top: 4rem; }
+    .lockup-proof { padding: 1.25rem; }
+    .variant-grid { grid-template-columns: 1fr; }
+    .theme-card { grid-template-columns: 1.5rem 4rem 1fr; padding: 1.25rem; }
+    .theme-mark { width: 4rem; }
+  }
+</style>

@@ -158,6 +158,7 @@
     display: none;
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
   [data-theme="light"] .site-brand-mark__image--light,
   [data-theme="dark"] .site-brand-mark__image--dark,

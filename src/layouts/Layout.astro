@@ -78,9 +78,9 @@ const ogTitle = title === 'Dima Perkis' ? 'Dima Perkis' : (title === 'dimadimadi
     <div class="nav-row" style="max-width:64rem;margin:0 auto;padding:0 1.5rem;height:3rem;display:flex;align-items:center;justify-content:space-between;position:relative;gap:1rem;">
       <a href="/" class="site-brand" aria-label="dimadimadima home">
         <span class="site-brand-mark" aria-hidden="true">
-          <img class="site-brand-mark__image site-brand-mark__image--light" src="/images/brand/dima-dima-dima/experiments/dima-mark-selected-192.png" alt="" />
-          <img class="site-brand-mark__image site-brand-mark__image--dark" src="/images/brand/dima-dima-dima/experiments/dima-mark-selected-dark-192.png" alt="" />
-          <img class="site-brand-mark__image site-brand-mark__image--hacker" src="/images/brand/dima-dima-dima/experiments/dima-mark-selected-dark-192.png" alt="" />
+          <img class="site-brand-mark__image site-brand-mark__image--light" src="/images/brand/dima-dima-dima/dima-mark-concept-01-transparent.png" alt="" />
+          <img class="site-brand-mark__image site-brand-mark__image--dark" src="/images/brand/dima-dima-dima/dima-mark-concept-01-transparent.png" alt="" />
+          <img class="site-brand-mark__image site-brand-mark__image--hacker" src="/images/brand/dima-dima-dima/dima-mark-concept-01-transparent.png" alt="" />
         </span>
         <span class="site-wordmark-lockup">
           <img class="site-wordmark site-wordmark--light" src="/images/brand/dima-dima-dima/experiments/dima-wordmark-flat.png" alt="dima dima dima" />
@@ -90,14 +90,15 @@ const ogTitle = title === 'Dima Perkis' ? 'Dima Perkis' : (title === 'dimadimadi
       </a>
 
       <div class="site-nav-primary" style="display:flex;align-items:center;gap:1.5rem;margin-left:auto;">
-        <a class="site-nav-link" href="/resume" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/resume' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/resume' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}><span class="nav-label-long">Professional Experience</span><span class="nav-label-short">Work</span></a>
+        <a class="site-nav-link" href="/resume" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/resume' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/resume' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>Work</a>
         <span aria-hidden="true" style="width:1px;height:12px;background:var(--border-hi);display:inline-block;"></span>
-        <a class="site-nav-link" href="/projects" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname.startsWith('/projects') ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname.startsWith('/projects') ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}><span class="nav-label-long">AI Side Quests</span><span class="nav-label-short">Projects</span></a>
+        <a class="site-nav-link" href="/projects" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname.startsWith('/projects') ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname.startsWith('/projects') ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>Projects</a>
       </div>
 
       <div id="nav-menu" class="site-nav-links" style="align-items:center;gap:1.5rem;">
         <span class="nav-menu-sep" aria-hidden="true" style="width:1px;height:12px;background:var(--border-hi);display:inline-block;"></span>
-        <a class="site-nav-link" href="/about" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/about' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/about' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>About Me</a>
+        <a class="site-nav-link" href="/now" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/now' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/now' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>Now</a>
+        <a class="site-nav-link" href="/about" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/about' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/about' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>About</a>
         <span aria-hidden="true" style="width:1px;height:12px;background:var(--border-hi);display:inline-block;" class="nav-menu-sep"></span>
         <a class="site-nav-link" href="/contact" style={'font-size:0.8rem;text-transform:uppercase;letter-spacing:.14em;text-decoration:none;transition:color .2s;' + (Astro.url.pathname === '/contact' ? 'color:var(--ink);' : 'color:var(--muted);')} onmouseover="this.style.color='var(--ink)'" onmouseout={Astro.url.pathname === '/contact' ? "this.style.color='var(--ink)'" : "this.style.color='var(--muted)'"}>Contact</a>
         <a href="/resume" style="background:var(--gold);color:#1a1a1a;font-size:0.75rem;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;padding:.35em 1em;border-radius:3px;font-weight:600;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Resume</a>

@@ -26,13 +26,13 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
       <div class="identity-lockup" aria-label="Dima Perkis">
         <img
           class="identity-mark"
-          src="/images/brand/dima-dima-dima/experiments/dima-mark-selected-512.png"
+          src="/images/brand/dima-dima-dima/dima-mark-concept-01-transparent.png"
           alt=""
           aria-hidden="true"
         />
         <div class="identity-words">
-          <h1 id="home-title" class="identity-first"><span class="accent-i">i</span>ma</h1>
-          <div class="identity-last">Perk<span class="accent-i">i</span>s</div>
+          <h1 id="home-title" class="identity-first">Dima</h1>
+          <div class="identity-last">Perkis</div>
         </div>
       </div>
 
@@ -52,102 +52,120 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
       </div>
     </section>
 
+    <nav class="home-paths" aria-label="Explore Dima’s site">
+      <a href="/resume"><span>01 · Work</span><strong>Experience &amp; outcomes</strong><i aria-hidden="true">→</i></a>
+      <a href="/projects"><span>02 · Projects</span><strong>Tools &amp; experiments</strong><i aria-hidden="true">→</i></a>
+      <a href="/now"><span>03 · Now</span><strong>Current focus</strong><i aria-hidden="true">→</i></a>
+      <a href="/about"><span>04 · About</span><strong>Life &amp; values</strong><i aria-hidden="true">→</i></a>
+    </nav>
+
     <section class="work-heading" aria-labelledby="selected-work-title">
       <div>
-        <p class="section-label">Selected work</p>
-        <h2 id="selected-work-title">Things I’ve shipped</h2>
+        <p class="section-label">Selected projects</p>
+        <h2 id="selected-work-title">Projects you can open</h2>
       </div>
       <a href="/projects">All projects <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="portfolio-grid" aria-label="Featured projects">
-      <a href="/projects/dewey" class="project-card project-card--feature card-dewey">
+      <article class="project-card project-card--feature card-dewey">
         <div class="card-media card-media--dewey">
           <img src="/images/dewey/dewey-check-list.png" alt="Dewey checking a reading list against the library catalog" />
         </div>
         <div class="card-copy">
           <span class="card-kicker">Featured build</span>
-          <div class="card-title-row"><h2>Dewey</h2><span aria-hidden="true">↗</span></div>
+          <div class="card-title-row"><h2>Dewey</h2></div>
           <p>Family book recommendations, checked live against Fulton County Library inventory.</p>
+          <div class="card-actions">
+            <a class="card-action-primary" href="https://dimadimadima.com/dewey" target="_blank" rel="noopener noreferrer">Open Dewey ↗</a>
+            <a href="/projects/dewey">Project notes →</a>
+          </div>
         </div>
-      </a>
+      </article>
 
-      <a href="/atl" class="radar-card">
+      <article class="radar-card">
         <div class="radar-brand">
           <span class="radar-icon"><img src="/atl/favicon.svg" alt="" /></span>
           <span>On Dima’s Radar</span>
         </div>
         <div class="radar-title-row">
           <h2>Happening in Atlanta</h2>
-          <span aria-hidden="true">↗</span>
         </div>
         <div id="atl-live-list" class="radar-list">
           <div class="radar-empty">Loading the radar…</div>
         </div>
         <p class="radar-foot">Atlanta events worth leaving the house for, ranked by my event-intelligence pipeline.</p>
-      </a>
+        <div class="card-actions radar-actions">
+          <a class="card-action-primary" href="https://dimadimadima.com/atl" target="_blank" rel="noopener noreferrer">Open Radar ↗</a>
+          <a href="/projects/atl-radar">Project notes →</a>
+        </div>
+      </article>
 
-      <a href="/projects/ai-ideas-explorer" class="project-card card-ideas">
+      <article class="project-card card-ideas">
         <div class="card-media"><img src="/images/ai-ideas-galaxy.png" alt="AI Ideas Explorer idea galaxy" /></div>
         <div class="card-copy">
           <span class="card-kicker">AI research</span>
-          <div class="card-title-row"><h2>AI Ideas Explorer</h2><span aria-hidden="true">↗</span></div>
+          <div class="card-title-row"><h2>AI Ideas Explorer</h2></div>
           <p>1,160 business ideas generated, scored, and mapped.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://ai-ideas-explorer.vercel.app" target="_blank" rel="noopener noreferrer">Open app ↗</a><a href="/projects/ai-ideas-explorer">Details →</a></div>
         </div>
-      </a>
+      </article>
 
-      <a href="/projects/toddlermaps" class="project-card card-toddlermaps">
+      <article class="project-card card-toddlermaps">
         <div class="card-media"><img src="/images/toddlermaps/toddlermaps-overview-map.png" alt="ToddlerMaps printable neighborhood map" /></div>
         <div class="card-copy">
           <span class="card-kicker">Family tool</span>
-          <div class="card-title-row"><h2>ToddlerMaps</h2><span aria-hidden="true">↗</span></div>
+          <div class="card-title-row"><h2>ToddlerMaps</h2></div>
           <p>Navigation translated into landmarks a toddler actually knows.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://dimadimadima.com/toddlermaps" target="_blank" rel="noopener noreferrer">Open app ↗</a><a href="/projects/toddlermaps">Details →</a></div>
         </div>
-      </a>
+      </article>
 
-      <a href="/projects/power-analysis" class="project-card card-power">
+      <article class="project-card card-power">
         <div class="card-media"><img src="/images/power-dashboard.png" alt="Georgia Power energy-analysis dashboard" /></div>
         <div class="card-copy">
           <span class="card-kicker">Personal data</span>
-          <div class="card-title-row"><h2>Georgia Power</h2><span aria-hidden="true">↗</span></div>
+          <div class="card-title-row"><h2>Georgia Power</h2></div>
           <p>13 months and 10,487 hourly readings turned into an energy playbook.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://dimadimadima.com/power" target="_blank" rel="noopener noreferrer">Open dashboard ↗</a><a href="/projects/power-analysis">Details →</a></div>
         </div>
-      </a>
+      </article>
 
-      <a
-        href={song?.data.youtube ?? '/projects/suno-factory'}
-        target={song?.data.youtube ? '_blank' : undefined}
-        rel={song?.data.youtube ? 'noopener noreferrer' : undefined}
-        class="project-card card-suno"
-      >
+      <article class="project-card card-suno">
         <div class="card-media card-media--suno">
           {songThumbnail && <img src={songThumbnail} alt={song?.data.title ?? 'Suno Factory'} />}
           <span class="play-button" aria-hidden="true">▶</span>
         </div>
         <div class="card-copy">
           <span class="card-kicker">Creative system</span>
-          <div class="card-title-row"><h2>Suno Factory</h2><span aria-hidden="true">↗</span></div>
+          <div class="card-title-row"><h2>Suno Factory</h2></div>
           <p>An end-to-end pipeline for turning family stories into finished songs.</p>
+          <div class="card-actions">
+            <a class="card-action-primary" href={song?.data.youtube ?? '/projects/suno-factory'} target={song?.data.youtube ? '_blank' : undefined} rel={song?.data.youtube ? 'noopener noreferrer' : undefined}>{song?.data.youtube ? 'Play latest ↗' : 'Explore →'}</a>
+            <a href="/projects/suno-factory">Details →</a>
+          </div>
         </div>
-      </a>
+      </article>
 
-      <a href="/projects/spotify-analysis" class="project-card card-music">
+      <article class="project-card card-music">
         <div class="card-media"><img src="/images/spotify-hero.png" alt="Dima’s music listening analysis" /></div>
         <div class="card-copy">
           <span class="card-kicker">Personal data</span>
-          <div class="card-title-row"><h2>Music Data</h2><span aria-hidden="true">↗</span></div>
+          <div class="card-title-row"><h2>Music Data</h2></div>
           <p>18 years, 147,594 streams, and 178 concerts—visualized.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://dima-spotify.vercel.app" target="_blank" rel="noopener noreferrer">Open site ↗</a><a href="/projects/spotify-analysis">Details →</a></div>
         </div>
-      </a>
+      </article>
 
-      <a href="/projects/kill-bill" class="project-card card-killbill">
+      <article class="project-card card-killbill">
         <div class="card-media"><img src="/images/kill-bill.jpg" alt="All Roads to Kill Bill" /></div>
         <div class="card-copy">
           <span class="card-kicker">Film graph</span>
-          <div class="card-title-row"><h2>All Roads to Kill Bill</h2><span aria-hidden="true">↗</span></div>
+          <div class="card-title-row"><h2>All Roads to Kill Bill</h2></div>
           <p>Every Tarantino connection in one explorable graph.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://allroadstokillbill.vercel.app" target="_blank" rel="noopener noreferrer">Open graph ↗</a><a href="/projects/kill-bill">Details →</a></div>
         </div>
-      </a>
+      </article>
     </section>
   </main>
 
@@ -209,23 +227,27 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
   }
 
   .identity-lockup {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-rows: auto auto;
-    column-gap: clamp(.75rem, 1.5vw, 1.15rem);
-    align-items: center;
+    display: flex;
+    align-items: stretch;
+    gap: clamp(.9rem, 1.7vw, 1.25rem);
     width: max-content;
     max-width: 100%;
   }
 
   .identity-mark {
-    grid-row: 1 / 3;
     width: clamp(8.75rem, 16vw, 10rem);
     height: auto;
     display: block;
+    flex: 0 0 auto;
   }
 
-  .identity-words { min-width: 0; }
+  .identity-words {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: .05em 0 .08em;
+  }
   .identity-first,
   .identity-last {
     margin: 0;
@@ -233,23 +255,10 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     font-family: 'DM Sans', system-ui, sans-serif;
     font-weight: 650;
     letter-spacing: -.065em;
-    line-height: .9;
+    font-size: clamp(3rem, 6vw, 4.1rem);
+    line-height: .88;
   }
-  .identity-first { font-size: clamp(4rem, 7vw, 4.75rem); }
-  .identity-last { margin-top: .42rem; font-size: clamp(2.55rem, 4.6vw, 3rem); }
-
-  .accent-i { position: relative; display: inline-block; }
-  .accent-i::after {
-    content: '';
-    position: absolute;
-    top: .08em;
-    left: 51%;
-    width: .19em;
-    height: .19em;
-    border-radius: 50%;
-    background: #C45420;
-    transform: translateX(-50%);
-  }
+  .identity-last { margin: 0; }
 
   .masthead-copy { max-width: 30rem; }
   .masthead-copy p {
@@ -295,6 +304,39 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     letter-spacing: .08em;
     text-transform: uppercase;
   }
+
+  .home-paths {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+  .home-paths a {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 7rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.1rem 1.15rem;
+    border-right: 1px solid var(--border);
+    color: inherit;
+    text-decoration: none;
+    transition: background-color .2s ease;
+  }
+  .home-paths a:last-child { border-right: 0; }
+  .home-paths a:hover { background: color-mix(in srgb, var(--gold) 7%, transparent); }
+  .home-paths span {
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+  .home-paths strong { max-width: 9rem; font-size: .88rem; line-height: 1.25; }
+  .home-paths i { position: absolute; right: 1rem; bottom: .9rem; color: var(--muted); font-style: normal; }
 
   .work-heading {
     display: flex;
@@ -363,6 +405,32 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
   .project-card--feature .card-title-row h2 { font-size: 1.55rem; }
   .project-card--feature .card-copy p { max-width: 42rem; font-size: .92rem; }
 
+  .card-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .55rem 1rem;
+    margin-top: auto;
+    padding-top: 1.1rem;
+  }
+  .card-actions a {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: .64rem;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .card-actions a:hover { color: var(--ink); }
+  .card-actions .card-action-primary {
+    padding: .55rem .72rem;
+    border: 1px solid color-mix(in srgb, var(--gold) 55%, var(--border));
+    border-radius: 7px;
+    background: color-mix(in srgb, var(--gold) 9%, transparent);
+    color: var(--ink);
+  }
+
   .card-dewey { grid-column: span 7; }
   .radar-card { grid-column: span 5; }
   .card-ideas,
@@ -402,10 +470,14 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
   .radar-card :global(.radar-name) { overflow: hidden; color: var(--ink); font-size: .86rem; text-overflow: ellipsis; white-space: nowrap; }
   .radar-card :global(.radar-venue) { overflow: hidden; color: var(--muted); font-family: 'DM Mono', monospace; font-size: .64rem; letter-spacing: .03em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
   .radar-foot { margin: .65rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.5; }
+  .radar-actions { margin-top: .35rem; }
 
   @media (max-width: 860px) {
     .masthead { grid-template-columns: 1fr; gap: 1.75rem; }
     .masthead-copy { max-width: 42rem; }
+    .home-paths { grid-template-columns: repeat(2, 1fr); }
+    .home-paths a:nth-child(2) { border-right: 0; }
+    .home-paths a:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
     .proof-grid { grid-template-columns: repeat(2, 1fr); }
     .proof-grid > div { padding: 1rem; border-bottom: 1px solid var(--border); }
     .proof-grid > div:nth-child(2) { border-right: 0; }
@@ -433,8 +505,8 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     .home-shell { padding: 1rem 0 3.5rem; }
     .masthead { gap: 1.35rem; padding: 1.25rem; border-radius: 18px; }
     .identity-mark { width: 6rem; }
-    .identity-first { font-size: 3rem; }
-    .identity-last { margin-top: .28rem; font-size: 1.9rem; }
+    .identity-first,
+    .identity-last { font-size: 2.25rem; }
     .masthead-copy p { font-size: 1rem; line-height: 1.58; }
     .masthead-link { margin-top: .9rem; }
     .proof-grid { padding-top: .35rem; }
@@ -446,6 +518,8 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     .work-heading { padding: 2.75rem 0 1rem; align-items: center; }
     .work-heading h2 { font-size: 1.85rem; }
     .work-heading > a { font-size: .62rem; }
+    .home-paths a { min-height: 5.7rem; padding: .9rem; }
+    .home-paths strong { max-width: 7.5rem; font-size: .78rem; }
     .portfolio-grid { gap: .75rem; }
     .project-card,
     .radar-card { border-radius: 15px; }

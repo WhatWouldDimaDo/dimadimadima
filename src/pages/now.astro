@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const latestSong = (await getCollection('posts'))
+  .filter(post => !post.data.draft && post.data.type === 'song' && post.data.youtube)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+---
+
+<Layout title="Now — Dima Perkis" description="What Dima Perkis is focused on, building, learning, and enjoying now.">
+  <section class="now-hero">
+    <div>
+      <p class="page-eyebrow">Now · July 2026 · Atlanta</p>
+      <h1 class="page-title">What has my<br />attention now.</h1>
+    </div>
+    <div class="now-intro">
+      <p>A current snapshot of the work, ideas, and people occupying most of my headspace. More useful than pretending an About page never changes.</p>
+      <span>Last updated <time datetime="2026-07">July 2026</time></span>
+    </div>
+  </section>
+
+  <section class="now-grid" aria-label="Current focus areas">
+    <article class="now-card now-card--work">
+      <span class="now-number">01</span>
+      <p class="section-kicker">Work</p>
+      <h2>Making applied AI useful</h2>
+      <p>Focusing on the operating layer around AI: choosing high-value problems, building evaluation into the process, and helping teams move from scattered experiments to systems people actually use.</p>
+      <a href="/resume">See my experience →</a>
+    </article>
+
+    <article class="now-card now-card--build">
+      <span class="now-number">02</span>
+      <p class="section-kicker">Building</p>
+      <h2>Tools for real family life</h2>
+      <p>Dewey is improving our library trips. On Dima’s Radar is making Atlanta weekends easier to plan. This site is becoming the shared home for both.</p>
+      <div class="now-links">
+        <a href="https://dimadimadima.com/dewey" target="_blank" rel="noopener noreferrer">Open Dewey ↗</a>
+        <a href="https://dimadimadima.com/atl" target="_blank" rel="noopener noreferrer">Open Radar ↗</a>
+      </div>
+    </article>
+
+    <article class="now-card">
+      <span class="now-number">03</span>
+      <p class="section-kicker">Learning</p>
+      <h2>Agent workflows that hold up</h2>
+      <p>Going deeper on evaluation, context design, tool use, and the boring-but-essential infrastructure that separates a compelling demo from a dependable workflow.</p>
+      <a href="/projects">Browse the experiments →</a>
+    </article>
+
+    <article class="now-card">
+      <span class="now-number">04</span>
+      <p class="section-kicker">Life</p>
+      <h2>Two toddlers, one Atlanta summer</h2>
+      <p>Trying to stay present for the small, funny years while keeping enough adventure on the calendar to make family life feel expansive rather than merely efficient.</p>
+      <a href="/about">More about me →</a>
+    </article>
+
+    <article class="now-card now-card--wide">
+      <span class="now-number">05</span>
+      <p class="section-kicker">Listening &amp; making</p>
+      <h2>{latestSong?.data.title ?? 'Turning family stories into songs'}</h2>
+      <p>Suno remains my fastest route from an inside joke or family memory to something we can play in the car.</p>
+      {latestSong?.data.youtube
+        ? <a href={latestSong.data.youtube} target="_blank" rel="noopener noreferrer">Play the latest song ↗</a>
+        : <a href="/projects/suno-factory">Explore the music project →</a>}
+    </article>
+  </section>
+
+  <aside class="now-note">
+    <span>About this page</span>
+    <p>A `/now` page is intentionally temporary. I update it when the center of gravity changes—not every time a task moves across a board.</p>
+  </aside>
+</Layout>
+
+<style>
+  .now-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .85fr);
+    gap: clamp(2rem, 7vw, 6rem);
+    align-items: end;
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .now-intro { max-width: 29rem; padding-bottom: .45rem; }
+  .now-intro p { margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.7; }
+  .now-intro span { display: block; margin-top: 1.2rem; color: var(--gold); font: 500 .68rem/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .now-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 3.5rem 0 1rem; }
+  .now-card { position: relative; min-height: 19rem; padding: 2rem; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
+  .now-card--work { background: color-mix(in srgb, var(--gold) 7%, var(--surface)); }
+  .now-card--build { background: color-mix(in srgb, #0B5A58 9%, var(--surface)); }
+  .now-card--wide { grid-column: 1 / -1; min-height: 14rem; }
+  .now-number { position: absolute; top: 1.25rem; right: 1.35rem; color: var(--border-hi); font: 600 .78rem/1 'DM Mono', monospace; }
+  .now-card h2 { max-width: 27rem; margin: .7rem 0 .8rem; font-size: clamp(1.45rem, 3vw, 2.15rem); letter-spacing: -.045em; line-height: 1.05; }
+  .now-card > p:not(.section-kicker) { max-width: 34rem; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+  .now-card > a, .now-links a { display: inline-block; margin-top: 1.3rem; color: var(--ink); font: 600 .68rem/1.4 'DM Mono', monospace; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+  .now-card a:hover { color: var(--gold); }
+  .now-links { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
+  .now-note { display: grid; grid-template-columns: 10rem 1fr; gap: 2rem; margin: 1rem 0 5rem; padding: 1.3rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .now-note span { color: var(--gold); font: 500 .68rem/1.5 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .now-note p { max-width: 44rem; margin: 0; color: var(--muted); font-size: .84rem; }
+  @media (max-width: 760px) {
+    .now-hero { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 4rem; }
+    .now-grid { grid-template-columns: 1fr; margin-top: 2rem; }
+    .now-card--wide { grid-column: auto; }
+  }
+  @media (max-width: 520px) {
+    .now-card { min-height: 0; padding: 1.4rem; }
+    .now-note { grid-template-columns: 1fr; gap: .5rem; }
+  }
+</style>

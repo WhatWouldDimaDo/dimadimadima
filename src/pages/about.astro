@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 
 const VALUES = [
-  { title: 'Family & security', body: 'Build a life where the people I love feel supported, protected, and fully part of the adventure.', icon: 'home' },
-  { title: 'Joy, awe & adventure', body: 'Seek experiences big enough to reset my sense of what is possible—and laugh often along the way.', icon: 'spark' },
-  { title: 'Growth & curiosity', body: 'Keep learning in public, follow the interesting thread, and stay willing to be a beginner.', icon: 'book' },
-  { title: 'Physical vitality', body: 'Use hard physical things to stay grounded, resilient, and awake to the world.', icon: 'heart' },
-  { title: 'Resilience', body: 'Turn difficult chapters into useful information, then keep moving with more self-awareness.', icon: 'mountain' },
-  { title: 'Contribution', body: 'Leave people, teams, and systems more capable than I found them.', icon: 'people' },
+  { title: 'Give my family more freedom', body: 'As an immigrant and provider, security means giving my family peace of mind, flexibility, and choices I didn\'t have growing up.', icon: 'home' },
+  { title: 'Make room for joy, awe & absurdity', body: 'I am most alive laughing, dancing, hearing live music, or exploring somewhere new. Beauty, play, and wonder are not extras.', icon: 'spark' },
+  { title: 'Follow the interesting thread', body: 'My possibility brain asks: What can I make with this? How does it connect? Curiosity turns scattered ideas into something useful.', icon: 'book' },
+  { title: 'Stay strong for the adventure', body: 'My body is the vehicle for joy and presence. I want to hike mountains with my kids in thirty years, so movement matters now.', icon: 'heart' },
+  { title: 'Find calm, then keep moving', body: 'Calm is not my default. Movement, mindfulness, music, and perspective help me interrupt the spiral and fall forward.', icon: 'mountain' },
+  { title: 'Connect people and leave things better', body: 'I want to be a community connector—lifting others, sharing what I know, and building teams where people can do their best work.', icon: 'people' },
 ];
 
 const ICONS: Record<string,string> = {
@@ -28,7 +28,7 @@ const SOMEDAY = ['Antarctica + aurora borealis', 'A genuinely good stand-up set'
     <div class="about-copy">
       <p class="page-eyebrow">About me</p>
       <h1 class="page-title">Builder.<br />Dad. Explorer.</h1>
-      <p class="about-lede">I’m a Data & AI leader who likes hard problems, working alongside a sharp team, and making the abstract tangible. Outside work, I build personal tools, chase new experiences, and test nearly everything on my family.</p>
+      <p class="about-lede">I’m a Data &amp; AI leader who likes hard problems, curious people, and making the abstract tangible. I’m passionate about connecting with people, live music and events, and finding moments of awe, joy, and absurdity. Outside work, I build personal tools, chase new experiences, and test nearly everything on my family.</p>
       <p class="personal-motto">“Make a stranger laugh every day.”</p>
     </div>
     <figure class="headshot"><img src="/images/dima.jpeg" alt="Dima Perkis" /></figure>
@@ -37,7 +37,7 @@ const SOMEDAY = ['Antarctica + aurora borealis', 'A genuinely good stand-up set'
   <section class="life-gallery">
     <div class="family-shot">
       <img src="/images/family.jpg" alt="Dima with Jeannie, Dean, and Ruby" loading="lazy" />
-      <div class="photo-caption"><strong>The home team</strong><span>Jeannie, Dean, Ruby, and me</span></div>
+      <div class="photo-caption"><strong>Jeannie, Dean, Ruby, and me</strong><span>Strawberry picking in Atlanta</span></div>
     </div>
     <div class="world-thumbs" aria-label="Dima out in the world">
       {[

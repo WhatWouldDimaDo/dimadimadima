@@ -41,7 +41,6 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
           Data &amp; AI leader who turns emerging technology into measurable value—from
           enterprise strategy to production systems.
         </p>
-        <a class="masthead-link" href="/resume">Professional experience <span aria-hidden="true">→</span></a>
       </div>
 
       <div class="proof-grid" aria-label="Selected facts">
@@ -51,13 +50,6 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
         <div><strong>2</strong><span>Toddlers</span></div>
       </div>
     </section>
-
-    <nav class="home-paths" aria-label="Explore Dima’s site">
-      <a href="/resume"><span>01 · Work</span><strong>Experience &amp; outcomes</strong><i aria-hidden="true">→</i></a>
-      <a href="/projects"><span>02 · Projects</span><strong>Tools &amp; experiments</strong><i aria-hidden="true">→</i></a>
-      <a href="/now"><span>03 · Now</span><strong>Current focus</strong><i aria-hidden="true">→</i></a>
-      <a href="/about"><span>04 · About</span><strong>Life &amp; values</strong><i aria-hidden="true">→</i></a>
-    </nav>
 
     <section class="work-heading" aria-labelledby="selected-work-title">
       <div>
@@ -267,19 +259,6 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     font-size: clamp(1.05rem, 2vw, 1.2rem);
     line-height: 1.7;
   }
-  .masthead-link {
-    display: inline-flex;
-    gap: .55rem;
-    margin-top: 1.35rem;
-    color: var(--ink);
-    font-family: 'DM Mono', monospace;
-    font-size: .72rem;
-    letter-spacing: .08em;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-  .masthead-link:hover { color: var(--gold); }
-
   .proof-grid {
     grid-column: 1 / -1;
     display: grid;
@@ -304,39 +283,6 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     letter-spacing: .08em;
     text-transform: uppercase;
   }
-
-  .home-paths {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin-top: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    background: var(--surface);
-  }
-  .home-paths a {
-    position: relative;
-    display: flex;
-    min-width: 0;
-    min-height: 7rem;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1.1rem 1.15rem;
-    border-right: 1px solid var(--border);
-    color: inherit;
-    text-decoration: none;
-    transition: background-color .2s ease;
-  }
-  .home-paths a:last-child { border-right: 0; }
-  .home-paths a:hover { background: color-mix(in srgb, var(--gold) 7%, transparent); }
-  .home-paths span {
-    color: var(--gold);
-    font-family: 'DM Mono', monospace;
-    font-size: .62rem;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-  }
-  .home-paths strong { max-width: 9rem; font-size: .88rem; line-height: 1.25; }
-  .home-paths i { position: absolute; right: 1rem; bottom: .9rem; color: var(--muted); font-style: normal; }
 
   .work-heading {
     display: flex;
@@ -475,9 +421,6 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
   @media (max-width: 860px) {
     .masthead { grid-template-columns: 1fr; gap: 1.75rem; }
     .masthead-copy { max-width: 42rem; }
-    .home-paths { grid-template-columns: repeat(2, 1fr); }
-    .home-paths a:nth-child(2) { border-right: 0; }
-    .home-paths a:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
     .proof-grid { grid-template-columns: repeat(2, 1fr); }
     .proof-grid > div { padding: 1rem; border-bottom: 1px solid var(--border); }
     .proof-grid > div:nth-child(2) { border-right: 0; }
@@ -508,7 +451,6 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     .identity-first,
     .identity-last { font-size: 2.25rem; }
     .masthead-copy p { font-size: 1rem; line-height: 1.58; }
-    .masthead-link { margin-top: .9rem; }
     .proof-grid { padding-top: .35rem; }
     .proof-grid > div,
     .proof-grid > div:first-child,
@@ -518,8 +460,6 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     .work-heading { padding: 2.75rem 0 1rem; align-items: center; }
     .work-heading h2 { font-size: 1.85rem; }
     .work-heading > a { font-size: .62rem; }
-    .home-paths a { min-height: 5.7rem; padding: .9rem; }
-    .home-paths strong { max-width: 7.5rem; font-size: .78rem; }
     .portfolio-grid { gap: .75rem; }
     .project-card,
     .radar-card { border-radius: 15px; }

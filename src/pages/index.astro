@@ -208,6 +208,18 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
   <script is:inline>
     (function () {
+      document.querySelectorAll('.bc-project').forEach(function (card) {
+        card.addEventListener('click', function () {
+          var titleEl = card.querySelector('.bc-project-title');
+          var name = (titleEl && titleEl.textContent.trim()) || card.getAttribute('href') || 'unknown';
+          if (typeof window.track === 'function') window.track('project_click', { project: name });
+        });
+      });
+    })();
+  </script>
+
+  <script is:inline>
+    (function () {
       var cell = document.getElementById('bc-ideas-cell');
       if (!cell || !('IntersectionObserver' in window)) return;
       var io = new IntersectionObserver(function (entries) {

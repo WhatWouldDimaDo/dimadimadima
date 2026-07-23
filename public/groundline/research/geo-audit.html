@@ -1,0 +1,178 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Groundline — GEO Audit Methodology</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:'Iowan Old Style',Georgia,serif;background:#faf7f0;color:#1a1a18;max-width:860px;margin:0 auto;padding:20px 16px;line-height:1.55}
+h1,h2,h3{color:#22402e} a{color:#22402e}
+table{border-collapse:collapse;font-size:.85rem;display:block;overflow-x:auto}
+th,td{border:1px solid #d8d2c4;padding:6px 8px;text-align:left;vertical-align:top;min-width:110px}
+th{background:#efe9dc} strong{color:#22402e}
+</style></head><body>
+<h1>AI-visibility (GEO) audit — methodology</h1>
+<p><a href="/groundline/research/">&larr; back to research</a></p>
+
+<p><strong>What this is:</strong> the repeatable method behind the pitch line <em>"AI recommends your biggest competitor 23&times; more often than you."</em> One audit = one trade &times; one territory &times; one client company, run across 6 AI engines, scored, and delivered as a one-page audit card that slots into the "spotlight on them" section of the one-sheet.</p>
+<p><strong>Why it's an open wedge:</strong> none of the four profiled competitors (CurbLead, Porchline, PostScout, RenderMail) sell any diagnostic/visibility product. This is the only artifact in the space that makes the problem <em>visible</em> before selling the fix.</p>
+<p><strong>Established mechanics (do not re-derive — from the Jul 16 SEO/AI-search research):</strong></p>
+<ul>
+<li>Google AI Overviews cite only what already ranks top-10/20 organically.</li>
+<li>Perplexity indexes fastest, citations are transparent.</li>
+<li>ChatGPT leans on aggregate third-party reputation (listicles, review platforms, forum mentions).</li>
+<li>FAQPage schema = highest-leverage structured data for GEO.</li>
+<li>Third-party citations beat owned-site content for AI answers.</li>
+</ul>
+<p>These mechanics are why the audit is <em>predictable from organic footprint</em> — and why the remediation roadmap writes itself from the citation-source breakdown (section 3).</p>
+
+<h2>1 &middot; Query battery (parameterized, ~18 queries per trade/territory)</h2>
+<p>Variables: <code>{trade}</code> (landscaping / pool service / driveway paving / roofing), <code>{job}</code> (trade-specific project noun), <code>{city}</code>, <code>{hood1}</code>, <code>{hood2}</code> (two target neighborhoods/suburbs), <code>{company}</code> (the client), <code>{competitor}</code> (top local rival, from the SERP winners).</p>
+
+<h3>Discovery intent (the money queries — weight 2&times; in scoring)</h3>
+<table>
+<tr><th>#</th><th>Template</th></tr>
+<tr><td>D1</td><td>best {trade} company in {city}</td></tr>
+<tr><td>D2</td><td>best {trade} in {hood1}</td></tr>
+<tr><td>D3</td><td>best {trade} in {hood2}</td></tr>
+<tr><td>D4</td><td>{trade} near me — I'm in {hood1} <em>(location stated in-prompt, see section 2)</em></td></tr>
+<tr><td>D5</td><td>who should I hire to {job} in {city}?</td></tr>
+<tr><td>D6</td><td>recommend a high-end {trade} contractor in {hood1}, budget is not the constraint</td></tr>
+<tr><td>D7</td><td>I need a {trade} company that does large projects ($25K+) in {city}</td></tr>
+<tr><td>D8</td><td>top rated {trade} companies {city} 2026</td></tr>
+</table>
+
+<h3>Job-specific intent</h3>
+<table>
+<tr><th>#</th><th>Template</th></tr>
+<tr><td>J1</td><td>how much does {job} cost in {city} and who does good work?</td></tr>
+<tr><td>J2</td><td>best company for {job} in {hood1}</td></tr>
+<tr><td>J3</td><td>{job} contractor recommendations {city}</td></tr>
+</table>
+
+<h3>Validation intent (homeowner checking a name they already have)</h3>
+<table>
+<tr><th>#</th><th>Template</th></tr>
+<tr><td>V1</td><td>is {company} legit?</td></tr>
+<tr><td>V2</td><td>{company} {city} reviews</td></tr>
+<tr><td>V3</td><td>{company} vs {competitor} — which is better?</td></tr>
+<tr><td>V4</td><td>has anyone used {company} in {hood1}?</td></tr>
+</table>
+
+<h3>Comparative / list intent</h3>
+<table>
+<tr><th>#</th><th>Template</th></tr>
+<tr><td>C1</td><td>give me 5 {trade} companies to get quotes from in {city}</td></tr>
+<tr><td>C2</td><td>who are the top 3 {trade} companies serving {hood1} and {hood2}?</td></tr>
+<tr><td>C3</td><td>which {trade} companies in {city} have the best reviews?</td></tr>
+</table>
+
+<p><strong>Trade fills for <code>{job}</code>:</strong> landscaping &rarr; "a full landscape redesign"; pools &rarr; "a pool renovation" / "weekly pool maintenance" (run both if the client does both); driveways &rarr; "replace my concrete driveway"; roofing &rarr; "replace my roof".</p>
+<p><strong>Rule:</strong> keep the wording of each template fixed across companies and across time — the battery is only comparable if the prompts are identical. Version the battery (this is v1); any wording change bumps the version and breaks comparability with prior runs.</p>
+
+<h2>2 &middot; Engine matrix + run protocol</h2>
+<h3>The matrix</h3>
+<table>
+<tr><th>Engine</th><th>Consumer surface</th><th>Automatable?</th><th>Location handling</th><th>Notes</th></tr>
+<tr><td>ChatGPT</td><td>chat.openai.com (logged-out or temp chat)</td><td>API yes, <strong>but</strong> API answers &ne; consumer app (app adds web search, memory, its own system prompt). Use the app for demo artifacts.</td><td>State location in prompt (D4-style). Logged-out ChatGPT may IP-geolocate — note it, don't rely on it.</td><td>Temporary Chat mode = no memory.</td></tr>
+<tr><td>Claude</td><td>claude.ai (fresh chat, no project/memory)</td><td>API yes, same caveat — consumer app has web search + system prompt the API doesn't replicate.</td><td>In-prompt only.</td><td>Turn off memory / use a chat with no prior context.</td></tr>
+<tr><td>Gemini</td><td>gemini.google.com</td><td>API (Gemini API w/ grounding) approximates but doesn't match consumer app.</td><td>Google account location leaks in — use a clean profile, set location in prompt anyway.</td><td>Grounded answers pull from Google index &rarr; correlates with AI Overviews.</td></tr>
+<tr><td>Grok</td><td>grok.com / X</td><td>API exists; consumer app leans on live X data — not reproducible via API.</td><td>In-prompt.</td><td>Weight lowest — smallest homeowner audience of the six.</td></tr>
+<tr><td>Perplexity</td><td>perplexity.ai (logged-out works)</td><td><strong>Best automation candidate</strong>: Sonar API returns citations, closest API&harr;app parity of the six.</td><td>In-prompt; app also IP-geolocates.</td><td>Citations are the raw material for the section-3 source breakdown.</td></tr>
+<tr><td>Google AI Overviews</td><td>google.com search</td><td>Semi: SerpAPI et al. expose AI Overview blocks; DIY scraping is against Google ToS. Manual + screenshot is fine at audit scale.</td><td>Set search location (or use <code>&amp;gl=us&amp;near=</code> params); AIO is location-sensitive.</td><td>Only appears on some queries — "no AIO shown" is itself a recorded outcome.</td></tr>
+</table>
+<p><strong>Honest automation summary:</strong> Perplexity (API) and Google AIO (via a SERP API vendor) are the two engines worth automating first. ChatGPT/Claude/Gemini/Grok APIs are fine for <em>trend monitoring at scale later</em>, but for the sales artifact the consumer app is the ground truth — it's what the customer's homeowner actually types into. <strong>For the demo artifact: run the consumer apps, screenshot everything.</strong> The screenshot <em>is</em> the product — "here is what a Dunwoody homeowner sees when they ask ChatGPT" beats any chart.</p>
+
+<h3>Run protocol (per engine, per query)</h3>
+<ol>
+<li><strong>Fresh session every query.</strong> New temporary/incognito chat; memory and personalization off; no logged-in history. One query per chat — never ask follow-ups in the same thread (context contaminates).</li>
+<li><strong>Repetitions: n = 3 per query per engine.</strong> LLM answers vary run-to-run; n=3 is the floor that separates "always mentioned" from "got lucky once." (n=5 on the 8 discovery queries if time allows — they carry 2&times; scoring weight.) Aggregate = mention counted if it appears in &ge;1 of the runs; mention <em>rate</em> computed over all runs.</li>
+<li><strong>Record per run</strong> (one spreadsheet row per engine &times; query &times; run):
+<ul>
+<li><code>mentioned</code> (client named at all): Y/N</li>
+<li><code>rank</code> (position in the answer's list, 1-based; blank if unranked prose)</li>
+<li><code>sentiment</code>: positive / neutral / negative / hedged ("mixed reviews")</li>
+<li><code>competitors_named</code> (all of them, in order)</li>
+<li><code>cited_sources</code> (URLs/domains the engine cites — Perplexity and AIO give these directly; ChatGPT/Gemini sometimes; record "none shown" otherwise)</li>
+<li><code>screenshot_ref</code> (filename; every run gets a screenshot, demo pulls the best 3-4)</li>
+<li><code>no_answer</code> flag (engine refused, or AIO didn't trigger)</li>
+</ul></li>
+<li><strong>Timing:</strong> run all engines within the same 48-hour window; date-stamp the audit. Answers drift — an audit is a snapshot, which is also the re-sell: quarterly re-runs are the retainer hook.</li>
+<li><strong>Hygiene:</strong> clean browser profile per engine, VPN off (or fixed to the client's metro), no autocomplete acceptance — type the query verbatim from the battery sheet.</li>
+</ol>
+<p><strong>Total run volume per audit:</strong> ~18 queries &times; 6 engines &times; 3 runs = <strong>~324 runs</strong> (~360 with n=5 on discovery). This is the cost driver — see section 6.</p>
+
+<h2>3 &middot; Scoring model</h2>
+<p>All scores computed from the run spreadsheet. Definitions are exact so the headline number is defensible in the room.</p>
+<ul>
+<li><strong>Mention rate (per company, per engine):</strong> runs where company is named &divide; total runs on that engine. Overall mention rate = weighted mean across engines, discovery queries counted 2&times;.</li>
+<li><strong>Share of voice (SoV):</strong> for each run, the named companies split 1 point by inverse rank (rank 1 = 1.0, rank 2 = 0.5, rank 3 = 0.33, unranked prose mention = 0.25). SoV(company) = company's points &divide; all points awarded across all runs. This rewards being <em>first-named</em>, which is what converts.</li>
+<li><strong>The "23&times;" number — Competitor Multiple:</strong> mentions(top competitor) &divide; mentions(client), where <em>mentions</em> = total runs naming the company across all engines and queries, and <em>top competitor</em> = the single most-mentioned company in the battery. <strong>Rules for defensibility:</strong> (a) if client mentions = 0, report the multiple as "<strong>{N}&times; vs. never</strong> — {competitor} was named {N} times across {M} AI answers; {client} was named zero times" — never divide by zero, the honest phrasing is stronger anyway; (b) always name the denominator ("across 324 AI answers on 18 homeowner questions, July 2026"); (c) the multiple is engine-blended — keep the per-engine table in the appendix so it survives scrutiny.</li>
+<li><strong>Citation-source breakdown = the remediation roadmap.</strong> Tally <code>cited_sources</code> domains across all runs &rarr; ranked table of which third-party sites actually feed the AI answers in this trade/territory (expected heavy hitters per the established mechanics: Yelp, Houzz, Angi/HomeAdvisor, Thumbtack listicle pages, Reddit/Nextdoor threads, local-news "best of" lists, Birdeye-syndicated review pages, the winners' own service-area pages). For each top source domain, mark: is the client present there at all? This table converts directly into the ranked fix list — <strong>you don't guess where to build presence, the engines tell you.</strong></li>
+<li><strong>Validation-query health (V1–V4):</strong> scored separately as pass/warn/fail — does the AI <em>confirm the client exists and is reputable</em> when asked by name? A referral-based business fails silently here: the homeowner got the name from a neighbor, asked ChatGPT "is X legit," and got "I couldn't find much information." That's a lost $50K job with no trace.</li>
+</ul>
+
+<h2>4 &middot; Deliverable artifact spec — the audit card</h2>
+<p>One page (PDF / printed card), per company. Slots into the one-sheet's "spotlight on them" section. Layout top to bottom:</p>
+<ol>
+<li><strong>Verdict line</strong> (one sentence, the cold shower): <em>"When Dunwoody homeowners ask AI who should redo their yard, {competitor} gets named {N}&times; — you get named {zero/once}."</em> Date-stamped, with the denominator in small print.</li>
+<li><strong>Share-of-voice bar</strong> — single horizontal stacked bar: top 5 companies by SoV + "everyone else," client's slice in red (or an arrow marking zero). One chart, no dashboard.</li>
+<li><strong>Evidence strip</strong> — 2-3 cropped consumer-app screenshots (ChatGPT + Perplexity + AI Overview) showing the competitor being recommended for the client's exact territory. This is the piece that makes it real; the numbers alone don't.</li>
+<li><strong>"Where the AI gets its answers"</strong> — the top 5-7 cited source domains from section 3, each marked present/absent for the client. This reframes the problem from "AI is a black box" to "you're absent from 6 specific websites."</li>
+<li><strong>3 remediation moves, ranked by leverage</strong> — pulled from the citation table + the established mechanics, in fixed priority logic: (1) whatever gets them into the top-cited <em>review</em> source (usually GBP claim + review velocity — feeds AIO via organic and ChatGPT via aggregate reputation); (2) presence on the top-cited <em>listicle/directory</em> source (Houzz/Angi/local "best-of"); (3) owned-site structural fix (service-area page + FAQPage schema). Each move: effort tag (hours/weeks) + which engines it moves.</li>
+<li><strong>Footer:</strong> method note ("{X} AI answers across 6 engines, {date range}, identical homeowner questions") + re-audit offer (quarterly).</li>
+</ol>
+<p><strong>Production rule:</strong> the card is generated from the run spreadsheet + screenshot folder — template it once (HTML &rarr; PDF), so audit #2 is assembly, not design.</p>
+
+<h2>5 &middot; Demo groundwork — organic footprint check (verified via web search, 2026-07-23)</h2>
+<p>Per the established mechanic — AI cites what ranks and what third parties say — organic footprint predicts the engine-run outcome. Both entries below are <strong>PREDICTED from organic footprint; actual engine runs (section 2) still need manual execution</strong> and are the demo build step.</p>
+
+<h3>Creekside Premier Landscaping (Dunwoody/Buckhead GA)</h3>
+<p><strong>Footprint (from the 2026-07-16 Track A audit, spot-checked today — unchanged):</strong> no discoverable GBP/review count; absent from Yelp, Houzz, Angi, Thumbtack, Nextdoor; not in top-10 organic for "landscaping Dunwoody GA" or "landscape design Buckhead"; Wix site with no keywords/schema; FB + Instagram exist but surface no reviews. Today's <code>"Creekside Premier Landscaping" reviews</code> search returns only same-named companies in OH/CA/CO — zero review presence for the Atlanta business; only its own <a href="https://www.creeksidepremierlandscaping.com/">site</a>, <a href="https://www.instagram.com/creeksidepremierlandscaping/">Instagram</a>, and <a href="https://www.facebook.com/p/Creekside-Premier-Landscaping-61579068656153/">Facebook page</a> appear.</p>
+<p><strong>PREDICTED audit outcome (label: predicted-from-organic-footprint, pending engine runs):</strong></p>
+<ul>
+<li>Discovery queries (D1–D8): <strong>~0% mention rate across all six engines.</strong> Nothing to cite — no reviews, no listicles, no directory pages, no ranking service-area pages. Expected winners: Bloom'n Gardens, White Oak, RelyNow, Buckhead Landscape &amp; Design (the SERP/map-pack incumbents from Track A).</li>
+<li>Validation queries (V1–V4): <strong>fail</strong> — engines likely to say they can't find substantive information, and possibly confuse it with the unrelated "Premier Landscaping" (16 Yelp reviews) or the Sacramento/Ohio Creeksides. Brand-confusion risk is itself a card-worthy finding.</li>
+<li>Headline shape: <strong>"{top competitor} named {N}&times;, Creekside named zero — {N}&times; vs. never."</strong></li>
+<li>This makes Creekside the <em>perfect internal demo</em> — the before/after will be maximal — and the card doubles as the GEO-retainer justification for the client conversation.</li>
+</ul>
+
+<h3>North Atlanta Pool Services (Atlanta GA — Wieuca Rd, Buckhead-adjacent)</h3>
+<p><strong>Footprint (verified today):</strong> real 38-year business (founded Dec 1987, Jim Morgan) with a genuine third-party citation trail — <a href="https://www.yelp.com/biz/north-atlanta-pool-services-atlanta-2">Yelp listing</a> (rating/count not retrievable, Yelp blocked fetch; appears low-volume), <a href="https://www.angi.com/companylist/us/ga/atlanta/north-atlanta-pool-service-inc-reviews-413839.htm">Angi 4.5-star</a>, <a href="https://www.bbb.org/us/ga/atlanta/profile/general-contractor/north-atlanta-pool-service-0443-27043149">BBB A+</a>, <a href="https://www.homeadvisor.com/rated.NorthAtlantaPool.22332811.html">HomeAdvisor</a>, <a href="https://nextdoor.com/pages/north-atlanta-pool-service-atlanta-ga/">Nextdoor page</a>, Yahoo Local. <strong>But:</strong> website is <a href="http://www.napsi.com/">napsi.com</a> — non-keyword domain, HTTP, legacy build; and the company is <strong>absent from every "best pool service Atlanta" surface that ranks</strong> — the <a href="https://swimply.com/pool-services/atlanta-georgia">Swimply top-10</a>, <a href="https://www.yelp.com/search?find_desc=Pool+Service&amp;find_loc=Atlanta%2C+GA">Yelp's "best" SERP</a>, <a href="https://www.houzz.com/professionals/pools-and-spas/atlanta-ga-us-probr0-bo~t_11795~r_4180439">Houzz top-15</a>, and the award-badged players (Pinnacle "Best Pool Cleaning 2025," Anthony &amp; Sylvan "Forbes Best of 2024," Pool Troopers, Sears Pool) that dominate the money query.</p>
+<p><strong>PREDICTED audit outcome (label: predicted-from-organic-footprint, pending engine runs):</strong></p>
+<ul>
+<li>Discovery queries: <strong>low but nonzero</strong> — occasional mention on citation-transparent engines (Perplexity may surface via Angi/BBB/HomeAdvisor), routinely beaten on "best pool service Atlanta" by the listicle/award incumbents. Expected SoV: low single digits vs. Pinnacle / Anthony &amp; Sylvan / Pool Troopers.</li>
+<li>Validation queries: <strong>pass/warn</strong> — 38 years + BBB A+ + Angi 4.5 should let engines confirm legitimacy, though thin review volume may produce hedged answers.</li>
+<li>Headline shape: <strong>a true multiple, not "vs. never"</strong> — e.g. "{award-badged competitor} named {N}&times; more often." This is the <em>more typical</em> prospect profile: good real-world reputation, invisible to AI on discovery intent — i.e., the exact customer the wedge is built for. Remediation story is clean: get onto the cited listicle/award surfaces + fix the owned site; the reputation substance already exists.</li>
+</ul>
+<p><strong>Demo pairing logic:</strong> Creekside shows the floor (invisible), North Atlanta Pool shows the norm (established-but-losing). Run both engine batteries in one sitting &rarr; two contrasting cards for the pitch deck.</p>
+
+<h2>6 &middot; Effort / cost estimate</h2>
+<p><strong>One full manual audit (v1, today):</strong></p>
+<table>
+<tr><th>Step</th><th>Hours</th></tr>
+<tr><td>Battery instantiation (fill variables, identify top competitor from a pre-check)</td><td>0.5</td></tr>
+<tr><td>Engine runs: ~324 runs, manual, fresh sessions, screenshots (~1 min/run incl. logging)</td><td>5.5–6.5</td></tr>
+<tr><td>Scoring spreadsheet + citation tally</td><td>1.0</td></tr>
+<tr><td>Card production (after template exists; first-ever card add +2 for template build)</td><td>1.0</td></tr>
+<tr><td><strong>Total per audit</strong></td><td><strong>~8–9 hrs</strong> (first one ~11 with template build)</td></tr>
+</table>
+<p>At the pilot's $1,500/mo anchor, the audit prices naturally at <strong>$500–$1,500 standalone</strong> (or free-as-wedge for whale prospects) — a few hours of margin either way, and it front-loads the retainer conversation.</p>
+<p><strong>Automation path (later, in order of ROI):</strong></p>
+<ol>
+<li><strong>Perplexity Sonar API runner</strong> — full battery + citations in minutes, ~$1-2 in API cost. Cuts ~1.5 hrs and gives the citation table for free. Build first.</li>
+<li><strong>SERP API for AI Overviews</strong> (SerpAPI or similar, ~$50/mo tier) — automates the Google layer compliantly.</li>
+<li><strong>Scoring sheet &rarr; card pipeline</strong> (script the tally + HTML-to-PDF card). Cuts ~1.5 hrs.</li>
+<li><strong>ChatGPT/Claude/Gemini API runs as a <em>monitoring</em> layer</strong> for quarterly re-audits (trend lines are fine from APIs; the sales artifact still uses consumer-app screenshots).</li>
+<li>End state: manual work drops to ~2 hrs/audit (consumer-app screenshot passes + review), which is what makes the quarterly re-audit retainer economics work at 5+ clients.</li>
+</ol>
+<p><strong>Not worth automating:</strong> the consumer-app runs themselves via browser automation — ToS-fragile, and the screenshots need human judgment on what's demo-worthy anyway.</p>
+
+<h2>Sources</h2>
+<ul>
+<li>Prior work: Jul 16 SEO/AI-search and social-monitoring research (Track A mechanics + Creekside footprint); Jul 20 competitor deep-dives (CurbLead, Porchline, PostScout, RenderMail — no-diagnostic-product gap); Jul 22 business-strategy one-pager (pricing anchor, one-sheet slot)</li>
+<li><a href="https://www.yelp.com/biz/north-atlanta-pool-services-atlanta-2">Yelp — North Atlanta Pool Services</a> &middot; <a href="https://www.angi.com/companylist/us/ga/atlanta/north-atlanta-pool-service-inc-reviews-413839.htm">Angi — 4.5-star</a> &middot; <a href="https://www.bbb.org/us/ga/atlanta/profile/general-contractor/north-atlanta-pool-service-0443-27043149">BBB A+ profile</a> &middot; <a href="https://www.homeadvisor.com/rated.NorthAtlantaPool.22332811.html">HomeAdvisor</a> &middot; <a href="https://nextdoor.com/pages/north-atlanta-pool-service-atlanta-ga/">Nextdoor page</a> &middot; <a href="http://www.napsi.com/">NAPSI site</a> &middot; <a href="https://local.yahoo.com/info-129750689-north-atlanta-pool-services-atlanta/">Yahoo Local</a></li>
+<li>Atlanta pool "best" surfaces: <a href="https://swimply.com/pool-services/atlanta-georgia">Swimply top-10</a> &middot; <a href="https://www.yelp.com/search?find_desc=Pool+Service&amp;find_loc=Atlanta%2C+GA">Yelp best-of SERP</a> &middot; <a href="https://www.houzz.com/professionals/pools-and-spas/atlanta-ga-us-probr0-bo~t_11795~r_4180439">Houzz top-15</a> &middot; <a href="https://www.pinnaclepoolservices.com/">Pinnacle Pools</a> &middot; <a href="https://anthonysylvan.com/locations/atlanta-ga/">Anthony &amp; Sylvan Atlanta</a> &middot; <a href="https://searspool.com/">Sears Pool</a></li>
+<li>Creekside spot-check: <code>"Creekside Premier Landscaping" reviews</code> web search 2026-07-23 — only owned properties (<a href="https://www.creeksidepremierlandscaping.com/">site</a>, <a href="https://www.instagram.com/creeksidepremierlandscaping/">Instagram</a>, <a href="https://www.facebook.com/p/Creekside-Premier-Landscaping-61579068656153/">Facebook</a>) plus unrelated same-named companies in OH/CA/CO</li>
+</ul>
+
+<p><em>July 23, 2026 &middot; Working document — not client-facing.</em></p>
+</body></html>

@@ -13,7 +13,7 @@ ctaLabel: Open ToddlerMaps
 image: /images/toddlermaps/toddlermaps-trip-strip.png
 images:
   - /images/toddlermaps/toddlermaps-trip-strip.png
-  - /images/toddlermaps/toddlermaps-logo.png
+  - /images/toddlermaps/toddlermaps-logo.webp
   - /images/toddlermaps/toddlermaps-overview-map.png
   - /images/toddlermaps/toddlermaps-place-sheet-zoo.png
   - /images/toddlermaps/toddlermaps-sticker-fernbank.png

@@ -7,7 +7,7 @@ status: live
 featured: true
 order: 4
 url: https://ai-ideas-explorer.vercel.app
-image: /images/ai-ideas-galaxy.png
+image: /images/ai-ideas-galaxy.webp
 ---
 
 ## The Problem

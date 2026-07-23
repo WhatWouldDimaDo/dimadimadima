@@ -71,7 +71,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
         <div class="bc-live-empty">Loading the radar…</div>
       </div>
       <div class="bc-live-foot">
-        Straight from my event-intelligence pipeline · Full radar →
+        Scraped, scored against my taste, updated continuously · Full radar →
       </div>
     </a>
 
@@ -99,7 +99,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
         class="bc-suno-play"
       >
         {songThumb && (
-          <img src={songThumb} alt={song?.data.title} class="bc-img bc-img--dim" />
+          <img src={songThumb} alt={song?.data.title} class="bc-img bc-img--dim" loading="lazy" />
         )}
         <span class="bc-play">▶</span>
       </a>
@@ -107,7 +107,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
     <!-- ── ToddlerMaps ────────────────────────────── -->
     <a href="/projects/toddlermaps" class="bc bc-project bc-tmaps">
-      <img src="/images/toddlermaps/toddlermaps-overview-map.png" alt="ToddlerMaps" class="bc-img" />
+      <img src="/images/toddlermaps/toddlermaps-overview-map.png" alt="ToddlerMaps" class="bc-img" loading="lazy" />
       <div class="bc-project-body">
         <div class="bc-status bc-status--gold">Live</div>
         <div class="bc-project-title">ToddlerMaps</div>
@@ -119,7 +119,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
     <!-- ── AI Ideas Explorer ──────────────────────── -->
     <a href="/projects/ai-ideas-explorer" class="bc bc-project bc-ideas" id="bc-ideas-cell">
       {aiIdeas?.data.image && (
-        <img src={aiIdeas.data.image} alt="AI Ideas Explorer" class="bc-img" />
+        <img src={aiIdeas.data.image} alt="AI Ideas Explorer" class="bc-img" loading="lazy" />
       )}
       <span class="bc-live-badge bc-ideas-live"><span class="dot-pulse"></span>Live</span>
       <div class="bc-project-body">
@@ -132,7 +132,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
     <!-- ── Georgia Power Analysis ─────────────────── -->
     <a href="/projects/power-analysis" class="bc bc-project bc-power">
-      <img src="/images/power-dashboard.png" alt="Georgia Power Analysis" class="bc-img" />
+      <img src="/images/power-dashboard.png" alt="Georgia Power Analysis" class="bc-img" loading="lazy" />
       <div class="bc-project-body">
         <div class="bc-status bc-status--gold">Active</div>
         <div class="bc-project-title">Georgia Power Analysis</div>
@@ -143,7 +143,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
     <!-- ── Music Data ──────────────────────────────── -->
     <a href="/projects/spotify-analysis" class="bc bc-project bc-music">
-      <img src="/images/spotify-hero.png" alt="Music Data" class="bc-img" />
+      <img src="/images/spotify-hero.png" alt="Music Data" class="bc-img" loading="lazy" />
       <div class="bc-project-body">
         <div class="bc-status bc-status--gold">Active</div>
         <div class="bc-project-title">Music Data</div>
@@ -154,7 +154,7 @@ const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg
 
     <!-- ── All Roads to Kill Bill ──────────────────── -->
     <a href="/projects/kill-bill" class="bc bc-project bc-killbill">
-      <img src="/images/kill-bill.jpg" alt="All Roads to Kill Bill" class="bc-img" />
+      <img src="/images/kill-bill.jpg" alt="All Roads to Kill Bill" class="bc-img" loading="lazy" />
       <div class="bc-project-body">
         <div class="bc-project-title">All Roads to Kill Bill</div>
         <div class="bc-project-desc">Every Tarantino connection, mapped</div>

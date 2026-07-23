@@ -4,7 +4,7 @@ description: An interactive 3D influence network mapping every film that fed int
 tags: [data viz, cinema, react, three.js]
 date: 2025-12-20
 url: https://allroadstokillbill.vercel.app
-image: /images/kill-bill-network.jpeg
+image: /images/kill-bill-network.webp
 featured: false
 order: 3
 ---

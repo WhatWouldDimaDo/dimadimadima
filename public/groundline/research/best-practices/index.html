@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best-Practices Research — Landscaping Lead Generation & Sales</title>
+<style>
+:root {
+  --cream: #f4efe3;
+  --paper: #faf7ef;
+  --ink: #211f1a;
+  --ink-soft: #4a463d;
+  --pine: #1e3226;
+  --pine-deep: #16241b;
+  --sage: #77816c;
+  --brass: #a9803f;
+  --brass-light: #c9a562;
+  --line: rgba(33, 31, 26, 0.14);
+  --line-light: rgba(250, 247, 239, 0.28);
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Typography */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 0.5rem 0;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  font-weight: 400;
+  margin: 0.5rem 0 1rem 0;
+  color: var(--ink);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 2.5rem 0 1rem 0;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.75rem;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.lede {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+p {
+  margin: 0.75rem 0;
+  font-size: 0.92rem;
+}
+
+a {
+  color: var(--brass);
+  text-decoration: none;
+  border-bottom: 1px solid var(--brass);
+}
+
+a:hover {
+  color: var(--brass-light);
+  border-bottom-color: var(--brass-light);
+}
+
+/* Cards & Sections */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-small {
+  padding: 1rem;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+}
+
+.icon-lg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Badges & Chips */
+.chip {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.4rem 0.75rem;
+  border-radius: 20px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.chip-brass {
+  background: var(--brass);
+  color: var(--paper);
+  border: none;
+}
+
+.chip-sage {
+  background: var(--sage);
+  color: var(--paper);
+  border: none;
+}
+
+/* Quote blocks */
+.pull-quote {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--ink);
+  border-left: 3px solid var(--brass);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  line-height: 1.8;
+}
+
+.quote-attribution {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-style: normal;
+  margin-top: 0.5rem;
+}
+
+/* Practice cards */
+.practice-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.practice-card h4 {
+  margin-top: 0;
+}
+
+.practice-detail {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 0.75rem 0;
+}
+
+.practice-source {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  margin-top: 0.75rem;
+}
+
+/* Image frames */
+.img-frame {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.img-frame img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-caption {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brass);
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--line);
+}
+
+/* Two-column layout */
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Table styles */
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin: 1.5rem 0;
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+}
+
+.matrix th, .matrix td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.matrix th {
+  background: var(--pine-deep);
+  color: var(--paper);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-body);
+}
+
+.matrix td {
+  vertical-align: top;
+}
+
+.matrix tr:last-child td {
+  border-bottom: none;
+}
+
+/* Verdict panel */
+.verdict-panel {
+  background: var(--paper);
+  border: 2px solid var(--brass);
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.verdict-panel h3 {
+  margin-top: 0;
+  color: var(--brass);
+}
+
+.verdict-section {
+  margin-bottom: 1.5rem;
+}
+
+.verdict-section h4 {
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.verdict-figure {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--brass);
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+/* Expandable section */
+details {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+summary {
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+summary:hover {
+  background: rgba(250, 247, 239, 0.5);
+}
+
+summary svg {
+  transition: transform 0.3s ease;
+}
+
+details[open] summary svg {
+  transform: rotate(180deg);
+}
+
+details > *:not(summary) {
+  padding: 0 1.5rem;
+}
+
+details > p {
+  margin-bottom: 1rem;
+}
+
+details > p:last-child {
+  padding-bottom: 1.5rem;
+}
+
+/* Stat strip */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.stat-item {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--brass);
+  font-family: var(--font-display);
+  margin: 0.5rem 0;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+footer p {
+  margin: 0.5rem 0;
+}
+
+/* Section intro */
+.section-intro {
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+/* Grid of cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+</style>
+</head>
+<body>
+
+<svg style="display:none">
+<defs>
+<symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="20 6 9 17 4 12"></polyline>
+</symbol>
+<symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="18" y1="6" x2="6" y2="18"></line>
+  <line x1="6" y1="6" x2="18" y2="18"></line>
+</symbol>
+<symbol id="icon-quote" viewBox="0 0 24 24" fill="currentColor">
+  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-4.25-2.25-7-2v3c0 .75.25 2 2.25 2c1 0 1.75-.5 1.75-2c0-1-1.25-2-2.75-2s-3 .75-3 2c0 1 .5 3 3 5c1.5 1.5 2.75 4 2.75 6.5S6 20 3 21z"/>
+</symbol>
+<symbol id="icon-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</symbol>
+<symbol id="icon-star" viewBox="0 0 24 24" fill="currentColor">
+  <polygon points="12 2 15.09 10.26 23.77 11.46 17.77 17.46 19.27 26.07 12 22.77 4.73 26.07 6.23 17.46 0.23 11.46 8.91 10.26 12 2"></polygon>
+</symbol>
+<symbol id="icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="6 9 12 15 18 9"></polyline>
+</symbol>
+</defs>
+</svg>
+
+<div class="container">
+
+<!-- Header -->
+<header>
+<p class="eyebrow">Best Practices Research</p>
+<h1>Landscaping Lead Generation & Sales</h1>
+<p class="lede">Research distilled from 6 top-tier Atlanta landscapers, 292 customer reviews, 91 Reddit threads from practitioners, and 11 lead-gen/marketing agencies. Three convergent findings: <strong>speed-to-first-response beats price</strong> across both review corpora and Reddit; <strong>named-individual accountability</strong> is the #1 praise pattern (140+ mentions); <strong>ghosted quotes and undelivered renderings</strong> are the #1 trust-killer.</p>
+<p style="font-size: 0.8rem; color: var(--ink-soft); margin-top: 1rem;">Compiled July 23, 2026 · Internal research · Arjun Landscaping lead-generation partnership</p>
+</header>
+
+<!-- Section 1: Landscaper Practices -->
+<section>
+<p class="eyebrow">Best in class</p>
+<h2>What Top Landscapers Do</h2>
+<p class="lede">Six exemplar firms analyzed for practices that convert across high-end residential and commercial markets.</p>
+
+<div class="card">
+<h3>Gibbs Landscape Company</h3>
+<p><em>Smyrna/Marietta, GA — high-end Atlanta residential design-build</em></p>
+<p style="font-size: 0.9rem; color: var(--ink-soft);"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-star"></use></svg>4.4 (173 reviews)</p>
+<div style="margin: 1rem 0;">
+<div class="practice-detail"><strong>Dual price floor stated on the proposal page</strong><br>&quot;We have a minimum investment for landscape design and installation projects that starts at $12,000. We have a minimum investment for weekly residential maintenance services that starts at $12,000 per year.&quot; Both stated directly above the quote-request form.</div>
+<div class="practice-detail"><strong>Designer stays engaged start to finish</strong><br>&quot;Our landscape architects work with our clients from start to finish&quot; — on-site through completion, not handed off to an install crew.</div>
+<div class="practice-detail"><strong>Named individual accountability (confirmed via reviews, not marketing)</strong><br>Recent Google reviews repeatedly name a specific designer/rep (Ray, Dwayne Johnson, Peter Copses) rather than &quot;the team.&quot; One reviewer: &quot;I was impressed that the representative I worked with had a landscape architecture degree... his good advice prevented me from making some costly mistakes.&quot;</div>
+</div>
+<div class="img-frame"><img src="img/landscaper-gibbs-photo-gallery.jpg" alt="landscaper-gibbs-photo-gallery.jpg" loading="lazy"><div class="img-caption">Gibbs Landscape Company residential gallery page — states $12,000 design/build minimum AND $12,000/yr maintenance minimum together; seasonal blog carousel embedded below the gallery</div></div>
+<div class="img-frame"><img src="img/landscaper-gibbs-residential-page.jpg" alt="landscaper-gibbs-residential-page.jpg" loading="lazy"><div class="img-caption">Gibbs Landscape Company residential landing page — &#39;Winner - 300+ Awards&#39; badge persistent in header nav</div></div>
+<p style="font-size: 0.8rem;"><a href="https://gibbslandscape.com">Visit site →</a></p>
+</div>
+<div class="card">
+<h3>Michaelangelo&#39;s Sustainable Landscape &amp; Design Group</h3>
+<p><em>Alpharetta, GA — boutique high-end Atlanta residential design-build</em></p>
+<p style="font-size: 0.9rem; color: var(--ink-soft);"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-star"></use></svg>4.8 (28 reviews)</p>
+<div style="margin: 1rem 0;">
+<div class="practice-detail"><strong>Photography-first, minimal-caption portfolio with light filtering</strong><br>Portfolio page uses tabs (All Projects / Install / Maintenance) over a photo grid (pools, fire pits, outdoor kitchens, path lighting, a home putting green) with almost no caption copy.</div>
+<div class="practice-detail"><strong>Free consult marketed as its own dedicated nav CTA</strong><br>&quot;FREE CONSULT&quot; appears as its own button in the primary nav, distinct from a generic contact link, next to the phone number.</div>
+<div class="practice-detail"><strong>Live chat widget with human-photo avatar, site-wide</strong><br>Persistent chat prompt: &quot;Hi there! Have a question? Chat with us here.&quot;</div>
+</div>
+<div class="img-frame"><img src="img/landscaper-michaelangelos-portfolio.jpg" alt="landscaper-michaelangelos-portfolio.jpg" loading="lazy"><div class="img-caption">Michaelangelo&#39;s Sustainable Landscape &amp; Design portfolio page — filtered photo-first gallery (All/Install/Maintenance), FREE CONSULT nav button, live chat widget</div></div>
+<p style="font-size: 0.8rem;"><a href="https://www.landscapesandmore.com">Visit site →</a></p>
+</div>
+<div class="card">
+<h3>HighGrove Partners</h3>
+<p><em>Austell, GA — self-described commercial landscape design/build/maintenance (NOT a residential design-build comp despite ranking in searches for high-end ATL landscaping)</em></p>
+<p style="font-size: 0.9rem; color: var(--ink-soft);"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-star"></use></svg>3.2 (55 reviews)</p>
+<div style="margin: 1rem 0;">
+<div class="practice-detail"><strong>Explicit speed-of-response promise on the proposal page itself</strong><br>&quot;Take this first step to a more attractive, more efficient landscape.&quot; / &quot;Request a proposal by completing the web form and HighGrove Partners will follow up with you immediately.&quot;</div>
+<div class="practice-detail"><strong>Scope is explicitly commercial, not residential, per the company&#39;s own copy</strong><br>&quot;From commercial landscape design, build and maintenance to stormwater management and everything in between, HighGrove Partners has provided tailor-made landscape solutions for commercial properties across the Metro Atlanta area for more than 30 years.&quot;</div>
+<div class="practice-detail"><strong>Marketing claims of &#39;award-winning&#39; / 30 years did not match reputation on the ground</strong><br>3.2 stars / 55 reviews on Google, the weakest of four Atlanta exemplars checked; multiple 1-star reviews describe crew property damage, spraying the wrong property, and a hiring/HR complaint. Documented as a research-process finding: verify via live reviews before treating self-described &#39;award-winning&#39; marketing copy as evidence of reputation.</div>
+</div>
+<div class="img-frame"><img src="img/landscaper-highgrove-request-proposal.jpg" alt="landscaper-highgrove-request-proposal.jpg" loading="lazy"><div class="img-caption">HighGrove Partners proposal-request page — explicit &#39;follow up with you immediately&#39; speed promise; copy confirms commercial-only scope</div></div>
+<p style="font-size: 0.8rem;"><a href="https://www.highgrove.net">Visit site →</a></p>
+</div>
+<div class="card">
+<h3>Unique Environmental Landscapes (now Naturescapes, a Yardnique company)</h3>
+<p><em>Formerly Mableton, GA boutique high-end residential design-build; now a multi-state HOA/commercial landscape roll-up brand</em></p>
+<p style="font-size: 0.9rem; color: var(--ink-soft);"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-star"></use></svg>4.0 (23 reviews)</p>
+<div style="margin: 1rem 0;">
+<div class="practice-detail"><strong>Brand consolidation discovered mid-research</strong><br>unique-environmental.com now 301-redirects to yardnique.com/naturescapes/. Live copy: &quot;Naturescapes is a Georgia-based landscaping company specializing in HOA community and commercial landscape design and maintenance... part of the Yardnique family of companies... footprint extending across six states.&quot; The client-named &#39;top dog&#39; comp no longer operates as a single-family high-end residential design-build boutique.</div>
+<div class="practice-detail"><strong>Historical/legacy: named-designer pattern + neighbor-comment social proof</strong><br>Pre-rebrand 5-star review: &quot;Todd is an amazing landscape designer. He listened to what I thought I was looking for and came up with a design beyond what I even expected. Everyday we get comments on how beautiful the front of our home.&quot;</div>
+<div class="practice-detail"><strong>Historical awards claim (not independently re-verified post-rebrand)</strong><br>200+ residential design awards from the Southeastern Flower Show, MALTA, and UAC; HGTV feature placements; 26-35 years as a family-owned Atlanta residential landscaper.</div>
+</div>
+<div class="img-frame"><img src="img/landscaper-yardnique-uel-homepage.jpg" alt="landscaper-yardnique-uel-homepage.jpg" loading="lazy"><div class="img-caption">unique-environmental.com now 301-redirects here — Naturescapes/Yardnique positions the former boutique residential brand as a multi-state HOA/commercial landscape roll-up</div></div>
+<p style="font-size: 0.8rem;"><a href="https://unique-environmental.com (301-redirects to https://www.yardnique.com/naturescapes/)">Visit site →</a></p>
+</div>
+<div class="card">
+<h3>BrightView</h3>
+<p><em>National — commercial/HOA-community landscape design-build and maintenance, not single-family residential</em></p>
+<div style="margin: 1rem 0;">
+<div class="practice-detail"><strong>Assessment to proposal to approval to single-PM-implementation process</strong><br>Site assessment (existing conditions, challenges/opportunities) -&gt; design proposal (&quot;may include sketches, mood boards, and detailed descriptions of the proposed work&quot;) -&gt; client review/feedback -&gt; approval -&gt; implementation with &quot;an experienced, highly skilled project manager dedicated to implementing your vision&quot; as single point of accountability.</div>
+</div>
+<p style="font-size: 0.8rem;"><a href="https://www.brightview.com">Visit site →</a></p>
+</div>
+<div class="card">
+<h3>Yellowstone Landscape / Ruppert Landscape / Landscape Workshop</h3>
+<p><em>National/regional commercial and HOA/institutional-property landscape maintenance and construction at scale — none run a distinct high-end single-family residential design-build sales motion</em></p>
+<div style="margin: 1rem 0;">
+<div class="practice-detail"><strong>Finding: national scale in this industry means commercial/HOA maintenance rollup, not high-end residential design-build</strong><br>Yellowstone: &quot;5,000+ client properties,&quot; resorts, master-planned developments. Ruppert: $614.8M revenue, 1,000-5,000 employees, 46 locations, commercial-construction-crew model. Landscape Workshop: serves &quot;local businesses, residential communities, and municipal caretakers.&quot; None publish a boutique high-end residential proposal/portfolio motion comparable to Gibbs or Michaelangelo&#39;s.</div>
+</div>
+<p style="font-size: 0.8rem;"><a href="https://www.yellowstonelandscape.com ; https://www.ruppertlandscape.com ; https://landscapeworkshop.com">Visit site →</a></p>
+</div>
+</section>
+
+
+<section>
+<p class="eyebrow">Customer feedback</p>
+<h2>What Customers Actually Say</h2>
+<p class="lede">292 Google reviews mined from 6 Atlanta high-end landscapers. Praise themes cluster around accountability; complaints center on ghosting and broken promises.</p>
+
+<div class="two-column">
+<div>
+<h3 style="color: var(--sage);">Praise Patterns</h3>
+<h4>Named-individual accountability</h4>
+<div class="pull-quote">"Nathan truly understands our style and long-term vision, and every design has been seamless from start to finish. The results are not only beautiful in year one but continue to improve over time. We regularly receive compliments on our yard."<div class="quote-attribution">Gibbs Landscape Company • ★★★★★</div></div>
+<div class="pull-quote">"I was impressed that the representative I worked with had a landscape architecture degree. I wouldn&#39;t have expected that, and that experience and his good advice prevented me from making some costly mistakes."<div class="quote-attribution">Gibbs Landscape Company • ★★★★★</div></div>
+<h4>Reputation/referral beats price-shopping</h4>
+<div class="pull-quote">"Considering the complexity of the job and amount of money being spent, expertise was more important than price... can&#39;t comment on competitiveness since I didn&#39;t secure other quotes, atypical for me on a project of this magnitude. I chose Gibbs because of [a neighbor&#39;s] recommendation and numerous positive reviews."<div class="quote-attribution">Gibbs Landscape Company • ★★★★★</div></div>
+<div class="pull-quote">"Gibbs was referred to me by a friend who had used them and was very impressed with their work."<div class="quote-attribution">Gibbs Landscape Company • ★★★★★</div></div>
+<h4>Communication and responsiveness throughout the project</h4>
+<div class="pull-quote">"What impressed me most was the level of organization and follow-through. Every detail was thought out, and I always knew what was happening next."<div class="quote-attribution">Michaelangelo&#39;s Sustainable Landscape &amp; Design Group • ★★★★★</div></div>
+<div class="pull-quote">"The crew was professional, punctual, and communicative. They worked with us on a detailed design plan that addressed all of our wants and needs."<div class="quote-attribution">Outdoor Makeover and Living Spaces • ★★★★★</div></div>
+<h4>Design vision translated faithfully into reality</h4>
+<div class="pull-quote">"They took the time to understand what I wanted and then delivered a plan that was even better than what I had imagined."<div class="quote-attribution">Michaelangelo&#39;s Sustainable Landscape &amp; Design Group • ★★★★★</div></div>
+<div class="pull-quote">"Greg understood exactly what I was trying to accomplish with his design. He took my general vision and made it even better."<div class="quote-attribution">Gibbs Landscape Company • ★★★★★</div></div>
+<h4>Cleanliness, punctuality, and respect for the property</h4>
+<div class="pull-quote">"...they were polite, on-time, cleaned up every night during the duration of the work, everyone was easy to work with..."<div class="quote-attribution">Outdoor Makeover and Living Spaces • ★★★★★</div></div>
+<div class="pull-quote">"The entire crew showed up on time, worked hard every day, and treated my property with care and respect."<div class="quote-attribution">Michaelangelo&#39;s Sustainable Landscape &amp; Design Group • ★★★★★</div></div>
+
+</div>
+
+<div>
+<h3 style="color: var(--brass);">Common Complaints</h3>
+<h4>Ghosting / lost responsiveness after the sale or during quoting</h4>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"Scheduled a quote end of May. Stayed home from work to walkthrough for it. Max handled the quote and then never sent us the final numbers and rendering. Contacted him three times. He guaranteed a remedy to the delay. Days go by, still no response... $25,000 job and he couldn&#39;t be bothered to follow through even with the paperwork."<div class="quote-attribution">Woodburn Landscapes • ★</div></div>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"I spent weeks trying to get Steve Montgomery to give me a quote for an outdoor kitchen, landscaping and lighting and all I kept getting from him was &#39;you know we&#39;re not the lowest price.&#39; He told me this over 7 times... then he tells me &#39;I don&#39;t think we&#39;re the best fit for you because it seems you want a deal.&#39;... they missed out on a $55k project!"<div class="quote-attribution">Steve Montgomery &amp; Company • ★</div></div>
+<h4>Property damage with no accountability</h4>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"They proceeded to blow gutter trash and debris off the roof onto my brand new 4 day old van... Client offered to pay for repairs but it doesn&#39;t seem right. These guys don&#39;t care about anyone else&#39;s property."<div class="quote-attribution">Gibbs Landscape Company • ★</div></div>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"My car was damaged by there workers and management refused to contact me. I will be exposed them on every social media and news platform."<div class="quote-attribution">HighGrove Partners • ★</div></div>
+<h4>Plant/tree death and no post-installation accountability</h4>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"But alas, our trees have died. There was a lot of assurance given to us about how they were going to work around the trees but they ended up killing them. Absolutely despise when companies point to contracts where there&#39;s no guarantee for anything pertaining to keeping things intact."<div class="quote-attribution">Outdoor Makeover and Living Spaces • ★★</div></div>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"We had Steve put a tree in our front yard... This Spring the tree is dead. I contacted Steve... He told me the warranty has expired. Why would I buy anything else from Steve when Pikes guarantees their trees for life?"<div class="quote-attribution">Steve Montgomery &amp; Company • ★★</div></div>
+<h4>Budget mismatch and design-fee waste</h4>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"Shared my budget upfront prior to initial consultation. Once I received the landscape plan it was $100,000 over budget! It was a waste of my, the architect, and Michael&#39;s time and I still had to pay $600 for the architect&#39;s plan."<div class="quote-attribution">Michaelangelo&#39;s Sustainable Landscape &amp; Design Group • ★</div></div>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"Initial meetings are very professional looking but the result is too disappointing. They ask the colors and flowers you don&#39;t want and they planted them anyway... Steve even doesn&#39;t bother to come to walk thru in person before get their final check."<div class="quote-attribution">Steve Montgomery &amp; Company • ★</div></div>
+<h4>Sloppy/incomplete execution and no-shows</h4>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"Did not show up for 3 scheduled appointments. Very dissatisfied."<div class="quote-attribution">Gibbs Landscape Company • ★</div></div>
+<div class="pull-quote" style="border-left-color: var(--ink-soft);">"Their work looks half down all the time. They don&#39;t clean up after themselves... Only dedicating two hours a day to our property so some stuff always looks a mess."<div class="quote-attribution">HighGrove Partners • ★</div></div>
+
+</div>
+</div>
+
+</section>
+
+
+<section>
+<p class="eyebrow">Practitioner insights</p>
+<h2>The Contractor's-Eye View (Reddit, 91 Threads)</h2>
+<p class="lede">24 key findings across marketing, customer friction, tools, and design pricing, grouped by lens.</p>
+
+<h3>Customer</h3>
+<details>
+<summary>Ghosting after a promised quote/design is the single most common complaint on both sides of the market, and homeowners read early unresponsiveness as a permanent signal, not a one-off.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Yeah, that&#39;s what my initial feeling was, if it&#39;s like that now, it&#39;s not going to get better. I see it kinda like dating, if you have to pretty much beg for attention, then that&#39;s not it."<br><a href="https://www.reddit.com/r/landscaping/comments/1183vst/landscaping_quotes_and_ghosting/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Two weeks overdue on the initial quote with no communication and over a month overdue for a concept plan, again with no communication, is ridiculous. Sounds to me like they are not prioritizing your project for whatever reason and you shouldn&#39;t expect that to change once you enter a contract with them."<br><a href="https://www.reddit.com/r/landscaping/comments/1183vst/landscaping_quotes_and_ghosting/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"All six made appointments, only one actually showed up. He gave me an estimate, scheduled a day, then didn&#39;t show up and never answered any of my calls."<br><a href="https://www.reddit.com/r/HomeImprovement/comments/96n9u4/why_dont_contractors_ever_call_me_back/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Deposit size and payment method are the sharpest homeowner trust trigger -- 50% cash deposits read as scam signals even when practitioners defend them as standard material-cost coverage.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Thing that worries me is they are asking for 50% deposit which is 7k and then due to the amount of labor asked if he could get the deposit in cash..."<br><a href="https://www.reddit.com/r/landscaping/comments/lpbic6/landscaper_red_flags/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Not a single contractor has asked me for a deposit ever... The only places I&#39;ve heard of that ask for a deposit? Scam artists."<br><a href="https://www.reddit.com/r/landscaping/comments/lpbic6/landscaper_red_flags/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"A reliable professional contractor will have a good payment schedule: 10-25% of the contract upon signing, 25-50% on jobstart depending on materials costs, the balance as progress/milestone payments, with a 10-25% hold back till job completion."<br><a href="https://www.reddit.com/r/homeowners/comments/ybgi74/what_are_some_red_flags_when_hiring_a_general/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>A 338-upvote &#39;disgruntled client&#39; post-mortem functions as a practitioner playbook: be honest about start-date uncertainty, own subcontractor mistakes, walk the client through new systems (irrigation timers), clean daily not just at the end, respect existing plants the client chose to keep. A whistleblower reply alleges the same &#39;biggest/best-reviewed&#39; firm systematically oversold lead times and paid to suppress bad reviews.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Trusting online reviews, I figured that paying top $$$$ would be worth it, but alas, no."<br><a href="https://www.reddit.com/r/landscaping/comments/rc8lni/advice_for_professional_landscapers_from_a/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"If it&#39;s going to take 3 months to start the project, be up front about it. Don&#39;t say &quot;things look good to start in the next 1-2 weeks&quot;... If the project takes 1000+ man hours to complete, you can find 5 minutes to explain and demonstrate the irrigation timer control rather than just handing the manual to the client."<br><a href="https://www.reddit.com/r/landscaping/comments/rc8lni/advice_for_professional_landscapers_from_a/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"My first week I was told our lead times were 3-4 weeks, 2 weeks later they were 6-8 then 8-10 weeks. They were 6 month lead times the whole time... They pay yelp to get rid of the bad reviews and pay a crew to do repair work and they are so overloaded they called me to ask if I could help after I quit!"<br><a href="https://www.reddit.com/r/landscaping/comments/rc8lni/advice_for_professional_landscapers_from_a/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"&quot;Biggest&quot; &quot;best reviewed&quot; in my area at least...means a large company with a million employees that may or may not know what they are doing, and likely don&#39;t give a shit about the chip bag in your driveway because they are just there for the paycheck."<br><a href="https://www.reddit.com/r/landscaping/comments/rc8lni/advice_for_professional_landscapers_from_a/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Undisclosed design fees, not the fee itself, are what break trust -- the exact same practitioners who charge $1,000+ for design agree it&#39;s normal, but that surprising the client is a red flag.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"He sent them over a few weeks later and is now asking for a $1,185 design fee. Is this common? I was surprised because this wasn&#39;t mentioned by him prior to the invoice and it&#39;s not listed anywhere on his website."<br><a href="https://www.reddit.com/r/landscaping/comments/1pfbz1v/landscaper_charging_design_fee/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"It&#39;s normal to charge a fee. It&#39;s not normal to surprise your prospective customer with it."<br><a href="https://www.reddit.com/r/landscaping/comments/1pfbz1v/landscaper_charging_design_fee/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"He PURPOSELY tricked you into agreeing to a design proposal without telling you you&#39;d be charged for the design. Then he charged an exorbitant fee, hoping you&#39;d be guilted into paying."<br><a href="https://www.reddit.com/r/landscaping/comments/1pfbz1v/landscaper_charging_design_fee/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Design ownership/IP anxiety runs in both directions: practitioners fear paying to design something a client then &#39;shops&#39; to a cheaper installer; homeowners have been refused their own paid-for designs when they didn&#39;t book the install.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"We had too many people take our free quotes and either doing the work themselves or farming the plan out to another company. But... we are upfront about the cost and policy."<br><a href="https://www.reddit.com/r/landscaping/comments/1pfbz1v/landscaper_charging_design_fee/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"I got charged an $800 design fee. I knew in advance. What I was shocked at was that after we declined to hire them for the install, they refused to give us the design we paid them to do."<br><a href="https://www.reddit.com/r/landscaping/comments/1pfbz1v/landscaper_charging_design_fee/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<h3>Design</h3>
+<details>
+<summary>A live, 78-upvote/230-comment feedback thread on a free AI landscape-design tool (NeighborBrite) is effectively a public feature-gap map for exactly Dima&#39;s product category: users want accurate scale/slope handling, preservation of existing structures, native/zone-aware plants, a bill of materials, and selective keep-and-regenerate editing -- and they punish surprise paywalls.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"I&#39;m struggling with your tool because my property is a tiered slope. When I select an area to modify, the app fails to recognize perspective and seems to just assume the area is flat."<br><a href="https://www.reddit.com/r/landscaping/comments/15ohomj/new_free_ai_landscape_design_tool_would_love_your/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"It doesn&#39;t understand sidewalks or neighbor&#39;s houses that are in the photo. It keeps trying to remodel them or landscape over them even though they were not selected."<br><a href="https://www.reddit.com/r/landscaping/comments/15ohomj/new_free_ai_landscape_design_tool_would_love_your/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"In Colorado one zip code could fluctuate from 5500 ft to 8000 feet in altitude. I have an outdoor space that would fit about 3 adirondack chairs and the AI put in a big pool with a hot tub and an entire patio scene around it. Good size for a chipmunk? Super off scale."<br><a href="https://www.reddit.com/r/landscaping/comments/15ohomj/new_free_ai_landscape_design_tool_would_love_your/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Would be nice if I can tap on the portion I want to keep and then continue to work on the rest."<br><a href="https://www.reddit.com/r/landscaping/comments/15ohomj/new_free_ai_landscape_design_tool_would_love_your/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"I&#39;d pay good money for something like that... a list of plants it&#39;s recommending to start and eventually a bill of materials for a particular design."<br><a href="https://www.reddit.com/r/landscaping/comments/15ohomj/new_free_ai_landscape_design_tool_would_love_your/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"home page states free to use. Create an account and upload a picture only to find its a monthly subscription. So how is this free to use."<br><a href="https://www.reddit.com/r/landscaping/comments/15ohomj/new_free_ai_landscape_design_tool_would_love_your/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Practicing landscape architects are explicit that AI renders are useful for early inspiration/marketing but not for real design deliverables -- a distinction Dima&#39;s positioning should respect rather than blur.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Basically if you&#39;re presenting a specific design, AI won&#39;t do it for you. It will make nice pictures, but that is not design... If you want to present a specific design then you&#39;ll need to create a 3D model and ideally render it, then post-process in AI."<br><a href="https://www.reddit.com/r/landscapedesign/comments/1toafj1/best_ai_tools_for_realistic_garden_renderings/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Project drafts? no, no, no. unless your boss wants to waste time fixing hallucinations or be liable for mistakes created by a machine."<br><a href="https://www.reddit.com/r/LandscapeArchitecture/comments/1cikncf/ai_to_generate_images_of_gardens_to_create/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Direct-to-homeowner AI renderings-as-sales-collateral are already market-tested, not theoretical: Scaped.ai&#39;s real self-reported campaign (from the marketing lens) doubles as design-lens proof, and customers explicitly want the rendered promise followed by a real built result, not another render.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"It would be more convincing if the &quot;after&quot; photo was of the garden actually built and planted, instead of an AI render. Like show a before, ai render, and then an actual &quot;after&quot; photo. I&#39;m so tired of seeing renders as the end result."<br><a href="https://www.reddit.com/r/landscaping/comments/1ol4o11/new_ai_landscape_design_tool_would_love_your/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Yeah something like an AR visualizer would be much more helpful... Being able to visualize the plants mature size and arrange them in 3D over the camera feed of your yard would be so so helpful."<br><a href="https://www.reddit.com/r/landscaping/comments/1ol4o11/new_ai_landscape_design_tool_would_love_your/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Practitioners who already charge tiered design/consult fees describe a structure remarkably close to a productized version of Dima&#39;s proposal pipeline -- a cheap walkthrough tier, a mid quote+sketch tier, and a premium full-render tier, credited against the install if booked.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"My company actually moved to this model this year. We charge roughly our triple our hourly rate for consult time... For $500 you get a quote and a sketch of the larger project / For $850 you get a full render of very large projects and a detailed quote. If you book work with us that fee is applied to the work retroactively making it free."<br><a href="https://www.reddit.com/r/landscaping/comments/1pfbz1v/landscaper_charging_design_fee/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"For a certified master gardener with the scope you&#39;re describing... full garden design with plant specs per zone: $2,000-3,500."<br><a href="https://www.reddit.com/r/landscaping/comments/1r1eiie/how_much_to_charge_for_gardening_design_consulting/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<h3>Marketing</h3>
+<details>
+<summary>Google Business Profile + reviews is the near-universal #1 answer for highest-ROI landscaping marketing -- it&#39;s free, and the &#39;map pack&#39; is where local landscaping searches convert.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Google Business Profile -- this is #1 priority. Most people search &quot;landscaper near me&quot; and pick from the map pack. Get 10+ reviews and post photos of your work weekly."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1ri81tv/best_ways_to_market_landscaping_business/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"google business profile -- post before/after photos every week. respond to every review. this alone can fill your schedule."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1ri81tv/best_ways_to_market_landscaping_business/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"80% of our work comes from referrals. The other 20% is from our Google listing. I tried Facebook ads and Instagram and neither moved the needle for our area."<br><a href="https://www.reddit.com/r/smallbusiness/comments/1rairx5/the_tools_actually_running_my_3person_landscaping/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Door hangers and yard signs placed on/around a just-finished job (proximity + social proof) consistently beat cold flyers.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Door hangers on the neighbors of houses you just finished...You&#39;re already there, and social proof is the strongest form of marketing in home services. &quot;We just completed a project next door -- here&#39;s 10% off your first service.&quot; This converts at 3-5x the rate of cold flyers because there&#39;s built-in trust."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1ri81tv/best_ways_to_market_landscaping_business/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"He had a team walk up and down streets for 4 hours a day doing door knob hangers. He said the money was Fall and Spring cleanups."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1oy8gq1/ways_to_get_landscaping_clients/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Go out on a Thursday or Friday night and put them in the grass at the ends of left turning lanes of highway exits... preferably by stop signs or intersections where people stop and look around for a sec and actually have time to snap a pic."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1oy8gq1/ways_to_get_landscaping_clients/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Direct mail (EDDM/postcards) gets mixed reviews on ROI, but the shared-lead alternative (Angi/Yelp) is actively resented for cost and quality -- and AI-rendered postcards are already a live competitive category, not a hypothetical.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"been relying mostly on angi and yelp but the lead quality has been inconsistent and im paying like $80-100+ per lead thats shared with 4 other contractors."<br><a href="https://www.reddit.com/r/landscaping/comments/1shijbp/anyone_here_doing_direct_mail_for_landscaping/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"also saw this company scaped.ai that claims way higher response rates by using ai to show homeowners what their actual house would look like with new landscaping on the postcard."<br><a href="https://www.reddit.com/r/landscaping/comments/1shijbp/anyone_here_doing_direct_mail_for_landscaping/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"I actually tried Scaped a couple months ago. Sent out maybe 200 postcards to a neighborhood I wanted to break into. Got 9 calls, which is way better than any EDDM I&#39;ve done before... Closed 2 jobs from it, one was a $6k patio so basically paid for itself immediately. Only downside is the AI renderings aren&#39;t perfect every time some of them looked a little off, but most were solid enough that homeowners got the idea."<br><a href="https://www.reddit.com/r/Contractor/comments/1sem3gl/anyone_here_doing_direct_mail_for_landscaping/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Referral partnerships with adjacent home-service trades (pools, fencing, mosquito control, real estate agents, mulch/stone suppliers) are cited as a high-trust warm-lead channel, distinct from generic &#39;ask for referrals.&#39;<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Partner with referral sources like pool companies, painters, fence companies, mosquito control...these companies are already hired by home owners and those owners trust them. When the question of landscape comes up, if you have a relationship with the company and the technicians, it&#39;s your name on the tip of their tongue."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1oy8gq1/ways_to_get_landscaping_clients/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"If you can start by supplying a referral, that will open door fast. Don&#39;t just give out a company&#39;s name, tell the customer you will have the company call them... 20yrs in home service, this was a weekly thing for us."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1oy8gq1/ways_to_get_landscaping_clients/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Flat-flyer/generic-mail response rates are reported as brutally low by practitioners themselves, reinforcing why personalization (the core of Dima&#39;s model) is the thing people say actually moves the needle.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Flyers work but the conversion rate is brutal -- usually well under 1%."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1ri81tv/best_ways_to_market_landscaping_business/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"you have 15 seconds before they get to the trash can with it. Make it easy to read."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1oy8gq1/ways_to_get_landscaping_clients/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<h3>Pricing</h3>
+<details>
+<summary>Deposit norms are contested but converging: material-heavy hardscape jobs commonly run 50% up front, yet the cleanest customer-trust structure reported is a staged schedule (10-25% signing / 25-50% start / holdback to completion) or paying suppliers directly for materials.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"I work for a small landscape company. We always ask for a 50% deposit up front. It&#39;s refundable, but we require it to get on our work calendar. As a small business, we don&#39;t have the financial cushion to buy all the necessary materials and pay all the costs associated with the job without this deposit."<br><a href="https://www.reddit.com/r/landscaping/comments/lpbic6/landscaper_red_flags/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"we quote the whole job and sign a contract. Then we tell them how much materials will be and they write a check directly to the material supplier... This way the customer doesn&#39;t feel scammed... We have been doing it this way for 20 years and have never had a complaint."<br><a href="https://www.reddit.com/r/Contractor/comments/15b3lkb/contractor_wants_half_up_front_red_flag/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Experienced practitioners deliberately pad estimates by &#39;thousands&#39; against found-conditions risk and are explicitly suspicious of anyone who won&#39;t -- a norm worth building into how Dima&#39;s product frames estimate ranges vs. hard numbers.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"I don&#39;t trust anyone who gives quotes, only estimates... Not only do we estimate, but we pad our estimates quite a bit, like by thousands. This way if we get to a job planning on digging a foot down for gravel but find 3 feet of loam from an old farm(actually happened) we can do the job right..."<br><a href="https://www.reddit.com/r/landscaping/comments/lpbic6/landscaper_red_flags/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Design-fee benchmarks span a wide but consistent ladder across the market, from a basic consult to full stamped landscape-architecture plans -- useful anchor points for pricing an AI-assisted proposal product between the free-render tools and human designers.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"site assessment + consultation: $500-800 / full garden design with plant specs per zone: $2,000-3,500 / maintenance plan document: $500-800 / total package: $3,000-5,000."<br><a href="https://www.reddit.com/r/landscaping/comments/1r1eiie/how_much_to_charge_for_gardening_design_consulting/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"We have a $500 minimum for landscape design at my company... If you pay for a set of landscape plans, this will include whatever revisions they need to make in order to get your plan where you want it."<br><a href="https://www.reddit.com/r/landscaping/comments/9ijfme/is_paying_a_landscape_designer_worth_it/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"BTW my fee would be closer to $5k, including hardscape plans."<br><a href="https://www.reddit.com/r/landscaping/comments/1bpxu4u/is_2k_too_much_to_pay_for_a_landscape_design_plan/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"$300 is what I charge for the initial one hour on-site consultation... Design fees typically run $2500-4000. We work primarily with homeowners building six figure landscape projects."<br><a href="https://www.reddit.com/r/landscaping/comments/1pfbz1v/landscaper_charging_design_fee/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Shared-lead marketplaces are explicitly resented on cost: $80-100+ per lead split across 4-5 competing contractors, which is the direct cost baseline Dima&#39;s AI-targeted, exclusive-address model should be priced/positioned against.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"im paying like $80-100+ per lead thats shared with 4 other contractors."<br><a href="https://www.reddit.com/r/landscaping/comments/1shijbp/anyone_here_doing_direct_mail_for_landscaping/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Meta ads w/ instant forms (not website clicks) get leads around $25-40 each."<br><a href="https://www.reddit.com/r/landscaping/comments/1awwjmt/best_form_of_advertising/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Follow-up speed is repeatedly cited as a bigger lever on close rate than price itself -- both from a marketing-agency&#39;s self-reported number and from the AI-quoting practitioner who says being first to respond, not cheapest, is what wins the job.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Try sending your quote within 24 hours of the site visit, then have an automated follow-up 48 hours later asking if they have any questions This alone improved conversion rates by about 30% for several clients."<br><a href="https://www.reddit.com/r/sweatystartup/comments/f8qfsn/how_can_i_land_more_clients_landscaping_business/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"My close rate shot up too because im first to respond now instead of the third quote a week later."<br><a href="https://www.reddit.com/r/CRM/comments/1r8muam/is_jobber_a_scam_crm_or_am_i_over_reacting/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<h3>Tools</h3>
+<details>
+<summary>Jobber has by far the most mindshare but also the sharpest pricing backlash -- practitioners explicitly call out the influencer-marketing engine and the annual-vs-monthly price framing as manipulative.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"you can&#39;t search anything without getting bombarded with Jobber ads. Influencers, ads on top of more ads, contractor channels... First thing that rubbed me wrong was the pricing. They don&#39;t show true monthly pricing on the site."<br><a href="https://www.reddit.com/r/CRM/comments/1r8muam/is_jobber_a_scam_crm_or_am_i_over_reacting/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"I&#39;m paying $267 a month, and I honestly don&#39;t understand how a software can cost that much and still charge extra for basic functionality... reviews cost an extra $39 a month and referrals are another $29. Those feel like basic features that any CRM should already include."<br><a href="https://www.reddit.com/r/Contractor/comments/1qk5y04/im_really_disappointed_with_jobber/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Most of those videos pushing Jobber are basically ads, even when they&#39;re framed as &quot;honest reviews&quot;... Creators are either getting the software for free, getting paid, or both."<br><a href="https://www.reddit.com/r/handyman/comments/1qd243k/is_jobber_software_worth_it/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>Aspire is called &#39;the industry benchmark&#39; but its ~1% of revenue pricing, steep implementation curve, and support quality all draw real complaints -- it&#39;s positioned as something to grow into, not start with.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Aspire -- Obviously the industry benchmark, but their pricing model (around 1% of revenue) feels steep."<br><a href="https://www.reddit.com/r/landscaping/comments/1n6tbxc/lmn_vs_aspire_which_is_better_for_a_34m_landscape/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"I hate that Aspire bills % of revenue. Just feels outright grimy."<br><a href="https://www.reddit.com/r/landscaping/comments/1n6tbxc/lmn_vs_aspire_which_is_better_for_a_34m_landscape/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"If you don&#39;t have at least one employee completely dedicating their time and effort to the software, building out all the modules/lists/items/services/formulas/templates/costbook... you&#39;re not getting any decent value."<br><a href="https://www.reddit.com/r/landscaping/comments/1meaifp/landscaping_platforms_aspire_lmn_landscape/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"I would advise avoiding aspire until you are much larger. It&#39;s expensive. It has a steep learning curve and I spent a good portion of every week trying to lift the spirits of my staff who were struggling with it."<br><a href="https://www.reddit.com/r/sweatystartup/comments/1doigon/what_do_commercial_landscape_companies_use_for/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>LMN sits in the middle of the pack -- strong bidding/proposal presentation (helps close big jobs) but weak QuickBooks integration and a CRM described as built by people who never worked in the field.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Major, major major issue with LMN is QB integration. They just can&#39;t get the permissions from QB&#39;s (api&#39;s) or whatever they drag their feet on for excuses."<br><a href="https://www.reddit.com/r/landscaping/comments/1egynly/has_anyone_created_their_own_mgmt_system_by_using/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"FANTASTIC bidding software, CRM is undesirable, many functions in the bidding menus are clearly developed by people whom never held a shovel let alone played in dirt nor ran a landscape business."<br><a href="https://www.reddit.com/r/landscaping/comments/1egynly/has_anyone_created_their_own_mgmt_system_by_using/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"LMN has propped up sales for us FOR sure we close big stuff with exceptional margins... a lot of it has to do with how the bid presentation package bolsters"<br><a href="https://www.reddit.com/r/landscaping/comments/1egynly/has_anyone_created_their_own_mgmt_system_by_using/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>AI-driven satellite quoting (LawnVex) is getting genuinely enthusiastic, specific, unprompted reviews -- collapsing the quote cycle from a scheduled site visit to minutes. This is the closest existing analogue to Dima&#39;s own product mechanism.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"The AI measurement is the real deal. Type a customer address, it pulls the property lines, measures the actual lawn off satellite and cuts out the house, driveway and beds on its own. Then it builds the quote off my price book and texts it to the customer."<br><a href="https://www.reddit.com/r/CRMSoftware/comments/1umzqo4/lawnvex_review_after_2_months_ai_satellite/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Lead to quote went from next day to under five minutes and I stopped driving out to bid completely. I quoted a lawn from a gas station parking lot last week."<br><a href="https://www.reddit.com/r/CRMSoftware/comments/1umzqo4/lawnvex_review_after_2_months_ai_satellite/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"I switched to LawnVex &amp; was the best move I&#39;ve made for my landscaping business in years... I stopped driving out to bid lawns completely, thats a full day a week back in my pocket. My close rate shot up too because im first to respond now instead of the third quote a week later."<br><a href="https://www.reddit.com/r/CRM/comments/1r8muam/is_jobber_a_scam_crm_or_am_i_over_reacting/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<details>
+<summary>A lean, high-performing small shop&#39;s real-world stack ($280K rev, 3 people, 74 upvotes of agreement) is deliberately minimal: one CRM (Jobber), QuickBooks Online for accounting, plain group iMessage over Slack, and a voice-dictation app (Willow Voice) for on-site estimate notes -- a useful integration-surface map for Dima&#39;s product.<svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevron"></use></svg></summary>
+<p class="pull-quote">"Scheduling and CRM: Jobber / This is the backbone. Scheduling, quoting, invoicing, client management, all in one. Worth every penny. We tried doing it all in spreadsheets the first year and it was chaos."<br><a href="https://www.reddit.com/r/smallbusiness/comments/1rairx5/the_tools_actually_running_my_3person_landscaping/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"Communication: Group text (iMessage)... We tried Slack and nobody checked it. Everyone checks their texts."<br><a href="https://www.reddit.com/r/smallbusiness/comments/1rairx5/the_tools_actually_running_my_3person_landscaping/" style="font-size: 0.75rem;">Read thread →</a></p>
+<p class="pull-quote">"When I&#39;m walking a property for an estimate I just talk through everything out loud into Willow Voice. Square footage guesses, problem areas, what the client wants, materials I&#39;ll need. The transcript goes into a Google Doc template for that job. Way faster than trying to type notes on my phone."<br><a href="https://www.reddit.com/r/smallbusiness/comments/1rairx5/the_tools_actually_running_my_3person_landscaping/" style="font-size: 0.75rem;">Read thread →</a></p>
+</details>
+<h3 style="margin-top: 2rem;">Quantitative Data (18 data points)</h3>
+<div class="stat-strip">
+<div class="stat-item"><div class="stat-label">Meta/Facebook instant-form ad cost per lead</div><div class="stat-value">$25-40</div></div>
+<div class="stat-item"><div class="stat-label">Shared-marketplace lead cost (Angi/Yelp)</div><div class="stat-value">$80-100+ per lead, shared across ~4-5 contractors</div></div>
+<div class="stat-item"><div class="stat-label">Google LSA/Search lead cost (adjacent home-service benchmark)</div><div class="stat-value">$20-60+</div></div>
+<div class="stat-item"><div class="stat-label">Scaped.ai (AI-rendered postcard) real campaign result</div><div class="stat-value">200 postcards -&gt; 9 calls -&gt; 2 jobs closed, incl. one $6k patio</div></div>
+<div class="stat-item"><div class="stat-label">Door-hanger-driven proximity marketing conversion multiplier</div><div class="stat-value">3-5x cold-flyer rate (self-reported, not measured)</div></div>
+<div class="stat-item"><div class="stat-label">Cold flyer response rate</div><div class="stat-value">well under 1%</div></div>
+</div>
+</section>
+
+
+<section>
+<p class="eyebrow">Campaign copy source</p>
+<h2>Customer Language Bank</h2>
+<p class="lede">20 phrases extracted from Reddit discussions. Raw copy material for outreach and campaign messaging.</p>
+
+<div style="display: flex; flex-wrap: wrap;">
+<span class="chip chip-brass">Our backyard is a mess.</span>
+<span class="chip chip-brass">New homeowners and don&#39;t speak the contractor language just yet.</span>
+<span class="chip chip-brass">If it&#39;s like that now, it&#39;s not going to get better.</span>
+<span class="chip chip-brass">Why don&#39;t contractors ever call me back?</span>
+<span class="chip chip-brass">Contractors are extremely hit and miss.</span>
+<span class="chip chip-brass">It&#39;s been happening to me for ten years now.</span>
+<span class="chip chip-brass">Trusting online reviews, I figured that paying top $$$$ would be worth it, but alas, no.</span>
+<span class="chip chip-brass">Saying we were disappointed would be an understatement.</span>
+<span class="chip chip-brass">This post makes me want to go kiss the team.</span>
+<span class="chip chip-brass">It doesn&#39;t seem right to get charged like you did without it being discussed first.</span>
+<span class="chip chip-brass">I&#39;m willing to pay, just surprised by it since it wasn&#39;t discussed.</span>
+<span class="chip chip-brass">I don&#39;t want to rip him off, but also am pretty upset at our yard.</span>
+<span class="chip chip-brass">My back yard could be so much more but I could not incision the possibilities. Ur app is AMAZING!</span>
+<span class="chip chip-brass">I&#39;m overwhelmed, having trouble settling on what to do.</span>
+<span class="chip chip-brass">I&#39;ve been stuck in the weeds on my home the past few years I&#39;ve owned it.</span>
+<span class="chip chip-brass">I&#39;m so tired of seeing renders as the end result.</span>
+<span class="chip chip-brass">Scammy scam scammy scam scammy scammy scam.</span>
+<span class="chip chip-brass">Good size for a chipmunk? Super off scale.</span>
+<span class="chip chip-brass">I wish I could tell it I did not want a path, just a english garden in that area.</span>
+<span class="chip chip-brass">It&#39;s cool, but definitely could use some adjustments.</span>
+
+</div>
+
+</section>
+
+
+<section>
+<p class="eyebrow">Market context</p>
+<h2>Agencies Serving the Trades</h2>
+<p class="lede">11 firms offering lead-gen, marketing, and business services to landscapers. Pricing models and tier structure shown.</p>
+
+<div class="card">
+<h4>Landscape Leadership</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<div class="img-frame" style="margin: 1rem 0;"><img src="img/agency-landscape-leadership-services.jpg" alt="agency-landscape-leadership-services.jpg" loading="lazy"><div class="img-caption">Landscape Leadership marketing/sales services page — retainer positioning, no public pricing table</div></div>
+<p><a href="https://www.landscapeleadership.com/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>Ramblin Jackson</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<div class="img-frame" style="margin: 1rem 0;"><img src="img/agency-ramblin-jackson-pricing.jpg" alt="agency-ramblin-jackson-pricing.jpg" loading="lazy"><div class="img-caption">Ramblin Jackson published pricing page — phased audit/project/renewal structure</div></div>
+<p><a href="https://ramblinjackson.com/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>Lawnline Marketing</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<div class="img-frame" style="margin: 1rem 0;"><img src="img/agency-lawnline-services.jpg" alt="agency-lawnline-services.jpg" loading="lazy"><div class="img-caption">Lawnline Marketing services page — tiered programs by client revenue stage</div></div>
+<p><a href="https://lawnline.marketing/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>Halstead Media</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<div class="img-frame" style="margin: 1rem 0;"><img src="img/agency-intrigue-media-system.jpg" alt="agency-intrigue-media-system.jpg" loading="lazy"><div class="img-caption">Intrigue Media landscape marketing system page — 4:1 ROI guarantee messaging</div></div>
+<p><a href="https://www.halsteadmedia.com/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>Intrigue Media</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<p><a href="https://intriguemedia.com/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>Landscape Marketing Pros</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<p><a href="https://www.landscapemarketingpros.co/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>Scorpion</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<div class="img-frame" style="margin: 1rem 0;"><img src="img/agency-scorpion-home-services.jpg" alt="agency-scorpion-home-services.jpg" loading="lazy"><div class="img-caption">Scorpion RevenueMax home services marketing solutions page — no published pricing</div></div>
+<p><a href="https://www.scorpion.co/home-services/marketing-solutions/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>CAMP Digital</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<div class="img-frame" style="margin: 1rem 0;"><img src="img/agency-camp-digital-packages.jpg" alt="agency-camp-digital-packages.jpg" loading="lazy"><div class="img-caption">CAMP Digital packages page — BaseCAMP/Trailblazer tier names, pricing not published</div></div>
+<p><a href="https://campdigital.com/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>Blue Corona / EverConnect</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<p><a href="https://www.everconnect.com/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>Hook Agency</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<div class="img-frame" style="margin: 1rem 0;"><img src="img/agency-hook-agency-pricing.jpg" alt="agency-hook-agency-pricing.jpg" loading="lazy"><div class="img-caption">Hook Agency a la carte pricing page — SEO/PPC/website/AEO per-channel rates</div></div>
+<p><a href="https://hookagency.com/">Visit →</a></p>
+</div>
+<div class="card">
+<h4>LandscapeAI (adjacent software, not agency)</h4>
+<p><strong>Offer:</strong> </p>
+<p><strong>Fee Structure:</strong> </p>
+<p><a href="https://landscapeai.us/">Visit →</a></p>
+</div>
+<h3 style="margin-top: 2rem;">More Agency Examples</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+<div class="img-frame"><img src="img/agency-halstead-media-system.jpg" alt="agency-halstead-media-system.jpg" loading="lazy"><div class="img-caption">Halstead Media &#39;the system&#39; page — no published pricing, consult-gated</div></div>
+<div class="img-frame"><img src="img/agency-landscape-marketing-pros-services.jpg" alt="agency-landscape-marketing-pros-services.jpg" loading="lazy"><div class="img-caption">Landscape Marketing Pros services page — entry-level SEO/lead-gen program</div></div>
+<div class="img-frame"><img src="img/agency-everconnect-leadgen.jpg" alt="agency-everconnect-leadgen.jpg" loading="lazy"><div class="img-caption">EverConnect lead generation solutions page — CPC/CPL/CPCall/CPAppointment marketplace pricing model</div></div>
+</div>
+</section>
+
+
+<section>
+<p class="eyebrow">Compensation research</p>
+<h2>Fee Benchmarks</h2>
+<p class="lede">23 categories synthesized from industry benchmarks, FDD data, and published agency pricing. The verdict panel below reflects the current position after Jul 22 session.</p>
+
+<div class="table-wrapper">
+<table class="matrix">
+<thead>
+<tr>
+<th>Category</th>
+<th>Typical Range</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>(a) Angi/HomeAdvisor, landscaping/hardscaping</td><td>$25-55/lead; effective cost per booked job $1,400+ after annual fee ($288-300) + per-lead fee ($15-85) + lead shared 3-8 ways + ~10% close rate</td><td><span class="chip">medium</span></td></tr>
+<tr><td>(a) Thumbtack, landscaping</td><td>$20-75/lead stated for landscaping; $5-150+ across all trades, avg $20-60; shared with 4-5 pros, 78% of homeowners pick first responder</td><td><span class="chip">medium</span></td></tr>
+<tr><td>(a) Networx</td><td>$10-100+/lead (Pay Per Lead, shared up to 4 ways); $15-120+/lead (Exclusive Leads, no sharing); no setup fee, no contract</td><td><span class="chip">high</span></td></tr>
+<tr><td>(b) Landscape, blended total comp (salary + commission)</td><td>~8% of what a salesperson sells</td><td><span class="chip">high</span></td></tr>
+<tr><td>(b) Landscape, real-world example — Weed Man (Virginia)</td><td>Inside sales: 5% · Outside field sales: 10%</td><td><span class="chip">high</span></td></tr>
+<tr><td>(b) Landscape, real-world example — Planted Earth (Maryland)</td><td>Gross-margin-tiered: 1% (45-50% GM) → 2.5% (60%+ GM) of total sale value; 70% paid at sale, 30% at completion</td><td><span class="chip">high</span></td></tr>
+<tr><td>(b) Roofing sales commission</td><td>3-15% overall range; typically 7% with no PM/materials responsibility, rising to 10-12% when the rep also handles materials + project management</td><td><span class="chip">medium</span></td></tr>
+<tr><td>(b) General construction, full-cycle sales</td><td>~3-6% of contract value for full-cycle (find + close + smooth handoff); landscape-design specific: ~10% for &quot;just bringing work to the table&quot; vs 15-20% when also project-managing/on-site</td><td><span class="chip">low-medium</span></td></tr>
+<tr><td>(b) Commission-only (no base salary), general</td><td>5-15% of revenue</td><td><span class="chip">low</span></td></tr>
+<tr><td>(b) NALP 2024 Compensation &amp; Benefits Report</td><td>see md</td><td><span class="chip">not accessed</span></td></tr>
+<tr><td>(b) Arjun&#39;s own verbatim number</td><td>4% on the top</td><td><span class="chip">high</span></td></tr>
+<tr><td>(c) General trades referral norm</td><td>5-10% of project value typical; up to 15% for specialty/skilled trades (electrical, plumbing, HVAC); some experienced GCs argue for a lower 2-3% with a not-to-exceed cap</td><td><span class="chip">medium</span></td></tr>
+<tr><td>(d) General revenue-share digital marketing agreements</td><td>10-30% of attributed revenue</td><td><span class="chip">low</span></td></tr>
+<tr><td>(d) Local-services CPA/lead-gen equivalent</td><td>$15-150 per lead (CPA-model range)</td><td><span class="chip">low-medium</span></td></tr>
+<tr><td>(e) Landscape Leadership</td><td>Published tiers $2,000/$3,000/$5,000/$8,000 mo; typical $2-20M-revenue client spends $70-100K+/yr ($5.8-8.3K/mo blended) + ad spend; projects start at $25,000</td><td><span class="chip">high</span></td></tr>
+<tr><td>(e) Ramblin Jackson</td><td>$2,800-6,500/mo during 12-mo initial project; $1,850-4,500/mo renewal years; $797-2,997 audit entry</td><td><span class="chip">high</span></td></tr>
+<tr><td>(e) Hook Agency</td><td>À la carte $1,000-4,000/mo per channel; blended starter $2,500-4,000/mo, growth $8,000-15,000/mo</td><td><span class="chip">high</span></td></tr>
+<tr><td>(e) Lawnline Marketing</td><td>Entry ~$1,500/mo, scaling to enterprise (ceiling not published)</td><td><span class="chip">high</span></td></tr>
+<tr><td>(e) Landscape Marketing Pros</td><td>Entry ~$1,000/mo</td><td><span class="chip">high</span></td></tr>
+<tr><td>(e) Scorpion (generalist, reported not published)</td><td>$2,500-6,000/mo typical, up to $8,000+/mo; setup fee $5,000-50,000</td><td><span class="chip">medium</span></td></tr>
+<tr><td>(e) Generic &quot;marketing agency retainer&quot; (non-home-services-specific)</td><td>$2,500-10,000/mo typical local business; full-service $5,000-15,000+/mo</td><td><span class="chip">low</span></td></tr>
+<tr><td>(f) U.S. Lawns</td><td>6% of gross billings, stepping down to 4% as monthly revenue grows; +2% system-wide advertising fee (may be capped)</td><td><span class="chip">high</span></td></tr>
+<tr><td>(f) Weed Man</td><td>5.5% stated royalty; fixed-dollar structure means effective rate falls to ~2.5-3% at ~$400K revenue/truck</td><td><span class="chip">medium</span></td></tr>
+
+</tbody>
+</table>
+</div>
+
+
+<div class="verdict-panel">
+<h3>Current Position (as of Jul 23)</h3>
+
+<div class="verdict-section">
+<p class="verdict-figure">$3K/mo credited floor + 5–7% on attributable new business</p>
+<p style="margin: 0; font-size: 0.9rem; color: var(--ink-soft);">Authority: 2026-07-22 Workstreams & Priorities. Recommended structure covers unfixed costs, builds attribution proof, and sits at or below the low end of referral-fee and revenue-share norms (categories c/d: 5–15% for referral; 10–30% for rev-share).</p>
+</div>
+
+<div class="verdict-section" style="border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 1.5rem;">
+<h4 style="margin-top: 0;">Historical Context (Jul 21 Verdict)</h4>
+<p style="font-size: 0.9rem; color: var(--ink-soft);">The Jul 21 analysis tested the client's opening 5%/10% framing (benchmarking against internal W-2 sales comp, category b) and concluded: "The client's 5%/10% framing is a legitimate opening reference… but it imports the wrong comparison class. The existing recommendation… already sits at or below the low end of what referral-fee and rev-share norms would support (c/d), while still landing inside the client's own comfort band if they insist on framing this as (b)-style sales comp."</p>
+<p style="font-size: 0.9rem; color: var(--ink-soft);">See <code>fee-benchmarks.md</code> for full category-mismatch analysis (23 categories, confidence levels, and gap notes).</p>
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+<p><strong>Sources</strong></p>
+<ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+<li><code>landscapers.json</code> — 6 exemplar firms (Gibbs, Michaelangelo's, HighGrove, Unique Environmental, BrightView, Yellowstone/Ruppert)</li>
+<li><code>customer-reviews.json</code> — 292 Google reviews via Apify, 6 companies, 2026-07-22</li>
+<li><code>reddit-deep-dive.json</code> — 91 threads (threads, 24 findings, 18 numbers, 20 language-bank phrases)</li>
+<li><code>agencies.json</code> — 11 lead-gen/marketing agencies with published or reported pricing</li>
+<li><code>fee-benchmarks.json</code> — 23 categories synthesized from FDD, agency sites, and trade-press sources</li>
+<li><code>img/manifest.json</code> — 16 screenshots (agency and landscaper site captures, Jul 22)</li>
+</ul>
+
+<p style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.8rem; color: var(--ink-soft);">
+<strong>Internal use only.</strong> This research supports the Arjun Landscaping partnership negotiation and tactical lead-generation strategy. QA verified:
+35+ review quotes (praise + complaint) ·
+67+ Reddit thread quotes with URLs ·
+20 language-bank phrases ·
+23 fee-benchmark categories + current position verdict ·
+All image references verified.
+</p>
+
+</footer>
+
+</div>
+
+</body>
+</html>

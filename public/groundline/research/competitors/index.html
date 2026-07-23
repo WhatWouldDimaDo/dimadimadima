@@ -1,0 +1,1975 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competitive Research — Landscaping AI & Direct-Mail Platforms</title>
+<style>
+:root {
+  --cream: #f4efe3;
+  --paper: #faf7ef;
+  --ink: #211f1a;
+  --ink-soft: #4a463d;
+  --pine: #1e3226;
+  --pine-deep: #16241b;
+  --sage: #77816c;
+  --brass: #a9803f;
+  --brass-light: #c9a562;
+  --line: rgba(33, 31, 26, 0.14);
+  --line-light: rgba(250, 247, 239, 0.28);
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Typography */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 0.5rem 0;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  font-weight: 400;
+  margin: 1rem 0 0.5rem 0;
+  color: var(--ink);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 2rem 0 1rem 0;
+  color: var(--ink);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+h4 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.lede {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+}
+
+p {
+  margin: 0.75rem 0;
+  font-size: 0.92rem;
+}
+
+a {
+  color: var(--brass);
+  text-decoration: none;
+  border-bottom: 1px solid var(--brass);
+}
+
+a:hover {
+  color: var(--brass-light);
+  border-bottom-color: var(--brass-light);
+}
+
+/* Cards & Sections */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card h4 {
+  margin-top: 0;
+  font-family: var(--font-display);
+}
+
+.card-small {
+  padding: 1rem;
+}
+
+.section {
+  margin: 3rem 0;
+}
+
+.section-title {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 3px;
+  margin: 0 0.25rem 0 0;
+}
+
+.verdict-sage {
+  background: var(--sage);
+  color: var(--paper);
+}
+
+.verdict-brass {
+  background: var(--brass);
+  color: var(--paper);
+}
+
+.verdict-ink-soft {
+  background: var(--ink-soft);
+  color: var(--paper);
+}
+
+.badge-sage {
+  color: var(--sage);
+}
+
+.badge-brass {
+  color: var(--brass);
+}
+
+.badge-ink-soft {
+  color: var(--ink-soft);
+}
+
+.badge-unknown {
+  color: #999;
+}
+
+/* Matrix */
+.matrix-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin: 1.5rem 0;
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+}
+
+.matrix th, .matrix td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.matrix th {
+  background: var(--pine-deep);
+  color: var(--paper);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+}
+
+.matrix td:first-child, .matrix th:first-child {
+  text-align: left;
+  position: sticky;
+  left: 0;
+  background: var(--cream);
+  min-width: 180px;
+}
+
+.matrix th:first-child {
+  background: var(--pine-deep);
+  color: var(--paper);
+  z-index: 2;
+}
+
+.matrix-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.matrix-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  margin-right: 0.25rem;
+}
+
+.dot-yes {
+  background: var(--sage);
+}
+
+.dot-partial {
+  background: var(--brass);
+}
+
+.dot-no {
+  background: var(--ink-soft);
+}
+
+.dot-unknown {
+  background: #ccc;
+}
+
+.compact-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Closeness strip */
+.closeness-strip {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.closeness-card {
+  flex: 0 1 calc(25% - 0.75rem);
+  min-width: 150px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.closeness-card h4 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.closeness-score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--brass);
+  margin: 0.5rem 0;
+}
+
+/* Screenshot gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.screenshot {
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.screenshot-caption {
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brass);
+  font-weight: 600;
+}
+
+/* Network story */
+.cluster-story {
+  background: var(--pine-deep);
+  color: var(--paper);
+  padding: 2rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+}
+
+.cluster-story h3 {
+  color: var(--paper);
+}
+
+.cluster-story p {
+  color: var(--paper);
+}
+
+.cluster-story a {
+  color: var(--brass-light);
+  border-bottom-color: var(--brass-light);
+}
+
+/* Tier-2/3 tables */
+.tier-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.tier-table th, .tier-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.tier-table th {
+  background: var(--cream);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+}
+
+.tier-table tr:nth-child(even) {
+  background: var(--paper);
+}
+
+/* Steal list */
+.steal-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.steal-list li {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.92rem;
+}
+
+.steal-list li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--sage);
+  font-weight: bold;
+}
+
+.steal-source {
+  color: var(--brass);
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+/* Icons */
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+
+.icon-lg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .closeness-strip {
+    gap: 0.75rem;
+  }
+
+  .closeness-card {
+    flex: 0 1 calc(50% - 0.375rem);
+  }
+
+  .matrix th:first-child, .matrix td:first-child {
+    min-width: 120px;
+  }
+
+  .matrix th, .matrix td {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="section">
+  <p class="eyebrow">Competitive Research</p>
+  <h1>Landscaping AI & Direct-Mail Platform Landscape</h1>
+  <p class="eyebrow" style="margin: 1rem 0 0 0;">Jul 22–23, 2026</p>
+
+  <p class="lede">
+    <strong>Headline finding:</strong> Of 8 deep-profiled direct competitors, only <strong>4 are verified real companies:</strong>
+    <strong>OutdoorDesigns AI</strong> (Techfektor Media Group), <strong>QuoteIQ</strong> (Cam-Mapper),
+    <strong>Postcard AI</strong> (DealMachine Operations), and <strong>Scaped.ai</strong> (leans real-but-early).
+    The other 3 are likely-thin-sites on a shared Vercel infrastructure cluster (outdoordesigns.ai, porchline.co, curblead.com, rendermail.app at 216.198.79.1).
+    Most importantly: <strong>nobody occupies Dima's full quadrant</strong>—true AI yard renders for specific addresses, plant fidelity,
+    print proposal sites with per-address tracking, delivery infrastructure, and full attribution.
+    <strong>Closest match:</strong> Scaped.ai (direct-mail + self-serve + landscape-native), but still lacks
+    per-address proposal microsites and true plant-species fidelity.
+  </p>
+</div>
+
+<!-- CLOSENESS RANKING -->
+<div class="section">
+  <p class="eyebrow">Tier-1 Closeness Ranking</p>
+  <h2 class="section-title">Direct Competitors by Overlap with Dima's Stack</h2>
+
+  <div class="closeness-strip">
+    <div class="closeness-card">
+      <h4>OutdoorDesigns AI</h4>
+      <div class="closeness-score">4/5</div>
+      <div><span class="badge verdict-sage">REAL</span></div>
+    </div>
+    <div class="closeness-card">
+      <h4>CurbLead</h4>
+      <div class="closeness-score">4/5</div>
+      <div><span class="badge verdict-ink-soft">LIKELY-THIN-SITE</span></div>
+    </div>
+    <div class="closeness-card">
+      <h4>PostScout</h4>
+      <div class="closeness-score">4/5</div>
+      <div><span class="badge verdict-brass">UNDETERMINED</span></div>
+    </div>
+    <div class="closeness-card">
+      <h4>Scaped.ai</h4>
+      <div class="closeness-score">4/5</div>
+      <div><span class="badge verdict-brass">UNDETERMINED</span></div>
+    </div>
+    <div class="closeness-card">
+      <h4>Postcard AI</h4>
+      <div class="closeness-score">4/5</div>
+      <div><span class="badge verdict-sage">REAL</span></div>
+    </div>
+    <div class="closeness-card">
+      <h4>QuoteIQ ("QuoteIQ Cam" + "MapMeasure Pro" modules — best-fit identification of the secondhand name 'Cam Mapper')</h4>
+      <div class="closeness-score">3/5</div>
+      <div><span class="badge verdict-sage">REAL</span></div>
+    </div>
+    <div class="closeness-card">
+      <h4>Porchline</h4>
+      <div class="closeness-score">3/5</div>
+      <div><span class="badge verdict-ink-soft">LIKELY-THIN-SITE</span></div>
+    </div>
+    <div class="closeness-card">
+      <h4>RenderMail</h4>
+      <div class="closeness-score">3/5</div>
+      <div><span class="badge verdict-ink-soft">LIKELY-THIN-SITE</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURE MATRIX -->
+<div class="section">
+  <p class="eyebrow">Feature Comparison</p>
+  <h2 class="section-title">15-Feature Checklist: Tier-1 (8 Competitors)</h2>
+  <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1.5rem;">
+    <span class="badge badge-sage">Yes</span>
+    <span class="badge badge-brass">Partial</span>
+    <span class="badge badge-ink-soft">No</span>
+    <span class="badge badge-unknown">Unknown</span>
+  </p>
+
+  <div class="matrix-wrapper">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>OutdoorDesigns AI</th>
+          <th>CurbLead</th>
+          <th>PostScout</th>
+          <th>Scaped.ai</th>
+          <th>Postcard AI</th>
+          <th>QuoteIQ ("QuoteIQ Cam" + "MapMeasure Pro" modules — best-fit identification of the secondhand name 'Cam Mapper')</th>
+          <th>Porchline</th>
+          <th>RenderMail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td title="AI photo-to-render">AI photo-to-render</td>
+          <td title="Upload a photo, select project type (pool/remodel/hardscape/landscape/fence/deck), get a photorealistic AI render in ~60 seconds; uses 'Advanced Image Gen AI' per FAQ">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Downloaded before/after image pairs (e.g. curblead-vert-deck-before.jpg vs curblead-vert-deck.jpg) show a genuine, high-fidelity aerial composite: a wooden deck with pergola, dining set, and fire pit accurately placed on the real yard footprint, matching lighting/shadow/perspective of the unmodified aerial before-photo. This is a materially stronger and more convincing render than anything found in Porchline's public gallery.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;Our AI locates each property and renders it with YOUR service applied. Paint colors, new roof, solar panels, holiday lights — you name it.&quot; Landscaping page: &quot;lush lawns, fresh mulch, seasonal color, and curb appeal that sells&quot;">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;Our AI analyzes each property's Google Street View image, identifies improvement opportunities such as lawn, garden beds, walkways, and patios, and generates a photorealistic visualization showing the property with professional landscaping and hardscaping.&quot;">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Featured homepage sample shows the recipient's actual house (source-image thumbnail displayed) re-rendered with solar panels added and per-recipient copy ('Hi Vicky, Transform your home at 1170 Charlsea Ln...') -- but in a painterly/illustrated art style, not a photorealistic transformation. Prompt examples ('Show them their house with a new roof,' 'Add solar panels') confirm property-modification rendering is a core capability. However, the landscaping vertical page pitches contractor portfolio photos, NOT rendering the recipient's yard.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="'Before/After AI' — generates a realistic predicted 'after' visualization from a single before photo; available from the Essentials/Starter tier via included IQ Credits">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Homepage hero slider (elW9bEm.png/q80STLB.jpeg) shows a genuine photorealistic yard transformation (dead lawn -> mulched beds, flowers, lush lawn) on the same house. But the actual public Gallery landscaping examples (porchline-gallery-rabKnCU/e43iXQz and -LwBBspw/TNAIyFM/27UOoHl) show NO landscape transformation at all -- the 'after' image is a generic stock marketing template (smiling landscaper stock photo, fake 'ABC Landscaping' logo, canned '50% OFF' graphics) pasted over the SAME unmodified before-photo of a dead lawn.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="&quot;Our AI renders a photorealistic visualization of what their house looks like with your service — new roof, solar panels, pool.&quot;">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Plant species fidelity / plant library">Plant species fidelity / plant library</td>
+          <td title="FAQ claims designs use 'real world references based on your inputs — pool finish, paver style, coping, decking, turf, plants, etc.' and landscapers get 'Drought, native, tropical — region-appropriate plants,' but no dedicated plant-species picker or library is shown; product is pool/hardscape-first, landscaping is one of six supported trades">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Landscape design is explicitly listed under 'Coming soon,' not a current vertical. Current verticals (decks, fencing, hardscape) do not require plant-species rendering, and none is shown.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Landscaping renders described qualitatively (&quot;lush gardens, defined beds, elegant hardscaping&quot;) but no plant-species-level detail or library is described">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Renders show generic 'lush gardens'/'garden beds' visually convincing but no named plant-species selection, catalog, or library described anywhere">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="No plant library, species selection, or botanical rendering mentioned anywhere. Landscaping page relies on the contractor's own project photos.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="No plant-specific detail found for the Before/After AI generator; feature is described generically as a 'property transformation' image tool, not landscaping-specific plant rendering">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Landscaping gallery samples show no species-specific plant rendering of any kind -- the lawn/shrubs in the 'after' image are byte-identical to the 'before' image; only a generic ad template is overlaid.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="No landscaping vertical or planting-specific rendering exists on the site; verticals shown are Roofing, Solar, Pools, Siding only">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Multiple design options">Multiple design options</td>
+          <td title="Professional plan includes '3-Variation AI Generation'; homepage copy 'Now I show four versions in under two minutes' (testimonial, Rachel Bauman)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;AI composites your product -- in your style -- onto each property. Three variants per home.&quot;">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="No mention of multiple render variants per property in any copy">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Flow is 'review the AI-generated designs, and hit send' — implies one design per property to approve/reject, not multiple variants to choose between">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="'Iterate Until Perfect -- Don't like a design? Regenerate it. Tweak the prompt, adjust colors, swap images.' Plan-limited design previews per month (10-1,000). This is sequential regeneration under user control, not parallel design variants per home (contrast CurbLead's 3 variants per home).">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Not documented publicly whether the Before/After AI generator produces multiple variations per photo">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Not mentioned anywhere on site; no variant renders shown per home (contrast CurbLead's explicit '3 variants per home').">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Not stated whether homeowner/contractor sees more than one render variant per property">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Seasonal/bloom states">Seasonal/bloom states</td>
+          <td title="No mention of seasonal or bloom-state variants anywhere on site; only 'Night-mode renders for lighting upsells' is offered as a lighting/time-of-day variant">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Not mentioned; not applicable to current hardscape/deck/fence verticals.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Landscaping industry page mentions &quot;seasonal color&quot; as a render element, but no seasonal/bloom-state selector or multiple-season output is described">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Not mentioned anywhere on site; single static 'dream yard' render per property">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="'Seasonal Design Rotation -- AI generates designs that match the season: spring florals, summer pool landscapes, fall foliage, winter hardscape.' Seasonal design THEMES for the card creative, not seasonal/bloom states of a rendered yard design.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="No mention anywhere in QuoteIQ marketing content of seasonal or bloom-state visualization">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="No mention of seasonal or bloom-state variation anywhere on the site.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="N/A — no landscaping/planting product exists to have bloom states">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Before/after slider">Before/after slider</td>
+          <td title="Drag-to-reveal AI Vision / Original slider is the primary homepage demo widget; 'Before/After Slider' listed as a Starter-plan feature">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Homepage hero has a draggable BEFORE / AFTER-CURBLEAD-RENDER slider on the featured house image.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Before/after shown as static side-by-side image pairs (&quot;Current State&quot; / &quot;After Transformation&quot; cards), not an interactive slider">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Homepage hero uses an interactive drag-to-compare before/after slider (&quot;Drag to compare&quot;) over the AI-generated example; same slider pattern used on /for-realtors">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="No interactive before/after slider on the marketing site (homepage shows a small 'Source Image' thumbnail next to the finished card instead). Product offers 'Before/After Split Layouts: upload two photos and AI creates a dramatic transformation card' -- split-layout postcards of the contractor's own project photos.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="A manual 'Before/After Photo Generator' creates 'side-by-side or top-down comparison photos in under a minute — with annotation, logo overlay, and custom label options'; described as side-by-side/annotated composite images rather than a confirmed interactive drag slider">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Homepage hero has a literal draggable before/after slider labeled 'Their home' / 'Their postcard.'">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Site describes 'before/after postcard' as the mailed physical artifact; no interactive web slider found on the live single-page site (no separate viewer URL exists)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Per-address proposal microsite">Per-address proposal microsite</td>
+          <td title="'Deal Room' = branded proposal link sent to the client; 'Send the Deal Room' step 3 of the 3-step workflow; client approves in one tap and contractor is notified when opened">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;Homeowner scans the QR, sees the full render, drops their number&quot; -- a per-address landing page is core to every postcard, not an add-on (contrast Porchline, where the equivalent is a paid upsell).">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="QR code links to &quot;a branded landing page&quot; / &quot;branded lead form,&quot; described as generic lead-capture, not a personalized per-address proposal experience with design options">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="No per-address microsite/URL found; delivery is physical postcard only, response channel is phone call (no QR/landing-page mechanism described on the main product, in contrast to PostScout)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="QR codes link to the client's existing website or online portfolio ('Link a QR code to your online portfolio so homeowners can browse dozens of projects'), not to a personalized per-recipient page. No PURL/microsite capability mentioned anywhere.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="No dedicated per-address microsite/proposal-link product found; QuoteIQ instead has 'InstaQuote' (customer self-quoting) and 'ClientHub' (messaging), which are CRM-embedded, not standalone address-specific microsites">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="'Porchline Studio' is described as a personalized QR opening an interactive page of the recipient's own home where they can edit the mockup and submit as a lead -- functionally a proposal microsite, but positioned as a paid add-on with undisclosed pricing/availability, not the core product.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="No per-address microsite mentioned; QR/phone tracking is described as response measurement only, not a personalized landing destination">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Homeowner targeting / prospect data">Homeowner targeting / prospect data</td>
+          <td title="No outbound prospect list, targeting, or homeowner-data feature found; product starts from an already-engaged homeowner (photo taken by contractor or submitted via the contractor's own site widget)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Three targeting modes: paste an address list, drop a pin + radius, or 'saturate the block' around a recently completed job.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Contractor uploads own address list (CSV/CRM export) or PostScout targets &quot;by location, demographics, and home characteristics&quot; including home value, age, neighborhood">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;We pull every residential property and their street view photos automatically&quot; for a given ZIP; AI filtering identifies homes 'with clear improvement potential' (aging hardscaping, bare yards, cracked driveways per Santa Monica case study)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="'Build lists with 50+ property filters'; 150M+ property database with home value, lot size, equity position, years owned, absentee status; landscaping page: 'filter target areas by home value, lot size, and other demographics.' USPS address verification on every record.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="No prospect-list or homeowner-targeting product found; QuoteIQ's growth tools (Review Multiplier, Email & Text Automation, Mass Campaigns) target the contractor's own existing customer/lead list, not cold outbound targeting">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="'We pull a targeted list of homeowners in your service area from our database and USPS-validate every address.' Claims reach of 100M+ households nationwide.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;Enter your zip codes and home value range. We pull property data, satellite and street photos — and score every home by urgency, age, and fit for your service.&quot;">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Direct mail / postcard generation">Direct mail / postcard generation</td>
+          <td title="No direct mail or postcard feature anywhere on site; distribution is digital (Deal Room link, chat widget, social share)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Core product: 4x6 postcards, one AI render on the front, a second style variant on the back.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Core product; 6 physical formats offered (4x6, 6x9, 6x11 postcards, color letter, bi-fold, tri-fold mailers)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Core product; postcards printed and mailed via USPS, cost bundled per mailer">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Core product: AI-designed postcards printed next-day and mailed via USPS First Class, in mailboxes days 5-7.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="No direct mail or postcard feature found in the full feature list (Job Tools, Business Control Center, Business Growth, AI-Powered Tools categories all reviewed)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Core product: personalized 4x6 to 6x11 postcards printed and mailed via USPS.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Core product is automated postcard print + USPS mail fulfillment, bundled in every tier">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Print collateral">Print collateral</td>
+          <td title="No print/PDF proposal or brochure feature mentioned; workflow is phone -> render -> digital Deal Room link">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="&quot;Includes printing, addressing, postage & USPS delivery.&quot; Sample postcard front/back downloaded (branded 'Elevate Deck Co.').">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Same 6-format list as above; done-for-you print + USPS mail fulfillment">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Postcard format only; no letters/door-hangers/other formats mentioned (narrower than PostScout's 6-format menu)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Four postcard sizes (4x6, 5x7, 6x9, 6x11), 14pt/16pt heavyweight cardstock, UV gloss coating. Postcards only -- no letters, brochures, or other formats mentioned.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="No print/PDF proposal or brochure generation feature found">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Postcard size options 4x6 up to 6x11; paper stock options from standard gloss to premium heavy stock.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Postcard is the only collateral format found; no letters/door-hangers/flyers mentioned">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="QR/PURL tracking">QR/PURL tracking</td>
+          <td title="No QR code or personalized-URL mail-tracking feature found; 'Deal Room' link is a generic shareable web link, not tied to a print/mail campaign">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="&quot;Every postcard has its own QR. You see scan rate, landing-page engagement, and phone capture rate per campaign.&quot; Core feature, included in the base Self-serve tier.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;Every postcard has a unique QR code linking to your branded landing page. Track which specific addresses engaged, when they scanned, and whether they submitted the lead form.&quot;">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Not part of the core/default product per FAQ and pricing pages, but the Scottsdale case study (dated May 2026) describes it as a new, campaign-specific add-on: &quot;It was our first campaign with QR tracking enabled... Every postcard included a unique QR code linking to a personalized landing page.&quot;">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="'Unique QR tracking code on every card'; scan triggers a notification with engagement data. QR only -- no personalized URLs (PURLs).">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="No QR/PURL tracking feature found">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Optional add-on: 'A QR code linking to your website, with full analytics on who scanned and when.'">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;QR code + phone tracking&quot; listed in every plan's feature list">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Engagement analytics">Engagement analytics</td>
+          <td title="'Engagement Tracking' and 'Pipeline Analytics' listed as explicit Professional-plan features; 'You get notified the second they open it' (Deal Room open notification)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;Closed-loop attribution dashboard&quot; tracking scan rate, landing-page engagement, and phone-capture rate per campaign -- listed as a Self-serve tier inclusion.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="&quot;Weekly performance reports showing scans, leads, and which neighborhoods are responding best&quot;; dashboard screenshot shown (&quot;Sales Activity Dashboard&quot;)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Response/call/lead metrics are reported per campaign in case-study blog posts (response rate, jobs won, revenue) but no contractor-facing analytics dashboard, screenshot, or self-serve reporting UI was found on the live product pages">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Campaign analytics on all plans incl. Free; 'Track delivery and responses in real-time'; 'Unique QR codes on each card tell you exactly who scanned. Retarget responders with digital ads or trigger automated follow-ups.'">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="'Business Analytics' (real-time performance insights) is a listed feature but described as internal business/ops analytics (job costing, crew performance), not lead/proposal-engagement tracking">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="QR scan tracking add-on shows 'exactly who scanned their card' -- but no broader engagement dashboard (time-on-page, repeat visits, etc.) is described or shown.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="&quot;Real-time delivery tracking&quot; listed; no dashboard screenshots, neighborhood-level breakdowns, or reporting cadence described (contrast with PostScout/Scaped.ai, which both show explicit dashboards)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Attribution to closed jobs">Attribution to closed jobs</td>
+          <td title="No explicit closed-job attribution or ROI-per-design reporting shown; 'Pipeline Analytics' is the closest named feature but its definition isn't detailed on the public site">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Tracking stops at phone-number capture and SMS notification to the contractor ('speed-to-lead in seconds'). No mechanism described for feeding back whether a captured lead became a signed/closed job.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="&quot;Real Attribution, Real ROI: Track every lead back to your campaign&quot; and street/neighborhood-level response-rate tracking is described, but no mention of tracking a lead through to a signed/closed job specifically (attribution stops at lead/scan/call, not deal-won status)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Case studies report full-funnel numbers down to jobs closed and revenue (e.g., Akron: 578 postcards -> 48 appointments -> 21 contracts closed -> $47K; Santa Monica: 1,000 postcards -> 42 leads -> 14 jobs -> $112K), though this appears to be manually-compiled case-study reporting, not a live in-product attribution dashboard">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="Tracking stops at QR scan + contact reveal. No job-close, revenue, or pipeline attribution mentioned anywhere. Landscaping testimonial claiming '$68K closed' is anonymized-adjacent and unverifiable.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="'Job Costing (per-job profitability)' exists but no evidence of marketing-campaign-to-closed-job attribution specifically">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="No mention anywhere of tracking a lead through to a signed/closed job. Only testimonial ('booked 12 jobs from the first campaign') is anonymized and unverifiable.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="ROI/close-rate math on the homepage (16x ROI, 30% close rate) is a modeled illustration (&quot;Here's the math&quot;), not a tracked-to-close attribution feature; no CRM or deal-stage tracking described">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="CRM / follow-up workflow">CRM / follow-up workflow</td>
+          <td title="Site has its own lead capture (chat widget 'Heather', website widget) and 'CRM alert' language, but no evidence of a full CRM/pipeline stage system beyond lead notification + Pipeline Analytics">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="No CRM, integration (Salesforce/HubSpot/ServiceTitan/JobNimbus), or automated follow-up sequence mentioned anywhere on the site -- lead handoff is a single SMS to the contractor.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="No CRM, Zapier, HubSpot, or ServiceTitan integration mentioned anywhere on the site">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Not mentioned anywhere on site">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="'Connect your CRM for automatic sync' (recipient import) and 'trigger automated follow-ups' / 'retarget responders with digital ads' are claimed, plus API & webhooks on all plans -- but no named CRM integrations, no described follow-up sequence builder, and no in-product CRM.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Core product is a full CRM: EmployeeHub, ClientHub, Pipelines (deal tracking), Email & Text Automation, Review Multiplier — this is QuoteIQ's central category, far more built-out than a point visualization tool">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="No CRM, integration, or lead-routing/follow-up automation mentioned anywhere on the site. Language throughout ('we handle everything,' 'full-service') implies a managed service, not a software platform with a workflow tool.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+          <td title="Not mentioned anywhere on site">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="Client self-serve editing">Client self-serve editing</td>
+          <td title="'AI Design Refinements' — homeowner or contractor can request changes by describing them ('Add a fire pit,' 'Remove the spa'), generating a new revision without redrawing; Professional plan = unlimited refinements">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="The contractor (CurbLead's paying client) can self-serve the full campaign in the Self-serve tier, including an approval gate to 'approve, reject, or regenerate' renders. But the homeowner recipient has no editing capability on their landing page (contrast Porchline Studio, which is explicitly homeowner-facing edit/redesign) -- they only view the render and submit a phone number.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="&quot;You can customize colors, messaging, your logo, contact information, and calls-to-action&quot; on provided templates — branding customization, not open-ended self-serve design editing of the AI render itself">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Contractor can 'review the AI-generated designs' and presumably approve/reject/regenerate (3 AI generations per mailer are included specifically for regeneration), but this is approve/regenerate, not open-ended design editing">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Fully self-serve SaaS: user writes/tweaks the design prompt, regenerates, previews every card, and approves before printing ('Nothing prints until you approve'). Free tier with no credit card required.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+          <td title="No evidence found of homeowner-facing self-serve design editing (as opposed to InstaQuote self-serve quoting, which is a different capability)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Only the recipient homeowner can edit the design mockup, and only within the paid 'Porchline Studio' add-on. No self-serve dashboard is described for the contractor client to run campaigns themselves.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="No design/editing interface described; contractor sets zip/value-range targeting only">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-no"></span>
+              <span class="badge badge-ink-soft">No</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td title="White-label for contractors">White-label for contractors</td>
+          <td title="Deal Rooms are described as 'Branded' (contractor's own brand) and there's a chat-widget embed for the contractor's own site ('your-site.com'), but footer of every Deal Room/widget says 'Powered by Outdoor Designs AI' (observed in live chat-widget popup) — so it's contractor-branded but not fully white-label/unbranded">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-partial"></span>
+              <span class="badge badge-brass">Partial</span>
+            </div>
+          </td>
+          <td title="Postcards are rendered 'in your style' with the contractor's own branding, but no white-label/reseller platform language is used anywhere on the site.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Not mentioned; postcards carry the contractor's own branding by default (this is closer to done-for-you agency service than a white-label platform contractors would resell)">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Not mentioned; postcards use contractor's own branding by default per sample images, but no explicit white-label/reseller program described">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="'Custom Branding' (logo + brand colors incorporated into designs) is available on Starter and above, but no white-label/reseller/agency platform is mentioned anywhere.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="No explicit white-label statement found; product is sold direct to the contractor under the QuoteIQ brand, used internally by their team rather than resold under a landscaper's own brand">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="Postcards carry the contractor's own logo/branding/color scheme, but there is no mention of a white-label/reseller platform. A 'Client Login' portal exists but requires auth and could not be inspected.">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-unknown"></span>
+              <span class="badge badge-unknown">?</span>
+            </div>
+          </td>
+          <td title="&quot;White-label option&quot; listed as an Agency-tier ($1,799/mo) feature, alongside multi-location support and API access">
+            <div class="matrix-cell">
+              <span class="matrix-dot dot-yes"></span>
+              <span class="badge badge-sage">Yes</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- NETWORK CLUSTER STORY -->
+<div class="section">
+  <p class="eyebrow">Technical Findings</p>
+  <h2 class="section-title">Vercel Cluster Discovery</h2>
+
+  <div class="cluster-story">
+    <h3>The 4-Domain Thin-Site Network</h3>
+    <p>
+      Four domains resolve to <code style="background: rgba(250,247,239,0.2); padding: 0.2rem 0.4rem; border-radius: 3px;">216.198.79.1</code>
+      via Vercel hosting, registered Jul 2025–Apr 2026, carrying identical SPA structure:
+      outdoordesigns.ai (Techfektor, REAL), porchline.co (LIKELY-THIN, $0.69/postcard),
+      curblead.com (LIKELY-THIN, registered to Peak Product Group/Chris Szigeti), and rendermail.app (LIKELY-THIN, no samples).
+      All four are single-page React/Vite apps with zero independent third-party footprint, zero paid-marketing tracking tooling,
+      and zero founder/funding attribution. CurbLead is the only one with a named registrant organization (Peak Product Group, a
+      digital-product consultancy founded 2023 in Oregon), suggesting these are internal ventures or spec builds rather than scams.
+    </p>
+    <p>
+      <strong>Separate infrastructure:</strong> PostScout.ai and Scaped.ai are confirmed OFF-cluster, running on Cloudflare and Railway respectively.
+      See <a href="#verification">VERIFICATION.md</a> for full DNS/WHOIS/analytics detail.
+    </p>
+  </div>
+</div>
+
+<!-- PER-COMPETITOR DETAILS -->
+<div class="section">
+  <p class="eyebrow">Tier-1 Deep Dives</p>
+  <h2 class="section-title">8 Direct Competitors: Full Profiles</h2>
+
+  <div class="card" id="outdoordesigns-ai">
+    <h3>OutdoorDesigns AI</h3>
+    <div style="margin-bottom: 1rem;">
+      <span class="badge verdict-sage">REAL</span>
+      <span style="color: var(--ink-soft); font-size: 0.9rem;">Closeness 4/5</span>
+    </div>
+
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1rem;">
+      <strong>Category:</strong> AI photo-to-render visualization SaaS for outdoor-living contractors (sales-close tool)<br>
+      <strong>URL:</strong> <a href="https://www.outdoordesigns.ai/" target="_blank">https://www.outdoordesigns.ai/</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem;">Positioning</h4>
+    <p><em>Close the deal before you leave the driveway. Upload any backyard photo. Get a photorealistic pool, hardscape, or landscape render in 60 seconds.</em></p>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li>#1 AI Design Tool for Pool, Hardscape & Deck Contractors</li>
+      <li>It's not your price. It's not your skill. It's your speed.</li>
+      <li>7,200x FASTER — 5 Days CAD turnaround vs 60 Sec AI generated</li>
+      <li>From Photo to Proposal in Minutes — 3 steps. Zero learning curve.</li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Pricing</h4>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li><strong>Starter (founder/promo rate):</strong> $49/mo billed annually at $597/yr, list $97/mo<br><em style="color: var(--ink-soft);">1 seat, 15 AI designs/mo, 3 cinematic videos/mo, 5 site surveys/mo (satellite+sl...</em></li>
+      <li><strong>Professional (founder/promo rate, labeled 'Best Value · Founding Offer'):</strong> $83/mo billed $997 first year (save $1,391), list $199/mo<br><em style="color: var(--ink-soft);">Everything in Starter plus: 100 AI designs/mo, 10 cinematic videos/mo, unlimited...</em></li>
+      <li><strong>Credits model:</strong> n/a<br><em style="color: var(--ink-soft);">1 design generation = 1 credit; Starter=15 credits/mo, Professional=100 credits/...</em></li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Screenshots</h4>
+    <div class="gallery">
+      <div class="screenshot">
+        <img src="img/outdoordesigns-sample-poolinstall-before.jpg" alt="OutdoorDesigns AI 'Pool Installation' category sample, before — homepage drag-to-reveal widget asset, downloaded directly (not a screenshot)" loading="lazy">
+        <div class="screenshot-caption">OutdoorDesigns AI 'Pool Installation' category sample, before — homepage drag-to-reveal widget asset, downloaded directly (not a screenshot)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/outdoordesigns-sample-poolinstall-after.jpg" alt="OutdoorDesigns AI 'Pool Installation' category sample, AI-rendered after — in-ground pool + patio added, house geometry preserved" loading="lazy">
+        <div class="screenshot-caption">OutdoorDesigns AI 'Pool Installation' category sample, AI-rendered after — in-ground pool + patio added, house geometry preserved</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/outdoordesigns-sample-poolremodel-before.jpg" alt="OutdoorDesigns AI 'Pool Remodel' category sample, before — dated existing pool" loading="lazy">
+        <div class="screenshot-caption">OutdoorDesigns AI 'Pool Remodel' category sample, before — dated existing pool</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/outdoordesigns-sample-poolremodel-after.jpg" alt="OutdoorDesigns AI 'Pool Remodel' category sample, AI-rendered after — re-decked/re-tiled, pool shape held constant" loading="lazy">
+        <div class="screenshot-caption">OutdoorDesigns AI 'Pool Remodel' category sample, AI-rendered after — re-decked/re-tiled, pool shape held constant</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="curblead">
+    <h3>CurbLead</h3>
+    <div style="margin-bottom: 1rem;">
+      <span class="badge verdict-ink-soft">LIKELY-THIN-SITE</span>
+      <span style="color: var(--ink-soft); font-size: 0.9rem;">Closeness 4/5</span>
+    </div>
+
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1rem;">
+      <strong>Category:</strong> AI-personalized direct mail for outdoor living contractors (deck/fence/hardscape; landscape design roadmapped)<br>
+      <strong>URL:</strong> <a href="https://curblead.com" target="_blank">https://curblead.com</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem;">Positioning</h4>
+    <p><em>Book more jobs. Show every homeowner their own house, transformed.</em></p>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li>CurbLead is AI-personalized direct mail for outdoor living contractors. We pull satellite imagery of every home you target, composite a photoreal render of your work onto it, and ship a postcard the homeowner can't ignore. When they scan the QR, your phone rings.</li>
+      <li>We don't try to serve roofers, plumbers, or HVAC -- we render outdoor work, on outdoor homes, for the contractors who build it.</li>
+      <li>The hardest part of selling outdoor work isn't the price. It's the imagination tax -- asking a homeowner to picture a $40,000 project from a verbal description and a portfolio of someone else's backyard.</li>
+      <li>The sales call is a closing call, not a discovery call.</li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Pricing</h4>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li><strong>Self-serve:</strong> Per piece (dollar amount not published; pay-on-send, no subscription)<br><em style="color: var(--ink-soft);">"For contractors who want to set up campaigns and approve renders themselves. Th...</em></li>
+      <li><strong>Guided onboarding:</strong> Per piece + onboarding (amounts not published)<br><em style="color: var(--ink-soft);">"We run your first campaign with you -- style guide, targeting, render approvals...</em></li>
+      <li><strong>Done for you (fully managed):</strong> Custom (not published)<br><em style="color: var(--ink-soft);">"We operate CurbLead on your behalf indefinitely." Dedicated campaign operator, ...</em></li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Screenshots</h4>
+    <div class="gallery">
+      <div class="screenshot">
+        <img src="img/curblead-home-page.jpg" alt="CurbLead homepage full-page screenshot (firecrawl)" loading="lazy">
+        <div class="screenshot-caption">CurbLead homepage full-page screenshot (firecrawl)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/curblead-before-hero.jpg" alt="Homepage hero 'before' image (unmodified aerial photo of home)" loading="lazy">
+        <div class="screenshot-caption">Homepage hero 'before' image (unmodified aerial photo of home)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/curblead-after-hero.jpg" alt="Homepage hero 'after' image, labeled AFTER - CURBLEAD RENDER" loading="lazy">
+        <div class="screenshot-caption">Homepage hero 'after' image, labeled AFTER - CURBLEAD RENDER</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/curblead-postcard-front.jpg" alt="Sample postcard mockup front, branded 'Elevate Deck Co.'" loading="lazy">
+        <div class="screenshot-caption">Sample postcard mockup front, branded 'Elevate Deck Co.'</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="postscout">
+    <h3>PostScout</h3>
+    <div style="margin-bottom: 1rem;">
+      <span class="badge verdict-brass">UNDETERMINED</span>
+      <span style="color: var(--ink-soft); font-size: 0.9rem;">Closeness 4/5</span>
+    </div>
+
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1rem;">
+      <strong>Category:</strong> Done-for-you AI-render direct-mail agency for home-service contractors (painting, landscaping, holiday/outdoor lighting), sold via sales-call not self-serve signup<br>
+      <strong>URL:</strong> <a href="https://postscout.ai/" target="_blank">https://postscout.ai/</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem;">Positioning</h4>
+    <p><em>Turn Every Mailbox Into a Sales Channel — Powered by AI Precision</em></p>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li>When they see their own house transformed, they don't just glance — they stop and imagine the possibility. Recognition triggers emotional connection and action.</li>
+      <li>No stock photos. No generic examples. Just their house, transformed by your service.</li>
+      <li>Full attribution means you'll know which neighborhoods responded, cost per lead by area, and exactly which campaigns generated which leads — not just aggregate numbers.</li>
+      <li>The Imagination Gap: Most homeowners know their front yard needs work but struggle to visualize the transformation.</li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Pricing</h4>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li><strong>Growth (1-3,000/mo), 4x6 postcard:</strong> $1.52/card initial, $1.00/card repeat<br><em style="color: var(--ink-soft);">Per-piece pricing includes AI image generation, custom design, printing, and pos...</em></li>
+      <li><strong>Scale (3,001-6,000/mo), 4x6 postcard:</strong> $1.40/card initial, $0.92/card repeat<br><em style="color: var(--ink-soft);">Same inclusions as Growth tier, volume discount...</em></li>
+      <li><strong>Enterprise (6,001-10,000/mo), 4x6 postcard:</strong> $1.32/card initial, $0.87/card repeat<br><em style="color: var(--ink-soft);">Same inclusions, further volume discount...</em></li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Screenshots</h4>
+    <div class="gallery">
+      <div class="screenshot">
+        <img src="img/postscout-home-screenshot.jpg" alt="PostScout homepage (full-page screenshot)" loading="lazy">
+        <div class="screenshot-caption">PostScout homepage (full-page screenshot)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/postscout-pricing-screenshot.jpg" alt="PostScout pricing page (full-page screenshot) — per-format x per-volume-tier price grid" loading="lazy">
+        <div class="screenshot-caption">PostScout pricing page (full-page screenshot) — per-format x per-volume-tier price grid</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/postscout-faq-screenshot.jpg" alt="PostScout FAQ page (full-page screenshot)" loading="lazy">
+        <div class="screenshot-caption">PostScout FAQ page (full-page screenshot)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/postscout-landscaping-screenshot.jpg" alt="PostScout landscaping industry vertical page (full-page screenshot)" loading="lazy">
+        <div class="screenshot-caption">PostScout landscaping industry vertical page (full-page screenshot)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="scaped.ai">
+    <h3>Scaped.ai</h3>
+    <div style="margin-bottom: 1rem;">
+      <span class="badge verdict-brass">UNDETERMINED</span>
+      <span style="color: var(--ink-soft); font-size: 0.9rem;">Closeness 4/5</span>
+    </div>
+
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1rem;">
+      <strong>Category:</strong> Self-serve AI landscaping/hardscaping direct-mail lead-gen platform (pay-per-mailer, credit-based), recently expanded into a real-estate-listing vertical (for-realtors)<br>
+      <strong>URL:</strong> <a href="https://scaped.ai/" target="_blank">https://scaped.ai/</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem;">Positioning</h4>
+    <p><em>Show Homeowners Their Dream Yard</em></p>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li>Pick a ZIP code. We AI-generate each home's dream yard and mail it straight to their door.</li>
+      <li>Not a generic flyer. Their actual house, professionally transformed. This is why our response rate is 3-4x industry average.</li>
+      <li>No Marketing Experience Needed — Pick a zip code, review the AI-generated designs, and hit send. We handle the printing, postage, and delivery. You just answer the phone.</li>
+      <li>Fill Your Pipeline Year-Round — Seasonal slowdowns kill margins. Run campaigns in new neighborhoods every month so you always have a steady flow of inbound calls and estimate requests.</li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Pricing</h4>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li><strong>Free trial:</strong> $0<br><em style="color: var(--ink-soft);">Every new account gets 10 free AI image generations to try the platform; 'no cre...</em></li>
+      <li><strong>Pay-as-you-go:</strong> $3.00/mailer<br><em style="color: var(--ink-soft);">Includes 1 mailer + 3 AI generations (3 AI generations per mailer, for regenerat...</em></li>
+      <li><strong>Starter Campaign:</strong> $299.00 ($2.99/mailer)<br><em style="color: var(--ink-soft);">100 mailers, 300 AI generations, 100 homes in one campaign...</em></li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Screenshots</h4>
+    <div class="gallery">
+      <div class="screenshot">
+        <img src="img/scaped-home-screenshot.jpg" alt="Scaped.ai homepage (full-page screenshot) — includes interactive before/after slider" loading="lazy">
+        <div class="screenshot-caption">Scaped.ai homepage (full-page screenshot) — includes interactive before/after slider</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/scaped-pricing-screenshot.jpg" alt="Scaped.ai pricing page (full-page screenshot) — credit-based, pay-as-you-go + 3 package tiers" loading="lazy">
+        <div class="screenshot-caption">Scaped.ai pricing page (full-page screenshot) — credit-based, pay-as-you-go + 3 package tiers</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/scaped-case-santamonica-screenshot.jpg" alt="Scaped.ai Santa Monica hardscaping case study page (full-page screenshot)" loading="lazy">
+        <div class="screenshot-caption">Scaped.ai Santa Monica hardscaping case study page (full-page screenshot)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/scaped-sample-example1-before.webp" alt="Scaped.ai homepage hero example, 'before' — genuine Google Street View capture of a Santa Monica-style bungalow" loading="lazy">
+        <div class="screenshot-caption">Scaped.ai homepage hero example, 'before' — genuine Google Street View capture of a Santa Monica-style bungalow</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="postcard-ai">
+    <h3>Postcard AI</h3>
+    <div style="margin-bottom: 1rem;">
+      <span class="badge verdict-sage">REAL</span>
+      <span style="color: var(--ink-soft); font-size: 0.9rem;">Closeness 4/5</span>
+    </div>
+
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1rem;">
+      <strong>Category:</strong> Self-serve AI direct-mail SaaS (horizontal, 21 vertical SEO pages; real-estate center of gravity; DealMachine product)<br>
+      <strong>URL:</strong> <a href="https://postcard.ai" target="_blank">https://postcard.ai</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem;">Positioning</h4>
+    <p><em>Every postcard unique. No designer needed.</em></p>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li>Not templates. Not mail merge. Each card is uniquely designed using real data -- their name, their property, their neighborhood. AI generates the design. We handle the rest.</li>
+      <li>Describe it like magic. 'Put a sold sign in their yard.' 'Show them their house with a new roof.' 'Add solar panels.' We make it happen on every card.</li>
+      <li>Data on 150M+ Properties. Property photos, home values, owner names, emails, and phones. Import your list and we enrich it -- or build one from scratch using our filters.</li>
+      <li>Upload what you have. We fill in the rest. Turn email addresses, phone numbers, or partial data into full, mailable contacts with property photos, home values, and owner information.</li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Pricing</h4>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li><strong>Free:</strong> $0/mo + $1.49-$1.79 per postcard by size<br><em style="color: var(--ink-soft);">10 design previews/mo, up to 100 contacts, 1 seat, 4x6 cards, API & webhooks, ad...</em></li>
+      <li><strong>Starter:</strong> $39/mo + $1.19-$1.49 per postcard by size<br><em style="color: var(--ink-soft);">50 previews/mo, 500 contacts, 2 seats, all postcard sizes (4x6/5x7/6x9/6x11), sc...</em></li>
+      <li><strong>Pro (Most Popular):</strong> $99/mo + $0.99-$1.29 per postcard by size<br><em style="color: var(--ink-soft);">100 previews/mo, 5,000 contacts, 5 seats. Pro+ unlocks advanced identity resolut...</em></li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Screenshots</h4>
+    <div class="gallery">
+      <div class="screenshot">
+        <img src="img/postcardai-home-page.jpg" alt="Postcard AI homepage full-page screenshot — hero, use-case carousel, solar sample postcard with source-image thumbnail, 3-step process" loading="lazy">
+        <div class="screenshot-caption">Postcard AI homepage full-page screenshot — hero, use-case carousel, solar sample postcard with source-image thumbnail, 3-step process</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/postcardai-pricing-page.jpg" alt="Postcard AI pricing page full-page screenshot — Free/$39/$99/$299 tiers, per-postcard price table by size, plan comparison, enterprise section" loading="lazy">
+        <div class="screenshot-caption">Postcard AI pricing page full-page screenshot — Free/$39/$99/$299 tiers, per-postcard price table by size, plan comparison, enterprise section</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/postcardai-landscaping-page.jpg" alt="Postcard AI landscaping vertical page full-page screenshot — portfolio-photo positioning, seasonal campaigns, unsourced stats, GreenEdge testimonial" loading="lazy">
+        <div class="screenshot-caption">Postcard AI landscaping vertical page full-page screenshot — portfolio-photo positioning, seasonal campaigns, unsourced stats, GreenEdge testimonial</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/postcardai-identity-resolution-page.jpg" alt="Postcard AI identity resolution feature page full-page screenshot — 4 match methods, per-contact enrichment data points, QR-scan contact reveal" loading="lazy">
+        <div class="screenshot-caption">Postcard AI identity resolution feature page full-page screenshot — 4 match methods, per-contact enrichment data points, QR-scan contact reveal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="quoteiq-("quoteiq-cam"-+-"mapmeasure-pro"-modules-—-best-fit-identification-of-the-secondhand-name-'cam-mapper')">
+    <h3>QuoteIQ ("QuoteIQ Cam" + "MapMeasure Pro" modules — best-fit identification of the secondhand name 'Cam Mapper')</h3>
+    <div style="margin-bottom: 1rem;">
+      <span class="badge verdict-sage">REAL</span>
+      <span style="color: var(--ink-soft); font-size: 0.9rem;">Closeness 3/5</span>
+    </div>
+
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1rem;">
+      <strong>Category:</strong> All-in-one field service management CRM for home service contractors (estimating, invoicing, scheduling, job photo documentation, AI tools) — landscaping is one of 50+ supported trades, not the primary focus<br>
+      <strong>URL:</strong> <a href="https://myquoteiq.com/" target="_blank">https://myquoteiq.com/</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem;">Positioning</h4>
+    <p><em>The #1 CRM Built For Home Service Pros. Estimates, invoicing, scheduling, and payments — all in one easy-to-use app built for the field.</em></p>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li>Trusted across 100+ trades</li>
+      <li>QuoteIQ Cam functions as QuoteIQ's answer to standalone photo tools like CompanyCam — bundling photo documentation inside the broader CRM, eliminating the need for separate subscriptions while adding AI capabilities competitors don't offer</li>
+      <li>MapMeasure Pro — satellite measurement that prices turf area, bed area, and linear edging from the office without a windshield trip</li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Pricing</h4>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li><strong>Starter:</strong> $29.99/mo<br><em style="color: var(--ink-soft);">Entry tier; AI Before/After Generator available from this tier via included IQ C...</em></li>
+      <li><strong>Beginner:</strong> $74.99/mo<br><em style="color: var(--ink-soft);">Adds full QuoteIQ Cam suite (manual before/after photo generator, inspection for...</em></li>
+      <li><strong>Pro:</strong> $149.99/mo<br><em style="color: var(--ink-soft);">Includes 4 users...</em></li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Screenshots</h4>
+    <div class="gallery">
+      <div class="screenshot">
+        <img src="img/quoteiq-home.jpg" alt="QuoteIQ homepage full-page screenshot (backfill — existing Tier-1 competitor profiled in cam-mapper.md whose screenshot was never saved)" loading="lazy">
+        <div class="screenshot-caption">QuoteIQ homepage full-page screenshot (backfill — existing Tier-1 competitor profiled in cam-mapper.md whose screenshot was never saved)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="porchline">
+    <h3>Porchline</h3>
+    <div style="margin-bottom: 1rem;">
+      <span class="badge verdict-ink-soft">LIKELY-THIN-SITE</span>
+      <span style="color: var(--ink-soft); font-size: 0.9rem;">Closeness 3/5</span>
+    </div>
+
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1rem;">
+      <strong>Category:</strong> Personalized direct-mail platform for home service companies (horizontal, 8 verticals)<br>
+      <strong>URL:</strong> <a href="https://www.porchline.co" target="_blank">https://www.porchline.co</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem;">Positioning</h4>
+    <p><em>Direct mail for home service companies. A photo of their actual home on every postcard. Full-service from list to mailbox.</em></p>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li>A photo of their actual home. Not stock imagery. Every postcard is unique. Personalized per address.</li>
+      <li>They redesign their own home. Porchline Studio, our interactive scan.</li>
+      <li>Standard postcards use stock photos or generic imagery. With Porchline, every postcard features a photo of the recipient's actual home, processed to show what it would look like after your service is applied.</li>
+      <li>95% direct mail open rate, vs 21% for email. 17 days direct mail stays in the home, vs 17 seconds for email. 5x average response rate vs. generic direct mail. 100M+ households we can reach across the U.S.</li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Pricing</h4>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li><strong>Standard campaign (custom-quoted):</strong> Starting at $0.69 per postcard<br><em style="color: var(--ink-soft);">No fixed tiers -- every campaign is custom-quoted based on 5 levers: number of h...</em></li>
+      <li><strong>Porchline Studio (premium add-on):</strong> not published<br><em style="color: var(--ink-soft);">Personalized QR code opens an interactive page of the recipient's own home where...</em></li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Screenshots</h4>
+    <div class="gallery">
+      <div class="screenshot">
+        <img src="img/porchline-home-page.jpg" alt="Porchline homepage full-page screenshot (firecrawl)" loading="lazy">
+        <div class="screenshot-caption">Porchline homepage full-page screenshot (firecrawl)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/porchline-gallery-page.jpg" alt="Porchline Gallery page full-page screenshot (firecrawl)" loading="lazy">
+        <div class="screenshot-caption">Porchline Gallery page full-page screenshot (firecrawl)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/porchline-pricing-page.jpg" alt="Porchline Pricing page full-page screenshot (firecrawl)" loading="lazy">
+        <div class="screenshot-caption">Porchline Pricing page full-page screenshot (firecrawl)</div>
+      </div>
+      <div class="screenshot">
+        <img src="img/porchline-process-page.jpg" alt="Porchline Process page full-page screenshot (firecrawl)" loading="lazy">
+        <div class="screenshot-caption">Porchline Process page full-page screenshot (firecrawl)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="rendermail">
+    <h3>RenderMail</h3>
+    <div style="margin-bottom: 1rem;">
+      <span class="badge verdict-ink-soft">LIKELY-THIN-SITE</span>
+      <span style="color: var(--ink-soft); font-size: 0.9rem;">Closeness 3/5</span>
+    </div>
+
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1rem;">
+      <strong>Category:</strong> Full-stack AI-render direct-mail lead-gen SaaS for home-service contractors (multi-vertical: roofing, solar, pools, siding)<br>
+      <strong>URL:</strong> <a href="https://www.rendermail.app/" target="_blank">https://www.rendermail.app/</a>
+    </p>
+
+    <h4 style="margin-top: 1.5rem;">Positioning</h4>
+    <p><em>The highest-ROI lead channel in home services</em></p>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li>Turn 200 postcards into $8,000+ in closed jobs. Every month.</li>
+      <li>We photograph each property, AI-render what it would look like with your service, and mail a personalized before/after postcard — automatically.</li>
+      <li>Generic mailers get thrown away. Ours get pinned to the fridge.</li>
+      <li>It's their actual house. Not a stock photo. Not a neighbor's house. Their roof, their yard, their address. Impossible to ignore.</li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Pricing</h4>
+    <ul style="margin: 1rem 0; font-size: 0.9rem;">
+      <li><strong>Starter:</strong> $449/mo<br><em style="color: var(--ink-soft);">200 postcards/mo (50/week max); expected 1-3 jobs/mo, $8k-$24k revenue; AI befor...</em></li>
+      <li><strong>Growth:</strong> $799/mo<br><em style="color: var(--ink-soft);">500 postcards/mo (125/week max); expected 3-8 jobs/mo, $24k-$64k revenue; everyt...</em></li>
+      <li><strong>Agency:</strong> $1,799/mo<br><em style="color: var(--ink-soft);">1,500 postcards/mo (375/week max); expected 8-20 jobs/mo, $64k-$160k revenue; ev...</em></li>
+    </ul>
+    <h4 style="margin-top: 1.5rem;">Screenshots</h4>
+    <div class="gallery">
+      <div class="screenshot">
+        <img src="img/rendermail-home-screenshot.jpg" alt="RenderMail homepage (full-page screenshot) — only page on the site; no separate pricing/FAQ pages exist" loading="lazy">
+        <div class="screenshot-caption">RenderMail homepage (full-page screenshot) — only page on the site; no separate pricing/FAQ pages exist</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TIER-2 COMPACT -->
+<div class="section">
+  <p class="eyebrow">Adjacent Competitors</p>
+  <h2 class="section-title">Tier-2: 5 Lighter Profiles</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 1.5rem;">
+    Tier-2 competitors have less direct overlap with Dima's stack but occupy adjacent niches or solve related problems.
+  </p>
+
+  <table class="tier-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Positioning</th>
+        <th>Key Difference vs. Dima</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Yardzen</strong></td>
+        <td><small>Human-designer-led online landscape design platform with AI concept-visualizer add-on</small></td>
+        <td><small><em>The Leading Online Landscape Design & Build Platform</em></small></td>
+        <td><small>No targeting capability - 100% inbound/self-serve, cannot proactively target specific high-value addresses</small></td>
+      </tr>
+      <tr>
+        <td><strong>iScape</strong></td>
+        <td><small>Manual drag-and-drop 2D/3D + AR landscape design mobile app (iOS/Android)</small></td>
+        <td><small><em>#1 Landscape Design App</em></small></td>
+        <td><small>Entirely manual (drag-drop asset placement), not AI-generated - output depends on operator skill, not automated pipeline</small></td>
+      </tr>
+      <tr>
+        <td><strong>ShrubHub</strong></td>
+        <td><small>Human-designer-led online 3D landscape design service, direct-to-homeowner</small></td>
+        <td><small><em>The #1 Rated Online 3D Landscape Design Service</em></small></td>
+        <td><small>No targeting or outbound capability - entirely a homeowner-initiated, self-checkout funnel</small></td>
+      </tr>
+      <tr>
+        <td><strong>Neighborbrite</strong></td>
+        <td><small>Free instant AI photo-to-render consumer tool with paid human-hybrid Pro Design upsell</small></td>
+        <td><small><em>Transform your yard with AI Powered Design</em></small></td>
+        <td><small>Zero targeting or delivery infrastructure - entirely consumer-pull, not landscaper-pushed to specific addresses</small></td>
+      </tr>
+      <tr>
+        <td><strong>DreamzAR</strong></td>
+        <td><small>Pure-play AI photo-to-render consumer/prosumer app with chat-based refinement, 2D editor, and 3D AR walkthrough</small></td>
+        <td><small><em>Design Your Yard with AI</em></small></td>
+        <td><small>Zero targeting or delivery infrastructure - it's a subscription app a homeowner uses themselves, no mechanism for a landscaper to push a design to a specific prospect's address</small></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- TIER-3 DISCOVERY -->
+<div class="section">
+  <p class="eyebrow">Early-Stage & Long Tail</p>
+  <h2 class="section-title">Tier-3: Discovery Table</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 1.5rem;">
+    14 additional platforms identified across web searches and Reddit discussions.
+    Most are general direct-mail platforms with home-services vertical content, or early-stage geographically-scoped plays.
+  </p>
+
+  <table class="tier-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Closeness</th>
+        <th>Category</th>
+        <th>One-Liner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><a href="https://scaped.ai" target="_blank">Scaped.ai</a></strong></td>
+        <td><strong>4/5</strong></td>
+        <td><small>Self-serve AI landscaping/hardscaping direct-mail lead-gen platform (pay-per-mailer, credit-based)</small></td>
+        <td><small>Pick a ZIP code, AI pulls Street View imagery, filters for improvement potential, generates a dream-yard render per property, mails a postcard via USPS; self-serve, claims 3-4x industry response rate. Closest match to Dima's mechanic found across both research passes.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://postscout.ai" target="_blank">PostScout</a></strong></td>
+        <td><strong>4/5</strong></td>
+        <td><small>Done-for-you AI-render direct-mail agency for home-service contractors (3 verticals: Painting, Landscaping & Lawn Care, Holiday/Outdoor Lighting)</small></td>
+        <td><small>Renders each targeted homeowner's actual property with the contractor's service applied, mails as a QR+tracking-number postcard, reports neighborhood-level attribution; sold via consultation, not self-serve. Landscaping framing nearly matches Dima's own high-value-home targeting thesis.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://curblead.com" target="_blank">CurbLead</a></strong></td>
+        <td><strong>4/5</strong></td>
+        <td><small>AI-personalized direct mail for outdoor living contractors (deck/fence/hardscape today, landscape design roadmapped)</small></td>
+        <td><small>Composites a photoreal AI render of a contractor's work onto satellite/street imagery of a targeted home, prints a QR-coded postcard, routes scans to the contractor via SMS; very early-stage (zero web/funding footprint) but genuinely convincing render quality on inspection.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.outdoordesigns.ai" target="_blank">OutdoorDesigns AI</a></strong></td>
+        <td><strong>4/5</strong></td>
+        <td><small>AI photo-to-render sales-close tool for pool builders, hardscapers, landscapers, fence and deck builders</small></td>
+        <td><small>Contractor uploads a backyard photo during a sales call, gets a photorealistic render in ~60 seconds, closes on the spot; built by an Atlanta marketing agency (Techfektor Media Group) with an existing 350+ contractor client base. Independently identified as the tool Arjun's partner found. Closest known render-quality/speed benchmark, but no per-address targeting/direct-mail layer.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.porchline.co" target="_blank">Porchline</a></strong></td>
+        <td><strong>3/5</strong></td>
+        <td><small>Personalized direct-mail platform for home service companies, horizontal across 8 verticals</small></td>
+        <td><small>Full-pipeline direct mail (list sourcing, photo enhancement, postcard design/print/mail, optional QR tracking) across Landscaping, Roofing, Painting, Solar, Holiday Lighting, Remodeling, Garage Doors, Moving; deep-profile flagged its public Gallery landscaping examples as generic stock templates over unmodified before-photos, not genuine AI renders.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.rendermail.app" target="_blank">RenderMail</a></strong></td>
+        <td><strong>3/5</strong></td>
+        <td><small>Full-stack AI-render direct-mail lead-gen SaaS for home-service contractors (Roofing, Solar, Pools, Siding; no landscaping vertical)</small></td>
+        <td><small>Subscription-tiered ($449-$1,799/mo) AI-render-to-postcard pipeline for 4 non-landscaping verticals; publishes zero sample before/after imagery anywhere on its site, a notable evidence gap versus Scaped.ai/PostScout.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://myquoteiq.com" target="_blank">Cam-Mapper (identified as QuoteIQ)</a></strong></td>
+        <td><strong>3/5</strong></td>
+        <td><small>All-in-one field-service CRM (estimating, invoicing, scheduling, job-photo documentation, AI tools) sold across 50+ trades</small></td>
+        <td><small>A secondhand name resolved to QuoteIQ (moderate confidence), whose 'QuoteIQ Cam' + 'MapMeasure Pro' modules provide before/after AI photo generation, an AI photo-to-quote estimator, and satellite property measurement; landscaping is one of many supported trades, not the focus. Adjacent ops/CRM platform, not a targeting-and-delivery tool, but a warm audience for a specialized lead-gen layer.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.postcard.ai" target="_blank">Postcard.ai</a></strong></td>
+        <td><strong>4/5</strong></td>
+        <td><small>AI-powered personalized direct mail with tracking</small></td>
+        <td><small>AI-designed postcards featuring the recipient's actual property, unique QR tracking, and identity resolution for targeting; general-purpose direct-mail platform, not landscaping-specific.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.lettrlabs.com" target="_blank">LettrLabs</a></strong></td>
+        <td><strong>2/5</strong></td>
+        <td><small>General personalized direct mail platform with home-services vertical content</small></td>
+        <td><small>Creates individually personalized postcards (messages, offers, imagery) and publishes contractor/home-services lead-gen content; a general direct-mail infrastructure vendor, not an AI-render specialist.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.prnewswire.com/news-releases/postcardmania-partners-with-housecall-pro-to-launch-native-direct-mail-integration-allowing-home-service-businesses-to-send-automated-postcard-campaigns-directly-from-the-app-302624552.html" target="_blank">PostcardMania x Housecall Pro integration</a></strong></td>
+        <td><strong>2/5</strong></td>
+        <td><small>Direct-mail platform embedded inside a home-services field-service CRM</small></td>
+        <td><small>PostcardMania partnered with Housecall Pro to let home-service businesses launch automated postcard campaigns (with AI 'write-it-for-me' copy) natively inside their field-service CRM — signals how incumbent vertical SaaS is approaching the direct-mail wedge.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.easypurl.com" target="_blank">EasyPURL</a></strong></td>
+        <td><strong>2/5</strong></td>
+        <td><small>Generic personalized-URL (PURL) marketing infrastructure vendor</small></td>
+        <td><small>Long-standing PURL generation and personalized-landing-page platform for direct-mail/multichannel marketing generally, not landscaping-specific; represents the underlying PURL/tracking tech category.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://mindfireinc.com" target="_blank">MindFire</a></strong></td>
+        <td><strong>2/5</strong></td>
+        <td><small>Generic personalized-URL (PURL) / multichannel direct-mail marketing platform</small></td>
+        <td><small>Automates a personalized URL and dynamic VIP landing page for every direct-mail recipient — same category as EasyPURL, general marketing infrastructure rather than a landscaping-specific competitor.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://rendair.ai" target="_blank">Rendair.ai</a></strong></td>
+        <td><strong>2/5</strong></td>
+        <td><small>AI rendering tool for landscape/architecture professionals</small></td>
+        <td><small>Professional-grade AI rendering tool cited in a 2026 'Top AI Tools for Landscape Designers' roundup; design-visualization-only, no targeting/delivery/attribution found.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://hadaa.app" target="_blank">Hadaa</a></strong></td>
+        <td><strong>2/5</strong></td>
+        <td><small>AI landscape rendering, consumer free tier + professional Pro Studio tier</small></td>
+        <td><small>Free consumer AI garden-design tool (upload photo, mask yard, climate-aware plant picks) plus a Pro Studio tier that produces six photorealistic renders, eight camera angles, a contractor blueprint, and a botanical shopping list from one photo in about a minute.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://prolandscape.com" target="_blank">PRO Landscape+</a></strong></td>
+        <td><strong>1/5</strong></td>
+        <td><small>Established professional landscape design software (CAD + photo imaging + AI add-ons)</small></td>
+        <td><small>Long-running industry-standard professional software referenced on LawnSite: photo-import, catalog-based design overlay, CAD construction drawings, 3D renderings, one-click client proposals, now with AI-powered add-ons layered on the traditional core — the incumbent tool contractors already own.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.curbappealai.co" target="_blank">Curb Appeal AI</a></strong></td>
+        <td><strong>2/5</strong></td>
+        <td><small>AI curb-appeal / exterior + landscape visualization, consumer/prosumer</small></td>
+        <td><small>Web-based platform generating photorealistic AI exterior designs in seconds from an uploaded photo, auto-detecting the property's climate/USDA hardiness zone to suggest suited plants/materials.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.remodelai.io" target="_blank">Remodel AI</a></strong></td>
+        <td><strong>1/5</strong></td>
+        <td><small>AI exterior/landscape redesign tool, broader than landscaping alone</small></td>
+        <td><small>Redesigns a yard from a single photo into 10 garden styles in about 10 seconds on a free tier, part of a broader AI home-exterior-remodel product; pure design-viz, no targeting/delivery/attribution.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://ideal.house" target="_blank">Ideal House</a></strong></td>
+        <td><strong>1/5</strong></td>
+        <td><small>AI curb-appeal landscaping visualizer, real-estate-listing use case</small></td>
+        <td><small>AI landscape/curb-appeal visualizer marketed to real estate agents staging a home's exterior for sale — evidence the AI curb-appeal wedge is being pulled into real estate marketing, a possible adjacent-vertical or partnership angle.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.archivinci.com/architecture-ai-tools/ai-landscape-design; https://www.reimaginehome.ai/ai-landscaping" target="_blank">ArchiVinci / REimagineHome</a></strong></td>
+        <td><strong>1/5</strong></td>
+        <td><small>AI landscape design modules inside broader AI home-design/architecture platforms</small></td>
+        <td><small>Two separate broader AI home-design platforms each bolt on a landscaping-specific module; design-visualization only, generic consumer tools, listed to show market crowding at the pure-visualization layer.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://leanscaper.com" target="_blank">LeanScaper</a></strong></td>
+        <td><strong>1/5</strong></td>
+        <td><small>AI-powered business operating system for landscaping companies (adjacent, not rendering/direct-mail)</small></td>
+        <td><small>AI-driven back-office/ops platform for landscaping contractors themselves (inventory, field/office workflow agents, a QuickBooks-tied CFO Agent, recruiting/compliance agents) — not a lead-gen tool, but evidence of active AI investment targeting the landscaping-contractor buyer persona.</small></td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.zellyfi.com" target="_blank">Zellyfi</a></strong></td>
+        <td><strong>1/5</strong></td>
+        <td><small>AI chatbot for landscaping-company websites (inbound lead capture, adjacent)</small></td>
+        <td><small>AI chatbot marketed specifically to landscaping companies to capture more leads from existing website traffic — an inbound-conversion tool, different job-to-be-done than Dima's outbound targeting model, but another AI vendor courting the same buyer.</small></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- WORTH STEALING -->
+<div class="section">
+  <p class="eyebrow">Strategic Learnings</p>
+  <h2 class="section-title">What's Worth Stealing (Phrasing, Positioning, Feature Ideas)</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 1.5rem;">
+    8–12 credible positioning moves, feature patterns, and customer framings extracted from deep-dive briefs and competitor copy.
+    Each item is tagged with its source company.
+  </p>
+
+  <ul class="steal-list">
+    <li>
+      The 3-step "photo → generate → Deal Room" framing and "under 2 minutes from photo to signed proposal" claim — tight, rep-friendly narrative worth adapting.
+      <br><span class="steal-source">— OutdoorDesigns AI</span>
+    </li>
+    <li>
+      The ROI-math sales-page pattern (old workflow vs. new workflow, paired stats: turnaround, close rate, jobs/month, project value) — strong template for Arjun's own pitch materials.
+      <br><span class="steal-source">— OutdoorDesigns AI</span>
+    </li>
+    <li>
+      Quantified format-advantage stats up top (95% open rate vs 21% email; 17 days vs 17 seconds; 5x response rate) — clean, skimmable, format-level differentiation before AI even enters the pitch.
+      <br><span class="steal-source">— Porchline</span>
+    </li>
+    <li>
+      The explicit 5-lever pricing breakdown (homes, size, paper stock, postage class, tracking add-on) — makes custom-quote pricing feel transparent.
+      <br><span class="steal-source">— Porchline</span>
+    </li>
+    <li>
+      The "imagination tax" framing — naming the actual psychological barrier (can't picture a big-ticket project from words + someone else's photos) as the product's reason to exist. Sharp, reusable positioning language.
+      <br><span class="steal-source">— CurbLead</span>
+    </li>
+    <li>
+      "Saturate off every completed job" targeting — mailing the immediate neighbors of a job just finished is a cheap, high-conversion targeting trick worth replicating for Creekside.
+      <br><span class="steal-source">— CurbLead</span>
+    </li>
+    <li>
+      The ROI framing ("1 closed job pays for 5 months of postcards" + per-tier expected-jobs/expected-revenue ranges) — clean way to pre-sell a subscription price against contractor economics
+      <br><span class="steal-source">— RenderMail</span>
+    </li>
+    <li>
+      Named "seasonal pause" hold option ($29/mo) instead of forced cancel/re-signup — reduces churn risk during landscaping's off-season
+      <br><span class="steal-source">— RenderMail</span>
+    </li>
+    <li>
+      Dedicated per-vertical landing pages with vertical-specific pain-point framing ("The Imagination Gap," "Stuck Selling Maintenance") — strong template for Dima's own segment pages
+      <br><span class="steal-source">— PostScout</span>
+    </li>
+    <li>
+      Explicit competitive comparison table (personalization/attribution/lead quality/setup time vs. named alternatives) — adaptable framework for Dima's sales materials
+      <br><span class="steal-source">— PostScout</span>
+    </li>
+    <li>
+      Identity resolution on QR scan — turning a scan into 3 phones + 3 emails for immediate follow-up is the single best attribution-to-outreach bridge seen across all profiled competitors; directly applicable to Dima's tracking layer (Dima's per-address sites already know who the visitor is by construction, which is stronger — worth saying explicitly in the pitch).
+      <br><span class="steal-source">— Postcard AI</span>
+    </li>
+    <li>
+      Free tier + pay-per-send — "No credit card required • Pay only when you send" removes all trial friction; contrast with consult-call gatekeeping (PostScout) and custom quotes (Porchline).
+      <br><span class="steal-source">— Postcard AI</span>
+    </li>
+  </ul>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <strong>Competitive Research — Internal Use Only</strong><br>
+    Research period: Jul 22–23, 2026.
+    Sources: live site scrapes (Firecrawl, live browser), WHOIS/DNS/hosting inspection,
+    Reddit/web search cross-checks, and corporate verification (LinkedIn, Crunchbase, company legal filings).
+    See <a href="#" style="border: none;">VERIFICATION.md</a> for claim-by-claim methodology and verdicts.
+  </p>
+  <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--ink-soft);">
+    Not for distribution.
+  </p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -8,6 +8,8 @@ status: active
 featured: true
 caseStudy: true
 order: 2
+url: https://dimadimadima.com/dewey
+ctaLabel: Open Dewey
 image: /images/dewey/dewey-check-list.png
 images:
   - /images/dewey/dewey-check-list.png

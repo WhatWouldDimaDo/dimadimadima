@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 
 const VALUES = [
-  { title: 'Family & security', body: 'Build a life where the people I love feel supported, protected, and fully part of the adventure.', icon: 'home' },
-  { title: 'Joy, awe & adventure', body: 'Seek experiences big enough to reset my sense of what is possible—and laugh often along the way.', icon: 'spark' },
-  { title: 'Growth & curiosity', body: 'Keep learning in public, follow the interesting thread, and stay willing to be a beginner.', icon: 'book' },
-  { title: 'Physical vitality', body: 'Use hard physical things to stay grounded, resilient, and awake to the world.', icon: 'heart' },
-  { title: 'Resilience', body: 'Turn difficult chapters into useful information, then keep moving with more self-awareness.', icon: 'mountain' },
-  { title: 'Contribution', body: 'Leave people, teams, and systems more capable than I found them.', icon: 'people' },
+  { title: 'Give my family more freedom', body: 'As an immigrant and provider, security means giving my family peace of mind, flexibility, and choices I didn\'t have growing up.', icon: 'home' },
+  { title: 'Make room for joy, awe & absurdity', body: 'I am most alive laughing, dancing, hearing live music, or exploring somewhere new. Beauty, play, and wonder are not extras.', icon: 'spark' },
+  { title: 'Follow the interesting thread', body: 'My possibility brain asks: What can I make with this? How does it connect? Curiosity turns scattered ideas into something useful.', icon: 'book' },
+  { title: 'Stay strong for the adventure', body: 'My body is the vehicle for joy and presence. I want to hike mountains with my kids in thirty years, so movement matters now.', icon: 'heart' },
+  { title: 'Find calm, then keep moving', body: 'Calm is not my default. Movement, mindfulness, music, and perspective help me interrupt the spiral and fall forward.', icon: 'mountain' },
+  { title: 'Connect people and leave things better', body: 'I want to be a community connector—lifting others, sharing what I know, and building teams where people can do their best work.', icon: 'people' },
 ];
 
 const ICONS: Record<string,string> = {
@@ -24,26 +24,28 @@ const NEXT = ['Mexico City', 'Spearfishing trip', 'Perform at a storytelling eve
 const SOMEDAY = ['Antarctica + aurora borealis', 'A genuinely good stand-up set', 'Publish a book', 'Dog sledding in Alaska or Scandinavia'];
 ---
 <Layout title="About" description="Dima Perkis — Data & AI leader, systems builder, husband, father, and serial side-quest starter.">
-  <section class="about-hero reveal">
+  <section class="about-hero">
     <div class="about-copy">
       <p class="page-eyebrow">About me</p>
       <h1 class="page-title">Builder.<br />Dad. Explorer.</h1>
-      <p class="about-lede">I’m a Data & AI leader who likes hard problems, working alongside a sharp team, and making the abstract tangible. Outside work, I build personal tools, chase new experiences, and test nearly everything on my family.</p>
+      <p class="about-lede">I’m a Data &amp; AI leader who likes hard problems, curious people, and making the abstract tangible. I’m passionate about connecting with people, live music and events, and finding moments of awe, joy, and absurdity. Outside work, I build personal tools, chase new experiences, and test nearly everything on my family.</p>
       <p class="personal-motto">“Make a stranger laugh every day.”</p>
     </div>
     <figure class="headshot"><img src="/images/dima.jpeg" alt="Dima Perkis" /></figure>
   </section>
 
-  <section class="life-gallery reveal">
+  <section class="life-gallery">
     <div class="family-shot">
       <img src="/images/family.jpg" alt="Dima with Jeannie, Dean, and Ruby" loading="lazy" />
-      <div class="photo-caption"><strong>The home team</strong><span>Jeannie, Dean, Ruby, and me</span></div>
+      <div class="photo-caption"><strong>Jeannie, Dean, Ruby, and me</strong><span>Strawberry picking in Atlanta</span></div>
     </div>
     <div class="world-thumbs" aria-label="Dima out in the world">
       {[
-        ['/images/about/cayambe.jpg','Cayambe summit · Ecuador'],
+        ['/images/about/graffiti.jpg','Finding the colorful route'],
+        ['/images/about/jeannie.jpg','Rainy day · Rome'],
+        ['/images/about/cayambe.jpg','Cayambe summit · 18,996 ft'],
         ['/images/about/moto-colombia.jpg','Motorcycling · Colombia'],
-        ['/images/about/scuba.jpg','Scuba · Thailand'],
+        ['/images/about/scuba.jpg','Learning below sea level · Thailand'],
         ['/images/about/kite.jpg','Learning to kite surf'],
       ].map(([src,cap]) => (
         <figure><img src={src} alt={cap} loading="lazy" /><figcaption>{cap}</figcaption></figure>
@@ -51,13 +53,13 @@ const SOMEDAY = ['Antarctica + aurora borealis', 'A genuinely good stand-up set'
     </div>
   </section>
 
-  <section class="about-identity reveal">
-    <article><span class="section-kicker">At work</span><h2>Strategy that ships</h2><p>I lead teams that turn AI and data into operating systems, growth decisions, and measurable outcomes—not decks that end at the boardroom.</p></article>
+  <section class="about-identity">
+    <article><span class="section-kicker">At work</span><h2>From strategy to systems</h2><p>I lead teams that turn AI and data into operating systems, growth decisions, and measurable outcomes—not decks that end at the boardroom.</p></article>
     <article><span class="section-kicker">After bedtime</span><h2>Useful side quests</h2><p>Family tools, event intelligence, data rabbit holes, and creative experiments. The point is not novelty; it is learning by making something real.</p></article>
     <article><span class="section-kicker">At home</span><h2>All-in on people</h2><p>Husband to Jeannie, dad to Dean and Ruby, born in Moldova, raised in New Jersey, and rooted in Atlanta.</p></article>
   </section>
 
-  <section class="values-section reveal">
+  <section class="values-section">
     <span class="section-kicker">What guides me</span>
     <h2 class="section-title">Core values</h2>
     <div class="values-grid">
@@ -70,7 +72,7 @@ const SOMEDAY = ['Antarctica + aurora borealis', 'A genuinely good stand-up set'
     </div>
   </section>
 
-  <section class="bucket-section reveal">
+  <section class="bucket-section">
     <span class="section-kicker">The running list</span>
     <h2 class="section-title">Bucket list</h2>
     <p class="bucket-intro">A life backlog should feel more like a launchpad than a checklist.</p>
@@ -84,10 +86,10 @@ const SOMEDAY = ['Antarctica + aurora borealis', 'A genuinely good stand-up set'
 
 <style>
   .about-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,390px);gap:clamp(2rem,7vw,6rem);padding:clamp(4rem,8vw,7rem) 0 4rem;border-bottom:1px solid var(--border);align-items:center}.about-lede{max-width:42rem;margin:1.5rem 0 0;color:var(--muted);font-size:clamp(1rem,2vw,1.18rem);line-height:1.75}.personal-motto{margin:1.5rem 0 0;color:var(--gold);font-size:.9rem;font-weight:600}.headshot{margin:0}.headshot img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:24px;border:1px solid var(--border)}
-  .life-gallery{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(240px,.75fr);gap:1rem;margin:4rem 0 5.5rem}.family-shot{position:relative;min-height:520px;overflow:hidden;border-radius:20px}.family-shot>img{width:100%;height:100%;object-fit:cover;display:block}.photo-caption{position:absolute;left:1rem;right:1rem;bottom:1rem;display:flex;justify-content:space-between;gap:1rem;padding:.85rem 1rem;border-radius:12px;background:rgba(12,12,14,.72);backdrop-filter:blur(10px);color:#fff;font-size:.8rem}.photo-caption span{opacity:.7}.world-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.world-thumbs figure{margin:0;min-width:0}.world-thumbs img{display:block;width:100%;aspect-ratio:1/1.14;object-fit:cover;border-radius:14px}.world-thumbs figcaption{margin-top:.4rem;color:var(--muted);font-family:'DM Mono',monospace;font-size:.65rem;line-height:1.35}
+  .life-gallery{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);gap:1.25rem;margin:4rem 0 5.5rem;align-items:stretch}.family-shot{position:relative;min-height:640px;overflow:hidden;border-radius:20px}.family-shot>img{width:100%;height:100%;object-fit:cover;display:block}.photo-caption{position:absolute;left:1rem;right:1rem;bottom:1rem;display:flex;justify-content:space-between;gap:1rem;padding:.85rem 1rem;border-radius:12px;background:rgba(12,12,14,.72);backdrop-filter:blur(10px);color:#fff;font-size:.8rem}.photo-caption span{opacity:.7}.world-thumbs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:1rem}.world-thumbs figure{display:flex;min-width:0;margin:0;flex-direction:column}.world-thumbs img{display:block;width:100%;min-height:0;flex:1;object-fit:cover;border-radius:14px}.world-thumbs figcaption{margin-top:.4rem;color:var(--muted);font-family:'DM Mono',monospace;font-size:.62rem;line-height:1.35}
   .about-identity{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:6rem}.about-identity article{padding:1.5rem;border-top:1px solid var(--border)}.about-identity h2{margin:0 0 .65rem;font-size:1.15rem;font-weight:600;letter-spacing:-.025em}.about-identity p{margin:0;color:var(--muted);font-size:.84rem;line-height:1.65}
   .values-section,.bucket-section{margin-bottom:6rem}.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.value-card{min-height:210px;padding:1.35rem;border:1px solid var(--border);border-radius:16px}.value-icon{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:11px;background:var(--surface);color:var(--gold)}.value-icon svg{width:1.3rem;height:1.3rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.value-card h3{margin:1.1rem 0 .55rem;font-size:1rem;font-weight:600;letter-spacing:-.02em}.value-card p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.6}
   .bucket-intro{margin:-.65rem 0 1.5rem;color:var(--muted);font-size:.9rem}.bucket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.bucket-column{padding:1.5rem;border:1px solid var(--border);border-radius:18px;background:var(--surface)}.bucket-done{background:color-mix(in srgb,var(--gold) 7%,var(--surface))}.bucket-head{display:flex;gap:.85rem;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--border)}.bucket-head>span{display:grid;place-items:center;width:2.3rem;height:2.3rem;border-radius:50%;background:var(--bg);color:var(--gold);font-weight:700}.bucket-head small,.bucket-head strong{display:block}.bucket-head small{color:var(--gold);font-family:'DM Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em}.bucket-head strong{margin-top:.18rem;font-size:.82rem;line-height:1.25}.bucket-column ul{list-style:none;padding:0;margin:1rem 0 0}.bucket-column li{position:relative;padding:.55rem 0 .55rem 1rem;border-bottom:1px solid var(--border);color:var(--muted);font-size:.78rem;line-height:1.4}.bucket-column li:last-child{border-bottom:0}.bucket-column li::before{content:'•';position:absolute;left:0;color:var(--gold)}
-  @media(max-width:800px){.about-hero,.life-gallery{grid-template-columns:1fr}.headshot{max-width:420px}.family-shot{min-height:380px}.about-identity,.values-grid,.bucket-grid{grid-template-columns:1fr 1fr}.about-identity article:last-child,.bucket-column:last-child{grid-column:1/-1}}
+  @media(max-width:800px){.about-hero,.life-gallery{grid-template-columns:1fr}.headshot{max-width:420px}.family-shot{min-height:480px}.world-thumbs{grid-template-rows:repeat(3,auto)}.world-thumbs img{aspect-ratio:4/3;flex:none}.about-identity,.values-grid,.bucket-grid{grid-template-columns:1fr 1fr}.about-identity article:last-child,.bucket-column:last-child{grid-column:1/-1}}
   @media(max-width:560px){.about-hero{padding-top:3rem}.world-thumbs{grid-template-columns:1fr 1fr}.about-identity,.values-grid,.bucket-grid{grid-template-columns:1fr}.about-identity article:last-child,.bucket-column:last-child{grid-column:auto}.family-shot{min-height:300px}.photo-caption{align-items:flex-start;flex-direction:column;gap:.1rem}}
 </style>

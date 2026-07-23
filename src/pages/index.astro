@@ -2,718 +2,479 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const allProjects = await getCollection('projects');
-const aiIdeas = allProjects.find(p => p.slug === 'ai-ideas-explorer');
-
 const songs = (await getCollection('posts'))
   .filter(p => !p.data.draft && p.data.type === 'song' && p.data.youtube)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const song = songs[0];
 
 function ytId(url: string) {
-  const m = url?.match(/(?:youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=)([^&?/\s]+)/);
-  return m ? m[1] : null;
+  const match = url?.match(/(?:youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=)([^&?/\s]+)/);
+  return match ? match[1] : null;
 }
-const songVid = song?.data.youtube ? ytId(song.data.youtube) : null;
-const songThumb = songVid ? `https://img.youtube.com/vi/${songVid}/hqdefault.jpg` : null;
-// NOTE: inline <iframe> player is ready to swap in, but Dima's YouTube channel has
-// "Allow embedding" turned OFF (all videos 401 on oEmbed). Enable it in YouTube
-// Studio, then replace the thumbnail link below with the iframe version.
+
+const songVideoId = song?.data.youtube ? ytId(song.data.youtube) : null;
+const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/hqdefault.jpg` : null;
 ---
 
-<Layout title="Dima Perkis" description="VP, Data & AI. I lead teams that turn emerging AI capabilities and messy data into revenue-producing systems — from strategy through production. Atlanta, GA." defaultTheme="light" heroNav={true}>
-
-  <div class="bento">
-
-    <!-- ── INTRO BANNER (full width) ─────────────── -->
-    <div class="bc bc-intro">
-      <nav class="bc-top-links" aria-label="Primary">
-        <a href="/resume">Professional Experience</a>
-        <span class="bc-top-sep" aria-hidden="true"></span>
-        <a href="/projects">AI Side Quests</a>
-        <span class="bc-top-sep" aria-hidden="true"></span>
-        <a href="/about">About Me</a>
-        <span class="bc-top-sep" aria-hidden="true"></span>
-        <a href="/contact">Contact</a>
-      </nav>
-      <div class="bc-intro-main">
-        <div class="bc-intro-left">
-          <img src="/images/brand/dima-dima-dima/png/dima-mark-concept-01-192.png" alt="" class="bc-mark" />
-          <h1 class="bc-name">Dima Perkis</h1>
+<Layout
+  title="Dima Perkis"
+  description="Data & AI leader who turns emerging technology into measurable value—from enterprise strategy to production systems."
+  defaultTheme="light"
+>
+  <main class="home-shell">
+    <section class="masthead" aria-labelledby="home-title">
+      <div class="identity-lockup" aria-label="Dima Perkis">
+        <img
+          class="identity-mark"
+          src="/images/brand/dima-dima-dima/dima-mark-concept-01-transparent.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="identity-words">
+          <h1 id="home-title" class="identity-first">Dima</h1>
+          <div class="identity-last">Perkis</div>
         </div>
-        <div class="bc-intro-right">
-          <p class="bc-bio">
-            Data &amp; AI leader. I lead teams that turn emerging capabilities into
-            revenue-producing systems — from board-level strategy through production.
-          </p>
-          <div class="bc-tags">
-            <span class="bc-tag bc-tag--gold">AI strategy</span>
-            <span class="bc-tag bc-tag--violet">Deployed systems</span>
-            <span class="bc-tag bc-tag--muted">Atlanta, GA</span>
+      </div>
+
+      <div class="masthead-copy">
+        <p>
+          Data &amp; AI leader who turns emerging technology into measurable value—from
+          enterprise strategy to production systems.
+        </p>
+      </div>
+
+      <div class="proof-grid" aria-label="Selected facts">
+        <div><strong>$140M+</strong><span>Delivered value</span></div>
+        <div><strong>15+</strong><span>Years of experience</span></div>
+        <div><strong>23</strong><span>AI projects live</span></div>
+        <div><strong>2</strong><span>Toddlers</span></div>
+      </div>
+    </section>
+
+    <section class="work-heading" aria-labelledby="selected-work-title">
+      <div>
+        <p class="section-label">Selected projects</p>
+        <h2 id="selected-work-title">Projects you can open</h2>
+      </div>
+      <a href="/projects">All projects <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section class="portfolio-grid" aria-label="Featured projects">
+      <article class="project-card project-card--feature card-dewey">
+        <div class="card-media card-media--dewey">
+          <img src="/images/dewey/dewey-check-list.png" alt="Dewey checking a reading list against the library catalog" />
+        </div>
+        <div class="card-copy">
+          <span class="card-kicker">Featured build</span>
+          <div class="card-title-row"><h2>Dewey</h2></div>
+          <p>Family book recommendations, checked live against Fulton County Library inventory.</p>
+          <div class="card-actions">
+            <a class="card-action-primary" href="https://dimadimadima.com/dewey" target="_blank" rel="noopener noreferrer">Open Dewey ↗</a>
+            <a href="/projects/dewey">Project notes →</a>
           </div>
         </div>
-      </div>
-      <div class="bc-proof" aria-label="Selected career outcomes">
-        <div><strong>$120M+</strong><span>Revenue impact</span></div>
-        <div><strong>6×</strong><span>Team growth</span></div>
-        <div><strong>$200K</strong><span>Capacity redeployed with AI</span></div>
-      </div>
-    </div>
+      </article>
 
-    <!-- ── ON DIMA'S RADAR: Happening in Atlanta ──── -->
-    <a href="/atl" class="bc bc-live">
-      <div class="bc-live-brand">
-        <span class="bc-radar-ping"><img src="/atl/favicon.svg" alt="" /></span>
-        <span class="bc-live-brandname">On Dima's Radar</span>
-      </div>
-      <div class="bc-live-title">Happening in Atlanta</div>
-      <div id="atl-live-list" class="bc-live-list">
-        <div class="bc-live-empty">Loading the radar…</div>
-      </div>
-      <div class="bc-live-foot">
-        Scraped, scored against my taste, updated continuously · Full radar →
-      </div>
-    </a>
+      <article class="radar-card">
+        <div class="radar-brand">
+          <span class="radar-icon"><img src="/atl/favicon.svg" alt="" /></span>
+          <span>On Dima’s Radar</span>
+        </div>
+        <div class="radar-title-row">
+          <h2>Happening in Atlanta</h2>
+        </div>
+        <div id="atl-live-list" class="radar-list">
+          <div class="radar-empty">Loading the radar…</div>
+        </div>
+        <p class="radar-foot">Atlanta events worth leaving the house for — scraped wide, scored against my taste, updated continuously.</p>
+        <div class="card-actions radar-actions">
+          <a class="card-action-primary" href="https://dimadimadima.com/atl" target="_blank" rel="noopener noreferrer">Open Radar ↗</a>
+          <a href="/projects/atl-radar">Project notes →</a>
+        </div>
+      </article>
 
-    <!-- ── Dewey ──────────────────────────────────── -->
-    <a href="/projects/dewey" class="bc bc-project bc-dewey">
-      <img src="/images/dewey/dewey-check-list.png" alt="Dewey — live library shelf check" class="bc-img" />
-      <div class="bc-project-body">
-        <div class="bc-status bc-status--gold">Active</div>
-        <div class="bc-project-title">Dewey</div>
-        <div class="bc-project-desc">Book recs for the whole family, checked live against the library shelf</div>
-        <span class="bc-project-view">View project →</span>
-      </div>
-    </a>
+      <article class="project-card card-ideas">
+        <div class="card-media"><img src="/images/ai-ideas-galaxy.webp" alt="AI Ideas Explorer idea galaxy" loading="lazy" /></div>
+        <div class="card-copy">
+          <span class="card-kicker">AI research</span>
+          <div class="card-title-row"><h2>AI Ideas Explorer</h2></div>
+          <p>1,160 business ideas generated, scored, and mapped.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://ai-ideas-explorer.vercel.app" target="_blank" rel="noopener noreferrer">Open app ↗</a><a href="/projects/ai-ideas-explorer">Details →</a></div>
+        </div>
+      </article>
 
-    <!-- ── SUNO ───────────────────────────────────── -->
-    <div class="bc bc-suno-cell">
-      <div class="bc-suno-head">
-        <span class="bc-music-eyebrow">♫ Suno Factory</span>
-        <span class="bc-suno-name">{song?.data.title ?? 'AI songs for my kids'}</span>
-      </div>
-      <a
-        href={song?.data.youtube ?? '/projects'}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="bc-suno-play"
-      >
-        {songThumb && (
-          <img src={songThumb} alt={song?.data.title} class="bc-img bc-img--dim" loading="lazy" />
-        )}
-        <span class="bc-play">▶</span>
-      </a>
-    </div>
+      <article class="project-card card-toddlermaps">
+        <div class="card-media"><img src="/images/toddlermaps/toddlermaps-overview-map.png" alt="ToddlerMaps printable neighborhood map" loading="lazy" /></div>
+        <div class="card-copy">
+          <span class="card-kicker">Family tool</span>
+          <div class="card-title-row"><h2>ToddlerMaps</h2></div>
+          <p>Navigation translated into landmarks a toddler actually knows.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://dimadimadima.com/toddlermaps" target="_blank" rel="noopener noreferrer">Open app ↗</a><a href="/projects/toddlermaps">Details →</a></div>
+        </div>
+      </article>
 
-    <!-- ── ToddlerMaps ────────────────────────────── -->
-    <a href="/projects/toddlermaps" class="bc bc-project bc-tmaps">
-      <img src="/images/toddlermaps/toddlermaps-overview-map.png" alt="ToddlerMaps" class="bc-img" loading="lazy" />
-      <div class="bc-project-body">
-        <div class="bc-status bc-status--gold">Live</div>
-        <div class="bc-project-title">ToddlerMaps</div>
-        <div class="bc-project-desc">GPS translated into a toddler's landmarks</div>
-        <span class="bc-project-view">View project →</span>
-      </div>
-    </a>
+      <article class="project-card card-power">
+        <div class="card-media"><img src="/images/power-dashboard.png" alt="Georgia Power energy-analysis dashboard" loading="lazy" /></div>
+        <div class="card-copy">
+          <span class="card-kicker">Personal data</span>
+          <div class="card-title-row"><h2>Georgia Power</h2></div>
+          <p>13 months and 10,487 hourly readings turned into an energy playbook.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://dimadimadima.com/power" target="_blank" rel="noopener noreferrer">Open dashboard ↗</a><a href="/projects/power-analysis">Details →</a></div>
+        </div>
+      </article>
 
-    <!-- ── AI Ideas Explorer ──────────────────────── -->
-    <a href="/projects/ai-ideas-explorer" class="bc bc-project bc-ideas" id="bc-ideas-cell">
-      {aiIdeas?.data.image && (
-        <img src={aiIdeas.data.image} alt="AI Ideas Explorer" class="bc-img" loading="lazy" />
-      )}
-      <span class="bc-live-badge bc-ideas-live"><span class="dot-pulse"></span>Live</span>
-      <div class="bc-project-body">
-        <div class="bc-status bc-status--gold">Live</div>
-        <div class="bc-project-title">AI Ideas Explorer</div>
-        <div class="bc-project-desc">1,160 AI business ideas, scored</div>
-        <span class="bc-project-view">View project →</span>
-      </div>
-    </a>
+      <article class="project-card card-suno">
+        <div class="card-media card-media--suno">
+          {songThumbnail && <img src={songThumbnail} alt={song?.data.title ?? 'Suno Factory'} loading="lazy" />}
+          <span class="play-button" aria-hidden="true">▶</span>
+        </div>
+        <div class="card-copy">
+          <span class="card-kicker">Creative system</span>
+          <div class="card-title-row"><h2>Suno Factory</h2></div>
+          <p>An end-to-end pipeline for turning family stories into finished songs.</p>
+          <div class="card-actions">
+            <a class="card-action-primary" href={song?.data.youtube ?? '/projects/suno-factory'} target={song?.data.youtube ? '_blank' : undefined} rel={song?.data.youtube ? 'noopener noreferrer' : undefined}>{song?.data.youtube ? 'Play latest ↗' : 'Explore →'}</a>
+            <a href="/projects/suno-factory">Details →</a>
+          </div>
+        </div>
+      </article>
 
-    <!-- ── Georgia Power Analysis ─────────────────── -->
-    <a href="/projects/power-analysis" class="bc bc-project bc-power">
-      <img src="/images/power-dashboard.png" alt="Georgia Power Analysis" class="bc-img" loading="lazy" />
-      <div class="bc-project-body">
-        <div class="bc-status bc-status--gold">Active</div>
-        <div class="bc-project-title">Georgia Power Analysis</div>
-        <div class="bc-project-desc">13 months of bills + 10,487 hourly readings, decoded</div>
-        <span class="bc-project-view">View project →</span>
-      </div>
-    </a>
+      <article class="project-card card-music">
+        <div class="card-media"><img src="/images/spotify-hero.png" alt="Dima’s music listening analysis" loading="lazy" /></div>
+        <div class="card-copy">
+          <span class="card-kicker">Personal data</span>
+          <div class="card-title-row"><h2>Music Data</h2></div>
+          <p>18 years, 147,594 streams, and 178 concerts—visualized.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://dima-spotify.vercel.app" target="_blank" rel="noopener noreferrer">Open site ↗</a><a href="/projects/spotify-analysis">Details →</a></div>
+        </div>
+      </article>
 
-    <!-- ── Music Data ──────────────────────────────── -->
-    <a href="/projects/spotify-analysis" class="bc bc-project bc-music">
-      <img src="/images/spotify-hero.png" alt="Music Data" class="bc-img" loading="lazy" />
-      <div class="bc-project-body">
-        <div class="bc-status bc-status--gold">Active</div>
-        <div class="bc-project-title">Music Data</div>
-        <div class="bc-project-desc">147,594 streams · 178 shows · 18 years of listening data</div>
-        <span class="bc-project-view">View project →</span>
-      </div>
-    </a>
+      <article class="project-card card-killbill">
+        <div class="card-media"><img src="/images/kill-bill.jpg" alt="All Roads to Kill Bill" loading="lazy" /></div>
+        <div class="card-copy">
+          <span class="card-kicker">Film graph</span>
+          <div class="card-title-row"><h2>All Roads to Kill Bill</h2></div>
+          <p>Every Tarantino connection in one explorable graph.</p>
+          <div class="card-actions"><a class="card-action-primary" href="https://allroadstokillbill.vercel.app" target="_blank" rel="noopener noreferrer">Open graph ↗</a><a href="/projects/kill-bill">Details →</a></div>
+        </div>
+      </article>
+    </section>
+  </main>
 
-    <!-- ── All Roads to Kill Bill ──────────────────── -->
-    <a href="/projects/kill-bill" class="bc bc-project bc-killbill">
-      <img src="/images/kill-bill.jpg" alt="All Roads to Kill Bill" class="bc-img" loading="lazy" />
-      <div class="bc-project-body">
-        <div class="bc-project-title">All Roads to Kill Bill</div>
-        <div class="bc-project-desc">Every Tarantino connection, mapped</div>
-        <span class="bc-project-view">View project →</span>
-      </div>
-    </a>
-
-  </div>
-
-  <!-- Live ATL feed: lazy-load the radar data layer after paint -->
   <script is:inline>
     (function () {
       function renderRadar() {
         try {
           var list = document.getElementById('atl-live-list');
           if (!list || typeof EVENTS === 'undefined') return;
-          var today = new Date(); today.setHours(0, 0, 0, 0);
+          var today = new Date();
+          today.setHours(0, 0, 0, 0);
           var upcoming = EVENTS
-            .filter(function (e) { return new Date(e.dateEnd || e.date) >= today; })
+            .filter(function (event) { return new Date(event.dateEnd || event.date) >= today; })
             .sort(function (a, b) { return (b.score || 0) - (a.score || 0); })
             .slice(0, 14)
             .sort(function (a, b) { return new Date(a.date) - new Date(b.date); })
             .slice(0, 3);
           if (!upcoming.length) return;
-          list.innerHTML = upcoming.map(function (e) {
-            var isAbsolute = e.imageUrl && /^https?:\/\//i.test(e.imageUrl);
-            var imgSrc = e.imageUrl ? (isAbsolute ? e.imageUrl : '/atl/' + e.imageUrl) : null;
-            var thumb = imgSrc
-              ? '<img class="bc-live-thumb" src="' + imgSrc + '" alt="" loading="lazy" '
-                + 'onerror="this.outerHTML=\'<span class=&quot;bc-live-thumb bc-live-thumb--emoji&quot;>' + (e.emoji || '📅') + '</span>\'">'
-              : '<span class="bc-live-thumb bc-live-thumb--emoji">' + (e.emoji || '📅') + '</span>';
-            return '<div class="bc-live-row">'
-              + thumb
-              + '<span class="bc-live-event"><span class="bc-live-name">' + e.title + '</span>'
-              + '<span class="bc-live-venue">' + e.dateStr + ' · ' + (e.venue || '') + '</span></span>'
-              + '<span class="bc-live-kind">' + (e.emoji || '') + '</span>'
+          list.innerHTML = upcoming.map(function (event) {
+            var isAbsolute = event.imageUrl && /^https?:\/\//i.test(event.imageUrl);
+            var imageSrc = event.imageUrl ? (isAbsolute ? event.imageUrl : '/atl/' + event.imageUrl) : null;
+            var thumbnail = imageSrc
+              ? '<img class="radar-thumb" src="' + imageSrc + '" alt="" loading="lazy" onerror="this.outerHTML=\'<span class=&quot;radar-thumb radar-thumb--emoji&quot;>' + (event.emoji || '📅') + '</span>\'">'
+              : '<span class="radar-thumb radar-thumb--emoji">' + (event.emoji || '📅') + '</span>';
+            return '<div class="radar-row">'
+              + thumbnail
+              + '<span class="radar-event"><span class="radar-name">' + event.title + '</span>'
+              + '<span class="radar-venue">' + event.dateStr + ' · ' + (event.venue || '') + '</span></span>'
               + '</div>';
           }).join('');
-        } catch (err) { /* leave fallback text */ }
+        } catch (error) { /* keep the loading fallback */ }
       }
+
       function loadRadar() {
-        var s = document.createElement('script');
-        s.src = '/atl/data.js';
-        s.onload = renderRadar;
-        document.body.appendChild(s);
+        var script = document.createElement('script');
+        script.src = '/atl/data.js';
+        script.onload = renderRadar;
+        document.body.appendChild(script);
       }
+
       if ('requestIdleCallback' in window) requestIdleCallback(loadRadar);
       else setTimeout(loadRadar, 250);
     })();
   </script>
-
-  <script is:inline>
-    (function () {
-      document.querySelectorAll('.bc-project').forEach(function (card) {
-        card.addEventListener('click', function () {
-          var titleEl = card.querySelector('.bc-project-title');
-          var name = (titleEl && titleEl.textContent.trim()) || card.getAttribute('href') || 'unknown';
-          if (typeof window.track === 'function') window.track('project_click', { project: name });
-        });
-      });
-    })();
-  </script>
-
-  <script is:inline>
-    (function () {
-      var cell = document.getElementById('bc-ideas-cell');
-      if (!cell || !('IntersectionObserver' in window)) return;
-      var io = new IntersectionObserver(function (entries) {
-        if (!entries.some(function (e) { return e.isIntersecting; })) return;
-        io.disconnect();
-        var frame = document.createElement('iframe');
-        frame.src = 'https://ai-ideas-explorer.vercel.app';
-        frame.loading = 'lazy';
-        frame.title = 'AI Ideas Explorer';
-        frame.className = 'bc-ideas-frame';
-        frame.addEventListener('load', function () {
-          cell.classList.add('bc-ideas--live');
-        });
-        cell.insertBefore(frame, cell.firstChild);
-      }, { rootMargin: '200px' });
-      io.observe(cell);
-    })();
-  </script>
-
 </Layout>
 
 <style>
-  /* ─── Grid ──────────────────────────────────────── */
-  .bento {
+  .home-shell { padding: 2rem 0 5rem; }
+
+  .masthead {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: auto repeat(3, 280px);
-    gap: 1rem;
-    padding-top: 1.75rem;
-    padding-bottom: 4rem;
-  }
-
-  /* ─── Base cell ─────────────────────────────────── */
-  .bc {
-    background: var(--surface);
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, .95fr);
+    gap: clamp(2rem, 6vw, 5.5rem);
+    align-items: center;
+    padding: clamp(2rem, 5vw, 4rem);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-    transition: border-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
-    animation: bc-rise 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  .bento .bc:nth-child(1) { animation-delay: 0.05s; }
-  .bento .bc:nth-child(2) { animation-delay: 0.12s; }
-  .bento .bc:nth-child(3) { animation-delay: 0.19s; }
-  .bento .bc:nth-child(4) { animation-delay: 0.26s; }
-  .bento .bc:nth-child(5) { animation-delay: 0.33s; }
-  .bento .bc:nth-child(6) { animation-delay: 0.40s; }
-  .bento .bc:nth-child(7) { animation-delay: 0.47s; }
-  .bento .bc:nth-child(8) { animation-delay: 0.54s; }
-  .bento .bc:nth-child(9) { animation-delay: 0.61s; }
-  @keyframes bc-rise {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: none; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .bc { animation: none; }
-  }
-  a.bc {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-  }
-  a.bc:hover {
-    border-color: color-mix(in srgb, var(--gold) 45%, var(--border));
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--ink) 25%, transparent);
+    border-radius: 24px;
+    background: color-mix(in srgb, var(--surface) 84%, transparent);
   }
 
-  /* ─── Grid placement ────────────────────────────── */
-  .bc-intro     { grid-column: 1 / 7; grid-row: 1; }
-  .bc-live      { grid-column: 1 / 4; grid-row: 2; }
-  .bc-dewey     { grid-column: 4 / 7; grid-row: 2; }
-  .bc-suno-cell { grid-column: 1 / 3; grid-row: 3; }
-  .bc-tmaps     { grid-column: 3 / 5; grid-row: 3; }
-  .bc-ideas     { grid-column: 5 / 7; grid-row: 3; }
-  .bc-power     { grid-column: 1 / 3; grid-row: 4; }
-  .bc-music     { grid-column: 3 / 5; grid-row: 4; }
-  .bc-killbill  { grid-column: 5 / 7; grid-row: 4; }
-
-  /* ─── Shared image pattern ──────────────────────── */
-  .bc-img {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  a.bc:hover .bc-img { transform: scale(1.04); }
-  .bc-tmaps .bc-img { object-position: center; }
-  .bc-dewey .bc-img { object-position: top left; }
-
-  /* ─── INTRO BANNER ──────────────────────────────── */
-  .bc-intro {
+  .identity-lockup {
     display: flex;
+    align-items: stretch;
+    gap: clamp(.9rem, 1.7vw, 1.25rem);
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .identity-mark {
+    width: clamp(8.75rem, 16vw, 10rem);
+    height: auto;
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .identity-words {
+    display: flex;
+    min-width: 0;
     flex-direction: column;
-    gap: 1.75rem;
-    padding: 1.5rem 2.25rem 1.75rem;
-  }
-  /* Horizontal top links — same grammar as the sticky nav they morph into */
-  .bc-top-links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    padding-bottom: 1.1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .bc-top-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-  .bc-top-links a:hover { color: var(--ink); }
-  .bc-top-sep { width: 1px; height: 12px; background: var(--border-hi); display: inline-block; }
-  .bc-intro-main {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 2.5rem;
-    flex-wrap: wrap;
+    padding: .05em 0 .08em;
   }
-  .bc-intro-left {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 1.4rem;
-  }
-  .bc-mark {
-    height: 96px;
-    width: auto;
-    display: block;
-    flex-shrink: 0;
-  }
-  .bc-name {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    font-size: clamp(2.25rem, 4vw, 3.25rem);
-    line-height: 1.0;
-    letter-spacing: -0.055em;
-    color: var(--ink);
+  .identity-first,
+  .identity-last {
     margin: 0;
-    white-space: nowrap;
+    color: var(--ink);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 650;
+    letter-spacing: -.065em;
+    font-size: clamp(3rem, 6vw, 4.1rem);
+    line-height: .88;
   }
-  .bc-intro-right {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    max-width: 30rem;
-    min-width: min(100%, 280px);
-  }
-  .bc-bio {
-    font-size: 0.98rem;
+  .identity-last { margin: 0; }
+
+  .masthead-copy { max-width: 30rem; }
+  .masthead-copy p {
+    margin: 0;
     color: var(--muted);
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
     line-height: 1.7;
+  }
+  .proof-grid {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+  }
+  .proof-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: 0 1.4rem;
+    border-right: 1px solid var(--border);
+  }
+  .proof-grid > div:first-child { padding-left: 0; }
+  .proof-grid > div:last-child { border-right: 0; }
+  .proof-grid strong { color: var(--ink); font-size: clamp(1.55rem, 3vw, 2rem); letter-spacing: -.055em; }
+  .proof-grid span {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .work-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem;
+    padding: 4rem 0 1.35rem;
+  }
+  .section-label,
+  .card-kicker {
     margin: 0;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
   }
-  .bc-tags {
+  .work-heading h2 { margin: .35rem 0 0; font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.045em; }
+  .work-heading > a {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .work-heading > a:hover { color: var(--gold); }
+
+  .portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+
+  .project-card,
+  .radar-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--surface);
+    color: inherit;
+    text-decoration: none;
+    transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+  }
+  .project-card:hover,
+  .radar-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--gold) 42%, var(--border));
+    box-shadow: 0 20px 44px -32px color-mix(in srgb, var(--ink) 45%, transparent);
+  }
+
+  .project-card { display: grid; grid-template-rows: auto 1fr; }
+  .card-media { position: relative; overflow: hidden; aspect-ratio: 16 / 10; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .card-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .45s ease; }
+  .project-card:hover .card-media img { transform: scale(1.025); }
+  .card-media--dewey { aspect-ratio: 16 / 8.7; }
+  .card-media--dewey img { object-position: top left; }
+  .card-media--suno { aspect-ratio: 16 / 8; background: #090a0c; }
+  .card-media--suno img { object-position: center; filter: brightness(.72); }
+
+  .card-copy { display: flex; flex-direction: column; padding: 1.2rem 1.25rem 1.35rem; }
+  .card-title-row,
+  .radar-title-row { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+  .card-title-row h2,
+  .radar-title-row h2 { margin: .55rem 0 .4rem; color: var(--ink); font-size: 1.25rem; letter-spacing: -.035em; line-height: 1.12; }
+  .card-title-row > span,
+  .radar-title-row > span { color: var(--gold); font-size: 1.15rem; transform: translateY(.45rem); }
+  .card-copy p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+  .project-card--feature .card-title-row h2 { font-size: 1.55rem; }
+  .project-card--feature .card-copy p { max-width: 42rem; font-size: .92rem; }
+
+  .card-actions {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 0.35rem;
+    gap: .55rem 1rem;
+    margin-top: auto;
+    padding-top: 1.1rem;
   }
-  .bc-tag {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 0.2em 0.65em;
-    border: 1px solid var(--border);
-    font-family: 'DM Mono', monospace;
-  }
-  .bc-tag--gold   { color: var(--gold);   border-color: color-mix(in srgb, var(--gold) 30%, transparent); }
-  .bc-tag--violet { color: var(--violet); border-color: color-mix(in srgb, var(--violet) 30%, transparent); }
-  .bc-tag--muted  { color: var(--muted); }
-  .bc-proof { display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);padding-top:1.25rem; }
-  .bc-proof>div { display:flex;align-items:baseline;gap:.65rem;padding:0 1.25rem;border-right:1px solid var(--border); }
-  .bc-proof>div:first-child { padding-left:0; }
-  .bc-proof>div:last-child { border-right:0; }
-  .bc-proof strong { color:var(--ink);font-size:1.35rem;letter-spacing:-.04em; }
-  .bc-proof span { color:var(--muted);font-family:'DM Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.07em; }
-
-  /* ─── LIVE ATL ──────────────────────────────────── */
-  .bc-live {
-    display: flex;
-    flex-direction: column;
-    padding: 1.25rem 1.5rem;
-  }
-  .bc-live-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.5rem;
-  }
-  .bc-radar-ping {
-    position: relative;
-    display: inline-flex;
-    width: 26px; height: 26px;
-    flex-shrink: 0;
-  }
-  .bc-radar-ping img { width: 100%; height: 100%; display: block; }
-  .bc-radar-ping::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 1px solid #C2410C;
-    opacity: 0;
-    animation: radar-ping 2.6s ease-out infinite;
-  }
-  @keyframes radar-ping {
-    0%   { transform: scale(0.6); opacity: 0.7; }
-    70%  { transform: scale(1.35); opacity: 0; }
-    100% { opacity: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) { .bc-radar-ping::after { animation: none; } }
-  .bc-live-brandname {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: #C2410C;
-  }
-  .bc-live-title {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    font-size: 1.45rem;
-    color: var(--ink);
-    margin-bottom: 0.6rem;
-  }
-  .bc-live :global(.bc-live-kind) {
-    margin-left: auto;
-    flex-shrink: 0;
-    font-size: 1.05rem;
-    opacity: 0.85;
-  }
-  .dot-pulse {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #5a9a6e;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .bc-live-badge {
-    font-size: 0.75rem;
-    font-family: 'DM Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: #5a9a6e;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-  .bc-live-list {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.1rem;
-    min-height: 0;
-  }
-  .bc-live-empty {
-    font-size: 0.75rem;
-    font-family: 'DM Mono', monospace;
+  .card-actions a {
     color: var(--muted);
-    opacity: 0.6;
-  }
-  .bc-live :global(.bc-live-row) {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 0.45rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .bc-live :global(.bc-live-row:last-child) { border-bottom: none; }
-  .bc-live :global(.bc-live-thumb) {
-    width: 44px; height: 44px;
-    object-fit: cover;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    background: color-mix(in srgb, var(--gold) 6%, transparent);
-  }
-  .bc-live :global(.bc-live-event) {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-  .bc-live :global(.bc-live-name) {
-    font-size: 0.84rem;
-    color: var(--ink);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .bc-live :global(.bc-live-venue) {
-    font-size: 0.75rem;
     font-family: 'DM Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .bc-live-foot {
-    font-size: 0.75rem;
-    font-family: 'DM Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    opacity: 0.55;
-    margin-top: 0.75rem;
-    transition: opacity 0.15s, color 0.15s;
-  }
-  a.bc-live:hover .bc-live-foot { opacity: 1; color: var(--gold); }
-
-  /* ─── SUNO ──────────────────────────────────────── */
-  .bc-suno-cell {
-    display: flex;
-    flex-direction: column;
-  }
-  .bc-suno-head {
-    display: flex;
-    align-items: baseline;
-    gap: 0.65rem;
-    padding: 0.8rem 1.1rem;
-    border-bottom: 1px solid var(--border);
-    min-width: 0;
-  }
-  .bc-music-eyebrow {
-    font-size: 0.75rem;
-    font-family: 'DM Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-  .bc-suno-name {
-    font-family: 'DM Sans', sans-serif;
+    font-size: .64rem;
     font-weight: 600;
-    font-size: 0.9rem;
+    letter-spacing: .05em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .card-actions a:hover { color: var(--ink); }
+  .card-actions .card-action-primary {
+    padding: .55rem .72rem;
+    border: 1px solid color-mix(in srgb, var(--gold) 55%, var(--border));
+    border-radius: 7px;
+    background: color-mix(in srgb, var(--gold) 9%, transparent);
     color: var(--ink);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
-  .bc-suno-play {
-    flex: 1;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    min-height: 0;
-  }
-  .bc-suno-play .bc-img { position: absolute; inset: 0; }
-  .bc-img--dim { filter: brightness(0.55); }
-  .bc-suno-play:hover .bc-img--dim { filter: brightness(0.7); }
-  .bc-play {
-    position: relative;
-    z-index: 1;
-    width: 50px; height: 50px;
+
+  .card-dewey { grid-column: span 7; }
+  .radar-card { grid-column: span 5; }
+  .card-ideas,
+  .card-toddlermaps,
+  .card-power { grid-column: span 4; }
+  .card-suno { grid-column: span 6; }
+  .card-music,
+  .card-killbill { grid-column: span 3; }
+  .card-toddlermaps .card-media img { object-position: center; }
+  .card-killbill .card-media img { object-position: center 28%; }
+
+  .play-button {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
     border-radius: 50%;
-    background: rgba(212,168,83,0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    font-size: 0.95rem;
-    padding-left: 4px;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .bc-suno-play:hover .bc-play { background: var(--gold); transform: scale(1.1); }
-
-  /* ─── PROJECT CARDS ─────────────────────────────── */
-  .bc-project-body {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, rgba(12,12,14,0.97) 55%, transparent 100%);
-    padding: 0.85rem 1.1rem;
-    z-index: 3;
+    background: rgba(212, 168, 83, .94);
+    color: #111;
+    transform: translate(-50%, -50%);
   }
 
-  /* ─── AI IDEAS LIVE EMBED ───────────────────────── */
-  .bc-ideas :global(.bc-ideas-frame) {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    border: 0;
-    display: block;
-    pointer-events: none;
-    background: #0c0c0e;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: 2;
-  }
-  .bc-ideas:global(.bc-ideas--live) :global(.bc-ideas-frame) { opacity: 1; }
-  .bc-ideas .bc-ideas-live {
-    position: absolute;
-    top: 0.75rem; right: 0.9rem;
-    z-index: 3;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .bc-ideas:global(.bc-ideas--live) .bc-ideas-live { opacity: 1; }
-  .bc-status {
-    font-size: 0.75rem;
-    font-family: 'DM Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    margin-bottom: 0.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-  .bc-status--gold { color: var(--gold); }
-  .bc-status--gold::before {
-    content: '';
-    display: inline-block;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-  .bc-project-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: rgba(240, 236, 228, 0.95);
-    line-height: 1.2;
-  }
-  .bc-project-desc {
-    font-size: 0.82rem;
-    color: rgba(240, 236, 228, 0.65);
-    margin-top: 0.2rem;
-    line-height: 1.5;
-  }
-  .bc-project-view {
-    display: inline-block;
-    margin-top: 0.4rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--gold);
-    opacity: 0;
-    transform: translateY(3px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-  a.bc:hover .bc-project-view { opacity: 1; transform: none; }
+  .radar-card { display: flex; flex-direction: column; padding: 1.35rem 1.45rem; }
+  .radar-brand { display: flex; align-items: center; gap: .65rem; color: #C45420; font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
+  .radar-icon { position: relative; display: inline-flex; width: 28px; height: 28px; flex: 0 0 auto; }
+  .radar-icon img { width: 100%; height: 100%; }
+  .radar-title-row h2 { margin-top: .85rem; font-size: 1.55rem; }
+  .radar-list { display: flex; flex: 1; flex-direction: column; justify-content: center; margin-top: .3rem; }
+  .radar-empty { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .72rem; }
+  .radar-card :global(.radar-row) { display: flex; align-items: center; gap: .8rem; padding: .62rem 0; border-bottom: 1px solid var(--border); }
+  .radar-card :global(.radar-row:last-child) { border-bottom: 0; }
+  .radar-card :global(.radar-thumb) { display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 auto; border: 1px solid var(--border); border-radius: 7px; object-fit: cover; background: var(--bg); }
+  .radar-card :global(.radar-thumb--emoji) { font-size: 1.25rem; }
+  .radar-card :global(.radar-event) { display: flex; min-width: 0; flex-direction: column; gap: .12rem; }
+  .radar-card :global(.radar-name) { overflow: hidden; color: var(--ink); font-size: .86rem; text-overflow: ellipsis; white-space: nowrap; }
+  .radar-card :global(.radar-venue) { overflow: hidden; color: var(--muted); font-family: 'DM Mono', monospace; font-size: .64rem; letter-spacing: .03em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+  .radar-foot { margin: .65rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.5; }
+  .radar-actions { margin-top: .35rem; }
 
-  /* ─── MOBILE ────────────────────────────────────── */
   @media (max-width: 860px) {
-    .bento {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      gap: 0.5rem;
-    }
-    .bc-intro, .bc-live, .bc-dewey, .bc-suno-cell,
-    .bc-tmaps, .bc-ideas, .bc-power, .bc-music, .bc-killbill {
-      grid-column: 1;
-      grid-row: auto;
-    }
-    .bc-intro     { order: 1; }
-    .bc-intro { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
-    .bc-name { white-space: normal; }
-    .bc-mark { height: 64px; }
-    .bc-top-links { gap: 0.65rem 0.9rem; }
-    .bc-top-links a { font-size: 0.75rem; }
-    .bc-top-sep { display: none; }
-    .bc-live      { order: 2; min-height: 300px; }
-    .bc-dewey     { order: 3; min-height: 240px; }
-    .bc-suno-cell { order: 4; min-height: 260px; }
-    .bc-tmaps     { order: 5; min-height: 220px; }
-    .bc-ideas     { order: 6; min-height: 220px; }
-    .bc-power     { order: 7; min-height: 220px; }
-    .bc-music     { order: 8; min-height: 220px; }
-    .bc-killbill  { order: 9; min-height: 220px; }
-    .bc-proof { grid-template-columns:1fr;gap:.75rem; }
-    .bc-proof>div,.bc-proof>div:first-child { padding:0 0 .75rem;border-right:0;border-bottom:1px solid var(--border); }
-    .bc-proof>div:last-child { border-bottom:0;padding-bottom:0; }
+    .masthead { grid-template-columns: 1fr; gap: 1.75rem; }
+    .masthead-copy { max-width: 42rem; }
+    .proof-grid { grid-template-columns: repeat(2, 1fr); }
+    .proof-grid > div { padding: 1rem; border-bottom: 1px solid var(--border); }
+    .proof-grid > div:nth-child(2) { border-right: 0; }
+    .proof-grid > div:nth-child(3) { padding-left: 0; border-bottom: 0; }
+    .proof-grid > div:last-child { border-bottom: 0; }
+    .card-dewey,
+    .radar-card,
+    .card-ideas,
+    .card-toddlermaps,
+    .card-power,
+    .card-suno,
+    .card-music,
+    .card-killbill { grid-column: span 12; }
+    .card-dewey { order: 1; }
+    .radar-card { order: 2; }
+    .card-ideas { order: 3; }
+    .card-toddlermaps { order: 4; }
+    .card-power { order: 5; }
+    .card-suno { order: 6; }
+    .card-music { order: 7; }
+    .card-killbill { order: 8; }
+  }
+
+  @media (max-width: 560px) {
+    .home-shell { padding: 1rem 0 3.5rem; }
+    .masthead { gap: 1.35rem; padding: 1.25rem; border-radius: 18px; }
+    .identity-mark { width: 6rem; }
+    .identity-first,
+    .identity-last { font-size: 2.25rem; }
+    .masthead-copy p { font-size: 1rem; line-height: 1.58; }
+    .proof-grid { padding-top: .35rem; }
+    .proof-grid > div,
+    .proof-grid > div:first-child,
+    .proof-grid > div:nth-child(3) { padding: .85rem .65rem; }
+    .proof-grid strong { font-size: 1.55rem; }
+    .proof-grid span { font-size: .57rem; line-height: 1.35; }
+    .work-heading { padding: 2.75rem 0 1rem; align-items: center; }
+    .work-heading h2 { font-size: 1.85rem; }
+    .work-heading > a { font-size: .62rem; }
+    .portfolio-grid { gap: .75rem; }
+    .project-card,
+    .radar-card { border-radius: 15px; }
+    .card-media,
+    .card-media--dewey,
+    .card-media--suno { aspect-ratio: 16 / 9; }
+    .card-copy { padding: 1rem 1rem 1.1rem; }
+    .card-title-row h2,
+    .project-card--feature .card-title-row h2 { font-size: 1.15rem; }
+    .card-copy p,
+    .project-card--feature .card-copy p { font-size: .8rem; }
+    .radar-card { padding: 1.1rem; }
+    .radar-title-row h2 { font-size: 1.3rem; }
+    .radar-card :global(.radar-name),
+    .radar-card :global(.radar-venue) { white-space: normal; }
+    .radar-foot { font-size: .74rem; }
   }
 </style>

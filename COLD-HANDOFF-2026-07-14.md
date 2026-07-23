@@ -1,10 +1,10 @@
 # Cold Handoff — dimadimadima Portfolio Refresh
 
-**Date:** 2026-07-14
+**Last updated:** 2026-07-18
 **Repository:** `WhatWouldDimaDo/dimadimadima`
 **Production:** https://dimadimadima.com
 **Vercel project:** `dimas-projects-a8469b81/dimadimadima`
-**Release branch:** `refresh-2026-07` → `main`
+**Latest release branch:** `feat/visual-brand-refresh` → `main`
 
 ## Objective
 
@@ -14,7 +14,49 @@ Refresh the portfolio so it works as both a distinctive personal site and a cred
 
 The design should remain personal, playful, and builder-led without making recruiters hunt for executive scope or commercial outcomes.
 
-## What Shipped
+## July 18 Brand and Information Architecture Update
+
+The latest release reorganizes the site around five stable destinations: **Work, Projects, Now, About, and Contact**. These labels come from the shared layout and remain the same on every page. `Work` links to the detailed professional-experience page; there is no separate Resume button in the header.
+
+### Brand system
+
+- The homepage identity uses the large teal `D` with Dima's right-facing profile cut into its counter and an orange beard.
+- `Dima Perkis` sits on two lines beside the mark, aligned to its top and bottom.
+- The small header combines the selected `D` mark with the `dima dima dima` wordmark.
+- Current selected mark: `public/images/brand/dima-dima-dima/dima-mark-concept-01-transparent.png`.
+- The broader visual system remains warm cream, dark teal, and reddish orange, with dark and hacker theme support.
+
+### Homepage and navigation
+
+- The homepage leads with Dima's name, leadership positioning, and four concise proof points.
+- The redundant category-card row under the hero was removed. The persistent global navigation is now the category system.
+- The text link to Professional Experience under the hero was removed.
+- Selected projects remain directly accessible from the homepage, with screenshots or motion previews where available.
+- Homepage proof points currently include `$140M+ delivered value`, `15+ years experience`, `23 AI projects live`, and `2 toddlers`.
+
+### About
+
+- The introduction emphasizes connecting with people, live music and events, and seeking awe, joy, and absurdity.
+- The family-photo caption names Jeannie, Dean, Ruby, and Dima; do not call them “the home team.”
+- Values were rewritten using Dima's Brain, coaching materials, and personal Codex. The six current themes are family freedom; joy, awe, and absurdity; following the interesting thread; physical vitality; finding calm and continuing forward; and connecting people while leaving things better.
+- The page includes a larger family image and six photos of Dima out in the world.
+
+### Contact
+
+- The role thesis now describes systems that give people and teams new superpowers and lead to revenue growth. Avoid the phrase “get used.”
+- Conversation starters include practical AI systems, team building, useful side projects, Atlanta live events and music, and toddler tech.
+- Toddler tech means using AI to reduce friction and bring more joy to family life—not positioning children as a product category.
+
+### Current operating state
+
+- `npm run build` passes with 53 static pages.
+- Local preview used for this release: `http://127.0.0.1:4322/`.
+- The primary checkout on `refresh-2026-07` contains unrelated local changes and must not be cleaned or overwritten.
+- The release was prepared in `.worktrees/feat/visual-brand-refresh` as a clean fast-forward from `origin/main`.
+
+## Earlier July 14 Update (Historical)
+
+The notes below describe the preceding refresh. Where details conflict, the July 18 update above is authoritative.
 
 ### Global design system
 

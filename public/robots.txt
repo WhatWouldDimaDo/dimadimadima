@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cpl/
+Disallow: /groundline/
 
 Sitemap: https://dimadimadima.com/sitemap-index.xml

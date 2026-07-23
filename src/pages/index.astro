@@ -86,7 +86,7 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
         <div id="atl-live-list" class="radar-list">
           <div class="radar-empty">Loading the radar…</div>
         </div>
-        <p class="radar-foot">Atlanta events worth leaving the house for, ranked by my event-intelligence pipeline.</p>
+        <p class="radar-foot">Atlanta events worth leaving the house for — scraped wide, scored against my taste, updated continuously.</p>
         <div class="card-actions radar-actions">
           <a class="card-action-primary" href="https://dimadimadima.com/atl" target="_blank" rel="noopener noreferrer">Open Radar ↗</a>
           <a href="/projects/atl-radar">Project notes →</a>
@@ -94,7 +94,7 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
       </article>
 
       <article class="project-card card-ideas">
-        <div class="card-media"><img src="/images/ai-ideas-galaxy.png" alt="AI Ideas Explorer idea galaxy" /></div>
+        <div class="card-media"><img src="/images/ai-ideas-galaxy.webp" alt="AI Ideas Explorer idea galaxy" loading="lazy" /></div>
         <div class="card-copy">
           <span class="card-kicker">AI research</span>
           <div class="card-title-row"><h2>AI Ideas Explorer</h2></div>
@@ -104,7 +104,7 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
       </article>
 
       <article class="project-card card-toddlermaps">
-        <div class="card-media"><img src="/images/toddlermaps/toddlermaps-overview-map.png" alt="ToddlerMaps printable neighborhood map" /></div>
+        <div class="card-media"><img src="/images/toddlermaps/toddlermaps-overview-map.png" alt="ToddlerMaps printable neighborhood map" loading="lazy" /></div>
         <div class="card-copy">
           <span class="card-kicker">Family tool</span>
           <div class="card-title-row"><h2>ToddlerMaps</h2></div>
@@ -114,7 +114,7 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
       </article>
 
       <article class="project-card card-power">
-        <div class="card-media"><img src="/images/power-dashboard.png" alt="Georgia Power energy-analysis dashboard" /></div>
+        <div class="card-media"><img src="/images/power-dashboard.png" alt="Georgia Power energy-analysis dashboard" loading="lazy" /></div>
         <div class="card-copy">
           <span class="card-kicker">Personal data</span>
           <div class="card-title-row"><h2>Georgia Power</h2></div>
@@ -125,7 +125,7 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
 
       <article class="project-card card-suno">
         <div class="card-media card-media--suno">
-          {songThumbnail && <img src={songThumbnail} alt={song?.data.title ?? 'Suno Factory'} />}
+          {songThumbnail && <img src={songThumbnail} alt={song?.data.title ?? 'Suno Factory'} loading="lazy" />}
           <span class="play-button" aria-hidden="true">▶</span>
         </div>
         <div class="card-copy">
@@ -140,7 +140,7 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
       </article>
 
       <article class="project-card card-music">
-        <div class="card-media"><img src="/images/spotify-hero.png" alt="Dima’s music listening analysis" /></div>
+        <div class="card-media"><img src="/images/spotify-hero.png" alt="Dima’s music listening analysis" loading="lazy" /></div>
         <div class="card-copy">
           <span class="card-kicker">Personal data</span>
           <div class="card-title-row"><h2>Music Data</h2></div>
@@ -150,7 +150,7 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
       </article>
 
       <article class="project-card card-killbill">
-        <div class="card-media"><img src="/images/kill-bill.jpg" alt="All Roads to Kill Bill" /></div>
+        <div class="card-media"><img src="/images/kill-bill.jpg" alt="All Roads to Kill Bill" loading="lazy" /></div>
         <div class="card-copy">
           <span class="card-kicker">Film graph</span>
           <div class="card-title-row"><h2>All Roads to Kill Bill</h2></div>

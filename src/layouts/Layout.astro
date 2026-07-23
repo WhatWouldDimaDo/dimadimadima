@@ -53,21 +53,72 @@ const ogTitle = title === 'Dima Perkis' ? 'Dima Perkis' : (title === 'dimadimadi
     })();
   </script>
   <!-- Vercel Web Analytics (requires Analytics enabled on the Vercel project) -->
-  <script is:inline defer src="/_vercel/insights/script.js"></script>
-  <!-- Scroll-reveal driver for .reveal elements -->
   <script is:inline>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script is:inline defer src="/_vercel/insights/script.js"></script>
+  <!-- PostHog -->
+  <script is:inline>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId startSessionRecording stopSessionRecording get_distinct_id get_session_id".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_tcNY2thEZc7bdM9Gafdzp8HZYFuUoWWAnyVgSFRXB9t7', {api_host: 'https://us.i.posthog.com', defaults: '2025-05-24', person_profiles: 'always'});
+  </script>
+  <!-- Dual-send tracking helper + standard taxonomy wiring -->
+  <script is:inline>
+    function track(name, data) {
+      if (typeof window.va === "function") window.va("event", { name: name, data: data || {} });
+      if (window.posthog && typeof window.posthog.capture === "function") window.posthog.capture(name, data || {});
+    }
+    window.track = track;
+
     document.addEventListener('DOMContentLoaded', function () {
+      /* ---- scroll-reveal driver for .reveal elements + section_view ---- */
       var els = document.querySelectorAll('.reveal');
       if (!els.length || !('IntersectionObserver' in window)) {
         els.forEach && els.forEach(function (e) { e.classList.add('revealed'); });
-        return;
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              en.target.classList.add('revealed');
+              var cls = Array.prototype.find.call(en.target.classList, function (c) { return c !== 'reveal' && c !== 'revealed'; });
+              track('section_view', { section: cls || en.target.id || 'unknown' });
+              io.unobserve(en.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (e) { io.observe(e); });
       }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) { en.target.classList.add('revealed'); io.unobserve(en.target); }
+
+      /* ---- scroll_depth ---- */
+      var firedDepths = {};
+      function checkScrollDepth() {
+        var doc = document.documentElement;
+        var scrollTop = window.scrollY || doc.scrollTop;
+        var height = doc.scrollHeight - doc.clientHeight;
+        if (height <= 0) return;
+        var pct = (scrollTop / height) * 100;
+        [25, 50, 75, 100].forEach(function (d) {
+          if (pct >= d && !firedDepths[d]) {
+            firedDepths[d] = true;
+            track('scroll_depth', { depth: d });
+          }
         });
-      }, { rootMargin: '0px 0px -8% 0px' });
-      els.forEach(function (e) { io.observe(e); });
+      }
+      window.addEventListener('scroll', checkScrollDepth, { passive: true });
+      checkScrollDepth();
+
+      /* ---- cta_click: outbound links, mailto, tel ---- */
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a');
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        var isOutbound = a.target === '_blank' && /^https?:\/\//i.test(href) && href.indexOf(location.hostname) === -1;
+        var isMail = href.indexOf('mailto:') === 0;
+        var isTel = href.indexOf('tel:') === 0;
+        if (!isOutbound && !isMail && !isTel) return;
+        var type = isMail ? 'email' : isTel ? 'call' : (href.indexOf('linkedin.com') !== -1 ? 'linkedin' : 'outbound');
+        track('cta_click', { type: type, location: location.pathname });
+      });
     });
   </script>
 </head>

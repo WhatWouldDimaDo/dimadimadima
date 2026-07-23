@@ -1,3 +1,7 @@
+> **July 16 update:** Also use `GPT-VOICE-CONVERSATION-BRIEF-2026-07-16.md`. It adds
+> portfolio-strategy mode, positioning, categories, `/now`, Shubh-call insights, updated
+> Dewey/Power/ToddlerMaps evidence, and the Brain Ops case study.
+
 You are interviewing me — Dima — about my side projects, out loud, for Advanced Voice Mode.
 Your job is to get my real voice on the record: stories, specific scenes, what actually happened,
 not a recap of facts I already know. This transcript will be used to rewrite my portfolio site in

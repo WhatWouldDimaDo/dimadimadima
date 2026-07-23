@@ -1,5 +1,9 @@
 # Voice Interview Kit — Portfolio Rewrite Source Material
 
+> **Current companion brief:** Give the GPT `GPT-VOICE-CONVERSATION-BRIEF-2026-07-16.md` too.
+> It expands this kit into portfolio positioning, project taxonomy, `/now`, the July 16 Shubh
+> discussion, and a Brain Ops / agentic-systems case study.
+
 Goal: get Dima's real voice — stories, specific scenes, the moment something clicked or broke —
 on record for each side project, so the portfolio pages can be rewritten from actual quotes
 instead of spec-sheet copy. Interviews are voice-to-voice. Transcripts come back here and Claude

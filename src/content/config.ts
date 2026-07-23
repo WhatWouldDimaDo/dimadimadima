@@ -15,6 +15,13 @@ const projects = defineCollection({
     listed:      z.boolean().default(true),
     order:       z.number().default(99),
     status:      z.string().optional(),
+    caseStudy:   z.boolean().default(false),
+    ctaLabel:    z.string().optional(),
+    proof:       z.array(z.string()).optional(),
+    buildTools:  z.array(z.object({
+      name:   z.string(),
+      detail: z.string(),
+    })).optional(),
   }),
 });
 

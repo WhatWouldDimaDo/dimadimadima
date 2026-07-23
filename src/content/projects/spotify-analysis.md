@@ -7,7 +7,7 @@ status: active
 featured: true
 order: 3
 url: https://dima-spotify.vercel.app
-image: /images/spotify-taste-galaxy.png
+image: /images/spotify-taste-galaxy.webp
 images: [/images/spotify-hero.png, /images/spotify-stats-hero.png, /images/spotify-loyalty-chart.png, /images/spotify-heatmap.png, /images/spotify-bar-chart.png]
 ---
 

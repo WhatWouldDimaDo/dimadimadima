@@ -235,6 +235,13 @@
   .temp-warm { color: var(--amber); }
   .num { font-variant-numeric: tabular-nums; }
 </style>
+<!-- Analytics: Vercel Web Analytics + PostHog -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId startSessionRecording stopSessionRecording get_distinct_id get_session_id".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_tcNY2thEZc7bdM9Gafdzp8HZYFuUoWWAnyVgSFRXB9t7', {api_host: 'https://us.i.posthog.com', defaults: '2025-05-24', person_profiles: 'always'});
+</script>
 </head>
 <body>
 <div class="header">
@@ -290,7 +297,7 @@
   <div class="pane active" id="pane-trend">
     <div class="chart-card">
       <div class="chart-card-title">Monthly Bill vs. Consumption</div>
-      <div class="chart-card-sub">13 billing periods · Smart Usage plan throughout · DAIKON HVAC installed Dec 2024</div>
+      <div class="chart-card-sub">13 billing periods · Smart Usage plan throughout · Daikin HVAC installed Dec 2024</div>
       <div class="legend">
         <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Bill amount ($)</div>
         <div class="legend-item"><div class="legend-line" style="background:var(--teal)"></div>kWh consumed</div>
@@ -337,7 +344,7 @@
         <div class="insight-icon">🌙</div>
         <div>
           <div class="insight-title">Overnight base is 800–900W — roughly 2× what's expected</div>
-          <div class="insight-body">The 2–4am floor is 0.59–0.73 kWh/hr (590–730W) in winter and 0.97–1.05 in summer. Expected for a house this size is 200–350W base + HVAC runtime. The gap implies phantom loads or the DAIKON running frequently overnight even in mild weather. Worth checking the Skyport app's overnight runtime logs.</div>
+          <div class="insight-body">The 2–4am floor is 0.59–0.73 kWh/hr (590–730W) in winter and 0.97–1.05 in summer. Expected for a house this size is 200–350W base + HVAC runtime. The gap implies phantom loads or the Daikin running frequently overnight even in mild weather. Worth checking the Skyport app's overnight runtime logs.</div>
         </div>
       </div>
       <div class="insight teal">
@@ -445,7 +452,7 @@
         <div class="insight-icon">❄️</div>
         <div>
           <div class="insight-title">Pre-cool strategy: biggest on-peak lever available</div>
-          <div class="insight-body">Set DAIKON to 70–71°F by 1:30pm on summer weekdays. Thermal mass carries the house through the 2–7pm on-peak window at a raised setpoint (76–78°F). At the on-peak rate vs off-peak rate differential, this saves an estimated $50–120/yr depending on summer severity. Available directly in Skyport Home as a schedule setpoint.</div>
+          <div class="insight-body">Set Daikin to 70–71°F by 1:30pm on summer weekdays. Thermal mass carries the house through the 2–7pm on-peak window at a raised setpoint (76–78°F). At the on-peak rate vs off-peak rate differential, this saves an estimated $50–120/yr depending on summer severity. Available directly in Skyport Home as a schedule setpoint.</div>
         </div>
       </div>
       <div class="insight red">
@@ -465,7 +472,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-card-title">Recommended DAIKON (Skyport Home) Thermostat Schedule</div>
+      <div class="chart-card-title">Recommended Daikin (Skyport Home) Thermostat Schedule</div>
       <div class="chart-card-sub">Summer (Jun–Sep) weekday · on-peak window highlighted · setpoints in °F · off-peak hours are cheap, peak hours are expensive, demand charge set by any worst hour</div>
       <div id="scheduleGrid" style="margin-top:12px; overflow-x:auto"></div>
       <div class="sched-legend" style="margin-top:10px">
@@ -491,7 +498,7 @@
 
     <div class="chart-card">
       <div class="chart-card-title">Skyport Home Setup Steps</div>
-      <div class="chart-card-sub">DAIKON system · Skyport Home app · Smart Usage billing plan</div>
+      <div class="chart-card-sub">Daikin system · Skyport Home app · Smart Usage billing plan</div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px">
         <div style="background:var(--card2); border-radius:6px; padding:12px">
           <div style="font-size:11px; font-weight:700; color:var(--amber); margin-bottom:6px">Summer Weekday Program</div>

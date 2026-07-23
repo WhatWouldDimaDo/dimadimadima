@@ -362,7 +362,8 @@
     .proof-lead{ grid-template-columns: 1fr; gap: 30px; }
   }
 
-  /* before/after slider — mirrors the studio .ba-slider component */
+  /* before/after auto-wipe — after-image clipped over the before, boundary sweeps
+     left-right on a slow alternating loop. Pure CSS; no JS, no GIF assets. */
   .compare-block{ margin-bottom: 56px; }
   .compare-block:last-child{ margin-bottom: 0; }
   .compare-label-row{
@@ -381,7 +382,6 @@
     overflow: hidden;
     border: 1px solid var(--line);
     background: var(--paper-dim);
-    touch-action: pan-y;
   }
   .compare-img{
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -389,37 +389,71 @@
   }
   .after-clip{
     position: absolute; inset: 0; width: 100%; height: 100%;
-    clip-path: inset(0 0 0 var(--ba-pos, 50%));
-    -webkit-clip-path: inset(0 0 0 var(--ba-pos, 50%));
+    clip-path: inset(0 0 0 10%);
+    animation: ba-wipe 6.5s ease-in-out infinite alternate;
+    will-change: clip-path;
   }
   .compare-divider{
-    position: absolute; top: 0; bottom: 0; left: var(--ba-pos, 50%); width: 2px;
+    position: absolute; top: 0; bottom: 0; left: 10%; width: 2px;
     background: var(--paper); box-shadow: 0 0 0 1px rgba(33,31,26,0.3);
     transform: translateX(-50%); pointer-events: none; z-index: 2;
+    animation: ba-wipe-line 6.5s ease-in-out infinite alternate;
   }
-  .compare-handle{
-    position: absolute; top: 50%; left: var(--ba-pos, 50%); transform: translate(-50%,-50%);
-    width: 2.6rem; height: 2.6rem; border-radius: 50%;
-    background: var(--paper); border: 1px solid var(--brass);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--pine-deep);
-    box-shadow: 0 8px 20px -8px rgba(20,20,15,0.5);
-    pointer-events: none; z-index: 3;
+  @keyframes ba-wipe{
+    from{ clip-path: inset(0 0 0 10%); }
+    to{   clip-path: inset(0 0 0 90%); }
+  }
+  @keyframes ba-wipe-line{
+    from{ left: 10%; }
+    to{   left: 90%; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .after-clip, .compare-divider{ animation: none; }
+    .after-clip{ clip-path: inset(0 0 0 50%); }
+    .compare-divider{ left: 50%; }
   }
   .compare-tag{
-    position: absolute; bottom: 0.75rem; z-index: 2;
+    position: absolute; bottom: 0.75rem; z-index: 3;
     font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
     background: rgba(22,36,27,0.65); color: var(--paper); padding: 0.35rem 0.7rem;
     pointer-events: none;
   }
   .compare-tag.before{ left: 0.75rem; }
   .compare-tag.after{ right: 0.75rem; }
-  .compare-range{
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    margin: 0; opacity: 0; cursor: ew-resize; z-index: 5;
-    -webkit-appearance: none; appearance: none; background: transparent;
+
+  /* demo-proposal thumbnail strip — supporting evidence, kept quiet */
+  .demo-thumbs{ margin-top: 60px; }
+  .demo-thumbs-head{
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 10px; margin-bottom: 18px;
   }
-  .compare:focus-within{ outline: 2px solid var(--brass); outline-offset: 2px; }
+  .demo-thumbs-head .eyebrow{ color: var(--brass); }
+  .demo-thumbs-link{
+    font-size: 0.8rem; color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .demo-thumbs-link:hover{ color: var(--brass); border-color: var(--brass); }
+  .demo-thumb-row{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .demo-thumb{ display: block; cursor: zoom-in; }
+  .demo-thumb img{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    background: var(--paper-dim);
+  }
+  .demo-thumb span{
+    display: block;
+    padding: 9px 2px 0;
+    font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 640px){ .demo-thumb-row{ grid-template-columns: 1fr 1fr; } }
 
   .stat-strip{
     margin-top: 74px;
@@ -451,6 +485,115 @@
   @media (max-width: 520px){
     .stat-row{ grid-template-columns: 1fr; }
     .stat-strip{ padding: 40px 26px; }
+  }
+
+  /* ============ WHY THIS WORKS ============ */
+  .why{ background: var(--cream); }
+  .why-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .why-card{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 36px 32px 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .why-card .why-tag{
+    position: absolute; top: 20px; right: 20px;
+    font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--brass); border: 1px solid var(--line); padding: 4px 9px;
+  }
+  .why-num{
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 3.4vw, 3rem);
+    line-height: 1;
+    color: var(--pine-deep);
+  }
+  .why-num .prefix{
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 600; color: var(--brass);
+    margin-bottom: 10px;
+  }
+  .why-card .claim{
+    margin-top: 16px;
+    font-size: 0.95rem; font-weight: 300; line-height: 1.5;
+    color: var(--ink);
+    flex: 1;
+  }
+  .why-card .source{
+    margin-top: 20px;
+    font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-soft); opacity: 0.75;
+  }
+  .why-card.counter{ background: var(--paper-dim); }
+  .why-card.counter .why-num{ color: var(--brass); }
+  @media (max-width: 900px){ .why-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px){ .why-grid{ grid-template-columns: 1fr; } }
+
+  /* ============ ARTIFACTS GALLERY ============ */
+  .artifacts{ background: var(--paper); }
+  .artifact-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .artifact-frame{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 12px;
+    display: block;
+    cursor: zoom-in;
+    transition: box-shadow .25s ease, transform .25s ease;
+  }
+  .artifact-frame:hover{ box-shadow: 0 18px 44px -20px rgba(33,31,26,0.35); transform: translateY(-2px); }
+  .artifact-frame img{
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top center;
+    border: 1px solid var(--line);
+    background: var(--paper-dim);
+  }
+  .artifact-frame figcaption{
+    padding: 14px 4px 4px;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--brass);
+    line-height: 1.7;
+  }
+  .artifact-frame figcaption .note{
+    display: block;
+    margin-top: 2px;
+    color: var(--ink-soft);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+  }
+  @media (max-width: 720px){ .artifact-grid{ grid-template-columns: 1fr; } }
+
+  /* lightbox — full-size view for gallery frames and demo thumbs */
+  .lightbox{
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(22,36,27,0.93);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 4vmin;
+    cursor: zoom-out;
+  }
+  .lightbox.open{ display: flex; }
+  .lightbox img{
+    max-width: 100%; max-height: 100%;
+    width: auto; height: auto;
+    border: 1px solid var(--line-on-dark);
+    background: var(--paper);
   }
 
   /* ============ ENGAGEMENT MODEL ============ */
@@ -498,6 +641,76 @@
     .model-card{ padding: 40px 30px; }
   }
 
+  /* founding-participant benefit chips */
+  .benefit-block{ margin: -22px 0 48px; }
+  .benefit-title{
+    display: block;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 600; color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .benefit-chips{ display: flex; flex-wrap: wrap; gap: 10px; }
+  .benefit-chip{
+    font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase;
+    font-weight: 600; color: var(--pine-deep);
+    border: 1px solid var(--brass);
+    background: var(--paper);
+    padding: 9px 15px;
+  }
+
+  /* territory exclusivity strip */
+  .territory{
+    margin-top: 28px;
+    background: var(--pine-deep);
+    color: var(--paper);
+    padding: 44px 48px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 30px;
+    align-items: start;
+    position: relative;
+    overflow: hidden;
+  }
+  .territory-icon{
+    position: relative; z-index: 2;
+    width: 2.7rem; height: 2.7rem;
+    border: 1px solid var(--line-on-dark); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brass-light);
+  }
+  .territory-body{ position: relative; z-index: 2; }
+  .territory h3{ font-size: 1.5rem; color: var(--paper); margin-bottom: 10px; }
+  .territory p{ color: var(--cream-soft); font-size: 0.96rem; font-weight: 300; max-width: 74ch; }
+  @media (max-width: 640px){
+    .territory{ grid-template-columns: 1fr; gap: 18px; padding: 36px 28px; }
+  }
+
+  /* pricing model card — paper card, same family as the assessment card */
+  .price-card{
+    margin-top: 28px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 52px 48px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 52px;
+    align-items: center;
+  }
+  .price-card .eyebrow{ color: var(--brass); display: block; margin-bottom: 14px; }
+  .price-card h3{ font-size: 1.9rem; color: var(--pine-deep); line-height: 1.15; margin-bottom: 14px; }
+  .price-main p{ color: var(--ink-soft); font-size: 0.98rem; font-weight: 300; max-width: 46ch; }
+  .price-main p + p{ margin-top: 16px; }
+  .price-icon{
+    width: 2.7rem; height: 2.7rem;
+    border: 1px solid var(--line); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brass);
+    margin-bottom: 22px;
+  }
+  @media (max-width: 860px){
+    .price-card{ grid-template-columns: 1fr; gap: 36px; padding: 38px 28px; }
+  }
+
   /* ============ VERTICALS ROADMAP ============ */
   .verticals{ background: var(--paper); }
   .road{ position: relative; padding-top: 10px; }
@@ -527,7 +740,74 @@
 
   /* ============ ABOUT / CONTACT ============ */
   .about{ background: var(--pine-deep); color: var(--paper); }
-  .about-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .offer-card{
+    position: relative; z-index: 2;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 52px 48px;
+    margin-bottom: 64px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 52px;
+    align-items: center;
+  }
+  .offer-icon{
+    width: 2.7rem; height: 2.7rem;
+    border: 1px solid var(--line); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brass);
+    margin-bottom: 22px;
+  }
+  .offer-card .eyebrow{ color: var(--brass); display: block; margin-bottom: 14px; }
+  .offer-card h3{ font-size: 1.9rem; color: var(--pine-deep); line-height: 1.15; margin-bottom: 14px; }
+  .offer-main p{ color: var(--ink-soft); font-size: 0.98rem; font-weight: 300; margin-bottom: 30px; max-width: 44ch; }
+  .offer-points-title{
+    display: block;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 600; color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .offer-points{ list-style: none; }
+  .offer-points li{
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 16px;
+    font-size: 0.96rem; font-weight: 300; line-height: 1.5;
+    color: var(--ink);
+  }
+  .offer-points li:last-child{ margin-bottom: 0; }
+  .offer-points li::before{
+    content: '—';
+    position: absolute; left: 0; top: 0;
+    color: var(--brass);
+  }
+  @media (max-width: 860px){
+    .offer-card{ grid-template-columns: 1fr; gap: 36px; padding: 38px 28px; }
+  }
+  .about-grid{ display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: start; }
+  .about-photo{
+    background: var(--paper);
+    padding: 12px 12px 14px;
+    box-shadow: 0 28px 60px -30px rgba(0,0,0,0.6);
+  }
+  .about-photo img{ width: 100%; border: 1px solid var(--line); }
+  .about-photo figcaption{
+    padding-top: 12px;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft); text-align: center;
+  }
+  .pull-quote{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--brass-light);
+    border-left: 2px solid var(--brass);
+    padding-left: 20px;
+    margin: 24px 0 26px;
+    max-width: 40ch;
+  }
   .about-name{ font-size: clamp(2rem, 3.2vw, 2.7rem); color: var(--paper); margin-bottom: 20px; }
   .about-body{ color: var(--cream-soft); font-size: 1.02rem; font-weight: 300; max-width: 50ch; margin-bottom: 16px; }
   .about-tags{ display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; margin-bottom: 36px; }
@@ -547,9 +827,20 @@
   }
   .contact-email:hover{ color: var(--brass-light); border-color: var(--brass-light); }
 
+  .contact-card.wide{
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 44px;
+    align-items: center;
+  }
+  .contact-card.wide h3{ margin-bottom: 12px; }
+  .contact-card.wide p{ margin-bottom: 0; max-width: 58ch; }
+
   @media (max-width: 860px){
     .about-grid{ grid-template-columns: 1fr; gap: 46px; }
     .contact-card{ padding: 34px 28px; }
+    .contact-card.wide{ grid-template-columns: 1fr; gap: 24px; }
   }
 
   /* ============ FOOTER ============ */
@@ -597,9 +888,6 @@
   <path d="M8.5 21h7"/>
   <path d="M12 4c-3 0-5.2 2.1-5.2 4.6 0 1 .4 1.9 1 2.6-.7.4-1.2 1.2-1.2 2.1 0 1.5 1.3 2.7 3 2.7h8.8c1.7 0 3-1.2 3-2.7 0-.9-.5-1.7-1.2-2.1.6-.7 1-1.6 1-2.6C21.2 6.1 19 4 16 4c-.7 0-1.4.1-2 .4-.5-.2-1.3-.4-2-.4z"/>
 </symbol>
-<symbol id="icon-chevrons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M8 7L4 12L8 17M16 7L20 12L16 17"/>
-</symbol>
 <symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
   <path d="M5 12h14M13 6l6 6-6 6"/>
 </symbol>
@@ -616,6 +904,15 @@
   <path d="M20 12a8 8 0 1 1-2.6-5.9"/>
   <path d="M20 4.5v5h-5"/>
 </symbol>
+<symbol id="icon-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="8.5"/>
+  <path d="M15.2 8.8l-1.9 4.5-4.5 1.9 1.9-4.5z"/>
+</symbol>
+<symbol id="icon-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.5 3.5h11v17l-2.2-1.5-2.3 1.5-2.3-1.5-2.2 1.5z"/>
+  <path d="M9.5 8.5h5"/>
+  <path d="M9.5 12h5"/>
+</symbol>
 </defs>
 </svg>
 
@@ -630,7 +927,7 @@
       <a class="nav-link" href="#work">What We Do</a>
       <a class="nav-link" href="#how">How It Works</a>
       <a class="nav-link" href="#proof">Proof</a>
-      <a class="nav-link" href="#model">Engagement</a>
+      <a class="nav-link" href="#model">The Pilot</a>
       <a class="nav-link" href="#verticals">Roadmap</a>
       <a class="nav-link" href="#about">Contact</a>
     </div>
@@ -689,7 +986,7 @@
           <span class="service-icon"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-flower"></use></svg></span>
         </div>
         <div class="service-name">Per-Address AI Proposal Experiences</div>
-        <div class="service-desc">Every homeowner on that list gets their own microsite: <strong>a real photo of their actual property</strong>, rendered into photorealistic redesign options, with before/after sliders, seasonal bloom states, and the plant palette behind it. Not a template — their yard. And it arrives: a render the homeowner actually receives, the same week.</div>
+        <div class="service-desc">Every homeowner on that list gets their own microsite: <strong>a real photo of their actual property</strong>, rendered into photorealistic redesign options, with before/after sliders, seasonal bloom states, and the plant palette behind it. Not a template — their yard. And it arrives: a render the homeowner actually receives, the same week.<br><br><strong>The key is in the details.</strong> This is not copy-paste AI output — it pairs your horticultural expertise and your plant palette with our rendering discipline, so the homeowner sees their own backyard, believable down to the planting. Not AI slop.</div>
       </div>
       <div class="service-row reveal">
         <div class="service-badge">
@@ -786,16 +1083,14 @@
         <h4>The courtyard hedge</h4>
         <span class="tag">Real Render Asset</span>
       </div>
-      <div class="compare" data-compare>
+      <div class="compare" role="img" aria-label="Animated comparison: courtyard before, then reimagined with a full clipped hedge in bloom">
         <img class="compare-img" src="img/courtyard-before.jpg" alt="Courtyard before: bare brick foundation with sparse vines">
         <div class="after-clip">
           <img class="compare-img" src="img/courtyard-reimagined.jpg" alt="Courtyard reimagined: full clipped hedge with white blooms along the foundation">
         </div>
         <div class="compare-divider"></div>
-        <div class="compare-handle"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevrons"></use></svg></div>
         <span class="compare-tag before">Before — As Photographed</span>
         <span class="compare-tag after">Reimagined — AI Proposal Option</span>
-        <input class="compare-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Drag to compare before and after" data-slider>
       </div>
     </div>
 
@@ -804,16 +1099,39 @@
         <h4>The stone retaining wall</h4>
         <span class="tag">Real Render Asset</span>
       </div>
-      <div class="compare" data-compare>
+      <div class="compare" role="img" aria-label="Animated comparison: stone retaining wall before, then reimagined with a mature camellia hedge in bloom">
         <img class="compare-img" src="img/wall-before.jpg" alt="Stone wall before: bare mulch bed with young saplings">
         <div class="after-clip">
           <img class="compare-img" src="img/wall-camellia-bloom.jpg" alt="Stone wall reimagined: mature camellia hedge in bloom along the wall">
         </div>
         <div class="compare-divider"></div>
-        <div class="compare-handle"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-chevrons"></use></svg></div>
         <span class="compare-tag before">Before — As Photographed</span>
         <span class="compare-tag after">Reimagined — AI Proposal Option</span>
-        <input class="compare-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Drag to compare before and after" data-slider>
+      </div>
+    </div>
+
+    <div class="demo-thumbs reveal">
+      <div class="demo-thumbs-head">
+        <span class="eyebrow">From the Live Demo Proposal</span>
+        <a class="demo-thumbs-link" href="https://landscapingdemo-nine.vercel.app/" target="_blank" rel="noopener">Open the full demo</a>
+      </div>
+      <div class="demo-thumb-row">
+        <a class="demo-thumb" href="img/demo-thumbs/before-front-entry.jpeg" data-lightbox>
+          <img src="img/demo-thumbs/before-front-entry.jpeg" alt="Demo proposal: front entry, before" loading="lazy">
+          <span>Before — Front Entry</span>
+        </a>
+        <a class="demo-thumb" href="img/demo-thumbs/after-front-entry.jpeg" data-lightbox>
+          <img src="img/demo-thumbs/after-front-entry.jpeg" alt="Demo proposal: front entry, reimagined" loading="lazy">
+          <span>After — Front Entry</span>
+        </a>
+        <a class="demo-thumb" href="img/demo-thumbs/before-back-slope.jpeg" data-lightbox>
+          <img src="img/demo-thumbs/before-back-slope.jpeg" alt="Demo proposal: back slope, before" loading="lazy">
+          <span>Before — Back Slope</span>
+        </a>
+        <a class="demo-thumb" href="img/demo-thumbs/after-back-wall.jpeg" data-lightbox>
+          <img src="img/demo-thumbs/after-back-wall.jpeg" alt="Demo proposal: back wall, reimagined" loading="lazy">
+          <span>After — Back Wall</span>
+        </a>
       </div>
     </div>
 
@@ -846,39 +1164,162 @@
   </div>
 </section>
 
-<!-- ENGAGEMENT MODEL -->
+<!-- WHY THIS WORKS -->
+<section class="why section-pad" id="why">
+  <div class="wrap light">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Why This Works</span>
+        <h2>The numbers behind<br>the design.</h2>
+      </div>
+      <p class="lede">Every number here is a reason the loop is built the way it is — personal imagery, physical delivery, an immediate response, and leads that are never shared.</p>
+    </div>
+
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-num">2–3&times;</div>
+        <p class="claim">Personalized mail with variable imagery pulls 2–3&times; the response of generic mail — 6% vs. 2%.</p>
+        <p class="source">Association of National Advertisers</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num"><span class="prefix">Up to</span>63%</div>
+        <p class="claim">Combining physical mail with a personalized digital follow-up page lifts response up to 63%.</p>
+        <p class="source">PURL campaign studies (Linemark / DMCG)</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">100&times;</div>
+        <p class="claim">A lead contacted within 5 minutes is up to 100&times; more likely to be reached than at 30 minutes.</p>
+        <p class="source">MIT Lead Response Management Study</p>
+      </div>
+      <div class="why-card counter">
+        <span class="why-tag">The Old Model</span>
+        <div class="why-num">$80–100+</div>
+        <p class="claim">What contractors pay per shared marketplace lead — split with 4–5 competitors. This is the model the loop replaces.</p>
+        <p class="source">Contractor-reported (Angi/Yelp)</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">4.5%</div>
+        <p class="claim">Call rate a contractor reported from AI-rendered, property-specific postcards — 9 calls from 200 pieces — versus under 1% for generic flyers.</p>
+        <p class="source">Contractor-reported, trade forums</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTIFACTS GALLERY -->
+<section class="artifacts section-pad" id="artifacts">
+  <div class="wrap light">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">The Artifacts</span>
+        <h2>What lands<br>in market.</h2>
+      </div>
+      <p class="lede">Not slideware. These are the actual pieces a campaign runs on — the page, the print, the tracker, the list. Click any of them to look closer.</p>
+    </div>
+
+    <div class="artifact-grid reveal">
+      <a class="artifact-frame" href="img/mock-proposal-site.png" data-lightbox>
+        <figure>
+          <img src="img/mock-proposal-site.png" alt="Per-address proposal microsite shown on screen" loading="lazy">
+          <figcaption>The per-address proposal microsite — a homeowner's own yard, reimagined</figcaption>
+        </figure>
+      </a>
+      <a class="artifact-frame" href="img/mock-postcard-front.png" data-lightbox>
+        <figure>
+          <img src="img/mock-postcard-front.png" alt="Printed proposal postcard with QR code" loading="lazy">
+          <figcaption>The printed piece that lands at the door — QR straight to their page</figcaption>
+        </figure>
+      </a>
+      <a class="artifact-frame" href="img/mock-campaign-dashboard.png" data-lightbox>
+        <figure>
+          <img src="img/mock-campaign-dashboard.png" alt="Campaign tracking dashboard with proposal, visit, and appointment metrics" loading="lazy">
+          <figcaption>The campaign tracker — every proposal, every visit, every appointment<span class="note">Shown with sample data</span></figcaption>
+        </figure>
+      </a>
+      <a class="artifact-frame" href="img/mock-targeting-map.png" data-lightbox>
+        <figure>
+          <img src="img/mock-targeting-map.png" alt="Neighborhood targeting map built from property records" loading="lazy">
+          <figcaption>Precision targeting — property records + neighborhood signals pick the list<span class="note">Illustrative view</span></figcaption>
+        </figure>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT MODEL / PILOT COHORT -->
 <section class="model section-pad" id="model">
   <div class="wrap light">
     <div class="section-head reveal">
       <div>
-        <span class="eyebrow">How We Work Together</span>
-        <h2>Start small.<br>Prove it. Scale it.</h2>
+        <span class="eyebrow">The Pilot Cohort</span>
+        <h2>This is a pilot.<br>That's the advantage.</h2>
       </div>
-      <p class="lede">No long-term commitment up front. We prove the model on your actual book of business before anything scales.</p>
+      <p class="lede">Honest positioning: Groundline is early-stage on purpose. One flagship engagement is already running in Atlanta, and we're now selecting a small cohort of founding participants to build alongside it. Early partners take an early bet — the terms reflect that.</p>
+    </div>
+
+    <div class="benefit-block reveal">
+      <span class="benefit-title">Founding participants get</span>
+      <div class="benefit-chips">
+        <span class="benefit-chip">Founding pricing — locked before this becomes a product</span>
+        <span class="benefit-chip">Additional AI strategy consultations included</span>
+        <span class="benefit-chip">First access to everything built during the pilot</span>
+        <span class="benefit-chip">Territory protection — one firm per market</span>
+      </div>
     </div>
 
     <div class="model-grid reveal">
       <div class="model-card">
-        <span class="model-stage">Stage One</span>
-        <h3>Pilot</h3>
-        <p class="model-sub">An 8-week proof of concept, run against your real target market.</p>
+        <span class="model-stage">Join the Pilot</span>
+        <h3>The 8-Week Pilot</h3>
+        <p class="model-sub">A proof of concept run against your real target market — as a founding participant, not a customer.</p>
         <ul class="model-points">
+          <li>We start in the field — ride-alongs and site visits to learn how you actually work and what makes your business different</li>
+          <li>That immersion becomes material: your brand voice, your portfolio, the content your proposals and site are built from</li>
           <li>Defined experiments against a hand-picked target list in your service area</li>
           <li>Full build: targeting, per-address proposals, delivery, and tracking</li>
-          <li>Every proposal carries your name and your voice — homeowners hire people, not platforms</li>
+          <li>Every proposal goes out in your name and your voice, not ours — homeowners hire people, not platforms</li>
           <li>A base floor fee plus performance upside tied to attributable business</li>
           <li>Built to prove the model before either side commits further</li>
         </ul>
       </div>
       <div class="model-card featured">
-        <span class="model-stage">Stage Two</span>
+        <span class="model-stage">Where It Goes</span>
         <h3>Growth Partner</h3>
-        <p class="model-sub">An ongoing engine once the pilot proves out.</p>
+        <p class="model-sub">The ongoing engine once your pilot proves out.</p>
         <ul class="model-points">
           <li>Expanded targeting and a steadier volume of proposals in market</li>
           <li>Case-study and reputation systems layered into your pipeline</li>
           <li>Continued tracking and attribution through to closed revenue</li>
           <li>AI adoption coaching for your team — not just for your leads</li>
+          <li>Founding-cohort pricing carries into the ongoing engagement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="territory reveal">
+      <div class="grain"></div>
+      <span class="territory-icon"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-map-pin"></use></svg></span>
+      <div class="territory-body">
+        <h3>One firm per territory. When a market is taken, it's taken.</h3>
+        <p>Pilot participants get their service footprint protected: Groundline will not run this playbook for a competitor inside your territory. The whole model depends on your proposals being the only ones like them in your neighborhoods — so exclusivity is a cohort mechanic, not an upsell.</p>
+      </div>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="price-main">
+        <span class="price-icon"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-receipt"></use></svg></span>
+        <span class="eyebrow">The Pricing Model</span>
+        <h3>A modest floor.<br>Performance above it.</h3>
+        <p>The shape is simple: a modest monthly floor, plus performance fees on net-new attributable business — with those fees credited against the floor. You only pay above the floor when results earn it.</p>
+        <p>Most firms in this space hide pricing behind a sales call. The model is shown here on purpose — exact numbers are set with each founding participant, but how it works shouldn't be a mystery.</p>
+      </div>
+      <div>
+        <span class="offer-points-title">How the fees behave</span>
+        <ul class="offer-points">
+          <li>Performance fees apply only to net-new, attributable business</li>
+          <li>Fees are credited against the monthly floor — never stacked on top of it</li>
+          <li>Organic, referral, and existing-customer work is excluded — and never charged</li>
+          <li>Every fee traces to a tracked, attributable job — that's what the attribution layer is for</li>
         </ul>
       </div>
     </div>
@@ -926,11 +1367,39 @@
 <section class="about section-pad" id="about">
   <div class="grain"></div>
   <div class="wrap">
+    <div class="offer-card reveal">
+      <div class="offer-main">
+        <span class="offer-icon"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-compass"></use></svg></span>
+        <span class="eyebrow">Start Here — Free</span>
+        <h3>Free 1-Hour AI Growth Assessment</h3>
+        <p>One hour on your actual business. Free, no obligation — a working session, not a pitch.</p>
+        <a class="btn btn-primary" href="mailto:dperkis@gmail.com?subject=Free%20AI%20Growth%20Assessment">
+          Book Your Assessment
+          <svg class="icon" viewBox="0 0 24 24"><use href="#icon-arrow"></use></svg>
+        </a>
+      </div>
+      <div>
+        <span class="offer-points-title">You walk away with</span>
+        <ul class="offer-points">
+          <li>An honest read of how your current web and review presence stacks up against your local market</li>
+          <li>The 2–3 highest-leverage AI opportunities in your specific operation</li>
+          <li>One sample AI render of a real property you choose — yours or a prospect's</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="about-grid">
-      <div class="reveal">
+      <figure class="about-photo reveal">
+        <img src="img/dima-perkis.jpg" alt="Dima Perkis" loading="lazy">
+        <figcaption>Dima Perkis · Atlanta, GA</figcaption>
+      </figure>
+
+      <div class="reveal reveal-delay-1">
         <span class="eyebrow" style="color:var(--brass-light); display:block; margin-bottom:18px;">Who's Behind This</span>
         <h2 class="about-name">Dima Perkis</h2>
-        <p class="about-body">Most recently VP of Data &amp; Analytics, building attribution and AI systems at enterprise scale. This is the same discipline applied to a much older business — knowing exactly which effort produced which result, and building the systems to prove it.</p>
+        <p class="pull-quote">"I use AI to reduce friction and unlock newfound superpowers."</p>
+        <p class="about-body">Most recently VP of Data &amp; Analytics at Lahzo, where I built AI chatbots and AI sales agents and ran hyper-targeted digital marketing for specialty dealerships and high-ticket retail. I owned attribution — knowing which effort produced which sale — and managed a $2M Equifax data relationship, which means I've been the buyer of data at scale. I know what data is worth, and when it isn't.</p>
+        <p class="about-body">Before that, Director of Customer &amp; International Analytics at Intuit Mailchimp — email marketing and small-business growth, analytics for exactly the kind of business Groundline serves. Earlier, strategy and AI consulting at Accenture Strategy, including the business case for a multi-billion-dollar AI chatbot program.</p>
         <p class="about-body">Based in Atlanta. Currently running the pilot in-market with a landscaping partner in Dunwoody.</p>
         <div class="about-tags">
           <span class="about-tag">Data &amp; Analytics</span>
@@ -939,16 +1408,18 @@
           <span class="about-tag">Atlanta</span>
         </div>
       </div>
+    </div>
 
-      <div class="contact-card reveal reveal-delay-2">
+    <div class="contact-card wide reveal">
+      <div>
         <span class="eyebrow">Get In Touch</span>
         <h3>Let's talk about your target market.</h3>
         <p>Whether it's landscaping, pools, or exteriors — if you're ready to compete on precision instead of volume, this is the conversation to have.</p>
-        <a class="contact-email" href="mailto:dperkis@gmail.com">
-          dperkis@gmail.com
-          <svg class="icon" viewBox="0 0 24 24"><use href="#icon-arrow"></use></svg>
-        </a>
       </div>
+      <a class="contact-email" href="mailto:dperkis@gmail.com">
+        dperkis@gmail.com
+        <svg class="icon" viewBox="0 0 24 24"><use href="#icon-arrow"></use></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -965,7 +1436,27 @@
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged image">
+  <img alt="">
+</div>
+
 <script>
+  // Lightbox — any element with [data-lightbox] opens its href full-size
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('img');
+  document.querySelectorAll('[data-lightbox]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const img = el.querySelector('img');
+      lbImg.src = el.getAttribute('href');
+      lbImg.alt = img ? img.alt : '';
+      lb.classList.add('open');
+    });
+  });
+  function closeLightbox(){ lb.classList.remove('open'); lbImg.removeAttribute('src'); }
+  lb.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
   // Scroll-reveal
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
@@ -977,16 +1468,6 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => io.observe(el));
-
-  // Before/after compare sliders (clip-path driven, mirrors the studio ba-slider component)
-  document.querySelectorAll('[data-compare]').forEach(block => {
-    const slider = block.querySelector('[data-slider]');
-    function update(val) {
-      block.style.setProperty('--ba-pos', val + '%');
-    }
-    update(50);
-    slider.addEventListener('input', (e) => update(e.target.value));
-  });
 
   // Nav background intensifies after hero
   const nav = document.querySelector('.nav');

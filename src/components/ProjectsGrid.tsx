@@ -85,7 +85,9 @@ export default function ProjectsGrid({ projects }: Props) {
         {filtered.map(project => {
           const status = project.status ? STATUS_CONFIG[project.status] ?? { label: project.status, color: '#6b6a72' } : null;
           const description = project.shortDescription ?? project.description;
-          const date = project.date ? new Date(project.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : null;
+          const date = project.date
+            ? new Date(project.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
+            : null;
           return (
             <a key={project.slug} href={`/projects/${project.slug}`} className="project-card">
               <div className="project-card-media">

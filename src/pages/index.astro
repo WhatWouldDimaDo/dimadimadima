@@ -1,24 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-
-const songs = (await getCollection('posts'))
-  .filter(p => !p.data.draft && p.data.type === 'song' && p.data.youtube)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const song = songs[0];
-
-function ytId(url: string) {
-  const match = url?.match(/(?:youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/watch\?v=)([^&?/\s]+)/);
-  return match ? match[1] : null;
-}
-
-const songVideoId = song?.data.youtube ? ytId(song.data.youtube) : null;
-const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/hqdefault.jpg` : null;
 ---
 
 <Layout
   title="Dima Perkis"
-  description="Data & AI leader who turns emerging technology into measurable value—from enterprise strategy to production systems."
+  description="Recovering strategy consultant with newfound AI superpowers. I help people see what AI suddenly makes possible, build the first real version together, and keep going on their own."
   defaultTheme="light"
 >
   <main class="home-shell">
@@ -31,35 +17,88 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
           aria-hidden="true"
         />
         <div class="identity-words">
-          <h1 id="home-title" class="identity-first">Dima</h1>
-          <div class="identity-last">Perkis</div>
+          <h1 id="home-title" class="identity-first">DIMA</h1>
+          <div class="identity-last">PERKIS</div>
         </div>
       </div>
 
       <div class="masthead-copy">
-        <p>
-          Data &amp; AI leader who turns emerging technology into measurable value—from
-          enterprise strategy to production systems.
-        </p>
+        <p class="masthead-kicker">Recovering strategy consultant with newfound AI superpowers</p>
+        <h2>I turn “what if?” into something real</h2>
+        <p class="masthead-explainer">I uncover the friction, create the lightbulb moment, and use AI to bring the first working solution to life in hours or days—not months. Then I help the people around it learn how to harness those same tools for their own work, lives, and projects.</p>
       </div>
+    </section>
 
-      <div class="proof-grid" aria-label="Selected facts">
-        <div><strong>$140M+</strong><span>Delivered value</span></div>
-        <div><strong>15+</strong><span>Years of experience</span></div>
-        <div><strong>23</strong><span>AI projects live</span></div>
-        <div><strong>2</strong><span>Toddlers</span></div>
+    <section class="thinking-section" aria-labelledby="thinking-title">
+      <div class="thinking-intro">
+        <p class="section-label">How I work</p>
+        <h2 id="thinking-title">From friction to something real</h2>
+        <p>The same pattern shows up whether I’m helping a builder find new work or getting my family out of the house</p>
       </div>
+      <ol class="thinking-loop">
+        <li>
+          <span>01</span>
+          <div><strong>Uncover the friction</strong><p>Find the annoying workaround, stuck decision, or possibility nobody has made concrete yet</p></div>
+        </li>
+        <li>
+          <span>02</span>
+          <div><strong>Create the lightbulb moment</strong><p>Use a map, render, or working prototype to make the opportunity obvious: “Wait—we can do that?”</p></div>
+        </li>
+        <li>
+          <span>03</span>
+          <div><strong>Bring it to life</strong><p>Iterate with AI in hours or days, use judgment to decide what matters, and leave people able to keep building</p></div>
+        </li>
+      </ol>
     </section>
 
     <section class="work-heading" aria-labelledby="selected-work-title">
       <div>
-        <p class="section-label">Selected projects</p>
-        <h2 id="selected-work-title">Projects you can open</h2>
+        <p class="section-label">In the real world</p>
+        <h2 id="selected-work-title">Things I’m building and using</h2>
       </div>
       <a href="/projects">All projects <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="portfolio-grid" aria-label="Featured projects">
+      <article class="project-card project-card--feature card-groundline">
+        <div class="card-media card-media--groundline comparison-preview" aria-label="A real yard before and after an AI-assisted landscaping concept">
+          <img class="comparison-before" src="/groundline/img/client-entry-before.jpg" alt="The existing front entry before a new landscaping concept" />
+          <img class="comparison-after" src="/groundline/img/client-entry-concept.jpg" alt="The same home with an AI-assisted landscaping concept" />
+          <span class="comparison-handle" aria-hidden="true"></span>
+          <span class="comparison-label comparison-label--before">Before</span>
+          <span class="comparison-label comparison-label--after">Reimagined</span>
+        </div>
+        <div class="card-copy">
+          <span class="card-kicker">Building now · AI growth for trades</span>
+          <div class="card-title-row"><h2>Groundline</h2></div>
+          <p>I’m exploring how AI can help builders and high-end trades spot growth opportunities, make them visible, and build the first working system with their team.</p>
+          <div class="card-actions">
+            <a class="card-action-primary" href="/projects/groundline-ai-growth">Read the field notes →</a>
+            <a href="/groundline/index.html">Open concept →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card card-permit">
+        <div class="card-media">
+          <img src="/groundline/img/mock-targeting-map.png" alt="A property targeting map with candidate homes and nearby completed work" />
+        </div>
+        <div class="card-copy">
+          <span class="card-kicker">Data investigation</span>
+          <div class="card-title-row"><h2>Permit Propensity</h2></div>
+          <p>I’m testing whether public permit and real-estate data can reveal new opportunities and better leads for high-end trades.</p>
+          <dl class="permit-stats" aria-label="Permit Propensity data collected">
+            <div><dt>8,701</dt><dd>Permit records</dd></div>
+            <div><dt>7</dt><dd>Source pipelines</dd></div>
+            <div><dt>143,031</dt><dd>Parcels</dd></div>
+            <div><dt>97,446</dt><dd>Valuations</dd></div>
+          </dl>
+          <div class="card-actions">
+            <a class="card-action-primary" href="/projects/permit-propensity">Read the project →</a>
+          </div>
+        </div>
+      </article>
+
       <article class="project-card project-card--feature card-dewey">
         <div class="card-media card-media--dewey">
           <img src="/images/dewey/dewey-check-list.png" alt="Dewey checking a reading list against the library catalog" />
@@ -77,8 +116,31 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
 
       <article class="radar-card">
         <div class="radar-brand">
-          <span class="radar-icon"><img src="/atl/favicon.svg" alt="" /></span>
-          <span>On Dima’s Radar</span>
+          <span class="radar-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40">
+              <defs>
+                <linearGradient id="odr-home-grad" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#C2410C"></stop>
+                  <stop offset="1" stop-color="#B45309"></stop>
+                </linearGradient>
+                <linearGradient id="odr-home-sweep" x1="20" y1="20" x2="36.9" y2="13.8" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#C2410C" stop-opacity="0"></stop>
+                  <stop offset="1" stop-color="#C2410C" stop-opacity=".28"></stop>
+                </linearGradient>
+              </defs>
+              <circle cx="20" cy="20" r="17.5" fill="none" stroke="url(#odr-home-grad)" stroke-width="2"></circle>
+              <circle cx="20" cy="20" r="11.5" fill="none" stroke="url(#odr-home-grad)" stroke-width="1.4" opacity=".5"></circle>
+              <circle cx="20" cy="20" r="5.5" fill="none" stroke="url(#odr-home-grad)" stroke-width="1.1" opacity=".35"></circle>
+              <g class="radar-sweep">
+                <path d="M20 20 L20 2.5 A17.5 17.5 0 0 1 36.9 13.8 Z" fill="url(#odr-home-sweep)"></path>
+                <line x1="20" y1="20" x2="36.9" y2="13.8" stroke="url(#odr-home-grad)" stroke-width="2" stroke-linecap="round"></line>
+              </g>
+              <circle cx="31.8" cy="15.6" r="3" fill="#B45309"></circle>
+              <circle cx="31.8" cy="15.6" r="3" fill="none" stroke="#B45309" stroke-width="1.5" opacity=".35"></circle>
+              <circle cx="20" cy="20" r="1.7" fill="url(#odr-home-grad)"></circle>
+            </svg>
+          </span>
+          <span>On Dima’s Radar · Live in Atlanta</span>
         </div>
         <div class="radar-title-row">
           <h2>Happening in Atlanta</h2>
@@ -86,20 +148,20 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
         <div id="atl-live-list" class="radar-list">
           <div class="radar-empty">Loading the radar…</div>
         </div>
-        <p class="radar-foot">Atlanta events worth leaving the house for — scraped wide, scored against my taste, updated continuously.</p>
+        <p class="radar-foot">The project I use to turn “we should hang out” into an actual plan: Atlanta events scraped wide, scored against my taste, and ready to send as an invite.</p>
         <div class="card-actions radar-actions">
           <a class="card-action-primary" href="https://dimadimadima.com/atl" target="_blank" rel="noopener noreferrer">Open Radar ↗</a>
           <a href="/projects/atl-radar">Project notes →</a>
         </div>
       </article>
 
-      <article class="project-card card-ideas">
-        <div class="card-media"><img src="/images/ai-ideas-galaxy.webp" alt="AI Ideas Explorer idea galaxy" loading="lazy" /></div>
+      <article class="project-card card-brain">
+        <div class="card-media"><img src="/images/brain-ops/dashboard-overview.png" alt="Brain Ops dashboard showing automation health and freshness" loading="lazy" /></div>
         <div class="card-copy">
-          <span class="card-kicker">AI research</span>
-          <div class="card-title-row"><h2>AI Ideas Explorer</h2></div>
-          <p>1,160 business ideas generated, scored, and mapped.</p>
-          <div class="card-actions"><a class="card-action-primary" href="https://ai-ideas-explorer.vercel.app" target="_blank" rel="noopener noreferrer">Open app ↗</a><a href="/projects/ai-ideas-explorer">Details →</a></div>
+          <span class="card-kicker">System I run</span>
+          <div class="card-title-row"><h2>Brain Ops</h2></div>
+          <p>18 automated jobs, one dashboard, and the difference between “alive” and “actually processing.”</p>
+          <div class="card-actions"><a class="card-action-primary" href="/projects/brain-ops">Open the dashboard →</a></div>
         </div>
       </article>
 
@@ -113,28 +175,21 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
         </div>
       </article>
 
-      <article class="project-card card-power">
-        <div class="card-media"><img src="/images/power-dashboard.png" alt="Georgia Power energy-analysis dashboard" loading="lazy" /></div>
-        <div class="card-copy">
-          <span class="card-kicker">Personal data</span>
-          <div class="card-title-row"><h2>Georgia Power</h2></div>
-          <p>13 months and 10,487 hourly readings turned into an energy playbook.</p>
-          <div class="card-actions"><a class="card-action-primary" href="https://dimadimadima.com/power" target="_blank" rel="noopener noreferrer">Open dashboard ↗</a><a href="/projects/power-analysis">Details →</a></div>
-        </div>
-      </article>
-
       <article class="project-card card-suno">
-        <div class="card-media card-media--suno">
-          {songThumbnail && <img src={songThumbnail} alt={song?.data.title ?? 'Suno Factory'} loading="lazy" />}
-          <span class="play-button" aria-hidden="true">▶</span>
+        <div class="card-media card-media--suno suno-preview-grid" aria-label="Animated artwork from recent family songs">
+          <video data-hover-video src="/videos/suno/skibidub-never-stop-preview.mp4" muted loop playsinline preload="metadata"></video>
+          <video data-hover-video src="/videos/suno/ra-ra-waffle-time-preview.mp4" muted loop playsinline preload="metadata"></video>
+          <img src="/videos/suno/ruby-ole.jpg" alt="" loading="lazy" />
+          <img src="/videos/suno/breakin-out-the-breakfast.jpg" alt="" loading="lazy" />
+          <span class="play-button" aria-hidden="true">♪</span>
         </div>
         <div class="card-copy">
-          <span class="card-kicker">Creative system</span>
-          <div class="card-title-row"><h2>Suno Factory</h2></div>
-          <p>An end-to-end pipeline for turning family stories into finished songs.</p>
+          <span class="card-kicker">Family songs</span>
+          <div class="card-title-row"><h2>Inside jokes with a soundtrack</h2></div>
+          <p>Suno turns a toddler phrase, breakfast ritual, or family memory into something we all sing in the car.</p>
           <div class="card-actions">
-            <a class="card-action-primary" href={song?.data.youtube ?? '/projects/suno-factory'} target={song?.data.youtube ? '_blank' : undefined} rel={song?.data.youtube ? 'noopener noreferrer' : undefined}>{song?.data.youtube ? 'Play latest ↗' : 'Explore →'}</a>
-            <a href="/projects/suno-factory">Details →</a>
+            <a class="card-action-primary" href="https://suno.com/@dimadimadima" target="_blank" rel="noopener noreferrer">Play the songs ↗</a>
+            <a href="/projects/suno-factory">How I make them →</a>
           </div>
         </div>
       </article>
@@ -146,16 +201,6 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
           <div class="card-title-row"><h2>Music Data</h2></div>
           <p>18 years, 147,594 streams, and 178 concerts—visualized.</p>
           <div class="card-actions"><a class="card-action-primary" href="https://dima-spotify.vercel.app" target="_blank" rel="noopener noreferrer">Open site ↗</a><a href="/projects/spotify-analysis">Details →</a></div>
-        </div>
-      </article>
-
-      <article class="project-card card-killbill">
-        <div class="card-media"><img src="/images/kill-bill.jpg" alt="All Roads to Kill Bill" loading="lazy" /></div>
-        <div class="card-copy">
-          <span class="card-kicker">Film graph</span>
-          <div class="card-title-row"><h2>All Roads to Kill Bill</h2></div>
-          <p>Every Tarantino connection in one explorable graph.</p>
-          <div class="card-actions"><a class="card-action-primary" href="https://allroadstokillbill.vercel.app" target="_blank" rel="noopener noreferrer">Open graph ↗</a><a href="/projects/kill-bill">Details →</a></div>
         </div>
       </article>
     </section>
@@ -200,6 +245,15 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
 
       if ('requestIdleCallback' in window) requestIdleCallback(loadRadar);
       else setTimeout(loadRadar, 250);
+
+      document.querySelectorAll('[data-hover-video]').forEach(function (video) {
+        var card = video.closest('.card-suno');
+        if (!card) return;
+        card.addEventListener('mouseenter', function () { video.play().catch(function () {}); });
+        card.addEventListener('mouseleave', function () { video.pause(); video.currentTime = 0; });
+        card.addEventListener('focusin', function () { video.play().catch(function () {}); });
+        card.addEventListener('focusout', function () { video.pause(); video.currentTime = 0; });
+      });
     })();
   </script>
 </Layout>
@@ -237,8 +291,9 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     display: flex;
     min-width: 0;
     flex-direction: column;
-    justify-content: space-between;
-    padding: .05em 0 .08em;
+    justify-content: center;
+    gap: .04em;
+    padding: .02em 0;
   }
   .identity-first,
   .identity-last {
@@ -246,43 +301,54 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     color: var(--ink);
     font-family: 'DM Sans', system-ui, sans-serif;
     font-weight: 650;
-    letter-spacing: -.065em;
+    letter-spacing: -.055em;
     font-size: clamp(3rem, 6vw, 4.1rem);
-    line-height: .88;
+    line-height: .83;
   }
   .identity-last { margin: 0; }
 
-  .masthead-copy { max-width: 30rem; }
-  .masthead-copy p {
-    margin: 0;
-    color: var(--muted);
-    font-size: clamp(1.05rem, 2vw, 1.2rem);
-    line-height: 1.7;
-  }
-  .proof-grid {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--border);
-    padding-top: 1.5rem;
-  }
-  .proof-grid > div {
-    display: flex;
-    flex-direction: column;
-    gap: .35rem;
-    padding: 0 1.4rem;
-    border-right: 1px solid var(--border);
-  }
-  .proof-grid > div:first-child { padding-left: 0; }
-  .proof-grid > div:last-child { border-right: 0; }
-  .proof-grid strong { color: var(--ink); font-size: clamp(1.55rem, 3vw, 2rem); letter-spacing: -.055em; }
-  .proof-grid span {
-    color: var(--muted);
+  .masthead-copy { max-width: 34rem; }
+  .masthead-copy .masthead-kicker {
+    margin: 0 0 .65rem;
+    color: var(--gold);
     font-family: 'DM Mono', monospace;
-    font-size: .65rem;
-    letter-spacing: .08em;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    line-height: 1.5;
     text-transform: uppercase;
   }
+  .masthead-copy h2 {
+    margin: 0 0 .8rem;
+    color: var(--ink);
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    letter-spacing: -.055em;
+    line-height: .98;
+  }
+  .masthead-copy .masthead-explainer {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(.98rem, 1.8vw, 1.08rem);
+    line-height: 1.68;
+  }
+  .thinking-section {
+    display: grid;
+    grid-template-columns: minmax(15rem, .68fr) minmax(0, 1.32fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    padding: clamp(2rem, 4vw, 3rem) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .thinking-intro h2 { margin: .5rem 0 .8rem; font-size: clamp(1.8rem, 3.4vw, 2.55rem); letter-spacing: -.045em; line-height: 1.02; }
+  .thinking-intro > p:last-child { max-width: 28rem; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.65; }
+  .thinking-loop { margin: 0; padding: 0; list-style: none; }
+  .thinking-loop li { display: grid; grid-template-columns: 2.25rem 1fr; gap: .9rem; padding: 1.15rem 0; border-top: 1px solid var(--border); }
+  .thinking-loop li:first-child { padding-top: 0; border-top: 0; }
+  .thinking-loop li:last-child { padding-bottom: 0; }
+  .thinking-loop li > span { color: var(--gold); font: 500 .67rem/1.5 'DM Mono', monospace; letter-spacing: .08em; }
+  .thinking-loop strong { display: block; margin-bottom: .25rem; color: var(--ink); font-size: 1rem; }
+  .thinking-loop p { max-width: 38rem; margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
 
   .work-heading {
     display: flex;
@@ -337,8 +403,56 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
   .project-card:hover .card-media img { transform: scale(1.025); }
   .card-media--dewey { aspect-ratio: 16 / 8.7; }
   .card-media--dewey img { object-position: top left; }
+  .card-media--groundline { aspect-ratio: 16 / 8.7; }
+  .card-media--groundline img { object-position: center; }
+  .comparison-preview { isolation: isolate; }
+  .comparison-preview img { position: absolute; inset: 0; }
+  .comparison-after { z-index: 1; clip-path: inset(0 0 0 48%); }
+  .comparison-handle {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    bottom: 0;
+    left: 48%;
+    width: 2px;
+    background: rgba(255, 255, 255, .94);
+    box-shadow: 0 0 0 1px rgba(12, 42, 37, .28);
+  }
+  .comparison-handle::after {
+    content: '↔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgba(12, 42, 37, .28);
+    border-radius: 50%;
+    background: #fff;
+    color: #0B5A58;
+    font-size: .78rem;
+    transform: translate(-50%, -50%);
+  }
+  .comparison-label { position: absolute; z-index: 4; bottom: .7rem; padding: .32rem .48rem; border-radius: 4px; background: rgba(11, 35, 32, .76); color: #fff; font: 600 .58rem/1 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .comparison-label--before { left: .7rem; }
+  .comparison-label--after { right: .7rem; }
+  .card-groundline:hover .comparison-after { animation: comparison-reveal 2.8s ease-in-out infinite alternate; transform: none; }
+  .card-groundline:hover .comparison-handle { animation: comparison-handle 2.8s ease-in-out infinite alternate; }
+  @keyframes comparison-reveal {
+    from { clip-path: inset(0 0 0 88%); }
+    to { clip-path: inset(0 0 0 12%); }
+  }
+  @keyframes comparison-handle {
+    from { left: 88%; }
+    to { left: 12%; }
+  }
   .card-media--suno { aspect-ratio: 16 / 8; background: #090a0c; }
-  .card-media--suno img { object-position: center; filter: brightness(.72); }
+  .suno-preview-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .suno-preview-grid video,
+  .suno-preview-grid img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(.78) saturate(.9); transition: filter .25s, transform .45s ease; }
+  .card-suno:hover .suno-preview-grid video,
+  .card-suno:hover .suno-preview-grid img { filter: brightness(.95) saturate(1); transform: scale(1.03); }
 
   .card-copy { display: flex; flex-direction: column; padding: 1.2rem 1.25rem 1.35rem; }
   .card-title-row,
@@ -377,16 +491,19 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     color: var(--ink);
   }
 
+  .card-groundline,
   .card-dewey { grid-column: span 7; }
-  .radar-card { grid-column: span 5; }
-  .card-ideas,
+  .card-permit { grid-column: span 5; }
+  .card-brain,
   .card-toddlermaps,
-  .card-power { grid-column: span 4; }
-  .card-suno { grid-column: span 6; }
-  .card-music,
-  .card-killbill { grid-column: span 3; }
+  .card-suno,
+  .card-music { grid-column: span 6; }
   .card-toddlermaps .card-media img { object-position: center; }
-  .card-killbill .card-media img { object-position: center 28%; }
+  .card-brain .card-media img { object-position: top left; }
+  .permit-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: .65rem .9rem; margin: 1rem 0 0; padding: .9rem 0 0; border-top: 1px solid var(--border); }
+  .permit-stats div { min-width: 0; }
+  .permit-stats dt { color: var(--ink); font: 650 1rem/1.1 'DM Sans', sans-serif; letter-spacing: -.035em; }
+  .permit-stats dd { margin: .2rem 0 0; color: var(--muted); font: 500 .57rem/1.35 'DM Mono', monospace; letter-spacing: .055em; text-transform: uppercase; }
 
   .play-button {
     position: absolute;
@@ -401,12 +518,33 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     transform: translate(-50%, -50%);
   }
 
-  .radar-card { display: flex; flex-direction: column; padding: 1.35rem 1.45rem; }
+  .radar-card {
+    display: grid;
+    grid-column: span 12;
+    grid-template-columns: minmax(14rem, .75fr) minmax(0, 1.25fr);
+    grid-template-areas:
+      "brand list"
+      "title list"
+      "foot list"
+      "actions list";
+    column-gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    background: color-mix(in srgb, #C45420 5%, var(--surface));
+  }
+  .radar-brand { grid-area: brand; }
+  .radar-title-row { grid-area: title; }
+  .radar-list { grid-area: list; }
+  .radar-foot { grid-area: foot; }
+  .radar-actions { grid-area: actions; }
   .radar-brand { display: flex; align-items: center; gap: .65rem; color: #C45420; font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
-  .radar-icon { position: relative; display: inline-flex; width: 28px; height: 28px; flex: 0 0 auto; }
-  .radar-icon img { width: 100%; height: 100%; }
+  .radar-icon { position: relative; display: inline-flex; width: 52px; height: 52px; flex: 0 0 auto; }
+  .radar-icon svg { width: 100%; height: 100%; overflow: visible; }
+  .radar-sweep { transform-origin: 20px 20px; }
+  .radar-card:hover .radar-sweep { animation: radar-scan 1.65s linear infinite; }
+  @keyframes radar-scan { to { transform: rotate(360deg); } }
   .radar-title-row h2 { margin-top: .85rem; font-size: 1.55rem; }
-  .radar-list { display: flex; flex: 1; flex-direction: column; justify-content: center; margin-top: .3rem; }
+  .radar-list { display: flex; flex: 1; flex-direction: column; justify-content: center; margin-top: 0; }
   .radar-empty { color: var(--muted); font-family: 'DM Mono', monospace; font-size: .72rem; }
   .radar-card :global(.radar-row) { display: flex; align-items: center; gap: .8rem; padding: .62rem 0; border-bottom: 1px solid var(--border); }
   .radar-card :global(.radar-row:last-child) { border-bottom: 0; }
@@ -421,27 +559,22 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
   @media (max-width: 860px) {
     .masthead { grid-template-columns: 1fr; gap: 1.75rem; }
     .masthead-copy { max-width: 42rem; }
-    .proof-grid { grid-template-columns: repeat(2, 1fr); }
-    .proof-grid > div { padding: 1rem; border-bottom: 1px solid var(--border); }
-    .proof-grid > div:nth-child(2) { border-right: 0; }
-    .proof-grid > div:nth-child(3) { padding-left: 0; border-bottom: 0; }
-    .proof-grid > div:last-child { border-bottom: 0; }
+    .card-groundline,
+    .card-permit,
     .card-dewey,
     .radar-card,
-    .card-ideas,
+    .card-brain,
     .card-toddlermaps,
-    .card-power,
     .card-suno,
-    .card-music,
-    .card-killbill { grid-column: span 12; }
-    .card-dewey { order: 1; }
-    .radar-card { order: 2; }
-    .card-ideas { order: 3; }
-    .card-toddlermaps { order: 4; }
-    .card-power { order: 5; }
-    .card-suno { order: 6; }
-    .card-music { order: 7; }
-    .card-killbill { order: 8; }
+    .card-music { grid-column: span 12; }
+    .card-groundline { order: 1; }
+    .card-permit { order: 2; }
+    .card-dewey { order: 3; }
+    .radar-card { order: 4; }
+    .card-brain { order: 5; }
+    .card-toddlermaps { order: 6; }
+    .card-suno { order: 7; }
+    .card-music { order: 8; }
   }
 
   @media (max-width: 560px) {
@@ -450,13 +583,10 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     .identity-mark { width: 6rem; }
     .identity-first,
     .identity-last { font-size: 2.25rem; }
-    .masthead-copy p { font-size: 1rem; line-height: 1.58; }
-    .proof-grid { padding-top: .35rem; }
-    .proof-grid > div,
-    .proof-grid > div:first-child,
-    .proof-grid > div:nth-child(3) { padding: .85rem .65rem; }
-    .proof-grid strong { font-size: 1.55rem; }
-    .proof-grid span { font-size: .57rem; line-height: 1.35; }
+    .masthead-copy .masthead-kicker { font-size: .62rem; }
+    .masthead-copy h2 { font-size: 2rem; }
+    .masthead-copy .masthead-explainer { font-size: .94rem; line-height: 1.58; }
+    .thinking-section { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2.75rem; padding: 2.25rem 0; }
     .work-heading { padding: 2.75rem 0 1rem; align-items: center; }
     .work-heading h2 { font-size: 1.85rem; }
     .work-heading > a { font-size: .62rem; }
@@ -464,6 +594,7 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     .project-card,
     .radar-card { border-radius: 15px; }
     .card-media,
+    .card-media--groundline,
     .card-media--dewey,
     .card-media--suno { aspect-ratio: 16 / 9; }
     .card-copy { padding: 1rem 1rem 1.1rem; }
@@ -471,10 +602,21 @@ const songThumbnail = songVideoId ? `https://img.youtube.com/vi/${songVideoId}/h
     .project-card--feature .card-title-row h2 { font-size: 1.15rem; }
     .card-copy p,
     .project-card--feature .card-copy p { font-size: .8rem; }
-    .radar-card { padding: 1.1rem; }
+    .radar-card { display: flex; flex-direction: column; padding: 1.1rem; }
     .radar-title-row h2 { font-size: 1.3rem; }
     .radar-card :global(.radar-name),
     .radar-card :global(.radar-venue) { white-space: normal; }
     .radar-foot { font-size: .74rem; }
+  }
+  @media (hover: none) {
+    .comparison-after { animation: comparison-reveal 4s ease-in-out infinite alternate; }
+    .comparison-handle { animation: comparison-handle 4s ease-in-out infinite alternate; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-groundline:hover .comparison-after,
+    .card-groundline:hover .comparison-handle,
+    .comparison-after,
+    .comparison-handle,
+    .radar-card:hover .radar-sweep { animation: none; }
   }
 </style>

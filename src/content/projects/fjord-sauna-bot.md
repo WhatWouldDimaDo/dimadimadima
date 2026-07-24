@@ -6,7 +6,7 @@ tags: [python, automation, discord, api, tools]
 status: built
 featured: true
 order: 6
-image: /images/fjord-imessage.png
+image: /images/fjord-sauna-official.jpg
 images: [/images/fjord-discord.png, /images/fjord-booking.png, /images/fjord-iMessage-booked.png]
 ---
 

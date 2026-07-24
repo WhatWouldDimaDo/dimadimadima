@@ -28,6 +28,16 @@ The biggest insight: **autonomy matters more than revenue.** When I deprioritize
 
 The top-scoring idea was a Property Tax Appeal Automator. It runs on public county data, triggers deterministically, and compounds via a proprietary outcome database. Not sexy. Just correct.
 
+## What It Turned Into
+
+The more interesting version appeared during a live brainstorm with a friend. While we talked, five small research agents investigated five ideas in parallel. Their findings flowed into a shared board with sources, competing products, warnings, and a one-line verdict.
+
+He did not have to become a prompt engineer or wait for a follow-up deck. He could watch a fuzzy possibility become concrete, challenge what came back, and decide where we should dig next.
+
+That was the lightbulb for me: **the superpower is not having more agents. It is helping another person see what is now possible, then giving them a way to shape the work with you.**
+
+The board still did not validate the businesses. It made the next conversation much better.
+
 ## Live
 
 Explore all 1,160 ideas at [ai-ideas-explorer.vercel.app](https://ai-ideas-explorer.vercel.app).

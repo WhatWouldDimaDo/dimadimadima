@@ -4,8 +4,8 @@
 <base href="/groundline/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Groundline — AI-Powered Growth for Outdoor Trades</title>
-<meta name="description" content="AI-targeted homeowner identification, photorealistic property-specific proposals, and full attribution tracking for high-end landscaping, pools, and outdoor trades.">
+<title>Groundline — AI Growth for Builders &amp; High-End Trades</title>
+<meta name="description" content="AI growth for builders and high-end trades: find the opportunity, make it visible, and build the first working system with your team.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%2316241b'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23c9a562' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
 <style>
 
@@ -202,7 +202,62 @@
     border: 1px solid var(--line-on-dark);
     box-shadow: 0 30px 70px -24px rgba(0,0,0,0.5);
   }
-  .hero-figure img{ width: 100%; height: 100%; object-fit: cover; }
+  .hero-figure img{ position:absolute; inset:0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-figure .hero-before{ z-index:0; }
+  .hero-figure .hero-after{
+    z-index:1;
+    clip-path: inset(0 50% 0 0);
+    animation: hero-reveal 5.5s ease-in-out infinite alternate;
+  }
+  .hero-reveal-line{
+    position:absolute;
+    z-index:3;
+    top:0;
+    bottom:0;
+    left:50%;
+    width:2px;
+    background:rgba(250,247,239,.92);
+    box-shadow:0 0 0 1px rgba(22,36,27,.3);
+    animation:hero-reveal-line 5.5s ease-in-out infinite alternate;
+  }
+  .hero-reveal-line::after{
+    content:'↔';
+    position:absolute;
+    top:50%;
+    left:50%;
+    display:grid;
+    place-items:center;
+    width:2.5rem;
+    height:2.5rem;
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--pine-deep);
+    font:600 .85rem/1 var(--font-body);
+    transform:translate(-50%,-50%);
+    box-shadow:0 6px 18px rgba(0,0,0,.2);
+  }
+  .hero-visual-label{
+    position:absolute;
+    z-index:4;
+    top:18px;
+    padding:7px 10px;
+    background:rgba(22,36,27,.78);
+    color:var(--paper);
+    font-size:.62rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .hero-visual-label.before{ left:18px; }
+  .hero-visual-label.after{ right:18px; }
+  @keyframes hero-reveal{
+    from{clip-path:inset(0 88% 0 0)}
+    to{clip-path:inset(0 12% 0 0)}
+  }
+  @keyframes hero-reveal-line{
+    from{left:12%}
+    to{left:88%}
+  }
   .hero-figure::after{
     content: '';
     position: absolute; inset: 0;
@@ -225,8 +280,11 @@
 
   @media (max-width: 900px){
     .hero .wrap{ grid-template-columns: 1fr; gap: 44px; }
-    .hero-figure{ aspect-ratio: 16/10; }
+    .hero-figure{ order:-1; aspect-ratio: 16/10; }
     .hero-scroll{ display: none; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-figure .hero-after,.hero-reveal-line{animation:none}
   }
 
   /* ============ SECTION SCAFFOLDING ============ */
@@ -927,7 +985,7 @@
       <a class="nav-link" href="#work">What We Do</a>
       <a class="nav-link" href="#how">How It Works</a>
       <a class="nav-link" href="#proof">Proof</a>
-      <a class="nav-link" href="#model">The Pilot</a>
+      <a class="nav-link" href="#model">Ways to Work</a>
       <a class="nav-link" href="#verticals">Roadmap</a>
       <a class="nav-link" href="#about">Contact</a>
     </div>
@@ -940,21 +998,25 @@
   <div class="grain"></div>
   <div class="wrap">
     <div class="hero-text">
-      <span class="eyebrow hero-eyebrow reveal">AI-Powered Growth for High-End Outdoor Trades</span>
-      <h1 class="reveal reveal-delay-1">Your next client is already <span class="accent">in the neighborhood.</span></h1>
-      <p class="hero-sub reveal reveal-delay-2">They already know their backyard could be more. Show them exactly what it could become — before you ever knock on the door.</p>
-      <p class="hero-body reveal reveal-delay-3">We pair AI-targeted homeowner identification with photorealistic, property-specific design proposals — delivered and tracked all the way to the closed job. Built for landscaping, pool, and outdoor construction firms that compete on craft, not coupons.</p>
+      <span class="eyebrow hero-eyebrow reveal">AI Growth for Builders &amp; High-End Trades</span>
+      <h1 class="reveal reveal-delay-1">See what AI could <span class="accent">unlock in your business</span></h1>
+      <p class="hero-sub reveal reveal-delay-2">I work with owners and teams to spot the growth opportunity, make it tangible, and build the first useful version together.</p>
+      <p class="hero-body reveal reveal-delay-3">That could mean a better way to find customers, a sales experience that makes the value obvious, useful property intelligence, or less friction inside the operation. We start with your real business—not a generic AI playbook.</p>
       <div class="hero-actions reveal reveal-delay-4">
-        <a class="btn btn-primary" href="https://landscapingdemo-nine.vercel.app/" target="_blank" rel="noopener">
-          View the Live Demo
+        <a class="btn btn-primary" href="#proof">
+          See the First Build
           <svg class="icon" viewBox="0 0 24 24"><use href="#icon-arrow"></use></svg>
         </a>
-        <a class="btn btn-secondary" href="mailto:dperkis@gmail.com">Get in Touch</a>
+        <a class="btn btn-secondary" href="mailto:dperkis@gmail.com">Start a Conversation</a>
       </div>
     </div>
-    <div class="hero-figure reveal reveal-delay-2">
-      <img src="img/pool-bloom.jpg" alt="High-end Atlanta residential landscape, camellia and gardenia hedge along stone terrace">
-      <span class="hero-figure-caption">Live pilot — Dunwoody, GA</span>
+    <div class="hero-figure reveal reveal-delay-2" aria-label="A real Atlanta yard before and after an AI-assisted landscaping concept">
+      <img class="hero-before" src="img/client-entry-before.jpg" alt="The existing front entry before a new landscaping concept">
+      <img class="hero-after" src="img/client-entry-concept.jpg" alt="The same home with an AI-assisted landscaping concept">
+      <span class="hero-reveal-line" aria-hidden="true"></span>
+      <span class="hero-visual-label before">Before</span>
+      <span class="hero-visual-label after">AI concept</span>
+      <span class="hero-figure-caption">Landscaping client · Atlanta, GA</span>
     </div>
   </div>
   <div class="hero-scroll"><span>Scroll</span><span class="line"></span></div>
@@ -966,7 +1028,7 @@
     <div class="section-head reveal">
       <div>
         <span class="eyebrow">What We Do</span>
-        <h2>Four systems.<br>One growth engine.</h2>
+        <h2>Four systems.<br>One growth engine</h2>
       </div>
       <p class="lede">Each piece works on its own. Together, they replace guesswork — from who to target, to what to show them, to knowing exactly which proposal turned into a job.</p>
     </div>
@@ -1015,7 +1077,7 @@
     <div class="section-head reveal">
       <div>
         <span class="eyebrow">How It Works</span>
-        <h2>Five steps.<br>One continuous loop.</h2>
+        <h2>Five steps.<br>One continuous loop</h2>
       </div>
       <p class="lede">Identify the right home, show them what it could become, deliver it like it matters, and let the results sharpen the next round.</p>
     </div>
@@ -1061,7 +1123,7 @@
     <div class="proof-lead reveal">
       <div>
         <span class="eyebrow">Proof, Not Promises</span>
-        <h2>Right now, this is running in Atlanta.</h2>
+        <h2>Right now, this is running in Atlanta</h2>
         <p class="lede">We're proving the model with a high-end landscaping company in Dunwoody — a real target list, real property renders, real homeowners. Nothing on this page is a mockup.</p>
       </div>
       <div class="demo-card">
@@ -1170,7 +1232,7 @@
     <div class="section-head reveal">
       <div>
         <span class="eyebrow">Why This Works</span>
-        <h2>The numbers behind<br>the design.</h2>
+        <h2>The numbers behind<br>the design</h2>
       </div>
       <p class="lede">Every number here is a reason the loop is built the way it is — personal imagery, physical delivery, an immediate response, and leads that are never shared.</p>
     </div>
@@ -1212,7 +1274,7 @@
     <div class="section-head reveal">
       <div>
         <span class="eyebrow">The Artifacts</span>
-        <h2>What lands<br>in market.</h2>
+        <h2>What lands<br>in market</h2>
       </div>
       <p class="lede">Not slideware. These are the actual pieces a campaign runs on — the page, the print, the tracker, the list. Click any of them to look closer.</p>
     </div>
@@ -1252,7 +1314,7 @@
     <div class="section-head reveal">
       <div>
         <span class="eyebrow">The Pilot Cohort</span>
-        <h2>This is a pilot.<br>That's the advantage.</h2>
+        <h2>This is a pilot.<br>That's the advantage</h2>
       </div>
       <p class="lede">Honest positioning: Groundline is early-stage on purpose. One flagship engagement is already running in Atlanta, and we're now selecting a small cohort of founding participants to build alongside it. Early partners take an early bet — the terms reflect that.</p>
     </div>
@@ -1300,7 +1362,7 @@
       <div class="grain"></div>
       <span class="territory-icon"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-map-pin"></use></svg></span>
       <div class="territory-body">
-        <h3>One firm per territory. When a market is taken, it's taken.</h3>
+        <h3>One firm per territory. When a market is taken, it's taken</h3>
         <p>Pilot participants get their service footprint protected: Groundline will not run this playbook for a competitor inside your territory. The whole model depends on your proposals being the only ones like them in your neighborhoods — so exclusivity is a cohort mechanic, not an upsell.</p>
       </div>
     </div>
@@ -1309,7 +1371,7 @@
       <div class="price-main">
         <span class="price-icon"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-receipt"></use></svg></span>
         <span class="eyebrow">The Pricing Model</span>
-        <h3>A modest floor.<br>Performance above it.</h3>
+        <h3>A modest floor.<br>Performance above it</h3>
         <p>The shape is simple: a modest monthly floor, plus performance fees on net-new attributable business — with those fees credited against the floor. You only pay above the floor when results earn it.</p>
         <p>Most firms in this space hide pricing behind a sales call. The model is shown here on purpose — exact numbers are set with each founding participant, but how it works shouldn't be a mystery.</p>
       </div>
@@ -1332,7 +1394,7 @@
     <div class="section-head reveal">
       <div>
         <span class="eyebrow">Where This Goes</span>
-        <h2>Built for landscaping.<br>Built to expand.</h2>
+        <h2>Built for landscaping.<br>Built to expand</h2>
       </div>
       <p class="lede">The same targeting-to-attribution playbook applies anywhere a homeowner makes a high-consideration outdoor decision.</p>
     </div>
@@ -1395,12 +1457,11 @@
       </figure>
 
       <div class="reveal reveal-delay-1">
-        <span class="eyebrow" style="color:var(--brass-light); display:block; margin-bottom:18px;">Who's Behind This</span>
+        <span class="eyebrow" style="color:var(--brass-light); display:block; margin-bottom:18px;">Who’s Behind This</span>
         <h2 class="about-name">Dima Perkis</h2>
-        <p class="pull-quote">"I use AI to reduce friction and unlock newfound superpowers."</p>
-        <p class="about-body">Most recently VP of Data &amp; Analytics at Lahzo, where I built AI chatbots and AI sales agents and ran hyper-targeted digital marketing for specialty dealerships and high-ticket retail. I owned attribution — knowing which effort produced which sale — and managed a $2M Equifax data relationship, which means I've been the buyer of data at scale. I know what data is worth, and when it isn't.</p>
-        <p class="about-body">Before that, Director of Customer &amp; International Analytics at Intuit Mailchimp — email marketing and small-business growth, analytics for exactly the kind of business Groundline serves. Earlier, strategy and AI consulting at Accenture Strategy, including the business case for a multi-billion-dollar AI chatbot program.</p>
-        <p class="about-body">Based in Atlanta. Currently running the pilot in-market with a landscaping partner in Dunwoody.</p>
+        <p class="pull-quote">“I create the lightbulb moment—then build the first real version with you.”</p>
+        <p class="about-body">I’m a recovering strategy consultant and former VP who now builds with AI. Most recently, I led strategy and analytics at Lahzo, where I built AI sales agents and growth systems for high-ticket retail. Before that, I led customer and international analytics at Mailchimp and worked in strategy and AI consulting at Accenture.</p>
+        <p class="about-body">I know how to make an emerging capability clear to a board, useful to a team, and measurable in the real world. Groundline brings that experience to builders and high-end trades—starting with an Atlanta landscaping client.</p>
         <div class="about-tags">
           <span class="about-tag">Data &amp; Analytics</span>
           <span class="about-tag">AI Systems</span>
@@ -1413,8 +1474,8 @@
     <div class="contact-card wide reveal">
       <div>
         <span class="eyebrow">Get In Touch</span>
-        <h3>Let's talk about your target market.</h3>
-        <p>Whether it's landscaping, pools, or exteriors — if you're ready to compete on precision instead of volume, this is the conversation to have.</p>
+        <h3>Let’s find the next growth opportunity</h3>
+        <p>Whether it is customer acquisition, sales, operations, or a possibility you cannot quite see yet, we can make it concrete and decide what is worth building.</p>
       </div>
       <a class="contact-email" href="mailto:dperkis@gmail.com">
         dperkis@gmail.com

@@ -792,6 +792,27 @@ window.CDMX = {
       link: "https://en.wikipedia.org/wiki/Ecobici", src: "hosts", confidence: "VERIFIED" },
 
     /* ═══════════ ADDED DURING THE TRIP ═══════════ */
+    { id: "lincoln-juegos", name: "Juegos Infantiles, Parque Lincoln", cat: "park", colonia: "Polanco",
+      address: "Parque Lincoln, Polanco IV", lat: 19.42927, lng: -99.19507,
+      uber: { min: 14, mxn: "$90\u2013140" }, when: ["morning", "afternoon"], duration: "1\u20132 hrs",
+      cost: "Free", hours: "Daylight", rain: "outdoor",
+      guides: ["playgrounds"],
+      tags: ["run", "shade", "free", "stroller"],
+      blurb: "The playground inside Parque Lincoln, under the trees at the eastern end, a couple of minutes from the aviary and the model-boat pond.",
+      benefit: "Sits inside a park that also has birds and a boating pond, so one stop covers three different things when attention runs short.",
+      link: "https://maps.app.goo.gl/z3vb4oL8DwrFhSjh9", src: "research", confidence: "VERIFIED" },
+
+    { id: "lincoln-aviario", name: "Aviario, Parque Lincoln", cat: "culture", colonia: "Polanco",
+      address: "Av. Emilio Castelar 61, Polanco IV", lat: 19.42952, lng: -99.19574,
+      uber: { min: 14, mxn: "$90\u2013140" }, when: ["morning", "afternoon"], duration: "30\u201345 min",
+      cost: "~$8 MXN", hours: "Tue\u2013Sun 10:00\u201317:00 \u00b7 closed Mondays", rain: "outdoor",
+      guides: ["playgrounds"],
+      tags: ["animals", "shade", "closed-mon"],
+      blurb: "A walk-through aviary of rescued and exotic birds in the middle of Parque Lincoln, costing about eight pesos to enter.",
+      benefit: "Live animals, trivially cheap, and short enough to suit a small attention span \u2014 then straight back out to the playground.",
+      notes: "Opens at ten, so the playground is the thing to do first if you arrive early.",
+      link: "https://maps.app.goo.gl/BZ6Ks4YRzULfXXW66", src: "research", confidence: "VERIFIED" },
+
     { id: "la-bonvi", name: "La Bonvi", cat: "food", colonia: "Polanco",
       address: "Anatole France 139, Polanco III", lat: 19.43299, lng: -99.19734,
       uber: { min: 15, mxn: "$90\u2013140" }, when: ["comida", "evening"], duration: "1.5 hrs",

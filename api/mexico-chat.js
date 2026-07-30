@@ -12,7 +12,7 @@
 // response and never logged.
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
-const CHAT_MODEL = "anthropic/claude-sonnet-4.5";
+const CHAT_MODEL = "anthropic/claude-sonnet-5";
 
 const MAX_MESSAGES = 30;         // trims older turns before they reach the model
 const MAX_MESSAGE_CHARS = 4000;  // per-message content cap

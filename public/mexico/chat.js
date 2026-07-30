@@ -1,5 +1,8 @@
 /* Condesa Days — chat.js
-   Floating chat assistant. Self-initialising, same IIFE style as app.js.
+   Guide assistant. Renders inline into the Chat view (#view-chat in
+   index.html) — app.js owns showing and hiding that view like every other
+   one, and pings 'cdmx:viewchange' when it does. Self-initialising, same
+   IIFE style as app.js.
 
    Contract for whoever wires this in (see CHAT-SETUP.md and the PR notes):
 
@@ -316,7 +319,7 @@
       lat: p.lat, lng: p.lng, coordsUnconfirmed: !!p.coordsUnconfirmed,
       when: p.when || [], cost: p.cost || "", hours: p.hours || "",
       tags: p.tags || [], confidence: p.confidence || null,
-      blurb: (p.blurb || "").slice(0, 220), userAdded: !!p.userAdded
+      blurb: (p.blurb || "").slice(0, 90), userAdded: !!p.userAdded
     };
   }
 
@@ -350,33 +353,17 @@
     });
   }
 
+  /* Chat is an inline view (view-chat in index.html) now, not a floating
+     panel — app.js owns showing/hiding it like every other view and tells us
+     when that happens via cdmx:viewchange. There is no fab, scrim or close
+     button left to build; just the conversation itself. */
   function buildUI() {
-    var fab = document.createElement("button");
-    fab.id = "ccxFab"; fab.type = "button"; fab.className = "ccx-fab";
-    fab.setAttribute("aria-label", "Open guide assistant");
-    fab.setAttribute("aria-haspopup", "dialog");
-    fab.setAttribute("aria-expanded", "false");
-    fab.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>' +
-      "</svg>";
-
-    var scrim = document.createElement("div");
-    scrim.id = "ccxScrim"; scrim.className = "ccx-scrim"; scrim.hidden = true;
-
-    var panel = document.createElement("aside");
-    panel.id = "ccxPanel"; panel.className = "ccx-panel"; panel.hidden = true;
-    panel.setAttribute("aria-modal", "true");
-    panel.setAttribute("role", "dialog");
-    panel.setAttribute("aria-label", "Guide assistant");
-    panel.innerHTML =
-      '<header class="ccx-head">' +
-        '<strong>Guide assistant</strong>' +
-        '<div class="ccx-head-actions">' +
-          '<button id="ccxClear" type="button" class="ccx-iconbtn" aria-label="Clear conversation" title="Clear conversation">↻</button>' +
-          '<button id="ccxClose" type="button" class="ccx-iconbtn" aria-label="Close">✕</button>' +
-        "</div>" +
-      "</header>" +
+    var host = $("#view-chat");
+    if (!host) { console.error("chat.js: #view-chat container missing"); return; }
+    host.innerHTML =
+      '<div class="ccx-toolbar">' +
+        '<button id="ccxClear" type="button" class="ccx-iconbtn" aria-label="Clear conversation" title="Clear conversation">↻</button>' +
+      "</div>" +
       '<div id="ccxMsgs" class="ccx-msgs" role="log" aria-live="polite"></div>' +
       '<div id="ccxError" class="ccx-error" hidden></div>' +
       '<form id="ccxForm" class="ccx-form">' +
@@ -387,43 +374,28 @@
           'stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>' +
         "</button>" +
       "</form>";
-
-    document.body.appendChild(fab);
-    document.body.appendChild(scrim);
-    document.body.appendChild(panel);
   }
 
   buildUI();
 
-  var fabEl = $("#ccxFab"), scrimEl = $("#ccxScrim"), panelEl = $("#ccxPanel");
   var msgsEl = $("#ccxMsgs"), errorEl = $("#ccxError"), formEl = $("#ccxForm"), inputEl = $("#ccxInput");
+  if (!msgsEl) return; // #view-chat was missing; buildUI() already logged it
 
   var state = {
-    open: false,
     sending: false,
     history: loadHistory(),
     toolLog: loadToolLog()
   };
 
-  function openPanel() {
-    state.open = true;
-    panelEl.hidden = false; scrimEl.hidden = false;
-    fabEl.setAttribute("aria-expanded", "true");
-    fabEl.classList.add("is-open");
-    renderMessages();
-    setTimeout(function () { inputEl.focus(); }, 30);
-  }
-  function closePanel() {
-    state.open = false;
-    panelEl.hidden = true; scrimEl.hidden = true;
-    fabEl.setAttribute("aria-expanded", "false");
-    fabEl.classList.remove("is-open");
-  }
-
-  fabEl.addEventListener("click", function () { state.open ? closePanel() : openPanel(); });
-  scrimEl.addEventListener("click", closePanel);
-  $("#ccxClose").addEventListener("click", closePanel);
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && state.open) closePanel(); });
+  // app.js dispatches this on every view switch (see setView() in app.js).
+  // Focus and drop the keyboard-safe scroll position only when we're the one
+  // becoming visible — not on every other view change.
+  document.addEventListener("cdmx:viewchange", function (e) {
+    if (e.detail && e.detail.view === "chat") {
+      renderMessages();
+      setTimeout(function () { inputEl.focus(); }, 30);
+    }
+  });
 
   $("#ccxClear").addEventListener("click", function () {
     if (state.sending) return;

@@ -1,75 +1,26 @@
 /* Condesa Days — chat.css
-   Styles for the floating guide assistant (chat.js). Uses the same design
-   tokens as styles.css (--rosa, --ink, --paper, --card, --line, --r, --shadow,
-   --display, --text) so it reads as part of the site, not a bolted-on widget.
-   All selectors are prefixed ccx- to avoid colliding with the rest of the app. */
+   Styles for the guide assistant (chat.js). It renders inline into the Chat
+   view now, not a floating panel — layout/sizing for #view-chat itself lives
+   in styles.css alongside the other views; this file just styles the pieces
+   chat.js builds inside it. Uses the same design tokens as styles.css
+   (--rosa, --ink, --paper, --card, --line, --r, --shadow, --display, --text)
+   so it reads as part of the site, not a bolted-on widget. All selectors are
+   prefixed ccx- to avoid colliding with the rest of the app. */
 
-.ccx-fab {
-  position: fixed;
-  right: calc(env(safe-area-inset-right) + 16px);
-  bottom: calc(env(safe-area-inset-bottom) + 16px);
-  width: 56px; height: 56px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--rosa); color: #fff;
-  box-shadow: var(--shadow-lift);
-  z-index: 5200;
-  transition: transform .15s ease;
+.ccx-toolbar {
+  display: flex; align-items: center; justify-content: flex-end;
+  padding: 6px 10px; border-bottom: 1px solid var(--line); flex-shrink: 0;
 }
-.ccx-fab svg { width: 25px; height: 25px; }
-.ccx-fab:active { transform: scale(.94); }
-.ccx-fab.is-open { display: none; }
-
-.ccx-scrim {
-  position: fixed; inset: 0; background: rgba(20,14,10,.46);
-  z-index: 5300; backdrop-filter: blur(2px);
-}
-
-.ccx-panel {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5400;
-  display: flex; flex-direction: column;
-  max-height: min(78vh, 640px);
-  background: var(--paper);
-  border-radius: 18px 18px 0 0;
-  box-shadow: var(--shadow-lift);
-  border-top: 1px solid var(--line-hi);
-  padding-bottom: env(safe-area-inset-bottom);
-  overflow: hidden;
-}
-
-@media (min-width: 640px) {
-  .ccx-panel {
-    left: auto; right: calc(env(safe-area-inset-right) + 16px);
-    bottom: calc(env(safe-area-inset-bottom) + 84px);
-    width: min(400px, calc(100vw - 32px));
-    max-height: min(70vh, 600px);
-    border-radius: var(--r);
-    border: 1px solid var(--line-hi);
-    border-top: 1px solid var(--line-hi);
-  }
-  .ccx-scrim { background: transparent; backdrop-filter: none; }
-}
-
-.ccx-head {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 14px 12px; border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
-}
-.ccx-head strong {
-  font-family: var(--display); font-weight: 800; font-size: 16.5px;
-  letter-spacing: -.01em;
-}
-.ccx-head-actions { display: flex; gap: 6px; }
 .ccx-iconbtn {
-  width: 34px; height: 34px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   border: 1px solid var(--line-hi); color: var(--ink-soft);
   font-size: 15px; display: flex; align-items: center; justify-content: center;
 }
 .ccx-iconbtn:active { background: var(--card-2); }
 
 .ccx-msgs {
-  flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch;
-  padding: 14px; display: flex; flex-direction: column; gap: 8px;
-  min-height: 160px;
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
 }
 
 .ccx-empty {
@@ -157,6 +108,5 @@
 
 /* Guard against any accidental overflow on narrow phones. */
 @media (max-width: 375px) {
-  .ccx-panel { max-width: 100vw; }
   .ccx-msg { max-width: 90%; }
 }

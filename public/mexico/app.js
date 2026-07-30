@@ -247,20 +247,23 @@
     };
   }
 
+  var VIEW_LABEL = { plan: "Schedule", browse: "Everything", guides: "Guides", map: "Map", chat: "Chat" };
+
   function setView(v) {
     // Leaving the Map view: stop watching position so it doesn't drain the battery.
     if (state.view === "map" && v !== "map" && locWatchId != null) stopLocate();
     state.view = v;
-    $$(".tab").forEach(function (t) {
-      var on = t.dataset.view === v;
-      t.classList.toggle("is-on", on);
-      t.setAttribute("aria-selected", on ? "true" : "false");
-    });
     $$(".view").forEach(function (s) { s.hidden = s.id !== "view-" + v; });
     $$(".view").forEach(function (s) { s.classList.toggle("is-on", s.id === "view-" + v); });
+    $("#viewLabel").textContent = VIEW_LABEL[v] || v;
+    document.body.classList.toggle("is-chatview", v === "chat");
+    updateMenuMarks();
     if (v === "map") initMap();
     if (v === "guides" && !openGuideId) { $("#guideGrid").hidden = false; $(".guides-intro").hidden = false; $("#guideRead").hidden = true; }
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    // app.js owns view switching; chat.js (and anything else) reacts to this
+    // rather than reaching into the header itself.
+    document.dispatchEvent(new CustomEvent("cdmx:viewchange", { detail: { view: v } }));
   }
 
   /* ───────────────────────── plan ───────────────────────── */
@@ -919,8 +922,24 @@
   document.addEventListener("click", function (e) {
     var t = e.target;
 
-    var tab = t.closest(".tab");
-    if (tab) return setView(tab.dataset.view);
+    var menuItem = t.closest(".menu-item[data-view]");
+    if (menuItem) { closeMenu(); return setView(menuItem.dataset.view); }
+
+    if (t.closest("#menuAbout")) { closeMenu(); return openAbout(); }
+
+    if (t.closest("#menuBtn")) {
+      menuOpen ? closeMenu() : openMenu();
+      return;
+    }
+    if (menuOpen && !t.closest("#menuPanel") && !t.closest("#menuBtn")) closeMenu();
+
+    if (t.closest("#searchBtn")) {
+      searchOpen() ? closeSearch() : openSearch();
+      return;
+    }
+
+    if (t.closest("#browseFilterToggle")) return toggleBrowseFilterPanel();
+    if (t.closest("#mapFilterToggle")) return toggleMapFilterPanel();
 
     var day = t.closest("[data-day]:not(.pickrow)");
     if (day && day.classList.contains("daybtn")) {
@@ -932,28 +951,29 @@
     var chip = t.closest(".chip");
     if (chip) {
       var g = chip.dataset.group, v = chip.dataset.val;
-      if (g === "when") { state.fWhen = state.fWhen === v ? null : v; renderChips(); renderCards(); }
-      else if (g === "cat") { state.fCat = state.fCat === v ? null : v; renderChips(); renderCards(); }
-      else if (g === "src") { state.fSrc = state.fSrc === v ? null : v; renderChips(); renderCards(); }
+      if (g === "when") { state.fWhen = state.fWhen === v ? null : v; renderChips(); renderCards(); updateBrowseFilterBadge(); }
+      else if (g === "cat") { state.fCat = state.fCat === v ? null : v; renderChips(); renderCards(); updateBrowseFilterBadge(); }
+      else if (g === "src") { state.fSrc = state.fSrc === v ? null : v; renderChips(); renderCards(); updateBrowseFilterBadge(); }
       else if (g === "tag") {
         var i = state.fTags.indexOf(v);
         if (i > -1) state.fTags.splice(i, 1); else state.fTags.push(v);
-        renderChips(); renderCards();
-      } else if (g === "mapcat") { state.mapCat = state.mapCat === v ? null : v; renderMapChips(); renderMarkers({ fit: true }); }
-      else if (g === "mapsrc") { state.mapSrc = state.mapSrc === v ? null : v; renderMapChips(); renderMarkers({ fit: true }); }
-      else if (g === "mapvisited") { state.mapVisited = state.mapVisited === v ? null : v; renderMapChips(); renderMarkers({ fit: true }); }
+        renderChips(); renderCards(); updateBrowseFilterBadge();
+      } else if (g === "mapcat") { state.mapCat = state.mapCat === v ? null : v; renderMapChips(); renderMarkers({ fit: true }); updateMapFilterBadge(); }
+      else if (g === "mapsrc") { state.mapSrc = state.mapSrc === v ? null : v; renderMapChips(); renderMarkers({ fit: true }); updateMapFilterBadge(); }
+      else if (g === "mapvisited") { state.mapVisited = state.mapVisited === v ? null : v; renderMapChips(); renderMarkers({ fit: true }); updateMapFilterBadge(); }
       return;
     }
 
     if (t.closest("#clearFilters")) {
-      state.fWhen = null; state.fCat = null; state.fSrc = null; state.fTags = [];
-      renderChips(); renderCards();
+      state.fWhen = null; state.fCat = null; state.fSrc = null; state.fTags = []; state.q = "";
+      $("#browseSearch").value = "";
+      renderChips(); renderCards(); updateBrowseFilterBadge();
       return;
     }
 
     if (t.closest("#mapClearFilters")) {
       state.mapCat = null; state.mapSrc = null; state.mapVisited = null;
-      renderMapChips(); renderMarkers({ fit: true });
+      renderMapChips(); renderMarkers({ fit: true }); updateMapFilterBadge();
       return;
     }
 
@@ -1037,27 +1057,29 @@
       return;
     }
 
-    if (t.closest("#helpBtn")) {
-      $("#sheetBody").innerHTML =
-        "<h2>About this guide</h2>" +
-        "<p>" + esc(D.about) + "</p>" +
-        "<h3>How the plan works</h3>" +
-        "<p>Browse places, tap ＋ to drop one into a day and a time block. Drag the handle on a placed card to move it between blocks. Everything saves on this device — nothing is sent anywhere.</p>" +
-        "<h3>Sharing</h3>" +
-        "<p>“Share plan” puts the whole plan into the link itself. Whoever opens it gets your version loaded on their device, and can change it from there without affecting yours.</p>" +
-        "<h3>Confidence</h3>" +
-        "<p><b>Confirmed</b> — checked against an official or reliable source. <b>Likely</b> — consistent across sources, not confirmed with the venue. <b>Check</b> — call first.</p>" +
-        "<p style=\"font-size:12.5px;color:var(--ink-dim);margin-top:18px\">Updated " + esc(D.updated) + ".</p>";
-      $("#sheet").hidden = false; $("#sheetScrim").hidden = false;
-      return;
-    }
   });
+
+  /* "About" used to be its own header button; it now lives in the menu, but
+     still opens the same detail sheet used for everywhere else. */
+  function openAbout() {
+    $("#sheetBody").innerHTML =
+      "<h2>About this guide</h2>" +
+      "<p>" + esc(D.about) + "</p>" +
+      "<h3>How the plan works</h3>" +
+      "<p>Browse places, tap ＋ to drop one into a day and a time block. Drag the handle on a placed card to move it between blocks. Everything saves on this device — nothing is sent anywhere.</p>" +
+      "<h3>Sharing</h3>" +
+      "<p>“Share plan” puts the whole plan into the link itself. Whoever opens it gets your version loaded on their device, and can change it from there without affecting yours.</p>" +
+      "<h3>Confidence</h3>" +
+      "<p><b>Confirmed</b> — checked against an official or reliable source. <b>Likely</b> — consistent across sources, not confirmed with the venue. <b>Check</b> — call first.</p>" +
+      "<p style=\"font-size:12.5px;color:var(--ink-dim);margin-top:18px\">Updated " + esc(D.updated) + ".</p>";
+    $("#sheet").hidden = false; $("#sheetScrim").hidden = false;
+  }
 
 
   document.addEventListener("pointerdown", onPointerDown);
 
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") { closeSheet(); closePick(); }
+    if (e.key === "Escape") { closeSheet(); closePick(); closeMenu(); closeSearch(); }
   });
 
   window.addEventListener("hashchange", function () {
@@ -1156,51 +1178,108 @@
     if (e.target.closest("#gback")) return closeGuide();
     if (e.target.closest("#brandHome")) {
       // The logo is a to-top control; from inside a guide it steps back out first.
-      // Instant rather than smooth: the header collapsing mid-animation can abort a
-      // smooth scroll partway, which leaves you stranded halfway up the page.
       if (state.view === "guides" && openGuideId) closeGuide();
-      else {
-        window.scrollTo({ top: 0, behavior: "instant" });
-        applyMin(false);
-      }
+      else window.scrollTo({ top: 0, behavior: "instant" });
       return;
     }
   });
 
-  /* ───────────────── header minimise ─────────────────
-     The header eats a lot of a phone screen. It collapses to just the brand row
-     once you scroll down, comes back when you scroll up, and the hamburger pins
-     it collapsed for people who would rather it stayed out of the way. */
+  /* ───────────────── header ─────────────────
+     The header is now a single compact row (brand, search, hamburger), so there
+     is nothing left to collapse. syncHeaderHeight() measures its real rendered
+     height into --header-h, which the search overlay, the menu panel and the
+     fixed-frame chat view all position against — cheaper and more robust than
+     hardcoding a pixel guess that breaks the moment the row's font size or
+     safe-area inset changes. */
 
-  var lastY = 0, pinnedMin = false, topbar = $(".topbar");
+  var topbar = $(".topbar");
 
-  function applyMin(on) {
-    topbar.classList.toggle("is-min", on);
-    $("#minBtn").setAttribute("aria-pressed", pinnedMin ? "true" : "false");
+  function syncHeaderHeight() {
+    document.documentElement.style.setProperty("--header-h", topbar.offsetHeight + "px");
+  }
+  window.addEventListener("resize", syncHeaderHeight);
+  window.addEventListener("orientationchange", syncHeaderHeight);
+
+  /* ───────────────────── menu ───────────────────── */
+
+  var menuOpen = false;
+
+  function updateMenuMarks() {
+    $$(".menu-item[data-view]").forEach(function (b) {
+      var on = b.dataset.view === state.view;
+      b.classList.toggle("is-on", on);
+      b.setAttribute("aria-current", on ? "page" : "false");
+    });
   }
 
-  $("#minBtn").addEventListener("click", function () {
-    pinnedMin = !pinnedMin;
-    if (pinnedMin) {
-      applyMin(true);
-    } else {
-      // Restore immediately rather than waiting for the scroll event to fire,
-      // which would otherwise leave the header collapsed until the next scroll.
-      window.scrollTo({ top: 0, behavior: "instant" });
-      lastY = 0;
-      applyMin(false);
-    }
-    $("#minBtn").setAttribute("aria-pressed", pinnedMin ? "true" : "false");
-  });
+  function openMenu() {
+    closeSearch();
+    menuOpen = true;
+    $("#menuPanel").hidden = false;
+    $("#menuBtn").setAttribute("aria-expanded", "true");
+    updateMenuMarks();
+  }
+  function closeMenu() {
+    if (!menuOpen) return;
+    menuOpen = false;
+    $("#menuPanel").hidden = true;
+    $("#menuBtn").setAttribute("aria-expanded", "false");
+  }
 
-  window.addEventListener("scroll", function () {
-    var y = window.scrollY;
-    if (pinnedMin) { applyMin(true); lastY = y; return; }
-    if (y < 60) applyMin(false);
-    else if (y > lastY + 6) applyMin(true);        // scrolling down — get out of the way
-    else if (y < lastY - 24) applyMin(false);      // a deliberate scroll up brings it back
-    lastY = y;
-  }, { passive: true });
+  /* ───────────────────── search disclosure ───────────────────── */
+
+  function searchOpen() { return !$("#gsResults").hidden; }
+
+  function openSearch() {
+    closeMenu();
+    $("#gsResults").hidden = false;
+    $("#searchBtn").setAttribute("aria-expanded", "true");
+    setTimeout(function () { $("#gq").focus(); }, 30);
+  }
+  function closeSearch() {
+    if (!searchOpen()) return;
+    $("#gsResults").hidden = true;
+    $("#searchBtn").setAttribute("aria-expanded", "false");
+    $("#gq").value = "";
+    $("#gsClear").hidden = true;
+    $("#gq").setAttribute("aria-expanded", "false");
+    $("#gsList").innerHTML = "";
+  }
+
+  /* ───────────────────── filter & sort disclosures ───────────────────── */
+
+  function toggleBrowseFilterPanel() {
+    var on = $("#browseFilterPanel").hidden;
+    $("#browseFilterPanel").hidden = !on;
+    $("#browseFilterToggle").setAttribute("aria-expanded", on ? "true" : "false");
+  }
+  function toggleMapFilterPanel() {
+    var on = $("#mapFilterPanel").hidden;
+    $("#mapFilterPanel").hidden = !on;
+    $("#mapFilterToggle").setAttribute("aria-expanded", on ? "true" : "false");
+  }
+
+  function filterToggleLabel(n) {
+    return n ? ("Filter & sort · " + n + " active") : "Filter & sort";
+  }
+
+  function browseFilterCount() {
+    return (state.fWhen ? 1 : 0) + (state.fCat ? 1 : 0) + (state.fSrc ? 1 : 0) +
+      state.fTags.length + (state.q ? 1 : 0);
+  }
+  function updateBrowseFilterBadge() {
+    var n = browseFilterCount();
+    $("#browseFilterLabel").textContent = filterToggleLabel(n);
+    $("#browseFilterToggle").classList.toggle("is-active", n > 0);
+  }
+  function mapFilterCount() {
+    return (state.mapCat ? 1 : 0) + (state.mapSrc ? 1 : 0) + (state.mapVisited ? 1 : 0);
+  }
+  function updateMapFilterBadge() {
+    var n = mapFilterCount();
+    $("#mapFilterLabel").textContent = filterToggleLabel(n);
+    $("#mapFilterToggle").classList.toggle("is-active", n > 0);
+  }
 
   /* ───────────────────── density ───────────────────── */
 
@@ -1258,20 +1337,19 @@
   }
 
   function renderSearch(q) {
-    var panel = $("#gsResults");
+    var list = $("#gsList");
     var hits = searchAll(q);
     $("#gsClear").hidden = !q;
     $("#gq").setAttribute("aria-expanded", hits.length ? "true" : "false");
 
-    if (!q.trim()) { panel.hidden = true; panel.innerHTML = ""; return; }
+    if (!q.trim()) { list.innerHTML = ""; return; }
 
     if (!hits.length) {
-      panel.innerHTML = '<p class="gs-empty">Nothing matches “' + esc(q) + '”.</p>';
-      panel.hidden = false;
+      list.innerHTML = '<p class="gs-empty">Nothing matches “' + esc(q) + '”.</p>';
       return;
     }
 
-    panel.innerHTML = hits.map(function (h) {
+    list.innerHTML = hits.map(function (h) {
       if (h.kind === "guide") {
         return '<button class="gs-row" type="button" role="option" data-gsguide="' + h.g.id + '">' +
           '<span class="gs-kind" style="background:' + h.g.tint + ';color:' + h.g.accent + '">' + h.g.icon + "</span>" +
@@ -1290,21 +1368,21 @@
         "<span class=\"gs-main\"><strong>" + esc(p.name) + "</strong>" +
         "<span>" + esc([c.label, p.colonia, travelLine(p)].filter(Boolean).join(" · ")) + "</span></span></button>";
     }).join("");
-    panel.hidden = false;
-  }
-
-  function closeSearch() {
-    $("#gsResults").hidden = true;
-    $("#gq").value = "";
-    $("#gsClear").hidden = true;
-    $("#gq").setAttribute("aria-expanded", "false");
   }
 
   $("#gq").addEventListener("input", function (e) { renderSearch(e.target.value); });
   $("#gq").addEventListener("focus", function (e) { if (e.target.value) renderSearch(e.target.value); });
 
   document.addEventListener("click", function (e) {
-    if (e.target.closest("#gsClear")) { closeSearch(); $("#gq").focus(); return; }
+    // Clears the text and keeps the overlay open, ready for another query —
+    // closing the whole thing is what the search icon and Escape are for.
+    if (e.target.closest("#gsClear")) {
+      $("#gq").value = "";
+      renderSearch("");
+      $("#gsClear").hidden = true;
+      $("#gq").focus();
+      return;
+    }
 
     var gp = e.target.closest("[data-gsplace]");
     if (gp) { closeSearch(); openSheet(gp.dataset.gsplace); return; }
@@ -1315,9 +1393,79 @@
     var gd = e.target.closest("[data-gsday]");
     if (gd) { closeSearch(); state.day = gd.dataset.gsday; setView("plan"); renderPlan(); return; }
 
-    if (!e.target.closest(".globalsearch") && !e.target.closest("#gsResults")) {
-      $("#gsResults").hidden = true;
+    if (searchOpen() && !e.target.closest("#gsResults") && !e.target.closest("#searchBtn")) {
+      closeSearch();
     }
+  });
+
+  $("#browseSearch").addEventListener("input", function (e) {
+    state.q = e.target.value;
+    renderCards();
+    updateBrowseFilterBadge();
+  });
+
+
+  /* ───────────────── chat mutations ─────────────────
+     chat.js proposes changes; this is the only thing that writes them. Calling
+     preventDefault() tells chat.js not to touch localStorage itself, which
+     matters because it would otherwise write the pre-v2 bare-plan shape and
+     keep visits in a second key that nothing else reads. */
+
+  function findPlaceByNameOrId(args) {
+    if (args.place_id && byId[args.place_id]) return byId[args.place_id];
+    var needle = String(args.place_name || args.place_id || "").toLowerCase().trim();
+    if (!needle) return null;
+    var exact = D.places.filter(function (p) { return p.name.toLowerCase() === needle; })[0];
+    return exact || D.places.filter(function (p) {
+      return p.name.toLowerCase().indexOf(needle) > -1;
+    })[0] || null;
+  }
+
+  document.addEventListener("cdmx:mutate", function (e) {
+    var tool = e.detail && e.detail.tool, args = (e.detail && e.detail.args) || {};
+    if (!tool) return;
+
+    if (tool === "add_to_itinerary") {
+      var p = findPlaceByNameOrId(args);
+      if (!p) return;                       // unknown place: let chat.js report it
+      var day = D.days.filter(function (d) { return d.id === args.day; })[0];
+      var slot = args.slot && slotExists(args.slot) ? args.slot : "afternoon";
+      if (!day) return;
+      e.preventDefault();
+      if (!state.plan[day.id]) state.plan[day.id] = [];
+      state.plan[day.id].push({ p: p.id, s: slot, n: args.note || "" });
+      saveStore();
+      state.day = day.id;
+      renderPlan();
+      toast(p.name + " \u2192 " + day.label);
+      return;
+    }
+
+    if (tool === "mark_visited") {
+      var mp = findPlaceByNameOrId(args);
+      if (!mp) return;
+      e.preventDefault();
+      state.visits[mp.id] = { on: args.date || isoToday(), note: args.note || "" };
+      saveStore();
+      renderCards(); renderPlan();
+      toast(mp.name + " marked as been there");
+      return;
+    }
+
+    if (tool === "add_note") {
+      var np = findPlaceByNameOrId(args);
+      if (!np) return;
+      e.preventDefault();
+      if (!state.visits[np.id]) state.visits[np.id] = { on: isoToday(), note: "" };
+      state.visits[np.id].note = args.note || "";
+      saveStore();
+      renderCards(); renderPlan();
+      toast("Note saved to " + np.name);
+      return;
+    }
+
+    // add_place is left to chat.js: user-added places live in their own key so
+    // they can never corrupt the curated set in data.js.
   });
 
   /* ───────────────────────── boot ───────────────────────── */
@@ -1331,5 +1479,8 @@
   renderGuideGrid();
   setDensity(state.density);
   renderPlan();
+  syncHeaderHeight();
+  updateBrowseFilterBadge();
+  updateMapFilterBadge();
   setView("plan");
 })();

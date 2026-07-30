@@ -27,7 +27,7 @@
   --shadow-lift: 0 6px 14px rgba(36,28,22,.14), 0 22px 44px -18px rgba(36,28,22,.42);
   --display:     "Fraunces", Georgia, serif;
   --text:        "Karla", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --topbar-h:    104px;
+  --header-h:    58px; /* JS overwrites this with the real measured header height */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,6 +40,7 @@
     --line: rgba(244,235,223,.14); --line-hi: rgba(244,235,223,.28);
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 22px -12px rgba(0,0,0,.7);
     --shadow-lift: 0 6px 14px rgba(0,0,0,.5), 0 22px 44px -18px rgba(0,0,0,.8);
+    --header-h: 58px;
   }
 }
 
@@ -76,7 +77,7 @@ a { color: var(--rosa-deep); }
 }
 .bar {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; padding: 10px 16px 8px; max-width: 900px; margin: 0 auto;
+  gap: 12px; padding: 8px 16px; max-width: 900px; margin: 0 auto;
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .brand-mark {
@@ -101,33 +102,20 @@ a { color: var(--rosa-deep); }
 }
 .icon-btn:active { background: var(--card-2); }
 
-.tabs {
-  display: flex; gap: 4px; padding: 0 16px 8px;
-  max-width: 900px; margin: 0 auto;
-}
-.tab {
-  flex: 1; padding: 9px 4px 8px; border-radius: 9px;
-  font-weight: 700; font-size: 14px; letter-spacing: .01em;
-  color: var(--ink-dim); border: 1px solid transparent;
-  min-height: 40px;
-}
-.tab.is-on { background: var(--ink); color: var(--paper); }
-@media (prefers-color-scheme: dark) { .tab.is-on { background: var(--rosa); color: #2A1015; } }
-
 /* ───────────────────────── views ───────────────────────── */
 .view { max-width: 900px; margin: 0 auto; padding: 0 16px; }
 .view[hidden] { display: none; }
 
 /* ───────────────────────── day strip ───────────────────────── */
 .daystrip {
-  display: flex; gap: 7px; overflow-x: auto; padding: 14px 0 12px;
+  display: flex; gap: 6px; overflow-x: auto; padding: 10px 0 8px;
   scrollbar-width: none; -webkit-overflow-scrolling: touch;
   scroll-snap-type: x proximity;
 }
 .daystrip::-webkit-scrollbar { display: none; }
 .daybtn {
   flex: 0 0 auto; scroll-snap-align: start;
-  min-width: 64px; padding: 9px 12px 8px;
+  min-width: 58px; min-height: 44px; padding: 7px 10px 6px;
   border: 1px solid var(--line-hi); border-radius: 11px;
   background: var(--card); text-align: center; line-height: 1.2;
 }
@@ -139,13 +127,13 @@ a { color: var(--rosa-deep); }
 
 .dayhead {
   display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 14px; padding: 4px 0 12px; flex-wrap: wrap;
+  gap: 14px; padding: 2px 0 8px; flex-wrap: wrap;
 }
 .dayhead h1 {
-  font-family: var(--display); font-size: clamp(23px, 6vw, 30px);
+  font-family: var(--display); font-size: clamp(21px, 5.5vw, 27px);
   font-weight: 800; letter-spacing: -.02em; line-height: 1.12;
 }
-.daysub { color: var(--ink-soft); font-size: 14px; margin-top: 3px; max-width: 46ch; }
+.daysub { color: var(--ink-soft); font-size: 13.5px; margin-top: 2px; max-width: 46ch; }
 .dayhead-actions { display: flex; gap: 7px; flex-shrink: 0; }
 .ghost-btn {
   border: 1px solid var(--line-hi); border-radius: 9px;
@@ -256,8 +244,36 @@ a { color: var(--rosa-deep); }
 }
 
 /* ───────────────────────── filters ───────────────────────── */
-.filters { padding: 14px 0 10px; }
-.searchwrap { margin-bottom: 10px; }
+.filters { padding: 10px 0 8px; }
+
+.filterbar { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
+.filtertoggle {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--line-hi); border-radius: 10px;
+  padding: 0 12px; min-height: 44px; font-size: 13.5px; font-weight: 700;
+  color: var(--ink-soft); background: var(--card); flex-shrink: 0;
+}
+.filtertoggle svg { width: 15px; height: 15px; flex-shrink: 0; }
+.filtertoggle:active { background: var(--card-2); }
+.filtertoggle[aria-expanded="true"] { color: var(--ink); border-color: var(--line-hi); background: var(--card-2); }
+/* the "· N active" suffix is plain text inside the button (see app.js), but
+   the whole control still gets an accent treatment so an active filter set
+   is never just quiet grey text easy to miss. */
+.filtertoggle.is-active { border-color: var(--rosa); color: var(--rosa-deep); background: var(--rosa-soft); }
+@media (prefers-color-scheme: dark) { .filtertoggle.is-active { color: var(--rosa); } }
+.resultline { font-size: 12.5px; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.filterpanel {
+  margin-top: 10px; padding: 12px; border: 1px solid var(--line);
+  border-radius: var(--r-sm); background: var(--card-2);
+}
+.withinwrap { margin-bottom: 10px; }
+#browseSearch {
+  width: 100%; padding: 12px; border-radius: 10px;
+  border: 1px solid var(--line-hi); background: var(--card); font-size: 16px;
+  -webkit-appearance: none; appearance: none;
+}
+#browseSearch::placeholder { color: var(--ink-dim); }
 
 .chiprow {
   display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px;
@@ -275,17 +291,17 @@ a { color: var(--rosa-deep); }
 .chip[data-group="mapcat"].is-on { background: var(--nopal); border-color: var(--nopal); color: #fff; }
 
 .filterfoot {
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 12.5px; color: var(--ink-dim); padding-top: 2px;
+  display: flex; justify-content: flex-end; align-items: center;
+  font-size: 12.5px; color: var(--ink-dim); padding-top: 4px;
 }
 .linky { color: var(--rosa-deep); font-weight: 700; font-size: 12.5px; min-height: 32px; }
 @media (prefers-color-scheme: dark) { .linky { color: var(--rosa); } }
 
 /* ───────────────────────── cards ───────────────────────── */
-.cards { display: flex; flex-direction: column; gap: 10px; padding-bottom: 32px; }
+.cards { display: flex; flex-direction: column; gap: 9px; padding-bottom: 28px; }
 .pcard {
   background: var(--card); border: 1px solid var(--line);
-  border-radius: var(--r); padding: 14px; box-shadow: var(--shadow);
+  border-radius: var(--r); padding: 11px; box-shadow: var(--shadow);
   position: relative;
 }
 .pcard-top { display: flex; gap: 10px; align-items: flex-start; }
@@ -350,7 +366,7 @@ a { color: var(--rosa-deep); }
   border-radius: var(--r); border: 1px solid var(--line);
   margin-bottom: 12px; background: var(--card-2); z-index: 1;
 }
-.maplegend { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 0 10px; }
+.maplegend { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 0 8px; }
 .legchip {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: 12px; font-weight: 600; color: var(--ink-soft);
@@ -369,7 +385,7 @@ a { color: var(--rosa-deep); }
 .pin--base i { transform: none; }
 .mapcard {
   background: var(--card); border: 1px solid var(--line);
-  border-radius: var(--r); padding: 14px; margin-bottom: 28px;
+  border-radius: var(--r); padding: 12px; margin-bottom: 24px;
   box-shadow: var(--shadow);
 }
 
@@ -448,21 +464,31 @@ a { color: var(--rosa-deep); }
 }
 
 @media print {
-  .topbar, .tabs, .dayhead-actions, .pcard-add, .item-x, .item-grip, .plan-hint, #map { display: none !important; }
+  .topbar, .gs-panel, .menu-panel, .dayhead-actions, .pcard-add, .item-x, .item-grip, .plan-hint, #map { display: none !important; }
   body { background: #fff; }
 }
 
 /* ───────────────────── global search ───────────────────── */
-.globalsearch {
-  position: relative; display: flex; align-items: center;
-  max-width: 900px; margin: 0 auto; padding: 0 16px 9px;
+/* The search box now lives inside the results overlay itself (opened by the
+   header search icon), rather than sitting permanently in the header. */
+.gs-panel {
+  position: fixed; left: 0; right: 0; z-index: 880;
+  top: var(--header-h);
+  max-height: calc(100dvh - var(--header-h)); overflow-y: auto; -webkit-overflow-scrolling: touch;
+  background: var(--paper); border-bottom: 1px solid var(--line);
+  box-shadow: 0 14px 30px -14px rgba(36,28,22,.45);
+  padding: 10px 16px 14px;
 }
+@media (min-width: 720px) {
+  .gs-panel { left: 50%; transform: translateX(-50%); width: 900px; border-radius: 0 0 14px 14px; max-height: min(70vh, 640px); }
+}
+.gs-searchbar { position: relative; display: flex; align-items: center; margin-bottom: 4px; }
 .gs-icon {
-  position: absolute; left: 28px; width: 16px; height: 16px;
+  position: absolute; left: 12px; width: 16px; height: 16px;
   color: var(--ink-dim); pointer-events: none;
 }
 #gq {
-  width: 100%; padding: 11px 38px 11px 38px;
+  width: 100%; padding: 12px 44px 12px 38px;
   border-radius: 10px; border: 1px solid var(--line-hi);
   background: var(--card); font-size: 16px; /* 16px stops iOS zoom-on-focus */
   -webkit-appearance: none; appearance: none;
@@ -470,22 +496,13 @@ a { color: var(--rosa-deep); }
 #gq::placeholder { color: var(--ink-dim); }
 #gq::-webkit-search-decoration, #gq::-webkit-search-cancel-button { -webkit-appearance: none; }
 .gs-clear {
-  position: absolute; right: 24px; width: 30px; height: 30px;
+  position: absolute; right: 0; width: 44px; height: 44px;
   border-radius: 50%; color: var(--ink-dim); font-size: 14px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
 }
 .gs-clear:active { background: var(--card-2); }
 
-.gs-panel {
-  position: fixed; left: 0; right: 0; z-index: 880;
-  top: calc(env(safe-area-inset-top) + 104px);
-  max-height: 62vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
-  background: var(--paper); border-bottom: 1px solid var(--line);
-  box-shadow: 0 14px 30px -14px rgba(36,28,22,.45);
-  padding: 6px 16px 14px;
-}
-@media (min-width: 720px) {
-  .gs-panel { left: 50%; transform: translateX(-50%); width: 900px; border-radius: 0 0 14px 14px; }
-}
+.gs-list { padding-top: 4px; }
 .gs-row {
   display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
   padding: 10px 8px; border-radius: 10px; min-height: 52px;
@@ -508,8 +525,8 @@ a { color: var(--rosa-deep); }
 /* ───────────────────── photos ───────────────────── */
 .pcard { overflow: hidden; padding-top: 0; }
 .pcard-img {
-  display: block; width: calc(100% + 28px); margin: 0 -14px 13px;
-  height: 168px; object-fit: cover; background: var(--card-2);
+  display: block; width: calc(100% + 22px); margin: 0 -11px 11px;
+  height: 156px; object-fit: cover; background: var(--card-2);
 }
 .sheet-img {
   display: block; width: calc(100% + 36px); margin: -22px -18px 16px;
@@ -532,37 +549,43 @@ a { color: var(--rosa-deep); }
 .icon-btn { width: 44px; height: 44px; }
 .item-x   { width: 44px; height: 44px; }
 .linky, .dropzone button, .sheet-body .linky { min-height: 44px; padding: 0 6px; }
-.gs-clear { width: 44px; height: 44px; right: 18px; }
 .pcard-add { width: 44px; height: 44px; }
 
 /* C2 — remaining sub-44px targets the earlier block missed */
 .chip      { min-height: 44px; }
-.tab       { min-height: 44px; }
 .ghost-btn { min-height: 44px; }
 .item-grip { min-height: 44px; }
 
-/* last two sub-44px targets: the search field and the inline "More info" link */
-#gq { padding-top: 12px; padding-bottom: 12px; }
 .pcard-foot a { display: inline-flex; align-items: center; min-height: 44px; }
 
-/* ───────────────── header minimise ───────────────── */
+/* ───────────────── header ───────────────── */
 .bar-actions { display: flex; gap: 6px; flex-shrink: 0; }
 .icon-btn svg { width: 17px; height: 17px; }
+.icon-btn[aria-expanded="true"] { background: var(--card-2); color: var(--ink); }
 
-.topbar { transition: none; }
-.globalsearch, .tabs { transition: max-height .18s ease, opacity .14s ease, padding .18s ease; overflow: hidden; }
-.topbar.is-min .globalsearch { max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0; pointer-events: none; }
-.topbar.is-min .bar { padding-top: 6px; padding-bottom: 4px; }
-.topbar.is-min .brand-text em { display: none; }
-.topbar.is-min .brand-text strong { font-size: 16px; }
-.topbar.is-min .brand-mark { width: 26px; height: 26px; }
-.topbar.is-min .tabs { padding-bottom: 5px; }
-.topbar.is-min .tab { min-height: 36px; padding: 6px 4px 5px; font-size: 13px; }
-#minBtn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-@media (prefers-color-scheme: dark) { #minBtn[aria-pressed="true"] { background: var(--rosa); color: #2A1015; border-color: var(--rosa); } }
-
-/* the search panel hangs off the header, so follow it up when minimised */
-.topbar.is-min ~ .gs-panel { top: calc(env(safe-area-inset-top) + 92px); }
+/* ───────────────── menu panel ───────────────── */
+.menu-panel {
+  position: fixed; z-index: 890; top: var(--header-h);
+  right: max(16px, env(safe-area-inset-right));
+  width: min(240px, calc(100vw - 32px));
+  background: var(--paper); border: 1px solid var(--line-hi);
+  border-radius: var(--r); box-shadow: var(--shadow-lift);
+  padding: 6px; display: flex; flex-direction: column; gap: 1px;
+  max-height: calc(100dvh - var(--header-h) - 16px); overflow-y: auto;
+}
+.menu-item {
+  display: flex; align-items: center; gap: 11px; width: 100%;
+  min-height: 44px; padding: 8px 10px; border-radius: 9px;
+  font-size: 14.5px; font-weight: 600; color: var(--ink); text-align: left;
+}
+.menu-item svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--ink-soft); }
+.menu-item:active { background: var(--card-2); }
+.menu-item.is-on { background: var(--rosa-soft); color: var(--rosa-deep); font-weight: 700; }
+.menu-item.is-on svg { color: var(--rosa-deep); }
+@media (prefers-color-scheme: dark) {
+  .menu-item.is-on { color: var(--rosa); }
+  .menu-item.is-on svg { color: var(--rosa); }
+}
 
 /* ───────────────── density ───────────────── */
 .densityrow {
@@ -570,7 +593,7 @@ a { color: var(--rosa-deep); }
   background: var(--card-2); border-radius: 10px; padding: 3px;
 }
 .dbtn {
-  flex: 1; border-radius: 8px; min-height: 40px; padding: 8px 4px;
+  flex: 1; border-radius: 8px; min-height: 44px; padding: 8px 4px;
   font-size: 13px; font-weight: 700; color: var(--ink-soft);
 }
 .dbtn.is-on { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
@@ -617,26 +640,24 @@ a { color: var(--rosa-deep); }
 
 /* schedule item body is now a button */
 .item-main {
-  text-align: left; width: 100%; background: none; border: 0;
+  text-align: left; width: 100%; min-height: 44px; background: none; border: 0;
   padding: 0; font: inherit; color: inherit; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: center;
 }
 .item-main:active h3 { color: var(--rosa-deep); }
 @media (prefers-color-scheme: dark) { .item-main:active h3 { color: var(--rosa); } }
 
 /* ───────────────── brand as a to-top control ───────────────── */
 .brand {
-  display: flex; align-items: center; gap: 10px; min-width: 0;
+  display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 44px;
   background: none; border: 0; padding: 0; text-align: left; cursor: pointer;
 }
 .brand:active .brand-text strong { color: var(--rosa-deep); }
 @media (prefers-color-scheme: dark) { .brand:active .brand-text strong { color: var(--rosa); } }
 .brand-mark { border-radius: 8px; }
 
-/* four tabs need to breathe a little tighter */
-.tab { font-size: 13px; padding: 9px 2px 8px; }
-
 /* ───────────────── guides ───────────────── */
-.guides-intro { padding: 16px 0 6px; }
+.guides-intro { padding: 12px 0 6px; }
 .guides-intro h1 {
   font-family: var(--display); font-size: clamp(24px, 6.5vw, 32px);
   font-weight: 800; letter-spacing: -.02em;
@@ -647,7 +668,7 @@ a { color: var(--rosa-deep); }
 .gcard {
   display: flex; gap: 12px; align-items: flex-start; width: 100%; text-align: left;
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
-  padding: 14px; box-shadow: var(--shadow); min-height: 44px;
+  padding: 12px; box-shadow: var(--shadow); min-height: 44px;
 }
 .gcard:active { background: var(--card-2); }
 .gcard-icon {
@@ -787,3 +808,24 @@ a { color: var(--rosa-deep); }
 }
 .nearrow:active { background: var(--card-2); }
 .nearrow b { color: var(--ink-dim); font-weight: 700; font-size: 12.5px; }
+
+/* ───────────────── chat view ─────────────────
+   Chat is a page now, not a floating panel, but it still needs its own fixed
+   frame — messages scroll, the composer stays put — rather than the whole
+   document scrolling. 100dvh (not vh) so the frame shrinks with the on-screen
+   keyboard on iOS instead of the input ending up underneath it. */
+/* #view-chat only needs to be a flex frame while it is actually the visible
+   view — gating the flex rule on body.is-chatview (rather than on #view-chat
+   itself) means it never has to fight .view[hidden]{display:none} on
+   specificity while some other view is showing. */
+.view#view-chat { padding: 0; }
+body.is-chatview { height: 100dvh; overflow: hidden; }
+body.is-chatview #main { display: flex; flex-direction: column; height: calc(100dvh - var(--header-h)); overflow: hidden; }
+body.is-chatview #view-chat { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
+
+/* Leaflet ships 30px zoom buttons; bring them up to a thumb-sized target.
+   The attribution link stays small — it is a credit, not a control. */
+.leaflet-touch .leaflet-bar a,
+.leaflet-control-zoom a {
+  width: 44px; height: 44px; line-height: 44px; font-size: 20px;
+}

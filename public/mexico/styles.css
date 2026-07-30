@@ -829,3 +829,10 @@ body.is-chatview #view-chat { display: flex; flex-direction: column; flex: 1 1 a
 .leaflet-control-zoom a {
   width: 44px; height: 44px; line-height: 44px; font-size: 20px;
 }
+
+/* The `hidden` attribute only works through the UA stylesheet's display:none,
+   so any author `display` rule silently defeats it. Several components here set
+   display:flex on the same element JS toggles with .hidden — the menu stayed
+   open, the search clear button never went away, and the guides grid rendered
+   underneath an open guide. Make the attribute authoritative. */
+[hidden] { display: none !important; }

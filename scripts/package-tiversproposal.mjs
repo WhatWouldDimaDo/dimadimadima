@@ -4,10 +4,11 @@ const pages = [
   {
     path: "public/tiversproposal/index.html",
     transform(html) {
-      return html.replaceAll(
+      const linked = html.replaceAll(
         'href="/communication-analytics"',
         'href="/tiversproposal/communication-analytics"',
       );
+      return updateProposalContent(linked);
     },
   },
   {
@@ -61,4 +62,35 @@ for (const page of pages) {
   );
 
   await writeFile(page.path, output);
+}
+
+function updateProposalContent(html) {
+  let output = html.replace(
+    /<div class="signal">(?:(?!<div class="signal">)[\s\S])*?<strong>1 decision<\/strong><span>what to tackle first<\/span><\/div>/,
+    "",
+  );
+
+  const start = output.indexOf('<p class="eyebrow">Eric’s time</p>');
+  const end = start === -1 ? -1 : output.indexOf("</ul></article>", start);
+  if (start === -1 || end === -1) return output;
+
+  const closeLength = "</ul></article>".length;
+  let section = output.slice(start, end + closeLength)
+    .replaceAll("About 3 hours total", "7–10 hours total")
+    .replaceAll(
+      "30 minutes for source access and context",
+      "2–3 hours for source access, context, and archive walkthrough",
+    )
+    .replaceAll("30-minute midpoint reaction", "90-minute midpoint working session")
+    .replaceAll("60-minute decision session", "90-minute decision session");
+
+  if (!section.includes("asynchronous review and feedback")) {
+    const icon = section.match(/<li>(<svg[\s\S]*?<\/svg>)/)?.[1] ?? "";
+    section = section.replace(
+      "</ul>",
+      `<li>${icon}1–3 hours asynchronous review and feedback</li></ul>`,
+    );
+  }
+
+  return `${output.slice(0, start)}${section}${output.slice(end + closeLength)}`;
 }

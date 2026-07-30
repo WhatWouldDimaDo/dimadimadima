@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pit Stop Radar — Printable Route Sheet</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #000; background: #fff;
+    padding: 20px; font-size: 12px; line-height: 1.35;
+  }
+  h1 { font-size: 17px; letter-spacing: .3px; }
+  .sub { font-size: 11px; color: #444; margin-top: 2px; }
+
+  .controls {
+    margin: 14px 0 10px; padding: 10px 12px;
+    border: 1px solid #bbb; border-radius: 6px;
+    display: flex; gap: 18px; flex-wrap: wrap; align-items: center;
+    font-size: 12px;
+  }
+  .controls fieldset { border: 0; display: flex; gap: 10px; align-items: center; }
+  .controls legend { float: left; font-weight: 700; margin-right: 8px; }
+  .controls label { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; white-space: nowrap; }
+  .controls select { font: inherit; padding: 2px 4px; }
+  .controls .print-btn {
+    margin-left: auto; font: inherit; font-weight: 700; cursor: pointer;
+    border: 1.5px solid #000; border-radius: 5px; background: #000; color: #fff;
+    padding: 6px 14px;
+  }
+  .back-link { font-size: 11px; color: #444; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  thead { display: table-header-group; }
+  th {
+    text-align: left; font-size: 10px; letter-spacing: .8px; text-transform: uppercase;
+    border-bottom: 2px solid #000; padding: 4px 6px 3px;
+  }
+  td { border-bottom: 1px solid #ccc; padding: 5px 6px 4px; vertical-align: top; }
+  tr { break-inside: avoid; page-break-inside: avoid; }
+  td.exit, td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.name { font-weight: 700; }
+  td.name .town { font-weight: 400; color: #444; }
+  .flag {
+    display: inline-block; width: 14px; height: 14px; line-height: 14px;
+    border: 1px solid #000; text-align: center;
+    font-size: 9px; font-weight: 700; margin-right: 2px;
+  }
+  td.summary { color: #333; max-width: 230px; }
+  .count-line { margin-top: 10px; font-size: 11px; color: #444; }
+  .empty { padding: 24px 6px; color: #444; font-style: italic; }
+  footer {
+    margin-top: 14px; padding-top: 6px; border-top: 1px solid #000;
+    font-size: 10px; color: #333;
+  }
+  @media print {
+    body { padding: 0; }
+    .no-print { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Pit Stop Radar — printable route sheet</h1>
+<p class="sub" id="routeSub">I-85 · Atlanta → Charlotte</p>
+
+<div class="controls no-print">
+  <fieldset>
+    <legend>Direction</legend>
+    <label><input type="radio" name="dir" value="NB" checked> NB → Charlotte</label>
+    <label><input type="radio" name="dir" value="SB"> SB → Atlanta</label>
+  </fieldset>
+  <fieldset>
+    <legend>Include</legend>
+    <label><input type="checkbox" name="cat" value="playground" checked> Playgrounds &amp; parks</label>
+    <label><input type="checkbox" name="cat" value="splash" checked> Splash pads</label>
+    <label><input type="checkbox" name="cat" value="rest_area" checked> Rest areas</label>
+    <label><input type="checkbox" name="cat" value="gas"> Gas / travel centers</label>
+  </fieldset>
+  <fieldset>
+    <legend>Max detour</legend>
+    <select id="maxDetour">
+      <option value="5">≤ 5 min</option>
+      <option value="10" selected>≤ 10 min</option>
+      <option value="any">any</option>
+    </select>
+  </fieldset>
+  <button class="print-btn" type="button" onclick="window.print()">Print</button>
+  <a class="back-link" href="index.html">← back to the site</a>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Exit</th><th>Name</th><th>From prev</th><th>Detour</th><th>Flags</th><th>Summary</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+<p class="count-line" id="countLine"></p>
+
+<footer id="footer"></footer>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  const DATA = window.PARKS_DATA;
+  const stops = DATA.stops;
+  const meta = DATA.meta;
+
+  const $ = (sel) => document.querySelector(sel);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  function effDetour(s) {
+    if (s.category === "rest_area" || s.category === "travel_center") return 0;
+    return s.detour_min;
+  }
+  function amenYes(s, k) { return !!(s.amenities && s.amenities[k] && s.amenities[k].value === "yes"); }
+
+  function tripSetFromSearch(search) { // ?trip=<comma-ids> → Set of ids, or null
+    const raw = new URLSearchParams(search).get("trip");
+    if (!raw) return null;
+    const ids = raw.split(",").map((x) => x.trim()).filter(Boolean);
+    return ids.length ? new Set(ids) : null;
+  }
+  const tripSet = tripSetFromSearch(location.search);
+
+  function dirBlocked(s, dir) {
+    if (s.category === "travel_center") return false; // reachable both ways via the exit crossover
+    if (dir === "NB" && s.access_direction === "southbound_only") return true;
+    if (dir === "SB" && s.access_direction === "northbound_only") return true;
+    return false;
+  }
+
+  function readControls() {
+    const dir = document.querySelector('input[name="dir"]:checked').value;
+    const cats = new Set([...document.querySelectorAll('input[name="cat"]:checked')].map((el) => el.value));
+    const maxD = $("#maxDetour").value;
+    return { dir, cats, maxDetour: maxD === "any" ? null : +maxD };
+  }
+
+  function inCats(s, cats) {
+    if (cats.has("splash") && (s.category === "splash_pad" || amenYes(s, "splash_pad"))) return true;
+    if (cats.has("playground") && (s.category === "playground" || s.category === "park" || s.category === "library_indoor")) return true;
+    if (cats.has("rest_area") && s.category === "rest_area") return true;
+    if (cats.has("gas") && s.category === "travel_center") return true;
+    return false;
+  }
+
+  function visible(o) {
+    return stops.filter((s) => {
+      if (tripSet) return tripSet.has(s.id) && !dirBlocked(s, o.dir); // trip mode: only the shared stops
+      if (!s.named) return false;
+      if (dirBlocked(s, o.dir)) return false;
+      if (!inCats(s, o.cats)) return false;
+      if (o.maxDetour != null) {
+        const d = effDetour(s);
+        if (!(d != null && d <= o.maxDetour)) return false;
+      }
+      return true;
+    });
+  }
+
+  function flagsHtml(s) {
+    const f = [];
+    if (s.category === "playground" || amenYes(s, "playground")) f.push("P");
+    if (s.category === "splash_pad" || amenYes(s, "splash_pad")) f.push("S");
+    if (amenYes(s, "restrooms")) f.push("R");
+    if (amenYes(s, "fenced")) f.push("F");
+    return f.map((c) => `<span class="flag">${c}</span>`).join("");
+  }
+
+  function detourText(s) {
+    if (s.category === "rest_area" || s.category === "travel_center") return "on hwy";
+    if (s.detour_min == null) return "?";
+    const pre = s.detour_method === "osrm" ? "" : "~";
+    return pre + Math.max(1, Math.round(s.detour_min)) + " min";
+  }
+
+  const AMEN_WORD = {
+    playground: "playground", splash_pad: "splash pad", restrooms: "restrooms",
+    shade: "shade", fenced: "fenced", picnic: "picnic",
+  };
+  function summary(s) {
+    const bits = [];
+    for (const k of Object.keys(AMEN_WORD)) if (amenYes(s, k)) bits.push(AMEN_WORD[k]);
+    if (s.rating) bits.push("★ " + s.rating);
+    return bits.join(" · ") || (s.tier === "verified" ? "hand-verified" : "mapped, amenities unverified");
+  }
+
+  function render() {
+    const o = readControls();
+    const list = visible(o);
+    list.sort((a, b) => o.dir === "NB" ? a.route_mile - b.route_mile : b.route_mile - a.route_mile);
+
+    $("#routeSub").textContent = (tripSet ? "My Trip · " : "")
+      + "I-85 · " + (o.dir === "NB" ? "Atlanta → Charlotte" : "Charlotte → Atlanta")
+      + " · " + (tripSet ? list.length + " starred stop" + (list.length === 1 ? "" : "s")
+        : o.maxDetour != null ? "detours ≤ " + o.maxDetour + " min" : "any detour");
+
+    let prevMile = null;
+    const rows = list.map((s) => {
+      const fromPrev = prevMile == null ? "—" : Math.round(Math.abs(s.route_mile - prevMile) / 65 * 60) + " min";
+      prevMile = s.route_mile;
+      const town = [s.town, s.state].filter(Boolean).join(", ");
+      return `<tr>
+        <td class="exit">${s.exit_number ? "Exit " + esc(s.exit_number) : "Mile " + s.route_mile.toFixed(1)}</td>
+        <td class="name">${esc(s.name || "(unnamed " + String(s.category || "stop").replace(/_/g, " ") + ")")}${town ? ` <span class="town">— ${esc(town)}</span>` : ""}</td>
+        <td class="num">${fromPrev}</td>
+        <td class="num">${detourText(s)}</td>
+        <td>${flagsHtml(s)}</td>
+        <td class="summary">${summary(s)}</td>
+      </tr>`;
+    });
+    $("#rows").innerHTML = rows.join("")
+      || `<tr><td class="empty" colspan="6">Nothing matches those filters in this direction.</td></tr>`;
+    $("#countLine").textContent = list.length + " stops · flags: P playground · S splash pad · R restrooms · F fenced";
+  }
+
+  $("#footer").textContent = "Data verified as of " + meta.built + " · dimadimadima.com/parks";
+  if (tripSet) { // trip mode: direction still applies, include/detour filters don't
+    document.querySelectorAll(".controls fieldset").forEach((fs) => {
+      if (fs.querySelector('input[name="cat"], #maxDetour')) fs.style.display = "none";
+    });
+    const note = document.createElement("span");
+    note.className = "back-link";
+    note.innerHTML = 'Showing your trip · <a href="print.html">show full directory</a>';
+    document.querySelector(".controls").insertBefore(note, document.querySelector(".print-btn"));
+  }
+  document.querySelectorAll(".controls input, .controls select").forEach((el) => el.addEventListener("change", render));
+  render();
+})();
+</script>
+</body>
+</html>

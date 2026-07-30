@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/parks/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pit Stop Radar — I-85 Atlanta → Charlotte</title>
+<meta name="description" content="Every playground, splash pad and rest area worth pulling off I-85 for, between Atlanta and Charlotte — with the evidence behind every claim.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pit Stop Radar">
+<meta property="og:title" content="Pit Stop Radar — I-85 Atlanta → Charlotte">
+<meta property="og:description" content="Every playground, splash pad and rest area worth pulling off I-85 for, between Atlanta and Charlotte — with the evidence behind every claim.">
+<meta property="og:image" content="https://dimadimadima.com/parks/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://dimadimadima.com/parks/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%2310603B'/%3E%3Crect x='2.5' y='2.5' width='27' height='27' rx='3.5' fill='none' stroke='white' stroke-width='1.6'/%3E%3Ctext x='16' y='21.5' font-family='Overpass,Arial,sans-serif' font-size='13' font-weight='800' fill='white' text-anchor='middle'%3E85%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-row1">
+    <a class="logo" href="#" id="logoHome" aria-label="Pit Stop Radar home">
+      <svg viewBox="0 0 236 64" class="logo-svg" role="img" aria-label="Pit Stop Radar — exit sign logo">
+        <!-- EXIT tab -->
+        <rect x="4" y="2" width="58" height="17" rx="3" fill="var(--sign-green)"/>
+        <rect x="5.2" y="3.2" width="55.6" height="14.6" rx="2.2" fill="none" stroke="#fff" stroke-width="1.4"/>
+        <text x="33" y="15" text-anchor="middle" class="logo-exit">EXIT</text>
+        <!-- main panel -->
+        <rect x="4" y="21" width="228" height="41" rx="5" fill="var(--sign-green)"/>
+        <rect x="6.4" y="23.4" width="223.2" height="36.2" rx="3.4" fill="none" stroke="#fff" stroke-width="1.8"/>
+        <text x="15" y="48" class="logo-title">PIT STOP RADAR</text>
+        <path d="M211 34 l9 8 -9 8 v-5 h-8 v-6 h8 z" fill="#fff"/>
+      </svg>
+    </a>
+    <div class="dir-group">
+      <div class="dir-toggle" role="group" aria-label="Direction of travel">
+        <button id="dirNB" class="dir-btn active" type="button">NB <span class="dir-dest">→ Charlotte</span></button>
+        <button id="dirSB" class="dir-btn" type="button">SB <span class="dir-dest">→ Atlanta</span></button>
+      </div>
+      <button id="planBtn" class="plan-btn" type="button">Plan my<br>drive</button>
+    </div>
+  </div>
+  <div class="topbar-row2">
+    <div class="view-toggle" role="group" aria-label="View">
+      <button id="viewList" class="view-btn active" type="button">Stops</button>
+      <button id="viewMap" class="view-btn" type="button">Map</button>
+    </div>
+    <div class="view-toggle sort-toggle" role="group" aria-label="Sort order">
+      <button id="sortMile" class="view-btn active" type="button">By mile</button>
+      <button id="sortDetour" class="view-btn" type="button">By detour</button>
+    </div>
+    <a class="print-link" href="print.html" title="Printable route sheet">⎙ Print this route</a>
+    <button id="tripBtn" class="print-link trip-btn" type="button" title="Your starred stops">★ My Trip (0)</button>
+    <div class="chips" id="chips">
+      <button class="chip" data-filter="splash_pad" type="button">Splash pad</button>
+      <button class="chip" data-filter="playground" type="button">Playground</button>
+      <button class="chip" data-filter="restrooms" type="button">Restrooms</button>
+      <button class="chip" data-filter="fenced" type="button">Fenced</button>
+      <button class="chip" data-filter="rest_area" type="button">Rest areas</button>
+      <button class="chip" data-filter="quick" type="button">≤ 5 min off</button>
+      <button class="chip" data-filter="quick10" type="button">≤ 10 min off</button>
+      <button class="chip chip-ghost" data-filter="unnamed" type="button">Unnamed pins</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="corridorView">
+    <div class="corridor-intro">
+      <h1><span id="introCount">–</span> places to pull off <strong>I-85</strong></h1>
+      <p id="introSub">Atlanta → Charlotte · sorted by mile marker</p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <section id="mapView" hidden>
+    <div id="map"></div>
+  </section>
+
+  <footer class="about" id="about">
+    <div class="about-inner">
+      <h2>About the data</h2>
+      <p class="about-lede">Every amenity flag on this site carries its own evidence: a quote from a
+      real source, a link, and a confidence level. If we couldn't prove it, it says
+      <em>unknown</em> — never a guess.</p>
+      <dl class="legend">
+        <div><dt><span class="dot dot-high"></span> high</dt><dd>an official page (city / county / state DOT) states it outright</dd></div>
+        <div><dt><span class="dot dot-med"></span> med</dt><dd>an official list omits it, or a review / blog / structured map source states it</dd></div>
+        <div><dt><span class="amen-glyph amen-unknown-demo">?</span> unknown</dt><dd>no source found — an honest gap, not a hidden "no"</dd></div>
+        <div><dt><span class="tier-badge tier-verified-demo">HAND-VERIFIED</span></dt><dd>full amenity record built and source-checked by hand</dd></div>
+        <div><dt><span class="tier-badge tier-mapped-demo">MAPPED</span></dt><dd>found on the map, not yet enriched — amenities still unknown</dd></div>
+      </dl>
+      <p class="about-fine" id="aboutFine"></p>
+      <p class="about-fine">Detour times are straight-line distance × 1.3 road factor — routed
+      drive times land with the next enrichment pass. Satellite thumbnails and map imagery
+      © Esri. Map data © OpenStreetMap contributors.</p>
+      <p class="about-built">Built for one family's real trips up I-85. 🧃</p>
+    </div>
+  </footer>
+</main>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-backdrop" id="sheetBackdrop"></div>
+  <article class="sheet-panel" id="sheetPanel" role="dialog" aria-modal="true"></article>
+</div>
+
+<div class="sheet" id="tripSheet" hidden>
+  <div class="sheet-backdrop" id="tripBackdrop"></div>
+  <article class="sheet-panel plain-panel" role="dialog" aria-modal="true" aria-label="My Trip">
+    <button class="panel-close" id="tripClose" aria-label="Close" type="button">✕</button>
+    <div class="sheet-body">
+      <h2>My Trip</h2>
+      <div id="tripBody"></div>
+    </div>
+  </article>
+</div>
+
+<div class="sheet" id="planSheet" hidden>
+  <div class="sheet-backdrop" id="planBackdrop"></div>
+  <article class="sheet-panel plain-panel" role="dialog" aria-modal="true" aria-label="Plan my drive">
+    <button class="panel-close" id="planClose" aria-label="Close" type="button">✕</button>
+    <div class="sheet-body">
+      <h2>Plan my drive</h2>
+      <form id="planForm" class="plan-form">
+        <label>Departure <input type="time" id="planDep" value="09:00" required></label>
+        <label>Direction
+          <select id="planDir">
+            <option value="NB">NB → Charlotte</option>
+            <option value="SB">SB → Atlanta</option>
+          </select>
+        </label>
+        <label>Stop cadence
+          <select id="planCadence">
+            <option value="60">every ~1h</option>
+            <option value="90" selected>every ~1.5h</option>
+            <option value="120">every ~2h</option>
+          </select>
+        </label>
+        <label class="plan-check"><input type="checkbox" id="planNap"> Toddler nap after lunch <span class="plan-check-sub">(no stops 12:30–2:30)</span></label>
+        <button class="plan-go" type="submit">Build plan</button>
+      </form>
+      <div id="planResult"></div>
+    </div>
+  </article>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

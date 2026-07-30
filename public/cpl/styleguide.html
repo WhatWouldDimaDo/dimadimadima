@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/cpl/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Styleguide — A&amp;B Landscape Studio</title>
+<meta name="description" content="Design system reference for the A&amp;B Landscape Studio redesign — color, type, icons and components.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" focusable="false">
+<defs>
+<symbol id="icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 20c7-1 13-6 15-15-9 1-14 6-15 15z"/>
+  <path d="M6.5 17.5C10 14 13 11 17 7"/>
+</symbol>
+<symbol id="icon-shears" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="9" cy="12" r="1.3"/>
+  <path d="M9 12L20 5"/>
+  <path d="M9 12L20 12.5"/>
+  <path d="M9 12L4 7.2"/>
+  <circle cx="4" cy="7.2" r="1.7"/>
+  <path d="M9 12L4 16.8"/>
+  <circle cx="4" cy="16.8" r="1.7"/>
+</symbol>
+<symbol id="icon-stone-wall" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 20h6v-4H3z"/>
+  <path d="M9 20h6v-4H9z"/>
+  <path d="M15 20h6v-4h-6z"/>
+  <path d="M6 16h6v-4H6z"/>
+  <path d="M12 16h6v-4h-6z"/>
+  <path d="M3 12h6V8H3z"/>
+  <path d="M9 12h6V8H9z"/>
+  <path d="M15 12h6V8h-6z"/>
+</symbol>
+<symbol id="icon-water-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 3c4 5 7 9.5 7 13a7 7 0 0 1-14 0c0-3.5 3-8 7-13z"/>
+</symbol>
+<symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="4.3"/>
+  <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.1 5.1l2.1 2.1M16.8 16.8l2.1 2.1M18.9 5.1l-2.1 2.1M7.2 16.8l-2.1 2.1"/>
+</symbol>
+<symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 21v-7"/>
+  <path d="M8.5 21h7"/>
+  <path d="M12 4c-3 0-5.2 2.1-5.2 4.6 0 1 .4 1.9 1 2.6-.7.4-1.2 1.2-1.2 2.1 0 1.5 1.3 2.7 3 2.7h8.8c1.7 0 3-1.2 3-2.7 0-.9-.5-1.7-1.2-2.1.6-.7 1-1.6 1-2.6C21.2 6.1 19 4 16 4c-.7 0-1.4.1-2 .4-.5-.2-1.3-.4-2-.4z"/>
+</symbol>
+<symbol id="icon-bonsai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 17.5h14l-1.6 3.2H6.6z"/>
+  <path d="M12 17.5c-.6-1.8 1.1-2.6.4-4.4-.6-1.7 1.3-2.6.6-4.6"/>
+  <ellipse cx="8.8" cy="12.3" rx="3.1" ry="1.15" transform="rotate(-14 8.8 12.3)"/>
+  <ellipse cx="14.6" cy="8.7" rx="2.7" ry="1.05" transform="rotate(10 14.6 8.7)"/>
+  <ellipse cx="11.6" cy="5.6" rx="2.2" ry="0.9" transform="rotate(-8 11.6 5.6)"/>
+</symbol>
+<symbol id="icon-plan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 20L4 5.5L18.5 20z"/>
+  <path d="M7 20v-3M10 20v-3M13 20v-3"/>
+</symbol>
+<symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 7.5h11v9h-11z"/>
+  <path d="M13.5 11h3.5l3 3v2.5h-6.5z"/>
+  <circle cx="6.5" cy="18" r="1.7"/>
+  <circle cx="16.5" cy="18" r="1.7"/>
+</symbol>
+<symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 4.5c1.6-.6 3.1-.4 3.6.9l1 2.6c.4 1-.1 1.8-1 2.5-.5.4-.6.9-.3 1.5 1 2 2.7 3.7 4.7 4.7.6.3 1.1.2 1.5-.3.7-.9 1.5-1.4 2.5-1l2.6 1c1.3.5 1.5 2 .9 3.6-.7 1.8-2.6 2.7-4.4 2.1-5.4-1.8-9.7-6.1-11.5-11.5-.6-1.8.3-3.7 2.1-4.4z"/>
+</symbol>
+<symbol id="icon-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.5 5.5h17v11h-10l-4 3.2v-3.2h-3z"/>
+</symbol>
+<symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 21c-3.5-4-6-7.6-6-11a6 6 0 0 1 12 0c0 3.4-2.5 7-6 11z"/>
+  <circle cx="12" cy="10" r="2.1"/>
+</symbol>
+<symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 5.5h16v15H4z"/>
+  <path d="M4 9.5h16"/>
+  <path d="M8 3v4M16 3v4"/>
+</symbol>
+<symbol id="icon-flower" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse cx="12" cy="7.3" rx="2.1" ry="3.2"/>
+  <ellipse cx="12" cy="7.3" rx="2.1" ry="3.2" transform="rotate(72 12 12)"/>
+  <ellipse cx="12" cy="7.3" rx="2.1" ry="3.2" transform="rotate(144 12 12)"/>
+  <ellipse cx="12" cy="7.3" rx="2.1" ry="3.2" transform="rotate(216 12 12)"/>
+  <ellipse cx="12" cy="7.3" rx="2.1" ry="3.2" transform="rotate(288 12 12)"/>
+  <circle cx="12" cy="12" r="1.4"/>
+</symbol>
+<symbol id="icon-chevrons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 7L4 12L8 17M16 7L20 12L16 17"/>
+</symbol>
+<symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 12h14M13 6l6 6-6 6"/>
+</symbol>
+</defs>
+</svg>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div id="gate-overlay">
+  <div class="gate-box">
+    <div class="gate-monogram">A&amp;B</div>
+    <h2 class="gate-title">A&amp;B Landscape Studio</h2>
+    <p class="gate-caption">Private preview</p>
+    <form class="gate-form" autocomplete="off">
+      <input class="gate-input" type="password" inputmode="numeric" placeholder="Password" aria-label="Password" required>
+      <button class="gate-submit" type="submit" aria-label="Enter">
+        <svg class="icon" viewBox="0 0 24 24"><use href="#icon-arrow"></use></svg>
+      </button>
+    </form>
+    <p class="gate-error">That's not quite it — try again.</p>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="masthead masthead-solid">
+  <a class="wordmark" href="index.html">
+    <span class="wordmark-mark">A&amp;B</span>
+    <span class="wordmark-full">A&amp;B Landscape Studio</span>
+  </a>
+  <nav class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="about.html">The studio</a>
+    <a class="nav-cta" href="tel:+14045550123">
+      <svg class="icon" style="width:0.9rem;height:0.9rem;margin-right:0.3rem;vertical-align:-1px" viewBox="0 0 24 24"><use href="#icon-phone"></use></svg>Call
+    </a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="sg-hero reveal">
+    <p class="eyebrow">Reference</p>
+    <h1 class="section-title">Design system</h1>
+    <p class="lede">Color, type, custom line-icon set and component specimens for the A&amp;B Landscape Studio redesign. Internal reference only.</p>
+  </section>
+
+  <!-- ============ COLOR ============ -->
+  <section class="section reveal" id="color">
+    <div class="section-head">
+      <p class="eyebrow">Color</p>
+      <h2 class="section-title">Palette</h2>
+    </div>
+    <div class="sg-swatches">
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#f4efe3"></div>
+        <p class="sg-swatch-name">Cream</p>
+        <p class="sg-swatch-hex">#F4EFE3</p>
+        <p class="sg-swatch-use">Page background base</p>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#faf7ef"></div>
+        <p class="sg-swatch-name">Paper</p>
+        <p class="sg-swatch-hex">#FAF7EF</p>
+        <p class="sg-swatch-use">Cards, panels, light text on dark</p>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#211f1a"></div>
+        <p class="sg-swatch-name">Ink</p>
+        <p class="sg-swatch-hex">#211F1A</p>
+        <p class="sg-swatch-use">Primary body text</p>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#4a463d"></div>
+        <p class="sg-swatch-name">Ink Soft</p>
+        <p class="sg-swatch-hex">#4A463D</p>
+        <p class="sg-swatch-use">Secondary text, captions</p>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#1e3226"></div>
+        <p class="sg-swatch-name">Pine</p>
+        <p class="sg-swatch-hex">#1E3226</p>
+        <p class="sg-swatch-use">Icon accents, process icons</p>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#16241b"></div>
+        <p class="sg-swatch-name">Pine Deep</p>
+        <p class="sg-swatch-hex">#16241B</p>
+        <p class="sg-swatch-use">Dark section backgrounds, headlines</p>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#77816c"></div>
+        <p class="sg-swatch-name">Sage</p>
+        <p class="sg-swatch-hex">#77816C</p>
+        <p class="sg-swatch-use">List markers, quiet accents</p>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#a9803f"></div>
+        <p class="sg-swatch-name">Brass</p>
+        <p class="sg-swatch-hex">#A9803F</p>
+        <p class="sg-swatch-use">Eyebrows, primary buttons, dividers</p>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:#c9a562"></div>
+        <p class="sg-swatch-name">Brass Light</p>
+        <p class="sg-swatch-hex">#C9A562</p>
+        <p class="sg-swatch-use">Brass accents on dark backgrounds</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TYPE ============ -->
+  <section class="section reveal" id="type">
+    <div class="section-head">
+      <p class="eyebrow">Type</p>
+      <h2 class="section-title">Type scale</h2>
+      <p class="lede">Display serif — Iowan Old Style stack — for headlines and names. System sans for body copy and UI.</p>
+    </div>
+    <div class="sg-type-row">
+      <span class="sg-type-label">Hero title</span>
+      <span class="sg-type-sample-display" style="font-size:clamp(2.2rem,6vw,3.2rem);color:var(--pine-deep)">Estate landscaping.</span>
+    </div>
+    <div class="sg-type-row">
+      <span class="sg-type-label">Section title</span>
+      <span class="sg-type-sample-display" style="font-size:2rem;color:var(--pine-deep)">The craft, considered.</span>
+    </div>
+    <div class="sg-type-row">
+      <span class="sg-type-label">Person name</span>
+      <span class="sg-type-sample-display" style="font-size:1.4rem;color:var(--pine-deep)">Arjun</span>
+    </div>
+    <div class="sg-type-row">
+      <span class="sg-type-label">Pull quote</span>
+      <span class="sg-type-sample-display" style="font-size:1.25rem;font-style:italic;color:var(--pine-deep)">A yard is a bonsai you walk through.</span>
+    </div>
+    <div class="sg-type-row">
+      <span class="sg-type-label">Eyebrow</span>
+      <span class="sg-type-sample-body" style="font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:600">What we do</span>
+    </div>
+    <div class="sg-type-row">
+      <span class="sg-type-label">Lede</span>
+      <span class="sg-type-sample-body" style="font-size:1.02rem;color:var(--ink-soft)">Every property gets the same team from first sketch to final walk-through.</span>
+    </div>
+    <div class="sg-type-row">
+      <span class="sg-type-label">Body</span>
+      <span class="sg-type-sample-body" style="font-size:0.92rem;color:var(--ink-soft)">Full planting plans composed for form, balance and how a space will read in five years.</span>
+    </div>
+    <div class="sg-type-row">
+      <span class="sg-type-label">Caption</span>
+      <span class="sg-type-sample-body" style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass)">Buckhead</span>
+    </div>
+  </section>
+
+  <!-- ============ ICONS ============ -->
+  <section class="section reveal" id="icons">
+    <div class="section-head">
+      <p class="eyebrow">Iconography</p>
+      <h2 class="section-title">Custom line-icon set</h2>
+      <p class="lede">14 hand-drawn glyphs. viewBox 0 0 24 24, stroke 1.75, round caps and joins, no fill — consistent optical weight from 20px to 28px.</p>
+    </div>
+    <div class="sg-icon-grid">
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-leaf"></use></svg><span>Leaf / sprout</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-shears"></use></svg><span>Pruning shears</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-stone-wall"></use></svg><span>Stone wall</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-water-drop"></use></svg><span>Water drop</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-sun"></use></svg><span>Sun</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-tree"></use></svg><span>Tree</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-bonsai"></use></svg><span>Bonsai (signature)</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-plan"></use></svg><span>Ruler / plan</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-truck"></use></svg><span>Truck</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-phone"></use></svg><span>Phone</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-message"></use></svg><span>Message</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-map-pin"></use></svg><span>Map pin</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-calendar"></use></svg><span>Calendar</span></div>
+      <div class="sg-icon-cell"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-flower"></use></svg><span>Flower bloom</span></div>
+    </div>
+    <div class="sg-component-row" style="margin-top:2rem">
+      <div style="display:flex;align-items:center;gap:0.6rem">
+        <svg class="icon" viewBox="0 0 24 24"><use href="#icon-leaf"></use></svg>
+        <span style="font-size:0.8rem;color:var(--ink-soft)">20px — inline UI scale</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.6rem">
+        <svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-leaf"></use></svg>
+        <span style="font-size:0.8rem;color:var(--ink-soft)">28px — feature scale</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPONENTS ============ -->
+  <section class="section reveal" id="components">
+    <div class="section-head">
+      <p class="eyebrow">Components</p>
+      <h2 class="section-title">Buttons, cards &amp; slider</h2>
+    </div>
+
+    <div class="sg-component-block">
+      <p class="sg-type-label">Buttons</p>
+      <div class="sg-component-row">
+        <a class="btn btn-primary" href="#components"><svg class="icon" viewBox="0 0 24 24"><use href="#icon-message"></use></svg>Primary</a>
+        <a class="btn btn-secondary" href="#components" style="border-color:var(--pine-deep);color:var(--pine-deep)">Secondary</a>
+        <a class="btn btn-dark" href="#components">Dark outline</a>
+      </div>
+    </div>
+
+    <div class="sg-component-block">
+      <p class="sg-type-label">Service card</p>
+      <div class="sg-component-row">
+        <div class="sg-card-demo">
+          <div class="service-icon"><svg class="icon-lg" viewBox="0 0 24 24"><use href="#icon-water-drop"></use></svg></div>
+          <h4>Irrigation &amp; Lighting</h4>
+          <p>Smart-controlled systems, run by our own crews.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sg-component-block">
+      <p class="sg-type-label">Before / after slider</p>
+      <div class="ba-slider" data-ba-slider style="max-width:32rem">
+        <div class="ba-frame" style="--ba-ratio:2.19;">
+          <img class="ba-img ba-before" src="img/slider-before-front.jpeg" alt="Front entry today" loading="lazy">
+          <div class="ba-after-clip">
+            <img class="ba-img ba-after" src="img/after-front-entry.jpeg" alt="Front entry proposed" loading="lazy">
+          </div>
+          <div class="ba-divider" aria-hidden="true"></div>
+          <div class="ba-handle" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><use href="#icon-chevrons"></use></svg>
+          </div>
+          <span class="ba-tag ba-tag-before">Today</span>
+          <span class="ba-tag ba-tag-after">Proposed</span>
+          <input class="ba-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Drag to compare">
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">The studio</a>
+    <a href="styleguide.html">Styleguide</a>
+  </div>
+  <p class="footer-fine">A&amp;B Landscape Studio &middot; Atlanta, Georgia &middot; Since 1987 &middot; Private preview, not for distribution.</p>
+</footer>
+
+<script src="gate.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

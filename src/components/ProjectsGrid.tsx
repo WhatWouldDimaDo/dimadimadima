@@ -20,8 +20,8 @@ const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
 };
 
 const CATEGORIES = [
-  ['all', 'All'], ['ai', 'AI / LLM'], ['data', 'Data'], ['creative', 'Creative'],
-  ['tools', 'Tools'], ['family', 'Family'],
+  ['all', 'All', '✦'], ['ai', 'AI / LLM', '◉'], ['data', 'Data', '⌁'], ['creative', 'Creative', '◇'],
+  ['tools', 'Tools', '⚙'], ['family', 'Family', '♡'],
 ] as const;
 
 const TAG_CATEGORY_MAP: Record<string, string[]> = {
@@ -62,9 +62,9 @@ export default function ProjectsGrid({ projects }: Props) {
     <div className="projects-browser">
       <div className="projects-controls">
         <div className="project-filters" aria-label="Filter projects">
-          {CATEGORIES.map(([id, label]) => (
+          {CATEGORIES.map(([id, label, icon]) => (
             <button key={id} type="button" aria-pressed={activeCategory === id}
-              onClick={() => setActiveCategory(id)}>{label}</button>
+              onClick={() => setActiveCategory(id)}><span className="filter-icon" aria-hidden="true">{icon}</span>{label}</button>
           ))}
         </div>
         <label className="project-search">
@@ -85,7 +85,9 @@ export default function ProjectsGrid({ projects }: Props) {
         {filtered.map(project => {
           const status = project.status ? STATUS_CONFIG[project.status] ?? { label: project.status, color: '#6b6a72' } : null;
           const description = project.shortDescription ?? project.description;
-          const date = project.date ? new Date(project.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : null;
+          const date = project.date
+            ? new Date(project.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
+            : null;
           return (
             <a key={project.slug} href={`/projects/${project.slug}`} className="project-card">
               <div className="project-card-media">

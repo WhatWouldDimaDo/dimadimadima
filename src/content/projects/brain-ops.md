@@ -5,9 +5,11 @@ description: "The agentic operating system behind everything else on this site �
 shortDescription: "18 automated jobs, one dashboard, and the difference between 'alive' and 'actually processing.'"
 tags: [ai, automation, agents, infrastructure, python, obsidian]
 status: active
-featured: false
+featured: true
 caseStudy: true
-order: 7
+order: 8
+url: /images/brain-ops/dashboard-overview.png
+ctaLabel: Open the dashboard
 image: /images/brain-ops/dashboard-overview.png
 proof:
   - "18 launchd job definitions under supervision"
@@ -45,11 +47,21 @@ Delegating work to agents and daemons has a failure mode nobody warns you about:
 A daemon that's been "up" for four days but hasn't successfully processed a file in four days looks identical to a healthy one — unless you measure the right thing.
 
 <figure class="story-image">
-  <img src="/images/brain-ops/dashboard-overview.png" alt="The Brain Ops dashboard grouping automation jobs by purpose with health status" />
-  <figcaption>The dashboard: jobs grouped by purpose, healthy detail collapsed, unhealthy groups opened.</figcaption>
+  <a href="/images/brain-ops/dashboard-overview.png" target="_blank" rel="noopener">
+    <img src="/images/brain-ops/dashboard-overview.png" alt="The Brain Ops dashboard grouping automation jobs by purpose with health status" />
+  </a>
+  <figcaption>The dashboard: jobs grouped by purpose, healthy detail collapsed, unhealthy groups opened. Open the image for the full view; the live dashboard stays local because it contains system paths and operational details.</figcaption>
 </figure>
 
 The dashboard is built around that distinction. It groups jobs by purpose, collapses healthy detail and opens unhealthy groups, tracks both scheduled-job runs and daemon liveness, separates "alive" from "last successful processing," shows the freshness of the outputs that matter, detects duplicate daemon instances, and surfaces system and integration health.
+
+## The Dashboard Is the Product
+
+The automations existed before the dashboard. What changed was my ability to judge whether I should trust them.
+
+Each job sits inside a purpose—morning briefing, relationships, Atlanta events, reflection, vault infrastructure, job search, or always-on monitoring. Healthy details stay quiet. Anything unhealthy opens itself and shows the schedule, last output, processing watermark, logs, and dependencies needed to decide what to do.
+
+That design is also a boundary between me and the agents. They can do more work on their own because I have a place to see what happened, what did not happen, and where human attention is needed.
 
 ## What the Rebuild Surfaced
 
@@ -58,13 +70,15 @@ The July 15 rebuild wasn't cosmetic — building honest monitoring immediately f
 - **A false stale status** on inbox monitoring: the job was fine, the check was wrong
 - **A JSON parser failure** silently breaking the weekly reflection
 - **Backup timeouts** caused by copying thousands of `.git` objects nobody needed
-- And the one that proves the thesis: **voice ingestion was alive but hadn't processed a file successfully in four days.** Liveness checks said green. The processing watermark said otherwise.
+- And the one that proves the thesis: **voice ingestion was alive but hadn't processed a file successfully in four days** Liveness checks said green; the processing watermark said otherwise
 
 Three were fixed that day. The fourth became its own investigation — which is exactly what the dashboard is for: turning silent failures into visible ones.
 
 ## A Deliberate Non-Decision
 
 The rebuild also surfaced that all 18 job definitions depend on fixed local paths. The tidy move would have been relocating the infrastructure for cosmetic consistency. I didn't — a working system's paths are load-bearing, and "clean" isn't a reason to risk two days of silent breakage. Judgment call, documented, revisitable.
+
+That same judgment applies to AI more broadly. I automate repetition, retrieval, and monitoring. I do not want the system making every decision for me. The useful line keeps moving, so the dashboard is also where I notice when I have delegated too much—or not enough.
 
 ## What Remains Fragile
 

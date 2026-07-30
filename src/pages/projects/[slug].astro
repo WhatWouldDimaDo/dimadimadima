@@ -291,6 +291,14 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
   :global(.prose .story-image img){margin:0}
   :global(.prose .story-image figcaption){margin-top:.65rem;font-family:'DM Mono',monospace;font-size:.68rem;line-height:1.5;color:var(--muted)}
   :global(.prose .story-image--contained img){object-fit:contain;max-height:720px}
+  :global(.prose .story-comparison){position:relative;isolation:isolate;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+  :global(.prose .story-comparison img){position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;border-radius:0}
+  :global(.prose .story-comparison img:last-child){z-index:1;clip-path:inset(0 52% 0 0)}
+  :global(.prose .story-comparison::after){content:'↔';position:absolute;z-index:2;top:50%;left:48%;display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:#fff;color:#0B5A58;font:600 .72rem/1 'DM Sans',sans-serif;transform:translate(-50%,-50%);box-shadow:0 0 0 1px rgba(11,90,88,.25)}
+  :global(.prose .story-comparison:hover img:last-child){animation:story-compare 3s ease-in-out infinite alternate}
+  :global(.prose .story-comparison:hover::after){animation:story-compare-handle 3s ease-in-out infinite alternate}
+  @keyframes story-compare{from{clip-path:inset(0 88% 0 0)}to{clip-path:inset(0 12% 0 0)}}
+  @keyframes story-compare-handle{from{left:12%}to{left:88%}}
 
   .build-system{margin:clamp(4rem,8vw,6rem) 0 0;padding-top:2rem;border-top:1px solid var(--border)}
   .build-system-kicker{font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin:0 0 .65rem}
@@ -301,6 +309,8 @@ const prevProject = currentIdx > 0 ? sorted[currentIdx - 1] : null;
   .build-system-grid p{margin:0;color:var(--muted);font-size:.75rem;line-height:1.55}
   @media(max-width:720px){.build-system-grid{grid-template-columns:1fr 1fr}.project-header--case{padding-bottom:2.25rem}}
   @media(max-width:480px){.build-system-grid{grid-template-columns:1fr}.project-proof span{border-radius:6px}.project-live-link--primary{width:100%;justify-content:space-between}}
+  @media(hover:none){:global(.prose .story-comparison img:last-child){animation:story-compare 4s ease-in-out infinite alternate}:global(.prose .story-comparison::after){animation:story-compare-handle 4s ease-in-out infinite alternate}}
+  @media(prefers-reduced-motion:reduce){:global(.prose .story-comparison:hover img:last-child),:global(.prose .story-comparison:hover::after),:global(.prose .story-comparison img:last-child),:global(.prose .story-comparison::after){animation:none}}
 
   /* Pipeline flow styles (used inline in .md files) */
   .pipeline-flow {

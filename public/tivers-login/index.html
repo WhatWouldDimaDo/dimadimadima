@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Private strategy room · Tivers ADHD reWired Growth Strategy</title>
+    <style>
+      :root{--cream:#f3eee2;--paper:#fbf8f1;--ink:#222019;--soft:#555044;--pine:#102219;--brass:#ad8542}
+      *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+      main{width:min(920px,100%);display:grid;grid-template-columns:1.05fr .95fr;border:1px solid rgba(34,32,25,.14);background:var(--paper);box-shadow:0 30px 90px rgba(16,34,25,.12)}
+      section,aside{padding:clamp(28px,5vw,64px)}aside{display:flex;min-height:520px;background:var(--pine);color:var(--paper);flex-direction:column;justify-content:flex-end}
+      .mark{display:grid;width:44px;height:44px;margin-bottom:auto;border:1px solid #d5b36f;border-radius:50%;place-items:center;font-family:Georgia,serif}
+      .eyebrow{margin:0;color:var(--brass);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+      aside .eyebrow{color:#d5b36f}h1{margin:14px 0 18px;font-family:"Iowan Old Style",Georgia,serif;font-size:clamp(44px,7vw,72px);font-weight:400;letter-spacing:-.05em;line-height:.92}
+      aside h2{margin:12px 0 16px;font-family:"Iowan Old Style",Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:400;letter-spacing:-.035em;line-height:1}
+      p{color:var(--soft);font-size:15px;line-height:1.65}aside p{color:rgba(251,248,241,.68)}
+      form{margin-top:42px}label{display:block;margin-bottom:8px;color:var(--soft);font-size:12px;font-weight:700}
+      input{width:100%;height:50px;padding:0 14px;border:1px solid rgba(34,32,25,.2);background:white;font:inherit;outline:none}input:focus{border-color:var(--brass)}
+      button{width:100%;height:50px;margin-top:10px;border:1px solid var(--brass);background:var(--brass);color:white;font-size:12px;font-weight:800;letter-spacing:.06em;cursor:pointer}
+      button:hover{background:var(--pine);border-color:var(--pine)}.error{display:none;margin:10px 0 0;color:#9b4937;font-size:12px}.note{margin-top:24px;font-size:11px}
+      body[data-error="1"] .error{display:block}
+      @media(max-width:720px){main{grid-template-columns:1fr}aside{min-height:360px;order:-1}.mark{margin-bottom:70px}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <p class="eyebrow">Private strategy room</p>
+        <h1>Tivers ADHD reWired</h1>
+        <p>Enter the shared password to open the ADHD reWired strategy, Book Authority Engine, partnership options, and communication-analytics concept.</p>
+        <form method="post" action="/api/tivers-unlock">
+          <input id="returnTo" type="hidden" name="returnTo" value="/tiversproposal">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" autofocus required>
+          <button type="submit">Open strategy room</button>
+          <p class="error">That password did not match. Try again.</p>
+        </form>
+        <p class="note">This room contains confidential working hypotheses. Please do not forward without permission.</p>
+      </section>
+      <aside>
+        <span class="mark">TA</span>
+        <p class="eyebrow">ADHD reWired strategy</p>
+        <h2>Growth Strategy</h2>
+        <p>Archive intelligence, book development, community engagement, corporate opportunity design, and practical operating leverage.</p>
+      </aside>
+    </main>
+    <script>
+      const params = new URLSearchParams(location.search);
+      document.body.dataset.error = params.get("error") === "1" ? "1" : "0";
+      const requested = params.get("returnTo");
+      if (requested?.startsWith("/tiversproposal") && !requested.startsWith("//")) {
+        document.querySelector("#returnTo").value = requested;
+      }
+    </script>
+  </body>
+</html>
